@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class PackageManager : Singleton<PackageManager>, ISaveable
 {
+    private int coin;
+    public int Coin
+    {
+        get => coin;
+        set
+        {
+            coin = value;
+        }
+    }
+
     public Dictionary<int, LocalWeaponData> weaponDict;
 
     private void OnEnable()
@@ -19,13 +29,19 @@ public class PackageManager : Singleton<PackageManager>, ISaveable
 
     public void GetWeapon(int id)
     {
-        LocalWeaponData newWeapon = new LocalWeaponData(Guid.NewGuid().ToString(), id);
+        LocalWeaponData newWeapon = new LocalWeaponData(id);
         weaponDict.Add(id, newWeapon);
     }
 
     public void EquipWeapon(int id)
     {
+        if (weaponDict.ContainsKey(id))
+        {
+            foreach (var weapon in weaponDict.Values)
+                weapon.isEquipped = false;
 
+            weaponDict[id].isEquipped = true;
+        }
     }
 
     public void UpgradeWeapon(int id)
@@ -38,14 +54,21 @@ public class PackageManager : Singleton<PackageManager>, ISaveable
     {
         foreach (LocalWeaponData weapon in weaponDict.Values)
         {
-            saveData.intDict.Add(weapon.uid + "id", weapon.id);
-            saveData.intDict.Add(weapon.uid + "level", weapon.level);
-            saveData.boolDict.Add(weapon.uid + "isEquipped", weapon.isEquipped);
+            if (!saveData.weaponDict.ContainsKey(weapon.id))
+                saveData.weaponDict.Add(weapon.id, weapon);
+            else
+                saveData.weaponDict[weapon.id] = weapon;
         }
     }
 
     public void LoadSaveData(SaveData saveData)
     {
-        
+        foreach (int weaponID in GameManager.Instance.saveData.weaponDict.Keys)
+        {
+            if (!weaponDict.ContainsKey(weaponID))
+                weaponDict.Add(weaponID, GameManager.Instance.saveData.weaponDict[weaponID]);
+            else
+                weaponDict[weaponID] = GameManager.Instance.saveData.weaponDict[weaponID];
+        }
     }
 }

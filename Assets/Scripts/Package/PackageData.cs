@@ -24,14 +24,12 @@ public class StaticWeaponData : ScriptableObject
 
 public class LocalWeaponData
 {
-    public string uid;
     public int id;
     public int level;
     public bool isEquipped;
 
-    public LocalWeaponData(string uid, int id, int level = 1, bool isEquipped = false)
+    public LocalWeaponData(int id, int level = 1, bool isEquipped = false)
     {
-        this.uid = uid;
         this.id = id;
         this.level = level;
         this.isEquipped = isEquipped;

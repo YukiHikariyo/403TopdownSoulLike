@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class GameManager : Singleton<GameManager>
 {
     private List<ISaveable> saveableList = new List<ISaveable>();
-    private SaveData saveData = new SaveData();
+    public SaveData saveData = new SaveData();
 
     public void RegisterSaveable(ISaveable saveable)
     {
