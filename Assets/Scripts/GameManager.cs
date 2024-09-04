@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoSingleton<GameManager>
 {
     private List<ISaveable> saveableList = new List<ISaveable>();
     public SaveData saveData = new SaveData();

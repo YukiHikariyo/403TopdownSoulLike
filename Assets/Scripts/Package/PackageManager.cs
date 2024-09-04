@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PackageManager : Singleton<PackageManager>, ISaveable
+public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 {
     private int coin;
     public int Coin
