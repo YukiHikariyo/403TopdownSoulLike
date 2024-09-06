@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MenuSelection : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class WeaponSlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public int menuIndex;
+    public int weaponID;
+    public Image weaponIcon;
     public Image selectionTip;
 
     private Sequence pointerEnterSequence;
@@ -25,9 +26,15 @@ public class MenuSelection : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         pointerExitSequence.Append(selectionTip.DOFade(0, 0.5f));
     }
 
+    public void Initialize(int id)
+    {
+        weaponID = id;
+        weaponIcon.sprite = PackageManager.Instance.allWeaponList[id].weaponIcon;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        UIManager.Instance.SelectMenu(menuIndex);
+        UIManager.Instance.SelectWeapon(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

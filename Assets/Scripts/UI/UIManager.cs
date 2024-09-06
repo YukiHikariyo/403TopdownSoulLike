@@ -8,7 +8,7 @@ public class UIManager : MonoSingleton<UIManager>
     public Transform mainCanvas;
     [Space(16)]
     [Header("背包UI")]
-    public BasePanel currentPanel;
+    public BasePanel currentMenuPanel;
     [Space(16)]
     public Transform packagePanel;
     public bool isPackageOpen;
@@ -18,6 +18,12 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI menuName;
     public int currentMenuIndex;
     [Space(16)]
+    [Header("武器")]
+    [Space(16)]
+    public Transform weaponSlots;
+    public GameObject weaponSlotPrefab;
+    public WeaponSlotUI currentSelectedWeapon;
+    public WeaponSlotUI currentEquippedWeapon;
     public TextMeshProUGUI selectedWeaponName;
     public TextMeshProUGUI selectedWeaponLevel;
 
@@ -27,20 +33,33 @@ public class UIManager : MonoSingleton<UIManager>
             OpenPackage();
     }
 
+    /// <summary>
+    /// 打开背包
+    /// </summary>
     public void OpenPackage()
     {
-        currentPanel.OnOpen();
+        if (!currentMenuPanel)
+            currentMenuPanel = menuPanelList[0];
+
+        currentMenuPanel.OnOpen();
         packagePanel.gameObject.SetActive(true);
         isPackageOpen = true;
     }
 
+    /// <summary>
+    /// 关闭背包
+    /// </summary>
     public void ClosePackage()
     {
         packagePanel.gameObject.SetActive(false);
-        currentPanel.OnClose();
+        currentMenuPanel.OnClose();
         isPackageOpen = false;
     }
 
+    /// <summary>
+    /// 选择菜单
+    /// </summary>
+    /// <param name="index">菜单索引</param>
     public void SelectMenu(int index)
     {
         currentMenuIndex = index;
@@ -61,10 +80,37 @@ public class UIManager : MonoSingleton<UIManager>
 
         menuName.text = menuNameList[index];
 
-        currentPanel.gameObject.SetActive(false);
-        currentPanel.OnClose();
-        currentPanel = menuPanelList[index];
+        currentMenuPanel.gameObject.SetActive(false);
+        currentMenuPanel.OnClose();
+        currentMenuPanel = menuPanelList[index];
         menuPanelList[index].OnOpen();
         menuPanelList[index].gameObject.SetActive(true);
     }
+
+    #region 武器
+
+    public void AddWeapon(int id)
+    {
+        GameObject weapon = Instantiate(weaponSlotPrefab, weaponSlots);
+        weapon.GetComponent<WeaponSlotUI>().Initialize(id);
+    }
+
+    public void SelectWeapon(WeaponSlotUI selectedWeaponSlot)
+    {
+        currentSelectedWeapon?.transform.GetChild(3).gameObject.SetActive(false);
+        currentSelectedWeapon = selectedWeaponSlot;
+        currentSelectedWeapon.transform.GetChild(3).gameObject.SetActive(true);
+
+        selectedWeaponName.text = PackageManager.Instance.allWeaponList[currentSelectedWeapon.weaponID].name;
+        selectedWeaponLevel.text = "LV." + PackageManager.Instance.weaponDict[currentSelectedWeapon.weaponID].level;
+    }
+
+    public void EquipWeapon()
+    {
+        currentEquippedWeapon?.transform.GetChild(4).gameObject.SetActive(false);
+        currentEquippedWeapon = currentSelectedWeapon;
+        currentEquippedWeapon?.transform.GetChild(4).gameObject.SetActive(true);
+    }
+
+    #endregion
 }

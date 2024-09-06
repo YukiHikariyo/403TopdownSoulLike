@@ -15,7 +15,16 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         }
     }
 
+    public List<StaticWeaponData> allWeaponList;
     public Dictionary<int, LocalWeaponData> weaponDict;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        weaponDict = new Dictionary<int, LocalWeaponData>();
+        allWeaponList.Sort();
+    }
 
     private void OnEnable()
     {
@@ -31,6 +40,15 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     {
         LocalWeaponData newWeapon = new LocalWeaponData(id);
         weaponDict.Add(id, newWeapon);
+        UIManager.Instance.AddWeapon(id);
+    }
+
+    [ContextMenu("添加测试武器")]
+    public void TestGetWeapon()
+    {
+        LocalWeaponData newWeapon = new LocalWeaponData(0);
+        weaponDict.Add(0, newWeapon);
+        UIManager.Instance.AddWeapon(0);
     }
 
     public void EquipWeapon(int id)

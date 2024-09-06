@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StaticWeaponData : ScriptableObject
+public class StaticWeaponData : ScriptableObject, IComparable<StaticWeaponData>
 {
     [Serializable]
     public struct WeaponStats
@@ -20,6 +20,8 @@ public class StaticWeaponData : ScriptableObject
     [Tooltip("最大等级")] public int maxLevel;
     [Space(16)]
     [Tooltip("数值")] public WeaponStats[] weaponStats;   //数组索引表示武器等级
+
+    public int CompareTo(StaticWeaponData other) => weaponID - other.weaponID;
 }
 
 public class LocalWeaponData
