@@ -100,11 +100,57 @@ public class PlayerData : MonoBehaviour, ISaveable
         set => basicCritDamage = value;
     }
 
+    [SerializeField][Tooltip("基础攻击倍率")] private float basicDamageRate;
+    [Tooltip("基础攻击倍率")]
+    public float BasicDamageRate
+    {
+        get => basicDamageRate;
+        set => basicDamageRate = value;
+    }
+
+    [SerializeField][Tooltip("基础伤害减免")] private float basicReductionRate;
+    [Tooltip("基础伤害减免")]
+    public float BasicReductionRate
+    {
+        get => basicReductionRate;
+        set => basicReductionRate = value;
+    }
+
+    [Space(16)]
+
     [SerializeField][Tooltip("最终攻击力")] private float finalDamage;
     [Tooltip("最终攻击力")] 
     public float FinalDamage
     {
-        get => basicDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level].damage;
+        get => basicDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damage;
+    }
+
+    [SerializeField][Tooltip("最终暴击率")] private float finalCritRate;
+    [Tooltip("最终暴击率")]
+    public float FinalCritRate
+    {
+        get => basicCritRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critRate;
+    }
+
+    [SerializeField][Tooltip("最终暴击上海")] private float finalCritDamage;
+    [Tooltip("最终暴击伤害")]
+    public float FinalCritDamage
+    {
+        get => basicCritDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critDamage;
+    }
+
+    [SerializeField][Tooltip("最终攻击倍率")] private float finalDamageRate;
+    [Tooltip("最终攻击倍率")]
+    public float FinalDamageRate
+    {
+        get => basicDamageRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damageRate;
+    }
+
+    [SerializeField][Tooltip("最终伤害减免")] private float finalReductionRate;
+    [Tooltip("最终伤害减免")]
+    public float FinalReducitonRate
+    {
+        get => basicReductionRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].reductionRate;
     }
 
     [Space(16)]

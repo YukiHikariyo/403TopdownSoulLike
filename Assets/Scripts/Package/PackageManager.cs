@@ -28,6 +28,9 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 
         weaponDict = new Dictionary<int, LocalWeaponData>();
         allWeaponList.Sort();
+
+        if (!weaponDict.ContainsKey(0))
+            GetWeapon(0);
     }
 
     private void OnEnable()

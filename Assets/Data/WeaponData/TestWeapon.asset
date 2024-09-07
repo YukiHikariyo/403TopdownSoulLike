@@ -18,14 +18,23 @@ MonoBehaviour:
   maxLevel: 3
   weaponStats:
   - damage: 1
-    critRate: 1
+    critRate: 0.1
+    critDamage: 0.1
+    damageRate: 0.1
+    reductionRate: 0.1
     coinCost: 1
     stoneCost: 1
   - damage: 2
-    critRate: 2
+    critRate: 0.2
+    critDamage: 0.2
+    damageRate: 0.2
+    reductionRate: 0.2
     coinCost: 2
     stoneCost: 2
   - damage: 3
-    critRate: 3
+    critRate: 0.3
+    critDamage: 0.3
+    damageRate: 0.3
+    reductionRate: 0.3
     coinCost: 0
     stoneCost: 0

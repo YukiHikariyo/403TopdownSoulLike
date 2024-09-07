@@ -6,27 +6,39 @@ using TMPro;
 public class UIManager : MonoSingleton<UIManager>
 {
     public Transform mainCanvas;
+
     [Space(16)]
     [Header("背包UI")]
-    public BasePanel currentMenuPanel;
     [Space(16)]
+
     public Transform packagePanel;
     public bool isPackageOpen;
+    [Space(16)]
+    public BasePanel currentMenuPanel;
     public List<Transform> menuSelectionList;
     public List<BasePanel> menuPanelList;
     public string[] menuNameList = { "玩家属性", "道具", "武器", "饰品", "天赋树", "设置" };
     public TextMeshProUGUI menuName;
     public int currentMenuIndex;
+
     [Space(16)]
     [Header("武器")]
     [Space(16)]
+
     public Transform weaponSlots;
     public GameObject weaponSlotPrefab;
     public WeaponSlotUI currentSelectedWeapon;
     public WeaponSlotUI currentEquippedWeapon;
+    [Space(16)]
     public Transform detailPanel;
     public TextMeshProUGUI selectedWeaponName;
     public TextMeshProUGUI selectedWeaponLevel;
+    [Space(16)]
+    public TextMeshProUGUI damageValue;
+    public TextMeshProUGUI critRateValue;
+    public TextMeshProUGUI critDamageValue;
+    public TextMeshProUGUI damageRateValue;
+    public TextMeshProUGUI reductionRateValue;
 
     private void Update()
     {
@@ -102,8 +114,15 @@ public class UIManager : MonoSingleton<UIManager>
         currentSelectedWeapon = selectedWeaponSlot;
         currentSelectedWeapon.transform.GetChild(3).gameObject.SetActive(true);
 
-        selectedWeaponName.text = PackageManager.Instance.allWeaponList[currentSelectedWeapon.weaponID].name;
-        selectedWeaponLevel.text = "LV." + PackageManager.Instance.weaponDict[currentSelectedWeapon.weaponID].level;
+        int id = currentSelectedWeapon.weaponID;
+        int level = PackageManager.Instance.weaponDict[id].level;
+        selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
+        selectedWeaponLevel.text = "LV." + level;
+        damageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
+        critRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critRate * 100 + "%";
+        critDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
+        damageRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damageRate * 100 + "%";
+        reductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
         detailPanel.gameObject.SetActive(true);
     }
 
@@ -114,6 +133,11 @@ public class UIManager : MonoSingleton<UIManager>
         currentEquippedWeapon?.transform.GetChild(4).gameObject.SetActive(true);
 
         PackageManager.Instance.EquipWeapon(currentSelectedWeapon.weaponID);
+    }
+
+    public void UpgradeWeapon()
+    {
+
     }
 
     #endregion

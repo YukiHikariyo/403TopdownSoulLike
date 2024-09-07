@@ -8,8 +8,11 @@ public class StaticWeaponData : ScriptableObject, IComparable<StaticWeaponData>
     [Serializable]
     public struct WeaponStats
     {
-        [Tooltip("伤害")] public float damage;
+        [Tooltip("攻击力")] public float damage;
         [Tooltip("暴击率")] public float critRate;
+        [Tooltip("暴击伤害")] public float critDamage;
+        [Tooltip("攻击倍率")] public float damageRate;
+        [Tooltip("伤害减免")] public float reductionRate;
         [Tooltip("升级花费金钱数量")] public int coinCost;
         [Tooltip("升级花费锻造石数量")] public int stoneCost;
     }
