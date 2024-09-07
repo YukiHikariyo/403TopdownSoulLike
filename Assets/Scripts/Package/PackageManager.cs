@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 {
-    private int coin;
+    public PlayerData playerData;
+
+    [SerializeField][Tooltip("当前金币")] private int coin;
+    [Tooltip("当前金币")]
     public int Coin
     {
         get => coin;
@@ -15,8 +18,9 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         }
     }
 
-    public List<StaticWeaponData> allWeaponList;
-    public Dictionary<int, LocalWeaponData> weaponDict;
+    [Tooltip("游戏中所有武器列表")] public List<StaticWeaponData> allWeaponList;
+    [Tooltip("已获得武器字典")] public Dictionary<int, LocalWeaponData> weaponDict;
+    public LocalWeaponData currentWeapon;
 
     protected override void Awake()
     {
@@ -55,11 +59,13 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     {
         if (weaponDict.ContainsKey(id))
         {
-            foreach (var weapon in weaponDict.Values)
-                weapon.isEquipped = false;
-
+            if (currentWeapon != null)
+                currentWeapon.isEquipped = false;
             weaponDict[id].isEquipped = true;
         }
+
+        playerData.currentWeaponStaticData = allWeaponList[id];
+        playerData.currentWeaponLocalData = weaponDict[id];
     }
 
     public void UpgradeWeapon(int id)
@@ -81,12 +87,12 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 
     public void LoadSaveData(SaveData saveData)
     {
-        foreach (int weaponID in GameManager.Instance.saveData.weaponDict.Keys)
+        foreach (int weaponID in saveData.weaponDict.Keys)
         {
             if (!weaponDict.ContainsKey(weaponID))
-                weaponDict.Add(weaponID, GameManager.Instance.saveData.weaponDict[weaponID]);
+                weaponDict.Add(weaponID, saveData.weaponDict[weaponID]);
             else
-                weaponDict[weaponID] = GameManager.Instance.saveData.weaponDict[weaponID];
+                weaponDict[weaponID] = saveData.weaponDict[weaponID];
         }
     }
 }

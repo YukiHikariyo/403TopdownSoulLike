@@ -24,6 +24,7 @@ public class UIManager : MonoSingleton<UIManager>
     public GameObject weaponSlotPrefab;
     public WeaponSlotUI currentSelectedWeapon;
     public WeaponSlotUI currentEquippedWeapon;
+    public Transform detailPanel;
     public TextMeshProUGUI selectedWeaponName;
     public TextMeshProUGUI selectedWeaponLevel;
 
@@ -103,6 +104,7 @@ public class UIManager : MonoSingleton<UIManager>
 
         selectedWeaponName.text = PackageManager.Instance.allWeaponList[currentSelectedWeapon.weaponID].name;
         selectedWeaponLevel.text = "LV." + PackageManager.Instance.weaponDict[currentSelectedWeapon.weaponID].level;
+        detailPanel.gameObject.SetActive(true);
     }
 
     public void EquipWeapon()
@@ -110,6 +112,8 @@ public class UIManager : MonoSingleton<UIManager>
         currentEquippedWeapon?.transform.GetChild(4).gameObject.SetActive(false);
         currentEquippedWeapon = currentSelectedWeapon;
         currentEquippedWeapon?.transform.GetChild(4).gameObject.SetActive(true);
+
+        PackageManager.Instance.EquipWeapon(currentSelectedWeapon.weaponID);
     }
 
     #endregion

@@ -270,9 +270,9 @@ RectTransform:
   - {fileID: 1880438029}
   m_Father: {fileID: 129092910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63965869
@@ -404,7 +404,7 @@ RectTransform:
   m_AnchorMin: {x: 0.15078898, y: 0}
   m_AnchorMax: {x: 0.85278904, y: 1}
   m_AnchoredPosition: {x: 0.35791016, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -247.13812, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129092911
 MonoBehaviour:
@@ -707,9 +707,9 @@ RectTransform:
   - {fileID: 544456493}
   m_Father: {fileID: 129092910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1050, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &179713922
@@ -830,6 +830,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 940739897}
+  - {fileID: 1686171218}
   - {fileID: 2044287019}
   - {fileID: 897842291}
   m_Father: {fileID: 0}
@@ -1371,9 +1372,9 @@ RectTransform:
   - {fileID: 1048042439}
   m_Father: {fileID: 129092910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 650, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495873808
@@ -1597,9 +1598,9 @@ RectTransform:
   - {fileID: 155259183}
   m_Father: {fileID: 129092910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515066578
@@ -2337,6 +2338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddbf49dce2cd569459a953bc24a319fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
+  coin: 0
   allWeaponList:
   - {fileID: 11400000, guid: df93a7f89228be74f9c90738f46780a9, type: 2}
 --- !u!1 &936793094
@@ -2921,7 +2924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1153521342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3162,7 +3165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6B66\u5668"
+  m_text: "\u73A9\u5BB6\u5C5E\u6027"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 295935abffa6ddd4aa05a081d976dea2, type: 2}
   m_sharedMaterial: {fileID: 3301500681553840597, guid: 295935abffa6ddd4aa05a081d976dea2, type: 2}
@@ -3256,7 +3259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1175634771
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3576,9 +3579,9 @@ RectTransform:
   - {fileID: 359499795}
   m_Father: {fileID: 129092910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 850, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1290056569
@@ -3724,7 +3727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1361941852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3773,7 +3776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1368653192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3864,7 +3867,7 @@ RectTransform:
   m_Father: {fileID: 1687191609}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3922,7 +3925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1413441600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4174,9 +4177,9 @@ RectTransform:
   - {fileID: 888558148}
   m_Father: {fileID: 129092910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 450, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1566618427
@@ -4231,6 +4234,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuIndex: 2
   selectionTip: {fileID: 888558149}
+--- !u!1 &1686171217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1686171218}
+  - component: {fileID: 1686171219}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1686171218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686171217}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 260011074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1686171219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686171217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df13178e90031d442806e56c74c7e6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1687191608
 GameObject:
   m_ObjectHideFlags: 0
@@ -4349,7 +4396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1801819867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4390,7 +4437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1822104442
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4438,7 +4485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1828612527
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4563,7 +4610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1943317759
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4687,7 +4734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2001893467
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4873,7 +4920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 2044287022}
-  currentMenuPanel: {fileID: 0}
+  currentMenuPanel: {fileID: 1700338902}
   packagePanel: {fileID: 1801819867}
   isPackageOpen: 0
   menuSelectionList:
@@ -4903,6 +4950,7 @@ MonoBehaviour:
   weaponSlotPrefab: {fileID: 3546014802300172941, guid: f33a4aeb9eaa94d4e9970bdda37a14a1, type: 3}
   currentSelectedWeapon: {fileID: 0}
   currentEquippedWeapon: {fileID: 0}
+  detailPanel: {fileID: 1228303330}
   selectedWeaponName: {fileID: 386135294}
   selectedWeaponLevel: {fileID: 1120222823}
 --- !u!1660057539 &9223372036854775807
