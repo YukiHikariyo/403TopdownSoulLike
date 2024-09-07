@@ -152,7 +152,19 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""KeyBoard"",
+            ""bindingGroup"": ""KeyBoard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
@@ -305,6 +317,15 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+    private int m_KeyBoardSchemeIndex = -1;
+    public InputControlScheme KeyBoardScheme
+    {
+        get
+        {
+            if (m_KeyBoardSchemeIndex == -1) m_KeyBoardSchemeIndex = asset.FindControlSchemeIndex("KeyBoard");
+            return asset.controlSchemes[m_KeyBoardSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnMoveUp(InputAction.CallbackContext context);

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -216,18 +216,46 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             if (!ResolveActionAndBinding(out var action, out var bindingIndex))
                 return;
-
-            if (action.bindings[bindingIndex].isComposite)
-            {
-                // It's a composite. Remove overrides from part bindings.
-                for (var i = bindingIndex + 1; i < action.bindings.Count && action.bindings[i].isPartOfComposite; ++i)
-                    action.RemoveBindingOverride(i);
-            }
-            else
-            {
-                action.RemoveBindingOverride(bindingIndex);
-            }
+            ResetBinding(action, bindingIndex);
+            //if (action.bindings[bindingIndex].isComposite)
+            //{
+            //    // It's a composite. Remove overrides from part bindings.
+            //    for (var i = bindingIndex + 1; i < action.bindings.Count && action.bindings[i].isPartOfComposite; ++i)
+            //        action.RemoveBindingOverride(i);
+            //}
+            //else
+            //{
+            //    action.RemoveBindingOverride(bindingIndex);
+            //}
             UpdateBindingDisplay();
+        }
+
+        private void ResetBinding(InputAction action, int bindingIndex)
+        {
+            InputBinding newBinding = action.bindings[bindingIndex];
+            string oldOverridePath = newBinding.overridePath;
+
+            action.RemoveBindingOverride(bindingIndex);
+            //检查所有当前按键绑定，目的是防止Reset按键绑定时出现的按键冲突
+
+            foreach(InputAction otherAction in action.actionMap.actions)
+            {
+                if(otherAction == action) 
+                {
+                    continue;
+                }
+
+                for(int i = 0; i < otherAction.bindings.Count; i++)
+                {
+                    InputBinding binding = otherAction.bindings[i];
+                    if(binding.overridePath == newBinding.path)
+                    {
+                        Debug.Log("该按键初始值与"+ binding.effectivePath + "发生冲突");
+                        action.ApplyBindingOverride(oldOverridePath);
+                    }
+                }
+            }
+
         }
 
         /// <summary>
@@ -262,6 +290,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 m_RebindOperation = null;
             }
             action.Disable();
+            //修改按键前需要先禁用当前使用的Action
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
                 .OnCancel(
@@ -378,6 +407,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             }
         }
 
+        //拒绝按键绑定冲突
         private bool CheckDuplicateBindings(InputAction action,int bingdingIndex,bool allCompositeParts = false)
         {
             InputBinding newBinding = action.bindings[bingdingIndex];
