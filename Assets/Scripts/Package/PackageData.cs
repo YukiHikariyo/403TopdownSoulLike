@@ -70,6 +70,6 @@ public class LocalItemData
     public LocalItemData(int id, int number = 1)
     {
         this.id = id;
-        this.number = number;
+        this.number = number < 999 ? number : 999;  //物品最大数量999
     }
 }

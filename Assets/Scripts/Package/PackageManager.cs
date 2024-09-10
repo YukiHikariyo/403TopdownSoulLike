@@ -18,7 +18,10 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         }
     }
 
-    [Tooltip("游戏中所有武器列表")] public List<StaticWeaponData> allWeaponList;
+    [Tooltip("所有物品列表")] public List<StaticItemData> allItemList;
+    [Tooltip("已获得道具字典")] public Dictionary<int, LocalItemData> itemDict;
+
+    [Tooltip("所有武器列表")] public List<StaticWeaponData> allWeaponList;
     [Tooltip("已获得武器字典")] public Dictionary<int, LocalWeaponData> weaponDict;
     public LocalWeaponData currentWeapon;
 
@@ -26,7 +29,10 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     {
         base.Awake();
 
+        itemDict = new Dictionary<int, LocalItemData>();
         weaponDict = new Dictionary<int, LocalWeaponData>();
+
+        allItemList.Sort();
         allWeaponList.Sort();
 
         if (!weaponDict.ContainsKey(0))
@@ -41,40 +47,6 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     private void OnDisable()
     {
         (this as ISaveable).UnRegister();
-    }
-
-    public void GetWeapon(int id)
-    {
-        LocalWeaponData newWeapon = new LocalWeaponData(id);
-        weaponDict.Add(id, newWeapon);
-        UIManager.Instance.AddWeapon(id);
-    }
-
-    [ContextMenu("添加测试武器")]
-    public void TestGetWeapon()
-    {
-        LocalWeaponData newWeapon = new LocalWeaponData(0);
-        weaponDict.Add(0, newWeapon);
-        UIManager.Instance.AddWeapon(0);
-    }
-
-    public void EquipWeapon(int id)
-    {
-        if (weaponDict.ContainsKey(id))
-        {
-            if (currentWeapon != null)
-                currentWeapon.isEquipped = false;
-            weaponDict[id].isEquipped = true;
-        }
-
-        playerData.currentWeaponStaticData = allWeaponList[id];
-        playerData.currentWeaponLocalData = weaponDict[id];
-    }
-
-    public void UpgradeWeapon(int id)
-    {
-        if (weaponDict.ContainsKey(id))
-            weaponDict[id].level++;
     }
 
     public void GetSaveData(SaveData saveData)
@@ -98,4 +70,64 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
                 weaponDict[weaponID] = saveData.weaponDict[weaponID];
         }
     }
+
+    #region 物品
+
+    public void GetItem(int id, int number)
+    {
+        if (itemDict.ContainsKey(id))
+            itemDict[id].number = itemDict[id].number + number < 999 ? itemDict[id].number + number : 999;
+        else
+            itemDict.Add(id, new LocalItemData(id, number));
+
+        UIManager.Instance.GetItem(id, number);
+    }
+
+    public void ConsumeItem(int id, int number)
+    {
+        if (itemDict.ContainsKey(id))
+        {
+            UIManager.Instance.ConsumeItem(id, number);
+            if (itemDict[id].number >= number)
+                itemDict[id].number -= number;
+        }
+    }
+
+    #endregion
+
+    #region 武器
+
+    public void GetWeapon(int id)
+    {
+        weaponDict.Add(id, new LocalWeaponData(id));
+        UIManager.Instance.GetWeapon(id);
+    }
+
+    [ContextMenu("添加测试武器")]
+    public void TestGetWeapon()
+    {
+        weaponDict.Add(0, new LocalWeaponData(0));
+        UIManager.Instance.GetWeapon(0);
+    }
+
+    public void EquipWeapon(int id)
+    {
+        if (weaponDict.ContainsKey(id))
+        {
+            if (currentWeapon != null)
+                currentWeapon.isEquipped = false;
+            weaponDict[id].isEquipped = true;
+        }
+
+        playerData.currentWeaponStaticData = allWeaponList[id];
+        playerData.currentWeaponLocalData = weaponDict[id];
+    }
+
+    public void UpgradeWeapon(int id)
+    {
+        if (weaponDict.ContainsKey(id))
+            weaponDict[id].level++;
+    }
+
+    #endregion
 }
