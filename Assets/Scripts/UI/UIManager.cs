@@ -37,7 +37,7 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI damageValue;
     public TextMeshProUGUI critRateValue;
     public TextMeshProUGUI critDamageValue;
-    public TextMeshProUGUI damageRateValue;
+    public TextMeshProUGUI penetratingPowerValue;
     public TextMeshProUGUI reductionRateValue;
 
     private void Update()
@@ -121,7 +121,7 @@ public class UIManager : MonoSingleton<UIManager>
         damageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
         critRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critRate * 100 + "%";
         critDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
-        damageRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damageRate * 100 + "%";
+        penetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
         reductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
         detailPanel.gameObject.SetActive(true);
     }

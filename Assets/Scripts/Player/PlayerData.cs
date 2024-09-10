@@ -100,12 +100,12 @@ public class PlayerData : MonoBehaviour, ISaveable
         set => basicCritDamage = value;
     }
 
-    [SerializeField][Tooltip("基础攻击倍率")] private float basicDamageRate;
-    [Tooltip("基础攻击倍率")]
+    [SerializeField][Tooltip("基础穿透力")] private float basicPenetratingPower;
+    [Tooltip("基础穿透力")]
     public float BasicDamageRate
     {
-        get => basicDamageRate;
-        set => basicDamageRate = value;
+        get => basicPenetratingPower;
+        set => basicPenetratingPower = value;
     }
 
     [SerializeField][Tooltip("基础伤害减免")] private float basicReductionRate;
@@ -139,11 +139,11 @@ public class PlayerData : MonoBehaviour, ISaveable
         get => basicCritDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critDamage;
     }
 
-    [SerializeField][Tooltip("最终攻击倍率")] private float finalDamageRate;
-    [Tooltip("最终攻击倍率")]
+    [SerializeField][Tooltip("最终穿透力")] private float finalPenetratingPower;
+    [Tooltip("最终穿透力")]
     public float FinalDamageRate
     {
-        get => basicDamageRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damageRate;
+        get => basicPenetratingPower + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].penetratingPower;
     }
 
     [SerializeField][Tooltip("最终伤害减免")] private float finalReductionRate;
