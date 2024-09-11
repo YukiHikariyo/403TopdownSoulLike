@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PackageManager : MonoSingleton<PackageManager>, ISaveable
@@ -83,6 +84,17 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         UIManager.Instance.GetItem(id, number);
     }
 
+    [ContextMenu("获得3个测试物品")]
+    public void TestGetItem()
+    {
+        if (itemDict.ContainsKey(0))
+            itemDict[0].number = itemDict[0].number + 3 < 999 ? itemDict[0].number + 3 : 999;
+        else
+            itemDict.Add(0, new LocalItemData(0, 3));
+
+        UIManager.Instance.GetItem(0, 3);
+    }
+
     public void ConsumeItem(int id, int number)
     {
         if (itemDict.ContainsKey(id))
@@ -93,21 +105,38 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         }
     }
 
+    [ContextMenu("消耗2个测试物品")]
+    public void TestConsumeItem()
+    {
+        if (itemDict.ContainsKey(0))
+        {
+            UIManager.Instance.ConsumeItem(0, 2);
+            if (itemDict[0].number >= 2)
+                itemDict[0].number -= 2;
+        }
+    }
+
     #endregion
 
     #region 武器
 
     public void GetWeapon(int id)
     {
-        weaponDict.Add(id, new LocalWeaponData(id));
-        UIManager.Instance.GetWeapon(id);
+        if (!weaponDict.ContainsKey(id))
+        {
+            weaponDict.Add(id, new LocalWeaponData(id));
+            UIManager.Instance.GetWeapon(id);
+        }
     }
 
     [ContextMenu("添加测试武器")]
     public void TestGetWeapon()
     {
-        weaponDict.Add(0, new LocalWeaponData(0));
-        UIManager.Instance.GetWeapon(0);
+        if (!weaponDict.ContainsKey(0))
+        {
+            weaponDict.Add(0, new LocalWeaponData(0));
+            UIManager.Instance.GetWeapon(0);
+        }
     }
 
     public void EquipWeapon(int id)

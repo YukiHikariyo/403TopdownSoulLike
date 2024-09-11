@@ -38,7 +38,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        
+        UIManager.Instance.SelectItem(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

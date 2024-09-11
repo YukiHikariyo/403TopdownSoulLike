@@ -23,7 +23,7 @@ public class UIManager : MonoSingleton<UIManager>
     public BasePanel currentMenuPanel;
     public List<Transform> menuSelectionList;
     public List<BasePanel> menuPanelList;
-    public string[] menuNameList = { "玩家属性", "道具", "武器", "饰品", "天赋树", "设置" };
+    public string[] menuNameList = { "玩家属性", "物品", "武器", "饰品", "天赋树", "设置" };
     public TextMeshProUGUI menuName;
     public int currentMenuIndex;
 
@@ -37,6 +37,8 @@ public class UIManager : MonoSingleton<UIManager>
     public Dictionary<int, ItemSlotUI> itemSlotDict;
     [Space(16)]
     public RectTransform itemDetailPanel;
+    public TextMeshProUGUI selectedItemName;
+    public TextMeshProUGUI selectedItemNumber;
 
     [Space(16)]
     [Header("武器")]
@@ -69,10 +71,7 @@ public class UIManager : MonoSingleton<UIManager>
     private void Update()
     {
         if (!isPackageOpen && Input.GetKeyDown(KeyCode.Escape))
-        {
             OpenPackage();
-            PlayTipSequence("打开了背包");
-        }
     }
 
     /// <summary>
@@ -194,9 +193,19 @@ public class UIManager : MonoSingleton<UIManager>
             itemSlotDict[id].itemNumberText.text = itemSlotDict[id].itemNumber.ToString();
         }
         else
-        {
+            PlayTipSequence(PackageManager.Instance.allItemList[id].itemName + "数量不足");
+    }
 
-        }
+    public void SelectItem(ItemSlotUI selectedItemSlot)
+    {
+        currentSelectedItem?.transform.GetChild(4).gameObject.SetActive(false);
+        currentSelectedItem = selectedItemSlot;
+        currentSelectedItem.transform.GetChild(4).gameObject.SetActive(true);
+
+        int id = currentSelectedItem.itemID;
+        selectedItemName.text = PackageManager.Instance.allItemList[id].itemName;
+        selectedItemNumber.text = " 数量：" + PackageManager.Instance.itemDict[id].number + "个";
+        itemDetailPanel.gameObject.SetActive(true);
     }
 
     #endregion

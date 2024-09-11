@@ -245,7 +245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 0
-  itemNumber: {fileID: 5779940923184765950}
+  itemNumber: 0
+  itemNumberText: {fileID: 5779940923184765950}
   itemIcon: {fileID: 1760611176335150027}
   selectionTip: {fileID: 2558207674182335632}
 --- !u!1 &3982487527079535630

@@ -3255,10 +3255,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 849114742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7477606, y: 0.13171098}
+  m_AnchorMin: {x: 0.6952369, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0013427734, y: -4.999916}
-  m_SizeDelta: {x: 0.0031433, y: 9.886}
+  m_AnchoredPosition: {x: 0.0015258789, y: 0.00008392334}
+  m_SizeDelta: {x: 0.0027313, y: -0.114}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &742083098
 MonoBehaviour:
@@ -3934,7 +3934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 0}
   coin: 0
-  allItemList: []
+  allItemList:
+  - {fileID: 11400000, guid: 491147848cb3f214f97ade4ee5552391, type: 2}
   allWeaponList:
   - {fileID: 11400000, guid: df93a7f89228be74f9c90738f46780a9, type: 2}
 --- !u!1 &936793094
@@ -5241,7 +5242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1228303330
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7621,6 +7622,8 @@ MonoBehaviour:
   itemSlotPrefab: {fileID: 3546014802300172941, guid: 81f40fbf73b5c3e408992369911acbd3, type: 3}
   currentSelectedItem: {fileID: 0}
   itemDetailPanel: {fileID: 1140949429}
+  selectedItemName: {fileID: 742531439}
+  selectedItemNumber: {fileID: 742083098}
   weaponSlots: {fileID: 1987621758}
   weaponSlotPrefab: {fileID: 3546014802300172941, guid: f33a4aeb9eaa94d4e9970bdda37a14a1, type: 3}
   currentSelectedWeapon: {fileID: 0}
