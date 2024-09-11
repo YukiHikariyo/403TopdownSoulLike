@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    IState currentState;
-
-
+    [SerializeField]IState currentState;
+    
+    protected Dictionary<System.Type, IState> dict;
     protected void Update()
     {
         currentState.LogicUpdate();
@@ -29,4 +29,8 @@ public class StateMachine : MonoBehaviour
         SwitchOn(newState);
     }
     
+    public void SwitchState(System.Type newState)
+    {
+        SwitchState(dict[newState]);
+    }
 }

@@ -1569,6 +1569,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1494598969}
   - component: {fileID: 1494598968}
+  - component: {fileID: 1494598973}
+  - component: {fileID: 1494598972}
+  - component: {fileID: 1494598971}
+  - component: {fileID: 1494598970}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1622,6 +1626,80 @@ Transform:
   - {fileID: 913952619}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1494598970
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494598967}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &1494598971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494598967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a649812bedf6846a4c05c488e798af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1494598972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494598967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ea294ca5f4b00498a3a166c6f1e4d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRb: {fileID: 1494598970}
+  inputs: {fileID: 1494598971}
+  moveSpeed: 5
+  fastRollSpeed: 0
+  slowRollSpeed: 0
+  RollDeceleration: 0
+--- !u!114 &1494598973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494598967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1ebd5a1d178314b81d5c47b50c30ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 1494598971}
+  playerController: {fileID: 1494598972}
+  stateTable:
+  - {fileID: 11400000, guid: d26821b8c6e5dde408ad7c24fc70c57a, type: 2}
+  - {fileID: 11400000, guid: a3e6f2ee2d051d04f8ddf2b471ba56eb, type: 2}
 --- !u!224 &1613978652 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6680292650503350825, guid: f25dcd618d3acd64795bf8bb32edb6c9, type: 3}
