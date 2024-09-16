@@ -7,7 +7,7 @@ public class StateMachine : MonoBehaviour
     [SerializeField]IState currentState;
     
     protected Dictionary<System.Type, IState> dict;
-    protected void Update()
+    protected virtual void Update()
     {
         currentState.LogicUpdate();
     }

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
 {
+    [SerializeField] Camera m_camera;
+    private Transform playerTransform;
+    [SerializeField] float mousedegree;
     public PlayerInput playerInput;
     public PlayerController playerController;
     [SerializeField]PlayerState[] stateTable;
+
+    public float MouseDegree => mousedegree;
     private void Awake()
     {
         //
@@ -25,4 +30,16 @@ public class PlayerStateMachine : StateMachine
         SwitchOn(dict[typeof(PlayerState_Idle)]);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        UpdateMouseDegree();
+    }
+
+    private void UpdateMouseDegree()
+    {
+        Vector2 vec = m_camera.WorldToScreenPoint(Input.mousePosition) - playerTransform.position;
+        float degree = Mathf.Atan2(vec.y,vec.x) * Mathf.Deg2Rad + (playerTransform.localScale.x > 0?0:180f);
+        mousedegree = degree;
+    }
 }

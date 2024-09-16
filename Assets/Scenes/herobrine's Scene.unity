@@ -1573,6 +1573,7 @@ GameObject:
   - component: {fileID: 1494598972}
   - component: {fileID: 1494598971}
   - component: {fileID: 1494598970}
+  - component: {fileID: 1494598974}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1695,11 +1696,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1ebd5a1d178314b81d5c47b50c30ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_camera: {fileID: 0}
+  mousedegree: 0
   playerInput: {fileID: 1494598971}
   playerController: {fileID: 1494598972}
   stateTable:
   - {fileID: 11400000, guid: d26821b8c6e5dde408ad7c24fc70c57a, type: 2}
   - {fileID: 11400000, guid: a3e6f2ee2d051d04f8ddf2b471ba56eb, type: 2}
+  - {fileID: 11400000, guid: babf95d4323233b4e84f16aff96fa5de, type: 2}
+--- !u!95 &1494598974
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494598967}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 794a6dade902aba429587496be46177b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!224 &1613978652 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6680292650503350825, guid: f25dcd618d3acd64795bf8bb32edb6c9, type: 3}
