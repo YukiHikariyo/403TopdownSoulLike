@@ -105,7 +105,7 @@ public class UIManager : MonoSingleton<UIManager>
     /// 播放提示弹窗动画序列
     /// </summary>
     /// <param name="tip">提示内容</param>
-    private void PlayTipSequence(string tip)
+    public void PlayTipSequence(string tip)
     {
         tipText.text = tip;
         tipSequence.Restart();
@@ -243,11 +243,23 @@ public class UIManager : MonoSingleton<UIManager>
         currentEquippedWeapon?.transform.GetChild(4).gameObject.SetActive(true);
 
         PackageManager.Instance.EquipWeapon(currentSelectedWeapon.weaponID);
+
+        PlayTipSequence("装备成功");
     }
 
     public void UpgradeWeapon()
     {
+        PackageManager.Instance.UpgradeWeapon(currentSelectedWeapon.weaponID);
 
+        int id = currentSelectedWeapon.weaponID;
+        int level = PackageManager.Instance.weaponDict[id].level;
+        selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
+        selectedWeaponLevel.text = "LV." + level;
+        damageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
+        critRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critRate * 100 + "%";
+        critDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
+        penetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
+        reductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
     }
 
     #endregion

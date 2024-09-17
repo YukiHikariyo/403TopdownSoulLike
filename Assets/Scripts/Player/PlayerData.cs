@@ -132,7 +132,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         get => basicCritRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critRate;
     }
 
-    [SerializeField][Tooltip("最终暴击上海")] private float finalCritDamage;
+    [SerializeField][Tooltip("最终暴击伤害")] private float finalCritDamage;
     [Tooltip("最终暴击伤害")]
     public float FinalCritDamage
     {

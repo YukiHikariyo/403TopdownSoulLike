@@ -2,24 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static StaticWeaponData;
+using static UnityEditor.Progress;
+
+[Serializable]
+public struct WeaponStats
+{
+    [Tooltip("攻击力")] public float damage;
+    [Tooltip("暴击率")] public float critRate;
+    [Tooltip("暴击伤害")] public float critDamage;
+    [Tooltip("穿透力")] public float penetratingPower;
+    [Tooltip("伤害减免")] public float reductionRate;
+    [Tooltip("升级花费金钱数量")] public int coinCost;
+    [Tooltip("升级花费锻造石数量")] public int stoneCost;
+}
 
 /// <summary>
 /// 静态武器数据
 /// </summary>
 public class StaticWeaponData : ScriptableObject, IComparable<StaticWeaponData>
 {
-    [Serializable]
-    public struct WeaponStats
-    {
-        [Tooltip("攻击力")] public float damage;
-        [Tooltip("暴击率")] public float critRate;
-        [Tooltip("暴击伤害")] public float critDamage;
-        [Tooltip("穿透力")] public float penetratingPower;
-        [Tooltip("伤害减免")] public float reductionRate;
-        [Tooltip("升级花费金钱数量")] public int coinCost;
-        [Tooltip("升级花费锻造石数量")] public int stoneCost;
-    }
-
+    
     [Tooltip("ID")] public int weaponID;
     [Tooltip("名称")] public string weaponName;
     [Tooltip("图标")] public Sprite weaponIcon;
@@ -55,6 +58,7 @@ public class StaticItemData : ScriptableObject, IComparable<StaticItemData>
     [Tooltip("ID")] public int itemID;
     [Tooltip("名称")] public string itemName;
     [Tooltip("图标")] public Sprite itemIcon;
+    [Tooltip("能否使用")] public bool isUseable;
 
     public int CompareTo(StaticItemData other) => itemID - other.itemID;
 }
@@ -71,5 +75,47 @@ public class LocalItemData
     {
         this.id = id;
         this.number = number < 999 ? number : 999;  //物品最大数量999
+    }
+}
+
+[Serializable]
+public struct AccessoryStats
+{
+    [Tooltip("攻击力")] public float damage;
+    [Tooltip("暴击率")] public float critRate;
+    [Tooltip("暴击伤害")] public float critDamage;
+    [Tooltip("穿透力")] public float penetratingPower;
+    [Tooltip("伤害减免")] public float reductionRate;
+    [Tooltip("升级花费金钱数量")] public int coinCost;
+    [Tooltip("升级花费强化石数量")] public int stoneCost;
+}
+
+
+/// <summary>
+/// 静态饰品数据
+/// </summary>
+public class StaticAccessoryData : ScriptableObject, IComparable<StaticAccessoryData>
+{
+    [Tooltip("ID")] public int accessoryID;
+    [Tooltip("名称")] public string accessoryName;
+    [Tooltip("图标")] public Sprite accessoryIcon;
+    [Tooltip("最大等级")] public int maxLevel;
+    [Space(16)]
+    [Tooltip("数值")] public AccessoryStats[] weaponStats;   //数组索引表示饰品等级
+
+    public int CompareTo(StaticAccessoryData other) => accessoryID - other.accessoryID;
+}
+
+public class LocalAccessoryData
+{
+    public int id;
+    public int level;
+    public bool isEquipped;
+
+    public LocalAccessoryData(int id, int level = 1, bool isEquipped = false)
+    {
+        this.id = id;
+        this.level = level;
+        this.isEquipped = isEquipped; 
     }
 }
