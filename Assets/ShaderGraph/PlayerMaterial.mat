@@ -61,8 +61,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Damaged: 0
     m_Colors:
+    - _DamagedColor: {r: 1, g: 1, b: 1, a: 0}
     - _SwordColor: {r: 0.18650512, g: 1.3350785, b: 0, a: 0}
     - _SwordShadowColor: {r: 4.9720206, g: 5.3403134, b: 0.08396665, a: 0}
   m_BuildTextureStacks: []
