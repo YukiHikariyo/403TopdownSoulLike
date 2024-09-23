@@ -53,6 +53,8 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI selectedWeaponName;
     public TextMeshProUGUI selectedWeaponLevel;
     [Space(16)]
+    public TextMeshProUGUI stoneValue;
+    public TextMeshProUGUI coinValue;
     public TextMeshProUGUI damageValue;
     public TextMeshProUGUI critRateValue;
     public TextMeshProUGUI critDamageValue;
@@ -169,12 +171,25 @@ public class UIManager : MonoSingleton<UIManager>
 
     #region 物品
 
+    public void ItemInfUpdate(int id)
+    {
+        if (currentSelectedItem)
+        {
+            selectedItemName.text = PackageManager.Instance.allItemList[currentSelectedItem.itemID].itemName;
+            selectedItemNumber.text = " 数量：" + PackageManager.Instance.itemDict[currentSelectedItem.itemID].number + "个";
+        }
+        
+        itemSlotDict[id].itemNumber = PackageManager.Instance.itemDict[id].number;
+        itemSlotDict[id].itemNumberText.text = itemSlotDict[id].itemNumber.ToString();
+
+        Debug.Log("物品更新成功" + id);
+    }
+
     public void GetItem(int id, int number)
     {
         if (itemSlotDict.ContainsKey(id))
         {
-            itemSlotDict[id].itemNumber = itemSlotDict[id].itemNumber + number < 999 ? number : 999;
-            itemSlotDict[id].itemNumberText.text = itemSlotDict[id].itemNumber.ToString();
+            
         }
         else
         {
@@ -183,17 +198,20 @@ public class UIManager : MonoSingleton<UIManager>
             itemSlot.Initialize(id, number);
             itemSlotDict.Add(id, itemSlot);
         }
+
+        ItemInfUpdate(id);
     }
 
     public void ConsumeItem(int id, int number)
     {
         if (itemSlotDict[id].itemNumber >= number)
         {
-            itemSlotDict[id].itemNumber -= number;
-            itemSlotDict[id].itemNumberText.text = itemSlotDict[id].itemNumber.ToString();
+            
         }
         else
             PlayTipSequence(PackageManager.Instance.allItemList[id].itemName + "数量不足");
+
+        ItemInfUpdate(id);
     }
 
     public void SelectItem(ItemSlotUI selectedItemSlot)
@@ -202,15 +220,28 @@ public class UIManager : MonoSingleton<UIManager>
         currentSelectedItem = selectedItemSlot;
         currentSelectedItem.transform.GetChild(4).gameObject.SetActive(true);
 
-        int id = currentSelectedItem.itemID;
-        selectedItemName.text = PackageManager.Instance.allItemList[id].itemName;
-        selectedItemNumber.text = " 数量：" + PackageManager.Instance.itemDict[id].number + "个";
+        ItemInfUpdate(currentSelectedItem.itemID);
         itemDetailPanel.gameObject.SetActive(true);
     }
 
     #endregion
 
     #region 武器
+
+    public void CurrentWeaponInfUpdate()
+    {
+        int id = currentSelectedWeapon.weaponID;
+        int level = PackageManager.Instance.weaponDict[id].level;
+        selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
+        selectedWeaponLevel.text = "LV." + level;
+        stoneValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].stoneCost + "";
+        coinValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].coinCost + "";
+        damageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
+        critRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critRate * 100 + "%";
+        critDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
+        penetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
+        reductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
+    }
 
     public void GetWeapon(int id)
     {
@@ -224,15 +255,7 @@ public class UIManager : MonoSingleton<UIManager>
         currentSelectedWeapon = selectedWeaponSlot;
         currentSelectedWeapon.transform.GetChild(3).gameObject.SetActive(true);
 
-        int id = currentSelectedWeapon.weaponID;
-        int level = PackageManager.Instance.weaponDict[id].level;
-        selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
-        selectedWeaponLevel.text = "LV." + level;
-        damageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
-        critRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critRate * 100 + "%";
-        critDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
-        penetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
-        reductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
+        CurrentWeaponInfUpdate();
         weaponDetailPanel.gameObject.SetActive(true);
     }
 
@@ -249,17 +272,13 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void UpgradeWeapon()
     {
-        PackageManager.Instance.UpgradeWeapon(currentSelectedWeapon.weaponID);
-
-        int id = currentSelectedWeapon.weaponID;
-        int level = PackageManager.Instance.weaponDict[id].level;
-        selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
-        selectedWeaponLevel.text = "LV." + level;
-        damageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
-        critRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critRate * 100 + "%";
-        critDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
-        penetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
-        reductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
+        if (PackageManager.Instance.weaponDict[currentSelectedWeapon.weaponID].level < PackageManager.Instance.allWeaponList[currentSelectedWeapon.weaponID].maxLevel)
+        {
+            PackageManager.Instance.UpgradeWeapon(currentSelectedWeapon.weaponID);
+            CurrentWeaponInfUpdate();
+        }
+        else
+            PlayTipSequence("当前武器已强化至最高级，无法继续强化");
     }
 
     #endregion

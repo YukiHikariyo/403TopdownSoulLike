@@ -116,7 +116,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     }
 
     [ContextMenu("获得3个测试物品")]
-    public void TestGetItem()
+    public void TestGetItem0()
     {
         if (itemDict.ContainsKey(0))
             itemDict[0].number = itemDict[0].number + 3 < 999 ? itemDict[0].number + 3 : 999;
@@ -124,6 +124,17 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             itemDict.Add(0, new LocalItemData(0, 3));
 
         UIManager.Instance.GetItem(0, 3);
+    }
+
+    [ContextMenu("获得10个锻造石")]
+    public void TestGetItem1()
+    {
+        if (itemDict.ContainsKey(1))
+            itemDict[1].number = itemDict[1].number + 10 < 999 ? itemDict[1].number + 10 : 999;
+        else
+            itemDict.Add(1, new LocalItemData(1, 10));
+
+        UIManager.Instance.GetItem(1, 10);
     }
 
     /// <summary>
@@ -216,16 +227,20 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// <remarks>此方法在UIManager中的UpgradeWeapon方法中调用</remarks>
     public void UpgradeWeapon(int id)
     {
-        if (weaponDict.ContainsKey(id) && itemDict[1] != null && itemDict[1].number >= allWeaponList[id].weaponStats[weaponDict[id].level].stoneCost && coin >= allWeaponList[id].weaponStats[weaponDict[id].level].coinCost)
+        if (weaponDict.ContainsKey(id))
         {
-            ConsumeItem(1, allWeaponList[id].weaponStats[weaponDict[id].level].stoneCost);
-            ConsumeCoin(allWeaponList[id].weaponStats[weaponDict[id].level].coinCost);
-            weaponDict[id].level++;
+            if (itemDict.ContainsKey(1) && itemDict[1].number >= allWeaponList[id].weaponStats[weaponDict[id].level - 1].stoneCost && coin >= allWeaponList[id].weaponStats[weaponDict[id].level - 1].coinCost)
+            {
+                ConsumeItem(1, allWeaponList[id].weaponStats[weaponDict[id].level - 1].stoneCost);
+                ConsumeCoin(allWeaponList[id].weaponStats[weaponDict[id].level - 1].coinCost);
+                weaponDict[id].level++;
+                UIManager.Instance.PlayTipSequence("强化成功");
+            }
+            else if (!itemDict.ContainsKey(1) || itemDict[1].number < allWeaponList[id].weaponStats[weaponDict[id].level - 1].stoneCost)
+                UIManager.Instance.PlayTipSequence("锻造石数量不足");
+            else if (coin < allWeaponList[id].weaponStats[weaponDict[id].level - 1].coinCost)
+                UIManager.Instance.PlayTipSequence("金币不足");
         }
-        else if (itemDict[1].number < allWeaponList[id].weaponStats[weaponDict[id].level].stoneCost)
-            UIManager.Instance.PlayTipSequence("锻造石数量不足");
-        else if (coin < allWeaponList[id].weaponStats[weaponDict[id].level].coinCost)
-            UIManager.Instance.PlayTipSequence("金币不足");
     }
 
     #endregion
