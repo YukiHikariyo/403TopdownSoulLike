@@ -7,6 +7,7 @@ public class PlayerState_Idle : PlayerState
     public override void Enter()
     {
         base.Enter();
+        playerAnimator.Play("Idle");
     }
 
     public override void Exit() 
@@ -16,10 +17,16 @@ public class PlayerState_Idle : PlayerState
 
     public override void LogicUpdate()
     {
+        SetAnimator_Update();
+
         if (playerInput.WantsMove)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Move));
         }
+
+        //等待添加耐力限制
+        if(playerInput.Roll)
+            playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
     }
 
     public override void PhysicUpdate()

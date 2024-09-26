@@ -40,6 +40,8 @@ public class PlayerInput : MonoBehaviour
     public bool LightAttack => input.Player.LightAttack.WasPressedThisFrame();
 
     //rightAttack
+
+    public bool Roll => input.Player.Roll.WasPressedThisFrame();
     #endregion
 
     #region 输入检测拓展

@@ -80,6 +80,15 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""37cbf5ba-1214-47b8-8141-85a73a7eb5b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -89,7 +98,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyBoard/Mouse"",
                     ""action"": ""MoveUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -100,7 +109,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyBoard/Mouse"",
                     ""action"": ""MoveDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -111,7 +120,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyBoard/Mouse"",
                     ""action"": ""MoveLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -122,7 +131,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyBoard/Mouse"",
                     ""action"": ""MoveRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -133,7 +142,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyBoard/Mouse"",
                     ""action"": ""LightAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -144,8 +153,19 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyBoard/Mouse"",
                     ""action"": ""RightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a5c28ae-e70f-4c03-8688-507235f63364"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard/Mouse"",
+                    ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -154,8 +174,8 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""KeyBoard"",
-            ""bindingGroup"": ""KeyBoard"",
+            ""name"": ""KeyBoard/Mouse"",
+            ""bindingGroup"": ""KeyBoard/Mouse"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
@@ -174,6 +194,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         m_Player_MoveRight = m_Player.FindAction("MoveRight", throwIfNotFound: true);
         m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
         m_Player_RightAttack = m_Player.FindAction("RightAttack", throwIfNotFound: true);
+        m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -241,6 +262,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MoveRight;
     private readonly InputAction m_Player_LightAttack;
     private readonly InputAction m_Player_RightAttack;
+    private readonly InputAction m_Player_Roll;
     public struct PlayerActions
     {
         private @InGameInput m_Wrapper;
@@ -251,6 +273,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         public InputAction @MoveRight => m_Wrapper.m_Player_MoveRight;
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputAction @RightAttack => m_Wrapper.m_Player_RightAttack;
+        public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -278,6 +301,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             @RightAttack.started += instance.OnRightAttack;
             @RightAttack.performed += instance.OnRightAttack;
             @RightAttack.canceled += instance.OnRightAttack;
+            @Roll.started += instance.OnRoll;
+            @Roll.performed += instance.OnRoll;
+            @Roll.canceled += instance.OnRoll;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -300,6 +326,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             @RightAttack.started -= instance.OnRightAttack;
             @RightAttack.performed -= instance.OnRightAttack;
             @RightAttack.canceled -= instance.OnRightAttack;
+            @Roll.started -= instance.OnRoll;
+            @Roll.performed -= instance.OnRoll;
+            @Roll.canceled -= instance.OnRoll;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -317,13 +346,13 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
-    private int m_KeyBoardSchemeIndex = -1;
-    public InputControlScheme KeyBoardScheme
+    private int m_KeyBoardMouseSchemeIndex = -1;
+    public InputControlScheme KeyBoardMouseScheme
     {
         get
         {
-            if (m_KeyBoardSchemeIndex == -1) m_KeyBoardSchemeIndex = asset.FindControlSchemeIndex("KeyBoard");
-            return asset.controlSchemes[m_KeyBoardSchemeIndex];
+            if (m_KeyBoardMouseSchemeIndex == -1) m_KeyBoardMouseSchemeIndex = asset.FindControlSchemeIndex("KeyBoard/Mouse");
+            return asset.controlSchemes[m_KeyBoardMouseSchemeIndex];
         }
     }
     public interface IPlayerActions
@@ -334,5 +363,6 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         void OnMoveRight(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnRightAttack(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
     }
 }

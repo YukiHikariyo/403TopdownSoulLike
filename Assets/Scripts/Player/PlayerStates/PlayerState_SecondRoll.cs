@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/FirstRoll", fileName = "PlayerState_FirstRoll")]
-public class PlayerState_FirstRoll : PlayerState
+[CreateAssetMenu(menuName = "Data/PlayerState/SecondRoll", fileName = "PlayerState_SecondRoll")]
+public class PlayerState_SecondRoll : PlayerState
 {
-
+    Vector2 FaceDir;
     public override void Enter()
     {
-        Debug.Log("First");
+        Debug.Log("2");
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         SetAnimator_OnStart();
-        playerAnimator.Play("FirstRoll");
-        playerController.FastRoll();
+        playerAnimator.Play("SecondRoll");
+        FaceDir = playerController.MoveAxis;
+        playerController.SlowRollStart();
+        playerController.LastRollDuration = playerAnimator.GetCurrentAnimatorStateInfo(0).length;
     }
 
     public override void Exit()
@@ -23,33 +25,23 @@ public class PlayerState_FirstRoll : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (playerStateMachine.CanAcceptInput)
-        {
-            if (playerInput.Roll)
-            {
-                playerStateMachine.SwitchState(typeof(PlayerState_SecondRoll));
-            }
-        }
 
         if (IsAnimationEnd)
         {
             //切换至移动
             if (playerInput.WantsMove)
             {
-                Debug.Log("Move");
                 playerStateMachine.SwitchState(typeof(PlayerState_Move));
             }
             //切换至常态
             if (!playerInput.WantsMove)
-            {
-                Debug.Log("Idle");
                 playerStateMachine.SwitchState(typeof(PlayerState_Idle));
-            }
         }
     }
 
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        playerController.SlowRoll(FaceDir);
     }
 }

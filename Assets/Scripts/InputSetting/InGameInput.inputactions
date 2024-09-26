@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Roll",
+                    "type": "Button",
+                    "id": "37cbf5ba-1214-47b8-8141-85a73a7eb5b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -67,7 +76,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyBoard/Mouse",
                     "action": "MoveUp",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -78,7 +87,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyBoard/Mouse",
                     "action": "MoveDown",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -89,7 +98,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyBoard/Mouse",
                     "action": "MoveLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -100,7 +109,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyBoard/Mouse",
                     "action": "MoveRight",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -111,7 +120,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyBoard/Mouse",
                     "action": "LightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -122,8 +131,19 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyBoard/Mouse",
                     "action": "RightAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a5c28ae-e70f-4c03-8688-507235f63364",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyBoard/Mouse",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -132,8 +152,8 @@
     ],
     "controlSchemes": [
         {
-            "name": "KeyBoard",
-            "bindingGroup": "KeyBoard",
+            "name": "KeyBoard/Mouse",
+            "bindingGroup": "KeyBoard/Mouse",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
