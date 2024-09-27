@@ -11,22 +11,19 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     [SerializeField][Tooltip("当前金币")] private int coin;
 
     [Tooltip("所有物品列表")] public List<StaticItemData> allItemList;
-    [Tooltip("已获得道具字典")] public Dictionary<int, LocalItemData> itemDict;
+    [Tooltip("已获得道具字典")] public Dictionary<int, LocalItemData> itemDict = new();
 
     [Tooltip("所有武器列表")] public List<StaticWeaponData> allWeaponList;
-    [Tooltip("已获得武器字典")] public Dictionary<int, LocalWeaponData> weaponDict;
+    [Tooltip("已获得武器字典")] public Dictionary<int, LocalWeaponData> weaponDict = new();
     public LocalWeaponData currentWeapon;
 
     [Tooltip("所有饰品列表")] public List<StaticAccessoryData> allAccessoryList;
-    [Tooltip("已获得饰品字典")] public Dictionary<int, LocalAccessoryData> accessoryDict;
+    [Tooltip("已获得饰品字典")] public Dictionary<int, LocalAccessoryData> accessoryDict = new();
+    public Dictionary<int, LocalAccessoryData> currentAccessory = new();
 
     protected override void Awake()
     {
         base.Awake();
-
-        itemDict = new Dictionary<int, LocalItemData>();
-        weaponDict = new Dictionary<int, LocalWeaponData>();
-        accessoryDict = new Dictionary<int, LocalAccessoryData>();
 
         allItemList.Sort();
         allWeaponList.Sort();
@@ -214,10 +211,12 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             if (currentWeapon != null)
                 currentWeapon.isEquipped = false;
             weaponDict[id].isEquipped = true;
-        }
 
-        playerData.currentWeaponStaticData = allWeaponList[id];
-        playerData.currentWeaponLocalData = weaponDict[id];
+            playerData.currentWeaponStaticData = allWeaponList[id];
+            playerData.currentWeaponLocalData = weaponDict[id];
+
+            UIManager.Instance.PlayTipSequence("装备成功")
+        }
     }
 
     /// <summary>
@@ -240,6 +239,61 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
                 UIManager.Instance.PlayTipSequence("锻造石数量不足");
             else if (coin < allWeaponList[id].weaponStats[weaponDict[id].level - 1].coinCost)
                 UIManager.Instance.PlayTipSequence("金币不足");
+        }
+    }
+
+    #endregion
+
+    #region 饰品
+
+    /// <summary>
+    /// 获得饰品
+    /// </summary>
+    /// <param name="id">饰品ID</param>
+    public void GetAccessory(int id)
+    {
+        if (!accessoryDict.ContainsKey(id))
+        {
+            accessoryDict.Add(id, new LocalAccessoryData(id));
+            UIManager.Instance.GetAccessory(id);
+        }
+    }
+
+    [ContextMenu("添加测试饰品")]
+    public void GetTestAccessory()
+    {
+        if (!accessoryDict.ContainsKey(0))
+        {
+            accessoryDict.Add(0, new LocalAccessoryData(0));
+            UIManager.Instance.GetAccessory(0);
+        }
+    }
+
+    /// <summary>
+    /// 装备饰品
+    /// </summary>
+    /// <param name="id">饰品ID</param>
+    /// <param name="position">装备位置(1~3)</param>
+    public void EquipAccessory(int id, int position)
+    {
+        if (accessoryDict.ContainsKey(id))
+        {
+            if (currentAccessory.ContainsKey(position))
+                currentAccessory[position].equipPosition = 0;
+            else
+                currentAccessory.Add(position, accessoryDict[id]);
+
+            if (playerData.currentAccessoryStaticData.ContainsKey(position))
+                playerData.currentAccessoryStaticData[position] = allAccessoryList[id];
+            else
+                playerData.currentAccessoryStaticData.Add(position, allAccessoryList[id]);
+
+            if (playerData.currentAccessoryLocalData.ContainsKey(position))
+                playerData.currentAccessoryLocalData[position] = accessoryDict[id];
+            else
+                playerData.currentAccessoryLocalData.Add(position, accessoryDict[id]);
+
+            UIManager.Instance.PlayTipSequence("已装备到" + position + "号饰品位")
         }
     }
 

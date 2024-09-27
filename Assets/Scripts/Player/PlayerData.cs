@@ -160,6 +160,9 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("当前武器静态数据")] public StaticWeaponData currentWeaponStaticData;
     [Tooltip("当前武器本地数据")] public LocalWeaponData currentWeaponLocalData;
 
+    [Tooltip("当前饰品静态数据")] public Dictionary<int, StaticAccessoryData> currentAccessoryStaticData = new();
+    [Tooltip("当前饰品本地数据")] public Dictionary<int, LocalAccessoryData> currentAccessoryLocalData = new();
+
     #endregion
 
     private void Awake()

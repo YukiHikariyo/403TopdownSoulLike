@@ -110,12 +110,12 @@ public class LocalAccessoryData
 {
     public int id;
     public int level;
-    public bool isEquipped;
+    public int equipPosition;
 
-    public LocalAccessoryData(int id, int level = 1, bool isEquipped = false)
+    public LocalAccessoryData(int id, int level = 1, int equipPosition = 0)
     {
         this.id = id;
         this.level = level;
-        this.isEquipped = isEquipped; 
+        this.equipPosition = equipPosition;
     }
 }

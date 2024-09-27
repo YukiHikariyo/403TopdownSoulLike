@@ -61,6 +61,18 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI penetratingPowerValue;
     public TextMeshProUGUI reductionRateValue;
 
+    [Space(16)]
+    [Header("饰品")]
+    [Space(16)]
+
+    public RectTransform accessorySlots;
+    public GameObject accessorySlotPrefab;
+    public AccessorySlotUI currentSelectedAccessory;
+    [Space(16)]
+    public RectTransform accessoryDetailPanel;
+    public TextMeshProUGUI selectedAccessoryName;
+    public TextMeshProUGUI selectedAccessoryLevel;
+
     protected override void Awake()
     {
         base.Awake();
@@ -279,6 +291,30 @@ public class UIManager : MonoSingleton<UIManager>
         }
         else
             PlayTipSequence("当前武器已强化至最高级，无法继续强化");
+    }
+
+    #endregion
+
+    #region 饰品
+
+    public void CurrentAccessoryInfUpdate()
+    {
+        
+    }
+
+    public void GetAccessory(int id)
+    {
+
+    }
+
+    public void SelectAccessory(AccessorySlotUI selectedAccessorySlot)
+    {
+        currentSelectedAccessory?.transform.GetChild(3).gameObject.SetActive(false);
+        currentSelectedAccessory = selectedAccessorySlot;
+        currentSelectedAccessory.transform.GetChild(3).gameObject.SetActive(true);
+
+        CurrentAccessoryInfUpdate();
+        accessoryDetailPanel.gameObject.SetActive(true);
     }
 
     #endregion
