@@ -53,13 +53,13 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI selectedWeaponName;
     public TextMeshProUGUI selectedWeaponLevel;
     [Space(16)]
-    public TextMeshProUGUI stoneValue;
-    public TextMeshProUGUI coinValue;
-    public TextMeshProUGUI damageValue;
-    public TextMeshProUGUI critRateValue;
-    public TextMeshProUGUI critDamageValue;
-    public TextMeshProUGUI penetratingPowerValue;
-    public TextMeshProUGUI reductionRateValue;
+    public TextMeshProUGUI weaponStoneValue;
+    public TextMeshProUGUI weaponCoinValue;
+    public TextMeshProUGUI weaponDamageValue;
+    public TextMeshProUGUI weaponCritRateValue;
+    public TextMeshProUGUI weaponCritDamageValue;
+    public TextMeshProUGUI weaponPenetratingPowerValue;
+    public TextMeshProUGUI weaponReductionRateValue;
 
     [Space(16)]
     [Header("饰品")]
@@ -68,10 +68,19 @@ public class UIManager : MonoSingleton<UIManager>
     public RectTransform accessorySlots;
     public GameObject accessorySlotPrefab;
     public AccessorySlotUI currentSelectedAccessory;
+    public Dictionary<int, AccessorySlotUI> currentEquippedAccessory = new();
     [Space(16)]
     public RectTransform accessoryDetailPanel;
     public TextMeshProUGUI selectedAccessoryName;
     public TextMeshProUGUI selectedAccessoryLevel;
+    [Space(16)]
+    public TextMeshProUGUI accessoryStoneValue;
+    public TextMeshProUGUI accessoryCoinValue;
+    public TextMeshProUGUI accessoryDamageValue;
+    public TextMeshProUGUI accessoryCritRateValue;
+    public TextMeshProUGUI accessoryCritDamageValue;
+    public TextMeshProUGUI accessoryPenetratingPowerValue;
+    public TextMeshProUGUI accessoryReductionRateValue;
 
     protected override void Awake()
     {
@@ -246,13 +255,13 @@ public class UIManager : MonoSingleton<UIManager>
         int level = PackageManager.Instance.weaponDict[id].level;
         selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
         selectedWeaponLevel.text = "LV." + level;
-        stoneValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].stoneCost + "";
-        coinValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].coinCost + "";
-        damageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
-        critRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critRate * 100 + "%";
-        critDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
-        penetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
-        reductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
+        weaponStoneValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].stoneCost + "";
+        weaponCoinValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].coinCost + "";
+        weaponDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
+        weaponCritRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critRate * 100 + "%";
+        weaponCritDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
+        weaponPenetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
+        weaponReductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
     }
 
     public void GetWeapon(int id)
@@ -299,12 +308,23 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void CurrentAccessoryInfUpdate()
     {
-        
+        int id = currentSelectedAccessory.accessoryID;
+        int level = PackageManager.Instance.accessoryDict[id].level;
+        selectedAccessoryName.text = PackageManager.Instance.allAccessoryList[id].name;
+        selectedAccessoryLevel.text = "LV." + level;
+        accessoryStoneValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].stoneCost + "";
+        accessoryCoinValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].coinCost + "";
+        accessoryDamageValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].damage + "";
+        accessoryCritRateValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].critRate * 100 + "%";
+        accessoryCritDamageValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].critDamage * 100 + "%";
+        accessoryPenetratingPowerValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].penetratingPower * 100 + "%";
+        accessoryReductionRateValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].reductionRate * 100 + "%";
     }
 
     public void GetAccessory(int id)
     {
-
+        GameObject accessory = Instantiate(accessorySlotPrefab, accessorySlots);
+        accessory.GetComponent<AccessorySlotUI>().Initialize(id);
     }
 
     public void SelectAccessory(AccessorySlotUI selectedAccessorySlot)
@@ -315,6 +335,34 @@ public class UIManager : MonoSingleton<UIManager>
 
         CurrentAccessoryInfUpdate();
         accessoryDetailPanel.gameObject.SetActive(true);
+    }
+
+    private void EquipAccessory(int position)
+    {
+        if (currentEquippedAccessory.ContainsKey(position))
+        {
+            currentEquippedAccessory[position].transform.GetChild(4).gameObject.SetActive(false);
+            currentEquippedAccessory[position] = currentSelectedAccessory;
+        }
+        else
+        {
+            currentEquippedAccessory.Add(position, currentSelectedAccessory);
+        }
+
+        currentEquippedAccessory[position].equipPosition.text = position + "号位";
+        currentEquippedAccessory[position].transform.GetChild(4).gameObject.SetActive(true);
+
+        PackageManager.Instance.EquipAccessory(currentSelectedAccessory.accessoryID, position);
+
+        PlayTipSequence("已装备到" + position + "号饰品位");
+    }
+    public void EquipAccessory1() => EquipAccessory(1);
+    public void EquipAccessory2() => EquipAccessory(2);
+    public void EquipAccessory3() => EquipAccessory(3);
+
+    public void UpgradeAccessory()
+    {
+
     }
 
     #endregion

@@ -215,7 +215,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             playerData.currentWeaponStaticData = allWeaponList[id];
             playerData.currentWeaponLocalData = weaponDict[id];
 
-            UIManager.Instance.PlayTipSequence("装备成功")
+            UIManager.Instance.PlayTipSequence("装备成功");
         }
     }
 
@@ -292,8 +292,6 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
                 playerData.currentAccessoryLocalData[position] = accessoryDict[id];
             else
                 playerData.currentAccessoryLocalData.Add(position, accessoryDict[id]);
-
-            UIManager.Instance.PlayTipSequence("已装备到" + position + "号饰品位")
         }
     }
 

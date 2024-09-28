@@ -101,7 +101,7 @@ public class StaticAccessoryData : ScriptableObject, IComparable<StaticAccessory
     [Tooltip("图标")] public Sprite accessoryIcon;
     [Tooltip("最大等级")] public int maxLevel;
     [Space(16)]
-    [Tooltip("数值")] public AccessoryStats[] weaponStats;   //数组索引表示饰品等级
+    [Tooltip("数值")] public AccessoryStats[] accessoryStats;   //数组索引表示饰品等级
 
     public int CompareTo(StaticAccessoryData other) => accessoryID - other.accessoryID;
 }
