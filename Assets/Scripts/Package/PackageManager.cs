@@ -28,9 +28,6 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         allItemList.Sort();
         allWeaponList.Sort();
         allAccessoryList.Sort();
-
-        if (!weaponDict.ContainsKey(0))
-            GetWeapon(0);
     }
 
     private void OnEnable()
@@ -66,6 +63,12 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     }
 
     #region 物品
+
+    /// <summary>
+    /// 查询当前金币数量
+    /// </summary>
+    /// <returns>金币数量</returns>
+    public int CoinNumber() => coin;
 
     /// <summary>
     /// 获得金币
@@ -113,26 +116,13 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     }
 
     [ContextMenu("获得3个测试物品")]
-    public void TestGetItem0()
-    {
-        if (itemDict.ContainsKey(0))
-            itemDict[0].number = itemDict[0].number + 3 < 999 ? itemDict[0].number + 3 : 999;
-        else
-            itemDict.Add(0, new LocalItemData(0, 3));
-
-        UIManager.Instance.GetItem(0, 3);
-    }
+    public void TestGetItem0() => GetItem(0, 3);
 
     [ContextMenu("获得10个锻造石")]
-    public void TestGetItem1()
-    {
-        if (itemDict.ContainsKey(1))
-            itemDict[1].number = itemDict[1].number + 10 < 999 ? itemDict[1].number + 10 : 999;
-        else
-            itemDict.Add(1, new LocalItemData(1, 10));
+    public void TestGetItem1() => GetItem(1, 10);
 
-        UIManager.Instance.GetItem(1, 10);
-    }
+    [ContextMenu("获得10个强化石")]
+    public void TestGetItem2() => GetItem(2, 10);
 
     /// <summary>
     /// 消耗物品
@@ -157,20 +147,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     }
 
     [ContextMenu("消耗2个测试物品")]
-    public bool TestConsumeItem()
-    {
-        if (itemDict.ContainsKey(0))
-        {
-            UIManager.Instance.ConsumeItem(0, 2);
-            if (itemDict[0].number >= 2)
-            {
-                itemDict[0].number -= 2;
-                return true;
-            }
-        }
-
-        return false;
-    }
+    public bool TestConsumeItem0() => ConsumeItem(0, 2);
 
     #endregion
 
@@ -190,14 +167,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     }
 
     [ContextMenu("添加测试武器")]
-    public void TestGetWeapon()
-    {
-        if (!weaponDict.ContainsKey(0))
-        {
-            weaponDict.Add(0, new LocalWeaponData(0));
-            UIManager.Instance.GetWeapon(0);
-        }
-    }
+    public void TestGetWeapon() => GetWeapon(0);
 
     /// <summary>
     /// 装备武器
@@ -260,20 +230,14 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     }
 
     [ContextMenu("添加测试饰品")]
-    public void GetTestAccessory()
-    {
-        if (!accessoryDict.ContainsKey(0))
-        {
-            accessoryDict.Add(0, new LocalAccessoryData(0));
-            UIManager.Instance.GetAccessory(0);
-        }
-    }
+    public void GetTestAccessory() => GetAccessory(0);
 
     /// <summary>
     /// 装备饰品
     /// </summary>
     /// <param name="id">饰品ID</param>
     /// <param name="position">装备位置(1~3)</param>
+    /// <remarks>此方法在UIManager中的EquipAccessory方法调用</remarks>
     public void EquipAccessory(int id, int position)
     {
         if (accessoryDict.ContainsKey(id))
@@ -292,6 +256,29 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
                 playerData.currentAccessoryLocalData[position] = accessoryDict[id];
             else
                 playerData.currentAccessoryLocalData.Add(position, accessoryDict[id]);
+        }
+    }
+
+    /// <summary>
+    /// 强化饰品
+    /// </summary>
+    /// <param name="id">饰品ID</param>
+    /// <remarks>此方法在UIManager中的UpgradeAccessory方法调用</remarks>
+    public void UpgradeAccessory(int id)
+    {
+        if (accessoryDict.ContainsKey(id))
+        {
+            if (itemDict.ContainsKey(2) && itemDict[2].number >= allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].stoneCost && coin >= allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].coinCost)
+            {
+                ConsumeItem(2, allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].stoneCost);
+                ConsumeCoin(allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].coinCost);
+                accessoryDict[id].level++;
+                UIManager.Instance.PlayTipSequence("强化成功");
+            }
+            else if (!itemDict.ContainsKey(2) || itemDict[2].number < allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].stoneCost)
+                UIManager.Instance.PlayTipSequence("强化石数量不足");
+            else if (coin < allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].coinCost)
+                UIManager.Instance.PlayTipSequence("金币不足");
         }
     }
 

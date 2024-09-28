@@ -168,8 +168,6 @@ public class PlayerData : MonoBehaviour, ISaveable
     private void Awake()
     {
         PackageManager.Instance.playerData = this;
-        if (PackageManager.Instance.currentWeapon == null)
-            PackageManager.Instance.EquipWeapon(0);
     }
 
     private void OnEnable()

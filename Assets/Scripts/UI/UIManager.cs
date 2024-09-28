@@ -254,7 +254,7 @@ public class UIManager : MonoSingleton<UIManager>
         int id = currentSelectedWeapon.weaponID;
         int level = PackageManager.Instance.weaponDict[id].level;
         selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
-        selectedWeaponLevel.text = "LV." + level;
+        selectedWeaponLevel.text = "LV." + level + (level >= PackageManager.Instance.allWeaponList[id].maxLevel ? "\n（满级）" : "");
         weaponStoneValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].stoneCost + "";
         weaponCoinValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].coinCost + "";
         weaponDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].damage + "";
@@ -311,7 +311,7 @@ public class UIManager : MonoSingleton<UIManager>
         int id = currentSelectedAccessory.accessoryID;
         int level = PackageManager.Instance.accessoryDict[id].level;
         selectedAccessoryName.text = PackageManager.Instance.allAccessoryList[id].name;
-        selectedAccessoryLevel.text = "LV." + level;
+        selectedAccessoryLevel.text = "LV." + level + (level >= PackageManager.Instance.allAccessoryList[id].maxLevel ? "\n（满级）" : "");
         accessoryStoneValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].stoneCost + "";
         accessoryCoinValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].coinCost + "";
         accessoryDamageValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].damage + "";
@@ -362,7 +362,13 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void UpgradeAccessory()
     {
-
+        if (PackageManager.Instance.accessoryDict[currentSelectedAccessory.accessoryID].level < PackageManager.Instance.allAccessoryList[currentSelectedAccessory.accessoryID].maxLevel)
+        {
+            PackageManager.Instance.UpgradeAccessory(currentSelectedAccessory.accessoryID);
+            CurrentAccessoryInfUpdate();
+        }
+        else
+            PlayTipSequence("当前饰品已强化至最高级，无法继续强化");
     }
 
     #endregion

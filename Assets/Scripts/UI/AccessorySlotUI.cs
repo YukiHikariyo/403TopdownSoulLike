@@ -31,7 +31,7 @@ public class AccessorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     public void Initialize(int id)
     {
         accessoryID = id;
-        accessoryIcon.sprite = PackageManager.Instance.allWeaponList[id].weaponIcon;
+        accessoryIcon.sprite = PackageManager.Instance.allAccessoryList[id].accessoryIcon;
     }
 
     public void OnPointerClick(PointerEventData eventData)
