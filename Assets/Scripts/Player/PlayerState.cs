@@ -23,7 +23,11 @@ public class PlayerState : ScriptableObject, IState
     protected float stateStartTime;
     //计算动画播放时间
     protected float StateDuration => Time.time - stateStartTime;
-    protected bool IsAnimationEnd => StateDuration >= playerAnimator.GetCurrentAnimatorStateInfo(0).length; 
+
+    protected float AnimationLength => playerAnimator.GetCurrentAnimatorStateInfo(0).length;
+    protected bool IsAnimationEnd => StateDuration >= AnimationLength;
+    //指定方向且在动作进行中不能切换的动作的方向
+    protected Vector2 FaceDir;
     #endregion
 
     public void Initialization(PlayerInput playerInput,

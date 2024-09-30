@@ -12,7 +12,7 @@ public class PlayerState_FirstRoll : PlayerState
         playerStateMachine.CanAcceptInput = false;
         SetAnimator_OnStart();
         playerAnimator.Play("FirstRoll");
-        playerController.FastRoll();
+        FaceDir = playerController.MoveAxis;
     }
 
     public override void Exit()
@@ -23,6 +23,9 @@ public class PlayerState_FirstRoll : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        //翻滚逻辑
+        playerController.FastRoll(FaceDir, StateDuration/AnimationLength);
+        //
         if (playerStateMachine.CanAcceptInput)
         {
             if (playerInput.Roll)

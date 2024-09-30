@@ -1808,10 +1808,10 @@ MonoBehaviour:
   playerRb: {fileID: 1494598970}
   inputs: {fileID: 1494598971}
   moveSpeed: 3
-  fastRollSpeed: 10
+  fastRollSpeed: 18
   slowRollSpeed: 30
   lastRollDuration: 0.3
-  cruve:
+  fastRollCruve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -1824,23 +1824,47 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.4423508
-      value: 0.8734048
-      inSlope: 0.68627614
-      outSlope: 0.68627614
+      time: 0.07292999
+      value: 0.8976811
+      inSlope: 1.4959607
+      outSlope: 1.4959607
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.2331944
-      value: 0.45955163
-      inSlope: 2
-      outSlope: 2
+      time: 0.39054772
+      value: 0.9964378
+      inSlope: 0.10097771
+      outSlope: 0.10097771
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.61551905
+      value: 0.9851922
+      inSlope: 0.029723456
+      outSlope: 0.029723456
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  slowRollCruve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

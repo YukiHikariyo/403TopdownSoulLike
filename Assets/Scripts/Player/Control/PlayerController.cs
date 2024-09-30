@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fastRollSpeed;
     [SerializeField] private float slowRollSpeed;
     [SerializeField] private float lastRollDuration;
-    public AnimationCurve cruve;
+    public AnimationCurve fastRollCruve;
+    public AnimationCurve slowRollCruve;
     private float nowSpeed;
     //二段翻滚的移动速度会由快变慢，该参数用于表示减速度，为了方便，向属性传递动作持续时间，属性内部会自行计算减速度
     public float LastRollDuration
@@ -118,18 +119,14 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
     #region 翻滚
-    public void FastRoll()
+    public void FastRoll(Vector2 FaceDir,float time)
     {
-        playerRb.velocity = MoveAxis * fastRollSpeed;
+        playerRb.velocity = FaceDir * fastRollSpeed * fastRollCruve.Evaluate(time);
     }
-    public void SlowRollStart()
+  
+    public void SlowRoll(Vector2 FaceDir, float time)
     {
-        nowSpeed = slowRollSpeed;
-    }
-    public void SlowRoll(Vector2 faceDir)
-    {
-        nowSpeed = Mathf.MoveTowards(nowSpeed, moveSpeed, lastRollDuration * Time.deltaTime);
-        playerRb.velocity = faceDir * nowSpeed;
+        playerRb.velocity = FaceDir * slowRollSpeed * slowRollCruve.Evaluate(time);
     }
     #endregion
 
