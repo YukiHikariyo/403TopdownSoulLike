@@ -328,7 +328,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.16
-    functionName: EnablePlayerInput
+    functionName: AcceptInput
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

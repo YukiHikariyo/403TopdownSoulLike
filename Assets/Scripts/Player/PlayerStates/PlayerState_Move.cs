@@ -7,6 +7,7 @@ public class PlayerState_Move : PlayerState
     public override void Enter()
     {
         base.Enter();
+        playerAnimator.Play("Move");
     }
     public override void Exit()
     {

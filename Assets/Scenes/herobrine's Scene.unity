@@ -1808,8 +1808,8 @@ MonoBehaviour:
   playerRb: {fileID: 1494598970}
   inputs: {fileID: 1494598971}
   moveSpeed: 3
-  fastRollSpeed: 18
-  slowRollSpeed: 30
+  fastRollSpeed: 10
+  slowRollSpeed: 8
   lastRollDuration: 0.3
   fastRollCruve:
     serializedVersion: 2
@@ -1824,8 +1824,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.07292999
-      value: 0.8976811
+      time: 0.11195435
+      value: 0.92597854
       inSlope: 1.4959607
       outSlope: 1.4959607
       tangentMode: 0
@@ -1833,17 +1833,26 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.39054772
-      value: 0.9964378
-      inSlope: 0.10097771
-      outSlope: 0.10097771
+      time: 0.13034087
+      value: 0.95048857
+      inSlope: 0.21806985
+      outSlope: 0.21806985
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
+      outWeight: 0.3737807
+    - serializedVersion: 3
+      time: 0.39054772
+      value: 0.9681349
+      inSlope: 0.01001024
+      outSlope: 0.01001024
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.41371658
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.61551905
-      value: 0.9851922
+      time: 0.8864541
+      value: 0.97575843
       inSlope: 0.029723456
       outSlope: 0.029723456
       tangentMode: 0
@@ -1851,8 +1860,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 0.99349976
+      value: 0.20519638
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1864,7 +1873,61 @@ MonoBehaviour:
     m_RotationOrder: 4
   slowRollCruve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.3960838
+      outSlope: -0.3960838
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.3027131
+    - serializedVersion: 3
+      time: 0.32957911
+      value: 0.9957707
+      inSlope: -0.050709058
+      outSlope: -0.050709058
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.52133346
+      value: 0.8040177
+      inSlope: -3.9622045
+      outSlope: -3.9622045
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.06482372
+    - serializedVersion: 3
+      time: 0.61235344
+      value: 0.05111268
+      inSlope: -2.0812593
+      outSlope: -2.0812593
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6383845
+      value: 0.010146782
+      inSlope: -0.011738201
+      outSlope: -0.011738201
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.39971107
+    - serializedVersion: 3
+      time: 1.0026855
+      value: 0.00957489
+      inSlope: -0.0015698327
+      outSlope: -0.0015698327
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -1887,6 +1950,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3e6f2ee2d051d04f8ddf2b471ba56eb, type: 2}
   - {fileID: 11400000, guid: babf95d4323233b4e84f16aff96fa5de, type: 2}
   - {fileID: 11400000, guid: 582b92721a61b964297e7f469e313717, type: 2}
+  - {fileID: 11400000, guid: 85ee91bc3774835459ae9cc168c794ed, type: 2}
   mouseDistance: {x: 0, y: 0, z: 0}
   playerInput: {fileID: 1494598971}
   playerController: {fileID: 1494598972}

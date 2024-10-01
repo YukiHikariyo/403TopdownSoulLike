@@ -7,11 +7,11 @@ public class PlayerState_SecondRoll : PlayerState
 
     public override void Enter()
     {
-        Debug.Log("First");
+        Debug.Log("Second");
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         SetAnimator_OnStart();
-        playerAnimator.Play("FirstRoll");
+        playerAnimator.Play("SecondRoll");
         FaceDir = playerController.MoveAxis;
     }
 
@@ -39,13 +39,11 @@ public class PlayerState_SecondRoll : PlayerState
             //切换至移动
             if (playerInput.WantsMove)
             {
-                Debug.Log("Move");
                 playerStateMachine.SwitchState(typeof(PlayerState_Move));
             }
             //切换至常态
             if (!playerInput.WantsMove)
             {
-                Debug.Log("Idle");
                 playerStateMachine.SwitchState(typeof(PlayerState_Idle));
             }
         }

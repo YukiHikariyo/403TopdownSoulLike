@@ -39,13 +39,11 @@ public class PlayerState_FirstRoll : PlayerState
             //切换至移动
             if (playerInput.WantsMove)
             {
-                Debug.Log("Move");
                 playerStateMachine.SwitchState(typeof(PlayerState_Move));
             }
             //切换至常态
             if (!playerInput.WantsMove)
             {
-                Debug.Log("Idle");
                 playerStateMachine.SwitchState(typeof(PlayerState_Idle));
             }
         }
