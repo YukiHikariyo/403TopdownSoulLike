@@ -13,4 +13,9 @@ public class AttackArea : MonoBehaviour
     }
 
     [Tooltip("攻击者类别")] public AttackerType attackerType;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
 }

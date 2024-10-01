@@ -81,10 +81,10 @@ public class LocalItemData
 [Serializable]
 public struct AccessoryStats
 {
-    [Tooltip("攻击力")] public float damage;
-    [Tooltip("暴击率")] public float critRate;
-    [Tooltip("暴击伤害")] public float critDamage;
-    [Tooltip("穿透力")] public float penetratingPower;
+    [Tooltip("生命值")] public float maxHealth;
+    [Tooltip("魔力值")] public float maxMana;
+    [Tooltip("体力值")] public float maxEnergy;
+    [Tooltip("体力恢复")] public float energyRecovery;
     [Tooltip("伤害减免")] public float reductionRate;
     [Tooltip("升级花费金钱数量")] public int coinCost;
     [Tooltip("升级花费强化石数量")] public int stoneCost;

@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    public void TakeDamage(float damage);
+    void TakeDamage(float damage, float attackPower);
+    void TakeBuffDamage(float damage);
+    void GetBuff(float duration);
 }

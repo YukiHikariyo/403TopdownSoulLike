@@ -76,10 +76,10 @@ public class UIManager : MonoSingleton<UIManager>
     [Space(16)]
     public TextMeshProUGUI accessoryStoneValue;
     public TextMeshProUGUI accessoryCoinValue;
-    public TextMeshProUGUI accessoryDamageValue;
-    public TextMeshProUGUI accessoryCritRateValue;
-    public TextMeshProUGUI accessoryCritDamageValue;
-    public TextMeshProUGUI accessoryPenetratingPowerValue;
+    public TextMeshProUGUI accessoryHealthValue;
+    public TextMeshProUGUI accessoryManaValue;
+    public TextMeshProUGUI accessoryEnergyValue;
+    public TextMeshProUGUI accessoryEnergyRecoveryValue;
     public TextMeshProUGUI accessoryReductionRateValue;
 
     protected override void Awake()
@@ -314,10 +314,10 @@ public class UIManager : MonoSingleton<UIManager>
         selectedAccessoryLevel.text = "LV." + level + (level >= PackageManager.Instance.allAccessoryList[id].maxLevel ? "\n（满级）" : "");
         accessoryStoneValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].stoneCost + "";
         accessoryCoinValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].coinCost + "";
-        accessoryDamageValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].damage + "";
-        accessoryCritRateValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].critRate * 100 + "%";
-        accessoryCritDamageValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].critDamage * 100 + "%";
-        accessoryPenetratingPowerValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].penetratingPower * 100 + "%";
+        accessoryHealthValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].maxHealth + "";
+        accessoryManaValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].maxMana * 100 + "";
+        accessoryEnergyValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].maxEnergy * 100 + "";
+        accessoryEnergyRecoveryValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].energyRecovery * 100 + "";
         accessoryReductionRateValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].reductionRate * 100 + "%";
     }
 
