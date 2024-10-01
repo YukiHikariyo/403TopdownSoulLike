@@ -84,7 +84,7 @@ public struct AccessoryStats
     [Tooltip("生命值")] public float maxHealth;
     [Tooltip("魔力值")] public float maxMana;
     [Tooltip("体力值")] public float maxEnergy;
-    [Tooltip("体力恢复")] public float energyRecovery;
+    [Tooltip("韧性")] public float toughness;
     [Tooltip("伤害减免")] public float reductionRate;
     [Tooltip("升级花费金钱数量")] public int coinCost;
     [Tooltip("升级花费强化石数量")] public int stoneCost;

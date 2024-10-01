@@ -240,6 +240,10 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// <remarks>此方法在UIManager中的EquipAccessory方法调用</remarks>
     public void EquipAccessory(int id, int position)
     {
+        float healthPercent = playerData.CurrentHealth / playerData.FinalMaxHealth;
+        float manaPercent = playerData.CurrentMana / playerData.FinalMaxMana;
+        float energyPercent = playerData.CurrentEnergy / playerData.FinalMaxEnergy;
+
         if (accessoryDict.ContainsKey(id))
         {
             if (currentAccessory.ContainsKey(position))
@@ -257,6 +261,10 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             else
                 playerData.currentAccessoryLocalData.Add(position, accessoryDict[id]);
         }
+
+        playerData.OnMaxHealthChange(healthPercent);
+        playerData.OnMaxManaChange(manaPercent);
+        playerData.OnMaxEnergyChange(energyPercent);
     }
 
     /// <summary>
@@ -270,10 +278,18 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         {
             if (itemDict.ContainsKey(2) && itemDict[2].number >= allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].stoneCost && coin >= allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].coinCost)
             {
+                float healthPercent = playerData.CurrentHealth / playerData.FinalMaxHealth;
+                float manaPercent = playerData.CurrentMana / playerData.FinalMaxMana;
+                float energyPercent = playerData.CurrentEnergy / playerData.FinalMaxEnergy;
+
                 ConsumeItem(2, allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].stoneCost);
                 ConsumeCoin(allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].coinCost);
                 accessoryDict[id].level++;
                 UIManager.Instance.PlayTipSequence("强化成功");
+
+                playerData.OnMaxHealthChange(healthPercent);
+                playerData.OnMaxManaChange(manaPercent);
+                playerData.OnMaxEnergyChange(energyPercent);
             }
             else if (!itemDict.ContainsKey(2) || itemDict[2].number < allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].stoneCost)
                 UIManager.Instance.PlayTipSequence("强化石数量不足");

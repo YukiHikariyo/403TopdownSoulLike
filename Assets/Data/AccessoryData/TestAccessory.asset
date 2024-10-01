@@ -17,24 +17,24 @@ MonoBehaviour:
   accessoryIcon: {fileID: 0}
   maxLevel: 3
   accessoryStats:
-  - damage: 0
-    critRate: 10
-    critDamage: 10
-    penetratingPower: 10
+  - maxHealth: 10
+    maxMana: 10
+    maxEnergy: 10
+    energyRecovery: 1
     reductionRate: 10
     coinCost: 5
     stoneCost: 5
-  - damage: 20
-    critRate: 20
-    critDamage: 20
-    penetratingPower: 20
+  - maxHealth: 20
+    maxMana: 20
+    maxEnergy: 20
+    energyRecovery: 2
     reductionRate: 20
     coinCost: 10
     stoneCost: 10
-  - damage: 30
-    critRate: 30
-    critDamage: 30
-    penetratingPower: 30
+  - maxHealth: 30
+    maxMana: 30
+    maxEnergy: 30
+    energyRecovery: 3
     reductionRate: 30
     coinCost: 0
     stoneCost: 0

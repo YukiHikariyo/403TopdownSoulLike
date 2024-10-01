@@ -79,7 +79,7 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI accessoryHealthValue;
     public TextMeshProUGUI accessoryManaValue;
     public TextMeshProUGUI accessoryEnergyValue;
-    public TextMeshProUGUI accessoryEnergyRecoveryValue;
+    public TextMeshProUGUI accessoryToughnessValue;
     public TextMeshProUGUI accessoryReductionRateValue;
 
     protected override void Awake()
@@ -317,7 +317,7 @@ public class UIManager : MonoSingleton<UIManager>
         accessoryHealthValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].maxHealth + "";
         accessoryManaValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].maxMana * 100 + "";
         accessoryEnergyValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].maxEnergy * 100 + "";
-        accessoryEnergyRecoveryValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].energyRecovery * 100 + "";
+        accessoryToughnessValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].toughness * 100 + "";
         accessoryReductionRateValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].reductionRate * 100 + "%";
     }
 
