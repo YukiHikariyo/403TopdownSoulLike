@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StaticSkillData : ScriptableObject
+public class StaticSkillData : ScriptableObject, IComparable<StaticSkillData>
 {
     //可能需要显示在UI上的数据
     
@@ -22,20 +23,21 @@ public class StaticSkillData : ScriptableObject
     //技能描述
     [TextArea(1,8)]
     public string skillDescription;//固定的文字描述    
+
+    //技能前置
+    [Tooltip("前置天赋ID")] public int[] preIDs;
+
+    public int CompareTo(StaticSkillData other) => skillTreeID - other.skillTreeID;
 }
 
 public class LocalSkillData
 {
     public int id;
     public int currentSkillLevel;
-    public bool canUnlock;
-    public bool isUnlocked;
-    public LocalSkillData(int id,int currentSkillLevel = 0,bool canUnlock = false,bool isUnlocked = false)
+    public LocalSkillData(int id,int currentSkillLevel = 0)
     {
         this.currentSkillLevel = currentSkillLevel;
         this.id = id;
-        this.canUnlock = canUnlock;
-        this.isUnlocked = isUnlocked;
     }
 
 }
