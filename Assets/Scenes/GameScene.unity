@@ -373,8 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d86b34aa60ed8d40899c35afcff6d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicMaxHealth: 0
-  currentHealth: 0
+  basicMaxHealth: 100
+  currentHealth: 100
   basicMaxMana: 0
   currentMana: 0
   basicMaxEnergy: 0
@@ -406,18 +406,18 @@ MonoBehaviour:
   penetratingPowerIncrement: 0
   reductionIncrement: 0
   toughnessIncrement: 0
-  maxHealthMultiplication: 0
-  maxManaMultiplication: 0
-  maxEnergyMultiplication: 0
-  energyRecoveryMultiplication: 0
-  energyCostMultiplication: 0
-  moveSpeedMultiplication: 0
-  damageMultiplication: 0
-  critRateMultiplication: 0
-  critDamageMultiplication: 0
-  penetratingPowerMultiplication: 0
-  reductionMultiplication: 0
-  toughnessMultiplication: 0
+  maxHealthMultiplication: 1
+  maxManaMultiplication: 1
+  maxEnergyMultiplication: 1
+  energyRecoveryMultiplication: 1
+  energyCostMultiplication: 1
+  moveSpeedMultiplication: 1
+  damageMultiplication: 1
+  critRateMultiplication: 1
+  critDamageMultiplication: 1
+  penetratingPowerMultiplication: 1
+  reductionMultiplication: 1
+  toughnessMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
 --- !u!212 &2025775074
 SpriteRenderer:
@@ -498,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c9087d317e1314d88347cf272cb87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

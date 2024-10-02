@@ -4,15 +4,13 @@ using UnityEngine;
 
 public enum BuffType
 {
-    TestBuff1,
-    TestBuff2,
-    TestBuff3,
+    TestBuff,
 }
 
 public abstract class BaseBuff
 {
-    float duration;
-    IDamageable damageable;
+    protected float duration;
+    protected IDamageable damageable;
 
     public BaseBuff(float duration, IDamageable damageable)
     {
@@ -25,22 +23,24 @@ public abstract class BaseBuff
     public abstract void OnBuffStay();
 }
 
-public class TestBuff1 : BaseBuff
+public class TestBuff : BaseBuff
 {
-    public TestBuff1(float duration, IDamageable damageable) : base(duration, damageable) { }
+    public TestBuff(float duration, IDamageable damageable) : base(duration, damageable) { }
 
     public override void OnBuffEnter()
     {
-        
+        if (damageable is Player)
+            (damageable as Player).playerData.maxHealthIncrement += 100;
     }
 
     public override void OnBuffExit()
     {
-        
+        if (damageable is Player)
+            (damageable as Player).playerData.maxHealthIncrement -= 100;
     }
 
     public override void OnBuffStay()
     {
-        
+        damageable.TakeDamage(1 * Time.deltaTime);
     }
 }

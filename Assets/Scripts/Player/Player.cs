@@ -8,12 +8,13 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour, IDamageable
 {
-    private PlayerData playerData;
+    public PlayerData playerData;
 
-    private UnityEvent buffEvent;
+    private UnityEvent buffEvent = new();
     private Dictionary<BuffType, BaseBuff> currentBuffDict = new();
     private Dictionary<BuffType, float> maxBuffHealth = new();
     private Dictionary<BuffType, float> currentBuffHealth = new();
+    private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTaskVoid>> OnBuffFunc = new();
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
 
     private void Awake()
@@ -55,7 +56,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             currentBuffDict.Add(buffType, buffType switch
             {
-                BuffType.TestBuff1 => new TestBuff1(duration, this),
+                BuffType.TestBuff => new TestBuff(duration, this),
 
                 _ => null
             });
@@ -65,34 +66,46 @@ public class Player : MonoBehaviour, IDamageable
             else
                 buffCTK[buffType] = new();
 
-            Func<BuffType, float, CancellationToken, UniTask> OnBuff = async (buffType, duration, ctk) =>
+            if (!OnBuffFunc.ContainsKey(buffType))
             {
-                if (currentBuffDict.ContainsKey(buffType))
+                OnBuffFunc.Add(buffType, async (buffType, duration, ctk) =>
                 {
-                    currentBuffDict[buffType].OnBuffEnter();
-                    buffEvent.AddListener(currentBuffDict[buffType].OnBuffStay);
-                }
-                
-                await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken:ctk);
+                    if (currentBuffDict.ContainsKey(buffType))
+                    {
+                        currentBuffDict[buffType].OnBuffEnter();
+                        buffEvent.AddListener(currentBuffDict[buffType].OnBuffStay);
+                    }
 
-                if (currentBuffDict.ContainsKey(buffType))
-                {
-                    buffEvent.RemoveListener(currentBuffDict[buffType].OnBuffStay);
-                    currentBuffDict[buffType].OnBuffExit();
-                }
-            };
+                    await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: ctk);
 
-            OnBuff.Invoke(buffType, duration, buffCTK[buffType].Token);
+                    if (currentBuffDict.ContainsKey(buffType))
+                    {
+                        buffEvent.RemoveListener(currentBuffDict[buffType].OnBuffStay);
+                        currentBuffDict[buffType].OnBuffExit();
+                        currentBuffDict.Remove(buffType);
+                    }
+                });
+            }
+
+            OnBuffFunc[buffType].Invoke(buffType, duration, buffCTK[buffType].Token);
         }
     }
+
+    [ContextMenu("给予测试Buff1")]
+    public void GetTestBuff1() => GetBuff(BuffType.TestBuff, 3);
 
     public void RemoveBuff(BuffType buffType)
     {
         if (currentBuffDict.ContainsKey(buffType))
         {
-            buffCTK[buffType].Cancel();
+            if (buffCTK.ContainsKey(buffType))
+                buffCTK[buffType].Cancel();
+
             currentBuffDict[buffType].OnBuffExit();
             currentBuffDict.Remove(buffType);
         }
     }
+
+    [ContextMenu("移除测试Buff1")]
+    public void RemoveTestBuff1() => RemoveBuff(BuffType.TestBuff);
 }

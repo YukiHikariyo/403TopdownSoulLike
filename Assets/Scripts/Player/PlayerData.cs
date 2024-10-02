@@ -321,19 +321,19 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Space(16)]
 
     //修改以下三个倍率时记得调用OnMax???Change
-    [Tooltip("最大生命值倍率")] public float maxHealthMultiplication;
-    [Tooltip("最大魔力值倍率")] public float maxManaMultiplication;
-    [Tooltip("最大体力值倍率")] public float maxEnergyMultiplication;
+    [Tooltip("最大生命值倍率")] public float maxHealthMultiplication = 1;
+    [Tooltip("最大魔力值倍率")] public float maxManaMultiplication = 1;
+    [Tooltip("最大体力值倍率")] public float maxEnergyMultiplication = 1;
     //End
-    [Tooltip("体力恢复倍率")] public float energyRecoveryMultiplication;
-    [Tooltip("体力消耗倍率")] public float energyCostMultiplication;
-    [Tooltip("移动速度倍率")] public float moveSpeedMultiplication;
-    [Tooltip("攻击力倍率")] public float damageMultiplication;
-    [Tooltip("暴击率倍率")] public float critRateMultiplication;
-    [Tooltip("暴击伤害倍率")] public float critDamageMultiplication;
-    [Tooltip("穿透力倍率")] public float penetratingPowerMultiplication;
-    [Tooltip("伤害减免倍率")] public float reductionMultiplication;
-    [Tooltip("韧性倍率")] public float toughnessMultiplication;
+    [Tooltip("体力恢复倍率")] public float energyRecoveryMultiplication = 1;
+    [Tooltip("体力消耗倍率")] public float energyCostMultiplication = 1;
+    [Tooltip("移动速度倍率")] public float moveSpeedMultiplication = 1;
+    [Tooltip("攻击力倍率")] public float damageMultiplication = 1;
+    [Tooltip("暴击率倍率")] public float critRateMultiplication = 1;
+    [Tooltip("暴击伤害倍率")] public float critDamageMultiplication = 1;
+    [Tooltip("穿透力倍率")] public float penetratingPowerMultiplication = 1;
+    [Tooltip("伤害减免倍率")] public float reductionMultiplication = 1;
+    [Tooltip("韧性倍率")] public float toughnessMultiplication = 1;
 
     [Tooltip("当前武器静态数据")][HideInInspector] public StaticWeaponData currentWeaponStaticData;
     [Tooltip("当前武器本地数据")] public LocalWeaponData currentWeaponLocalData;
