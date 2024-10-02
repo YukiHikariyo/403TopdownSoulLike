@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 2025775075}
   - component: {fileID: 2025775074}
   - component: {fileID: 2025775073}
+  - component: {fileID: 2025775076}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -372,16 +373,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d86b34aa60ed8d40899c35afcff6d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  basicMaxHealth: 0
   currentHealth: 0
-  maxMana: 0
+  basicMaxMana: 0
   currentMana: 0
-  maxEnergy: 0
+  basicMaxEnergy: 0
   currentEnergy: 0
+  basicEnergyRecovery: 0
   basicDamage: 0
   basicCritRate: 0
   basicCritDamage: 0
-  finalDamage: 0
+  basicPenetratingPower: 0
+  basicReductionRate: 0
+  basicToughness: 0
+  talentEnergyRecovery: 0
+  talentDamage: 0
+  talentCritRate: 0
+  talentCritDamage: 0
+  talentPenetratingPower: 0
+  talentReductionRate: 0
+  motionToughness: 0
+  motionValue: []
+  maxHealthIncrement: 0
+  maxManaIncrement: 0
+  maxEnergyIncrement: 0
+  energyRecoveryIncrement: 0
+  energyCostIncrement: 0
+  moveSpeedIncrement: 0
+  damageIncrement: 0
+  critRateIncrement: 0
+  critDamageIncrement: 0
+  penetratingPowerIncrement: 0
+  reductionIncrement: 0
+  toughnessIncrement: 0
+  maxHealthMultiplication: 0
+  maxManaMultiplication: 0
+  maxEnergyMultiplication: 0
+  energyRecoveryMultiplication: 0
+  energyCostMultiplication: 0
+  moveSpeedMultiplication: 0
+  damageMultiplication: 0
+  critRateMultiplication: 0
+  critDamageMultiplication: 0
+  penetratingPowerMultiplication: 0
+  reductionMultiplication: 0
+  toughnessMultiplication: 0
   currentWeaponStaticData: {fileID: 0}
 --- !u!212 &2025775074
 SpriteRenderer:
@@ -450,6 +486,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2025775076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025775072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c9087d317e1314d88347cf272cb87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
