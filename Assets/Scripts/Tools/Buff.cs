@@ -41,6 +41,6 @@ public class TestBuff : BaseBuff
 
     public override void OnBuffStay()
     {
-        damageable.TakeDamage(1 * Time.deltaTime);
+        damageable.TakeDamage(1 * Time.deltaTime, 0);
     }
 }

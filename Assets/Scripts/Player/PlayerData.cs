@@ -275,7 +275,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("最终伤害减免")]
     public float FinalReducitonRate
     {
-        get => (basicReductionRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].reductionRate + talentReductionRate + reductionIncrement > 0 ? basicReductionRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].reductionRate + talentReductionRate + reductionIncrement : 0) * reductionMultiplication;
+        get => (basicReductionRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].reductionRate + talentReductionRate + reductionRateIncrement > 0 ? basicReductionRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].reductionRate + talentReductionRate + reductionRateIncrement : 0) * reductionRateMultiplication;
     }
 
     [Tooltip("最终韧性")]
@@ -296,6 +296,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Space(16)]
 
     [Tooltip("动作值")] public float[] motionValue;
+    [Tooltip("攻击强度")] public float[] attackPower;
 
     [Space(16)]
     [Header("Buff增量（可为负）")]
@@ -313,7 +314,8 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("暴击率增量")] public float critRateIncrement;
     [Tooltip("暴击伤害增量")] public float critDamageIncrement;
     [Tooltip("穿透力增量")] public float penetratingPowerIncrement;
-    [Tooltip("伤害减免增量")] public float reductionIncrement;
+    [Tooltip("伤害减免增量")] public float reductionRateIncrement;
+    [Tooltip("易伤增量")] public float vulnerabilityIncrement;
     [Tooltip("韧性增量")] public float toughnessIncrement;
 
     [Space(16)]
@@ -332,7 +334,8 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("暴击率倍率")] public float critRateMultiplication = 1;
     [Tooltip("暴击伤害倍率")] public float critDamageMultiplication = 1;
     [Tooltip("穿透力倍率")] public float penetratingPowerMultiplication = 1;
-    [Tooltip("伤害减免倍率")] public float reductionMultiplication = 1;
+    [Tooltip("伤害减免倍率")] public float reductionRateMultiplication = 1;
+    [Tooltip("易伤倍率")] public float vulnerabilityMultiplication = 1;
     [Tooltip("韧性倍率")] public float toughnessMultiplication = 1;
 
     [Tooltip("当前武器静态数据")][HideInInspector] public StaticWeaponData currentWeaponStaticData;
