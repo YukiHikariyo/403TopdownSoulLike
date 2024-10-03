@@ -12,6 +12,7 @@ public struct WeaponStats
     [Tooltip("暴击伤害")] public float critDamage;
     [Tooltip("穿透力")] public float penetratingPower;
     [Tooltip("伤害减免")] public float reductionRate;
+    [Tooltip("属性攻击倍率")] public float buffDamageMultiplication;
     [Tooltip("升级花费金钱数量")] public int coinCost;
     [Tooltip("升级花费锻造石数量")] public int stoneCost;
 }

@@ -7,7 +7,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// 玩家主体类，用于联系其他玩家类
+/// 玩家主体类
+/// 用于联系其他玩家类
 /// </summary>
 public class Player : MonoBehaviour, IDamageable
 {
@@ -20,8 +21,18 @@ public class Player : MonoBehaviour, IDamageable
     private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTaskVoid>> OnBuffFunc = new();
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
 
+    [Space(16)]
+    [Header("固定属性")]
+    [Space(16)]
+
+    [Tooltip("动作值")] public float[] motionValue;
+    [Tooltip("攻击强度")] public float[] attackPower;
+    [Tooltip("Buff动作值")] public float[] buffMotionValue;
+
+    [Space(16)]
     [Header("受击事件")]
     [Space(16)]
+
     [Tooltip("受击无硬直")] public UnityEvent<Transform> noStunEvent;
     [Tooltip("受击小硬直")] public UnityEvent<Transform> smallStunEvent;
     [Tooltip("受击中硬直")] public UnityEvent<Transform> normalStunEvent;
@@ -38,9 +49,9 @@ public class Player : MonoBehaviour, IDamageable
         buffEvent?.Invoke();
     }
 
-    public void TakeDamage(float damage, float penetratingPower,float attackPower, Transform attackerTransform, bool ignoreReduction = false)
+    public void TakeDamage(float damage, float penetratingPower,float attackPower, Transform attackerTransform)
     {
-        TakeDamage(damage, penetratingPower, ignoreReduction);
+        TakeDamage(damage, penetratingPower);
 
         //玩家受击硬直部分，数值待定
         float stunValue = attackPower - playerData.FinalToughness;
@@ -54,12 +65,9 @@ public class Player : MonoBehaviour, IDamageable
             bigStunEvent?.Invoke(attackerTransform);
     }
 
-    public void TakeDamage(float damage, float penetratingPower,bool ignoreReduction = false)
+    public void TakeDamage(float damage, float penetratingPower)
     {
-        if (ignoreReduction)
-            playerData.CurrentHealth -= (damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication;
-        else
-            playerData.CurrentHealth -= (damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower));
+        playerData.CurrentHealth -= (damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower));
     }
 
     public void TakeBuffDamage(BuffType buffType, float damage)

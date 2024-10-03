@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// 背包管理类
+/// </summary>
 public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 {
     public PlayerData playerData;

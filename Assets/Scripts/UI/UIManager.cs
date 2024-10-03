@@ -5,6 +5,9 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 
+/// <summary>
+/// UI管理类
+/// </summary>
 public class UIManager : MonoSingleton<UIManager>
 {
     public RectTransform mainCanvas;

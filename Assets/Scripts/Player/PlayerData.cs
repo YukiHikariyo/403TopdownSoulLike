@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 玩家数据类
+/// 用于存放所有可能要保存的数据
+/// 并处理部分数值计算
+/// </summary>
 public class PlayerData : MonoBehaviour, ISaveable
 {
     #region 变量与属性
@@ -254,6 +259,12 @@ public class PlayerData : MonoBehaviour, ISaveable
         get => (basicDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damage + talentDamage + damageIncrement > 0 ? basicDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damage + talentDamage + damageIncrement : 0) * damageMultiplication;
     }
 
+    [Tooltip("最终属性攻击力")]
+    public float FinalBuffDamage
+    {
+        get => FinalDamage * currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].buffDamageMultiplication;
+    }
+
     [Tooltip("最终暴击率")]
     public float FinalCritRate
     {
@@ -292,11 +303,6 @@ public class PlayerData : MonoBehaviour, ISaveable
             return finalToughness * toughnessMultiplication;
         }
     }
-
-    [Space(16)]
-
-    [Tooltip("动作值")] public float[] motionValue;
-    [Tooltip("攻击强度")] public float[] attackPower;
 
     [Space(16)]
     [Header("Buff增量（可为负）")]
