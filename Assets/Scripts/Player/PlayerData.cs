@@ -38,7 +38,7 @@ public class PlayerData : MonoBehaviour, ISaveable
                 if (currentAccessoryLocalData.ContainsKey(i))
                     finalMaxHealth += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].maxHealth;
             }
-            return finalMaxHealth * maxHealthMultiplication;
+            return (finalMaxHealth > 0 ? finalMaxHealth : 0) * maxHealthMultiplication;
         }
     }
 
@@ -77,7 +77,7 @@ public class PlayerData : MonoBehaviour, ISaveable
                 if (currentAccessoryLocalData.ContainsKey(i))
                     finalMaxMana += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].maxMana;
             }
-            return finalMaxMana * maxManaMultiplication;
+            return (finalMaxMana > 0 ? finalMaxMana : 0) * maxManaMultiplication;
         }
     }
 
@@ -117,7 +117,7 @@ public class PlayerData : MonoBehaviour, ISaveable
                 if (currentAccessoryLocalData.ContainsKey(i))
                     finalMaxEnergy += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].maxEnergy;
             }
-            return finalMaxEnergy + maxEnergyMultiplication;
+            return (finalMaxEnergy > 0 ? finalMaxEnergy : 0) * maxEnergyMultiplication;
         }
     }
 
@@ -256,37 +256,89 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("最终攻击力")] 
     public float FinalDamage
     {
-        get => (basicDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damage + talentDamage + damageIncrement > 0 ? basicDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damage + talentDamage + damageIncrement : 0) * damageMultiplication;
+        get
+        {
+            if (currentWeaponStaticData != null)
+                return (basicDamage + talentDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damage + damageIncrement > 0 ? basicDamage + talentDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].damage + damageIncrement : 0) * damageMultiplication;
+            else
+                return (basicDamage + talentDamage + damageIncrement > 0 ? basicDamage + talentDamage + damageIncrement : 0) * damageMultiplication;
+        }
     }
 
     [Tooltip("最终属性攻击力")]
     public float FinalBuffDamage
     {
-        get => FinalDamage * currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].buffDamageMultiplication;
+        get
+        {
+            if (currentWeaponStaticData != null)
+                return FinalDamage * currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].buffDamageMultiplication;
+            else
+                return 0;
+        }
     }
 
     [Tooltip("最终暴击率")]
     public float FinalCritRate
     {
-        get => (basicCritRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critRate + talentCritRate + critRateIncrement > 0 ? basicCritRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critRate + talentCritRate + critRateIncrement : 0) * critRateMultiplication;
+        get
+        {
+            if (currentWeaponStaticData != null)
+                return (basicCritRate + talentCritRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critRate + critRateIncrement > 0 ? basicCritRate + talentCritRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critRate + critRateIncrement : 0) * critRateMultiplication;
+            else
+                return (basicCritRate + talentCritRate + critRateIncrement > 0 ? basicCritRate + talentCritRate + critRateIncrement : 0) * critRateMultiplication;
+        }
     }
 
     [Tooltip("最终暴击伤害")]
     public float FinalCritDamage
     {
-        get => (basicCritDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critDamage + talentCritDamage + critDamageIncrement > 0 ? basicCritDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critDamage + talentCritDamage + critDamageIncrement : 0) * critDamageMultiplication;
+        get
+        {
+            if (currentWeaponStaticData != null)
+                return (basicCritDamage + talentCritDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critDamage + critDamageIncrement > 0 ? basicCritDamage + talentCritDamage + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].critDamage + critDamageIncrement : 0) * critDamageMultiplication;
+            else
+                return (basicCritDamage + talentCritDamage + critDamageIncrement > 0 ? basicCritDamage + talentCritDamage + critDamageIncrement : 0) * critDamageMultiplication;
+        }
     }
 
     [Tooltip("最终穿透力")]
     public float FinalPenetratingPower
     {
-        get => (basicPenetratingPower + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].penetratingPower + talentPenetratingPower + penetratingPowerIncrement > 0 ? basicPenetratingPower + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].penetratingPower + talentPenetratingPower + penetratingPowerIncrement : 0) * penetratingPowerMultiplication;
+        get 
+        {
+            if (currentWeaponStaticData != null)
+                return (basicPenetratingPower + talentPenetratingPower + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].penetratingPower + penetratingPowerIncrement > 0 ? basicPenetratingPower + talentPenetratingPower + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].penetratingPower + penetratingPowerIncrement : 0) * penetratingPowerMultiplication;
+            else
+                return (basicPenetratingPower + talentPenetratingPower + penetratingPowerIncrement > 0 ? basicPenetratingPower + talentPenetratingPower + penetratingPowerIncrement : 0) * penetratingPowerMultiplication;
+        }
     }
 
     [Tooltip("最终伤害减免")]
     public float FinalReducitonRate
     {
-        get => (basicReductionRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].reductionRate + talentReductionRate + reductionRateIncrement > 0 ? basicReductionRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].reductionRate + talentReductionRate + reductionRateIncrement : 0) * reductionRateMultiplication;
+        get
+        {
+            if (currentWeaponStaticData != null)
+            {
+                float finalReductionRate = basicReductionRate + talentReductionRate + currentWeaponStaticData.weaponStats[currentWeaponLocalData.level - 1].reductionRate + reductionRateIncrement;
+                for (int i = 1; i <= 3; i++)
+                {
+                    if (currentAccessoryLocalData.ContainsKey(i))
+                        finalReductionRate += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].reductionRate;
+                }
+                return (finalReductionRate > 0 ? finalReductionRate : 0) * reductionRateMultiplication;
+            }
+            else
+            {
+                float finalReductionRate = basicReductionRate + talentReductionRate + reductionRateIncrement;
+                for (int i = 1; i <= 3; i++)
+                {
+                    if (currentAccessoryLocalData.ContainsKey(i))
+                        finalReductionRate += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].reductionRate;
+                }
+                return (finalReductionRate > 0 ? finalReductionRate : 0) * reductionRateMultiplication;
+            }
+        } 
     }
 
     [Tooltip("最终韧性")]
@@ -300,7 +352,7 @@ public class PlayerData : MonoBehaviour, ISaveable
                 if (currentAccessoryLocalData.ContainsKey(i))
                     finalToughness += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].toughness;
             }
-            return finalToughness * toughnessMultiplication;
+            return (finalToughness > 0 ? finalToughness : 0) * toughnessMultiplication;
         }
     }
 
@@ -388,9 +440,12 @@ public class PlayerData : MonoBehaviour, ISaveable
         currentMana = FinalMaxMana * percent;
         //TODO: UI更新
     }
+
     public void OnMaxEnergyChange(float percent)
     {
         currentEnergy = FinalMaxEnergy * percent;
         //TODO: UI更新
     }
+
+    public float CalculateHealthPercent() => currentHealth / FinalMaxHealth;
 }

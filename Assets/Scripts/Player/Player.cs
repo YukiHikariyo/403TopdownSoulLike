@@ -14,11 +14,11 @@ public class Player : MonoBehaviour, IDamageable
 {
     public PlayerData playerData;
 
-    private UnityEvent buffEvent = new();
+    private UnityAction buffAction;
     private Dictionary<BuffType, BaseBuff> currentBuffDict = new();
     private Dictionary<BuffType, float> maxBuffHealth = new();
     private Dictionary<BuffType, float> currentBuffHealth = new();
-    private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTaskVoid>> OnBuffFunc = new();
+    private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTask>> OnBuffFunc = new();
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
 
     [Space(16)]
@@ -38,6 +38,17 @@ public class Player : MonoBehaviour, IDamageable
     [Tooltip("受击中硬直")] public UnityEvent<Transform> normalStunEvent;
     [Tooltip("受击大硬直")] public UnityEvent<Transform> bigStunEvent;
 
+    [Space(16)]
+    [Header("被动技能")]
+    [Space(16)]
+
+    public Dictionary<PassiveSkillType, BasePassiveSkill> currentPassiveSkillDict = new();
+    private Dictionary<PassiveSkillType, CancellationTokenSource> passiveSkillCTK = new();
+    private Dictionary<PassiveSkillType, Func<float, CancellationToken, UniTask>> OnIntervalPassiveSkillFunc = new();
+    public Dictionary<PlayerPassiveSkill.TriggerType, UnityAction> passiveSkillTriggerAction = new();
+
+    #region 生命周期
+
     private void Awake()
     {
         if (playerData == null)
@@ -46,8 +57,12 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        buffEvent?.Invoke();
+        buffAction?.Invoke();
     }
+
+    #endregion
+
+    #region IDamageable接口方法
 
     public void TakeDamage(float damage, float penetratingPower,float attackPower, Transform attackerTransform)
     {
@@ -106,14 +121,14 @@ public class Player : MonoBehaviour, IDamageable
                     if (currentBuffDict.ContainsKey(buffType))
                     {
                         currentBuffDict[buffType].OnBuffEnter();
-                        buffEvent.AddListener(currentBuffDict[buffType].OnBuffStay);
+                        buffAction += currentBuffDict[buffType].OnBuffStay;
                     }
 
                     await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: ctk);
 
                     if (currentBuffDict.ContainsKey(buffType))
                     {
-                        buffEvent.RemoveListener(currentBuffDict[buffType].OnBuffStay);
+                        buffAction -= currentBuffDict[buffType].OnBuffStay;
                         currentBuffDict[buffType].OnBuffExit();
                         currentBuffDict.Remove(buffType);
                     }
@@ -124,9 +139,6 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    [ContextMenu("给予测试Buff1")]
-    public void GetTestBuff1() => GetBuff(BuffType.TestBuff, 3);
-
     public void RemoveBuff(BuffType buffType)
     {
         if (currentBuffDict.ContainsKey(buffType))
@@ -134,11 +146,90 @@ public class Player : MonoBehaviour, IDamageable
             if (buffCTK.ContainsKey(buffType))
                 buffCTK[buffType].Cancel();
 
+            buffAction -= currentBuffDict[buffType].OnBuffStay;
             currentBuffDict[buffType].OnBuffExit();
             currentBuffDict.Remove(buffType);
         }
     }
 
+    [ContextMenu("给予测试Buff1")]
+    public void GetTestBuff1() => GetBuff(BuffType.TestBuff, 3);
+
     [ContextMenu("移除测试Buff1")]
     public void RemoveTestBuff1() => RemoveBuff(BuffType.TestBuff);
+
+    #endregion
+
+    #region 被动技能方法
+
+    public void GetPassiveSkill(PassiveSkillType skillType)
+    {
+        if (!currentPassiveSkillDict.ContainsKey(skillType))
+        {
+            currentPassiveSkillDict.Add(skillType, skillType switch
+            {
+                PassiveSkillType.TestPassiveSkill => new TestPassiveSkill(this),
+
+                _ => null
+            });
+
+            currentPassiveSkillDict[skillType].OnEnter();
+
+            if (currentPassiveSkillDict[skillType].triggerType == PlayerPassiveSkill.TriggerType.Interval)
+            {
+                if (!passiveSkillCTK.ContainsKey(skillType))
+                    passiveSkillCTK.Add(skillType, new());
+                else
+                    passiveSkillCTK[skillType] = new();
+
+                if (!OnIntervalPassiveSkillFunc.ContainsKey(skillType))
+                {
+                    OnIntervalPassiveSkillFunc.Add(skillType, async (interval, ctk) =>
+                    {
+                        while (true)
+                        {
+                            await UniTask.Delay(TimeSpan.FromSeconds(interval), cancellationToken: ctk);
+                            currentPassiveSkillDict[skillType].OnTrigger();
+                        }
+                    });
+                }
+
+                OnIntervalPassiveSkillFunc[skillType].Invoke(currentPassiveSkillDict[skillType].interval, passiveSkillCTK[skillType].Token);
+            }
+            else
+            {
+                if (!passiveSkillTriggerAction.ContainsKey(currentPassiveSkillDict[skillType].triggerType))
+                    passiveSkillTriggerAction.Add(currentPassiveSkillDict[skillType].triggerType, currentPassiveSkillDict[skillType].OnTrigger);
+                else
+                    passiveSkillTriggerAction[currentPassiveSkillDict[skillType].triggerType] += currentPassiveSkillDict[skillType].OnTrigger;
+            }
+        }
+    }
+
+    public void RemovePassiveSkill(PassiveSkillType skillType)
+    {
+        if (currentPassiveSkillDict.ContainsKey(skillType))
+        {
+            if (currentPassiveSkillDict[skillType].triggerType == PlayerPassiveSkill.TriggerType.Interval)
+            {
+                if (passiveSkillCTK.ContainsKey(skillType))
+                    passiveSkillCTK[skillType].Cancel();
+            }    
+            else
+                passiveSkillTriggerAction[currentPassiveSkillDict[skillType].triggerType] -= currentPassiveSkillDict[skillType].OnTrigger;
+
+            currentPassiveSkillDict[skillType].OnExit();
+            currentPassiveSkillDict.Remove(skillType);
+        }
+    }
+
+    [ContextMenu("获得测试被动技能")]
+    public void GetTestPassiveSkill() => GetPassiveSkill(PassiveSkillType.TestPassiveSkill);
+
+    [ContextMenu("移除测试被动技能")]
+    public void RemoveTestPassiveSkill() => RemovePassiveSkill(PassiveSkillType.TestPassiveSkill);
+
+    #endregion
 }
+
+
