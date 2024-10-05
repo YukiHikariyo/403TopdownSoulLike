@@ -11,6 +11,8 @@ public class PlayerData : MonoBehaviour, ISaveable
 {
     #region 变量与属性
 
+    public Player player;
+
     [Header("基本数值")]
     [Space(16)]
 
@@ -407,6 +409,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     private void Awake()
     {
         PackageManager.Instance.playerData = this;
+        player = GetComponent<Player>();
     }
 
     private void OnEnable()
@@ -448,4 +451,6 @@ public class PlayerData : MonoBehaviour, ISaveable
     }
 
     public float CalculateHealthPercent() => currentHealth / FinalMaxHealth;
+    public float CalculateManaPercent() => currentMana / FinalMaxMana;
+    public float CalculateEnergyPercent() => currentEnergy / FinalMaxEnergy;
 }

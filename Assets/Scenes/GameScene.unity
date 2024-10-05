@@ -373,12 +373,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d86b34aa60ed8d40899c35afcff6d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   basicMaxHealth: 100
   currentHealth: 100
-  basicMaxMana: 0
-  currentMana: 0
-  basicMaxEnergy: 0
-  currentEnergy: 0
+  basicMaxMana: 100
+  currentMana: 100
+  basicMaxEnergy: 100
+  currentEnergy: 100
   basicEnergyRecovery: 0
   basicDamage: 0
   basicCritRate: 0
@@ -393,7 +394,6 @@ MonoBehaviour:
   talentPenetratingPower: 0
   talentReductionRate: 0
   motionToughness: 0
-  motionValue: []
   maxHealthIncrement: 0
   maxManaIncrement: 0
   maxEnergyIncrement: 0
@@ -404,7 +404,8 @@ MonoBehaviour:
   critRateIncrement: 0
   critDamageIncrement: 0
   penetratingPowerIncrement: 0
-  reductionIncrement: 0
+  reductionRateIncrement: 0
+  vulnerabilityIncrement: 0
   toughnessIncrement: 0
   maxHealthMultiplication: 1
   maxManaMultiplication: 1
@@ -416,7 +417,8 @@ MonoBehaviour:
   critRateMultiplication: 1
   critDamageMultiplication: 1
   penetratingPowerMultiplication: 1
-  reductionMultiplication: 1
+  reductionRateMultiplication: 1
+  vulnerabilityMultiplication: 1
   toughnessMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
 --- !u!212 &2025775074
@@ -499,6 +501,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 2025775073}
+  motionValue: []
+  attackPower: []
+  buffMotionValue: []
+  noStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  smallStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  normalStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  bigStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

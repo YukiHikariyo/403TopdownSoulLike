@@ -51,8 +51,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        if (playerData == null)
-            playerData = GetComponent<PlayerData>();
+        playerData = GetComponent<PlayerData>();
     }
 
     private void Update()

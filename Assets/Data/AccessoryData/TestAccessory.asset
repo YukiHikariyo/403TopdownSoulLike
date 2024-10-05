@@ -20,21 +20,22 @@ MonoBehaviour:
   - maxHealth: 10
     maxMana: 10
     maxEnergy: 10
-    energyRecovery: 1
+    toughness: 0
     reductionRate: 10
     coinCost: 5
     stoneCost: 5
   - maxHealth: 20
     maxMana: 20
     maxEnergy: 20
-    energyRecovery: 2
+    toughness: 0
     reductionRate: 20
     coinCost: 10
     stoneCost: 10
   - maxHealth: 30
     maxMana: 30
     maxEnergy: 30
-    energyRecovery: 3
+    toughness: 0
     reductionRate: 30
     coinCost: 0
     stoneCost: 0
+  passiveSkillType: 1

@@ -19,6 +19,7 @@ namespace PlayerPassiveSkill
 
 public enum PassiveSkillType
 {
+    None,
     TestPassiveSkill,
 }
 

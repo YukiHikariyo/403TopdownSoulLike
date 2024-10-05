@@ -185,8 +185,14 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
                 currentWeapon.isEquipped = false;
             weaponDict[id].isEquipped = true;
 
+            if (playerData.currentWeaponStaticData != null && playerData.currentWeaponStaticData.passiveSkillType != PassiveSkillType.None)
+                playerData.player.RemovePassiveSkill(playerData.currentWeaponStaticData.passiveSkillType);
+
             playerData.currentWeaponStaticData = allWeaponList[id];
             playerData.currentWeaponLocalData = weaponDict[id];
+
+            if (playerData.currentWeaponStaticData.passiveSkillType != PassiveSkillType.None)
+                playerData.player.GetPassiveSkill(playerData.currentWeaponStaticData.passiveSkillType);
 
             UIManager.Instance.PlayTipSequence("装备成功");
         }
@@ -243,9 +249,11 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// <remarks>此方法在UIManager中的EquipAccessory方法调用</remarks>
     public void EquipAccessory(int id, int position)
     {
-        float healthPercent = playerData.CurrentHealth / playerData.FinalMaxHealth;
-        float manaPercent = playerData.CurrentMana / playerData.FinalMaxMana;
-        float energyPercent = playerData.CurrentEnergy / playerData.FinalMaxEnergy;
+        float healthPercent = playerData.CalculateHealthPercent();
+        float manaPercent = playerData.CalculateManaPercent();
+        float energyPercent = playerData.CalculateEnergyPercent();
+
+        int rm = 0;
 
         if (accessoryDict.ContainsKey(id))
         {
@@ -254,10 +262,31 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             else
                 currentAccessory.Add(position, accessoryDict[id]);
 
+            foreach (int p in playerData.currentAccessoryStaticData.Keys)
+            {
+                if (playerData.currentAccessoryStaticData[p].accessoryID == id)
+                    rm = p;
+            }
+
+            if (rm != 0)
+            {
+                playerData.player.RemovePassiveSkill(playerData.currentAccessoryStaticData[rm].passiveSkillType);
+                playerData.currentAccessoryStaticData.Remove(rm);
+                playerData.currentAccessoryLocalData.Remove(rm);
+            }
+
             if (playerData.currentAccessoryStaticData.ContainsKey(position))
+            {
+                if (playerData.currentAccessoryStaticData[position].passiveSkillType != PassiveSkillType.None)
+                    playerData.player.RemovePassiveSkill(playerData.currentAccessoryStaticData[position].passiveSkillType);
+
                 playerData.currentAccessoryStaticData[position] = allAccessoryList[id];
+            }
             else
                 playerData.currentAccessoryStaticData.Add(position, allAccessoryList[id]);
+
+            if (playerData.currentAccessoryStaticData[position].passiveSkillType != PassiveSkillType.None)
+                playerData.player.GetPassiveSkill(playerData.currentAccessoryStaticData[position].passiveSkillType);
 
             if (playerData.currentAccessoryLocalData.ContainsKey(position))
                 playerData.currentAccessoryLocalData[position] = accessoryDict[id];

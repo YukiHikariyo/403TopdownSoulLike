@@ -29,6 +29,7 @@ public class StaticWeaponData : ScriptableObject, IComparable<StaticWeaponData>
     [Tooltip("最大等级")] public int maxLevel;
     [Space(16)]
     [Tooltip("数值")] public WeaponStats[] weaponStats;   //数组索引表示武器等级
+    [Tooltip("被动技能")] public PassiveSkillType passiveSkillType;
 
     public int CompareTo(StaticWeaponData other) => weaponID - other.weaponID;
 }
@@ -102,6 +103,7 @@ public class StaticAccessoryData : ScriptableObject, IComparable<StaticAccessory
     [Tooltip("最大等级")] public int maxLevel;
     [Space(16)]
     [Tooltip("数值")] public AccessoryStats[] accessoryStats;   //数组索引表示饰品等级
+    [Tooltip("被动技能")] public PassiveSkillType passiveSkillType;
 
     public int CompareTo(StaticAccessoryData other) => accessoryID - other.accessoryID;
 }
