@@ -14,13 +14,6 @@ public class Player : MonoBehaviour, IDamageable
 {
     public PlayerData playerData;
 
-    private UnityAction buffAction;
-    private Dictionary<BuffType, BaseBuff> currentBuffDict = new();
-    private Dictionary<BuffType, float> maxBuffHealth = new();
-    private Dictionary<BuffType, float> currentBuffHealth = new();
-    private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTask>> OnBuffFunc = new();
-    private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
-
     [Space(16)]
     [Header("固定属性")]
     [Space(16)]
@@ -28,6 +21,17 @@ public class Player : MonoBehaviour, IDamageable
     [Tooltip("动作值")] public float[] motionValue;
     [Tooltip("攻击强度")] public float[] attackPower;
     [Tooltip("Buff动作值")] public float[] buffMotionValue;
+
+    [Space(16)]
+    [Header("Buff方法相关")]
+    [Space(16)]
+
+    private UnityAction buffAction;
+    private Dictionary<BuffType, BaseBuff> currentBuffDict = new();
+    private Dictionary<BuffType, float> maxBuffHealth = new();
+    private Dictionary<BuffType, float> currentBuffHealth = new();
+    private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTask>> OnBuffFunc = new();
+    private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
 
     [Space(16)]
     [Header("受击事件")]
@@ -52,6 +56,8 @@ public class Player : MonoBehaviour, IDamageable
     private void Awake()
     {
         playerData = GetComponent<PlayerData>();
+
+        //TODO: 初始化Buff血量
     }
 
     private void Update()
@@ -86,6 +92,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void TakeBuffDamage(BuffType buffType, float damage)
     {
+        //以下为测试
         if (!currentBuffDict.ContainsKey(buffType))
         {
             currentBuffHealth[buffType] += damage;
@@ -120,14 +127,14 @@ public class Player : MonoBehaviour, IDamageable
                     if (currentBuffDict.ContainsKey(buffType))
                     {
                         currentBuffDict[buffType].OnBuffEnter();
-                        buffAction += currentBuffDict[buffType].OnBuffStay;
+                        buffAction += currentBuffDict[buffType].OnPlayerBuffStay;
                     }
 
                     await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: ctk);
 
                     if (currentBuffDict.ContainsKey(buffType))
                     {
-                        buffAction -= currentBuffDict[buffType].OnBuffStay;
+                        buffAction -= currentBuffDict[buffType].OnPlayerBuffStay;
                         currentBuffDict[buffType].OnBuffExit();
                         currentBuffDict.Remove(buffType);
                     }
@@ -145,7 +152,7 @@ public class Player : MonoBehaviour, IDamageable
             if (buffCTK.ContainsKey(buffType))
                 buffCTK[buffType].Cancel();
 
-            buffAction -= currentBuffDict[buffType].OnBuffStay;
+            buffAction -= currentBuffDict[buffType].OnPlayerBuffStay;
             currentBuffDict[buffType].OnBuffExit();
             currentBuffDict.Remove(buffType);
         }

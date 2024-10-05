@@ -19,6 +19,7 @@ public class AttackArea : MonoBehaviour
     [Tooltip("攻击者类别")] public AttackerType attackerType;
     [Space(16)]
     public Player player;
+    public Enemy enemy;
     [Space(16)]
     [Tooltip("造成血量伤害")] public bool causeHealthDamage;
     [Tooltip("造成属性伤害")] public bool causeBuffDamage;
@@ -68,7 +69,10 @@ public class AttackArea : MonoBehaviour
                     damageable.TakeBuffDamage(buffType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex]);
                 break;
             case AttackerType.Enemy:
-                //TODO: 敌人攻击
+                if (causeHealthDamage)
+                    damageable.TakeDamage(enemy.FinalDamage * enemy.motionValue[motionValueIndex], enemy.FinalPenetratingPower, enemy.attackPower[attackPowerIndex], isBullet ? transform : enemy.transform);
+                if (causeBuffDamage)
+                    damageable.TakeBuffDamage(buffType, enemy.FinalBuffDamage * enemy.buffMotionValue[buffMotionValueIndex]);
                 break;
             case AttackerType.Trap:
                 //TODO: 陷阱攻击

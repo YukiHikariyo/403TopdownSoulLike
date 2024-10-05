@@ -49,16 +49,12 @@ public class TestPassiveSkill : BasePassiveSkill
 
     public override void OnEnter()
     {
-        float percent = player.playerData.CalculateHealthPercent();
-        player.playerData.maxHealthMultiplication = 2;
-        player.playerData.OnMaxHealthChange(percent);
+        player.playerData.MaxHealthMultiplication = 2;
     }
 
     public override void OnExit()
     {
-        float percent = player.playerData.CalculateHealthPercent();
-        player.playerData.maxHealthMultiplication = 1;
-        player.playerData.OnMaxHealthChange(percent);
+        player.playerData.MaxHealthMultiplication = 1;
     }
 
     public override void OnTrigger()

@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerData : MonoBehaviour, ISaveable
 {
-    #region 变量与属性
+    #region 字段与属性
 
     public Player player;
 
@@ -26,6 +26,8 @@ public class PlayerData : MonoBehaviour, ISaveable
             float percent = currentHealth / FinalMaxHealth;
             basicMaxHealth = value;
             CurrentHealth = FinalMaxHealth * percent;
+
+            //TODO: 最大血量UI更新
         }
     }
 
@@ -52,6 +54,8 @@ public class PlayerData : MonoBehaviour, ISaveable
         set
         {
             currentHealth = Mathf.Clamp(value, 0, FinalMaxHealth);
+
+            //TODO: 当前血量UI更新
         }
     }
 
@@ -65,6 +69,8 @@ public class PlayerData : MonoBehaviour, ISaveable
             float percent = currentMana / FinalMaxMana;
             basicMaxMana = value;
             CurrentMana = FinalMaxMana * percent;
+
+            //TODO: 最大魔力UI更新
         }
     }
 
@@ -91,6 +97,8 @@ public class PlayerData : MonoBehaviour, ISaveable
         set
         {
             currentMana = Mathf.Clamp(value, 0, FinalMaxMana);
+
+            //TODO: 当前魔力UI更新
         }
     }
 
@@ -105,6 +113,8 @@ public class PlayerData : MonoBehaviour, ISaveable
             float percent = basicMaxEnergy / FinalMaxEnergy;
             basicMaxEnergy = value;
             CurrentEnergy = FinalMaxEnergy * percent;
+
+            //TODO: 最大体力UI更新
         }
     }
 
@@ -131,6 +141,8 @@ public class PlayerData : MonoBehaviour, ISaveable
         set
         {
             currentEnergy = value < FinalMaxEnergy ? value : FinalMaxEnergy;
+
+            //TODO: 当前体力UI更新
         }
     }
 
@@ -362,11 +374,10 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Header("Buff增量（可为负）")]
     [Space(16)]
 
-    //修改以下三个增量时记得调用OnMax???Change
-    [Tooltip("最大生命值增量")] public float maxHealthIncrement;
-    [Tooltip("最大魔力值增量")] public float maxManaIncrement;
-    [Tooltip("最大体力值增量")] public float maxEnergyIncrement;
-    //End
+    [Tooltip("最大生命值增量")][SerializeField] private float maxHealthIncrement;
+    [Tooltip("最大魔力值增量")][SerializeField] private float maxManaIncrement;
+    [Tooltip("最大体力值增量")][SerializeField] private float maxEnergyIncrement;
+
     [Tooltip("体力恢复增量")] public float energyRecoveryIncrement;
     [Tooltip("体力消耗增量")] public float energyCostIncrement;
     [Tooltip("移动速度增量")] public float moveSpeedIncrement;
@@ -378,15 +389,53 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("易伤增量")] public float vulnerabilityIncrement;
     [Tooltip("韧性增量")] public float toughnessIncrement;
 
+    public float MaxHealthIncrement
+    {
+        get => maxHealthIncrement;
+        set
+        {
+            float percent = currentHealth / FinalMaxHealth;
+            maxHealthIncrement = value;
+            CurrentHealth = FinalMaxHealth * percent;
+
+            //TODO: 最大血量UI更新
+        }
+    }
+
+    public float MaxManaIncrement
+    {
+        get => maxManaIncrement;
+        set
+        {
+            float percent = currentMana / FinalMaxMana;
+            maxManaIncrement = value;
+            CurrentMana = FinalMaxMana * percent;
+
+            //TODO: 最大魔力UI更新
+        }
+    }
+
+    public float MaxEnergyIncrement
+    {
+        get => maxEnergyIncrement;
+        set
+        {
+            float percent = currentEnergy / FinalMaxEnergy;
+            maxEnergyIncrement = value;
+            CurrentEnergy = FinalMaxEnergy * percent;
+
+            //TODO: 最大体力UI更新
+        }
+    }
+
     [Space(16)]
     [Header("Buff倍率")]
     [Space(16)]
 
-    //修改以下三个倍率时记得调用OnMax???Change
-    [Tooltip("最大生命值倍率")] public float maxHealthMultiplication = 1;
-    [Tooltip("最大魔力值倍率")] public float maxManaMultiplication = 1;
-    [Tooltip("最大体力值倍率")] public float maxEnergyMultiplication = 1;
-    //End
+    [Tooltip("最大生命值倍率")][SerializeField] private float maxHealthMultiplication = 1;
+    [Tooltip("最大魔力值倍率")][SerializeField] private float maxManaMultiplication = 1;
+    [Tooltip("最大体力值倍率")][SerializeField] private float maxEnergyMultiplication = 1;
+
     [Tooltip("体力恢复倍率")] public float energyRecoveryMultiplication = 1;
     [Tooltip("体力消耗倍率")] public float energyCostMultiplication = 1;
     [Tooltip("移动速度倍率")] public float moveSpeedMultiplication = 1;
@@ -397,6 +446,49 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("伤害减免倍率")] public float reductionRateMultiplication = 1;
     [Tooltip("易伤倍率")] public float vulnerabilityMultiplication = 1;
     [Tooltip("韧性倍率")] public float toughnessMultiplication = 1;
+
+    public float MaxHealthMultiplication
+    {
+        get => maxHealthMultiplication;
+        set
+        {
+            float percent = currentHealth / FinalMaxHealth;
+            maxHealthMultiplication = value;
+            CurrentHealth = FinalMaxHealth * percent;
+
+            //TODO: 最大血量UI更新
+        }
+    }
+
+    public float MaxManaMultiplication
+    {
+        get => maxManaMultiplication;
+        set
+        {
+            float percent = currentMana / FinalMaxMana;
+            maxManaMultiplication = value;
+            CurrentMana = FinalMaxMana * percent;
+
+            //TODO: 最大魔力UI更新
+        }
+    }
+
+    public float MaxEnergyMultiplication
+    {
+        get => maxEnergyMultiplication;
+        set
+        {
+            float percent = currentEnergy / FinalMaxEnergy;
+            maxEnergyMultiplication = value;
+            CurrentEnergy = FinalMaxEnergy * percent;
+
+            //TODO: 最大体力UI更新
+        }
+    }
+
+    [Space(16)]
+    [Header("装备数据")]
+    [Space(16)]
 
     [Tooltip("当前武器静态数据")][HideInInspector] public StaticWeaponData currentWeaponStaticData;
     [Tooltip("当前武器本地数据")] public LocalWeaponData currentWeaponLocalData;
@@ -432,25 +524,28 @@ public class PlayerData : MonoBehaviour, ISaveable
         
     }
 
+    public float CalculateHealthPercent() => currentHealth / FinalMaxHealth;
+    public float CalculateManaPercent() => currentMana / FinalMaxMana;
+    public float CalculateEnergyPercent() => currentEnergy / FinalMaxEnergy;
+
     public void OnMaxHealthChange(float percent)
     {
-        currentHealth = FinalMaxHealth * percent;
-        //TODO: UI更新
+        CurrentHealth = FinalMaxHealth * percent;
+
+        //TODO: 最大血量UI更新
     }
 
     public void OnMaxManaChange(float percent)
     {
-        currentMana = FinalMaxMana * percent;
-        //TODO: UI更新
+        CurrentMana = FinalMaxMana * percent;
+
+        //TODO: 最大魔力UI更新
     }
 
     public void OnMaxEnergyChange(float percent)
     {
-        currentEnergy = FinalMaxEnergy * percent;
-        //TODO: UI更新
-    }
+        CurrentEnergy = FinalMaxEnergy * percent;
 
-    public float CalculateHealthPercent() => currentHealth / FinalMaxHealth;
-    public float CalculateManaPercent() => currentMana / FinalMaxMana;
-    public float CalculateEnergyPercent() => currentEnergy / FinalMaxEnergy;
+        //TODO: 最大体力UI更新
+    }
 }
