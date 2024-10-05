@@ -79,7 +79,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     public void GetCoin(int number)
     {
         coin = coin + number < 999999 ? coin + number : 999999;
-        //TODO: UI金币逻辑处理
+        UIManager.Instance.coinValue.text = coin.ToString();
     }
 
     /// <summary>
@@ -93,6 +93,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         if (coin >= number)
         {
             coin -= number;
+            UIManager.Instance.coinValue.text = coin.ToString();
             return true;
         }
         else

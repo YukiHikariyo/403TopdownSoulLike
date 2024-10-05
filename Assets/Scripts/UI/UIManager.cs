@@ -29,6 +29,7 @@ public class UIManager : MonoSingleton<UIManager>
     public string[] menuNameList = { "玩家属性", "物品", "武器", "饰品", "天赋树", "设置" };
     public TextMeshProUGUI menuName;
     public int currentMenuIndex;
+    public TextMeshProUGUI coinValue;
 
     [Space(16)]
     [Header("物品")]
@@ -147,6 +148,7 @@ public class UIManager : MonoSingleton<UIManager>
         if (!currentMenuPanel)
             currentMenuPanel = menuPanelList[0];
 
+        coinValue.text = PackageManager.Instance.CoinNumber().ToString();
         currentMenuPanel.OnOpen();
         packagePanel.gameObject.SetActive(true);
         isPackageOpen = true;
@@ -197,7 +199,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void ItemInfUpdate(int id)
     {
-        if (currentSelectedItem)
+        if (currentSelectedItem != null)
         {
             selectedItemName.text = PackageManager.Instance.allItemList[currentSelectedItem.itemID].itemName;
             selectedItemNumber.text = " 数量：" + PackageManager.Instance.itemDict[currentSelectedItem.itemID].number + "个";
@@ -205,8 +207,6 @@ public class UIManager : MonoSingleton<UIManager>
         
         itemSlotDict[id].itemNumber = PackageManager.Instance.itemDict[id].number;
         itemSlotDict[id].itemNumberText.text = itemSlotDict[id].itemNumber.ToString();
-
-        Debug.Log("物品更新成功" + id);
     }
 
     public void GetItem(int id, int number)
@@ -254,6 +254,9 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void CurrentWeaponInfUpdate()
     {
+        if (currentSelectedWeapon == null)
+            return;
+
         int id = currentSelectedWeapon.weaponID;
         int level = PackageManager.Instance.weaponDict[id].level;
         selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
@@ -265,6 +268,9 @@ public class UIManager : MonoSingleton<UIManager>
         weaponCritDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
         weaponPenetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
         weaponReductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
+
+        weaponStoneValue.color = (PackageManager.Instance.itemDict.ContainsKey(1) && PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].stoneCost <= PackageManager.Instance.itemDict[1].number) ? Color.green : Color.red;
+        weaponCoinValue.color = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].coinCost <= PackageManager.Instance.CoinNumber() ? Color.green : Color.red;
     }
 
     public void GetWeapon(int id)
@@ -311,6 +317,9 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void CurrentAccessoryInfUpdate()
     {
+        if (currentSelectedAccessory == null)
+            return;
+
         int id = currentSelectedAccessory.accessoryID;
         int level = PackageManager.Instance.accessoryDict[id].level;
         selectedAccessoryName.text = PackageManager.Instance.allAccessoryList[id].name;
@@ -322,6 +331,9 @@ public class UIManager : MonoSingleton<UIManager>
         accessoryEnergyValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].maxEnergy * 100 + "";
         accessoryToughnessValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].toughness * 100 + "";
         accessoryReductionRateValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].reductionRate * 100 + "%";
+
+        accessoryStoneValue.color = (PackageManager.Instance.itemDict.ContainsKey(2) && PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].stoneCost <= PackageManager.Instance.itemDict[2].number) ? Color.green : Color.red;
+        accessoryCoinValue.color = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].coinCost <= PackageManager.Instance.CoinNumber() ? Color.green : Color.red;
     }
 
     public void GetAccessory(int id)

@@ -11,6 +11,6 @@ public class AccessoryPanel : BasePanel
 
     public override void OnOpen()
     {
-
+        UIManager.Instance.CurrentAccessoryInfUpdate();
     }
 }

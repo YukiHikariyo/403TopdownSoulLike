@@ -11,6 +11,6 @@ public class WeaponPanel : BasePanel
 
     public override void OnOpen()
     {
-        
+        UIManager.Instance.CurrentWeaponInfUpdate();
     }
 }
