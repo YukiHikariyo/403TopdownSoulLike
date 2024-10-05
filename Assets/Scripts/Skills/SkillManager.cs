@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 {
@@ -39,14 +41,20 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 
     public bool CanUnlock(int id)
     {
-        if (allSkillList[id] != null && allSkillList[id].preIDs.Length > 0)
+        if (allSkillList[id].preIDs.Length > 0)
         {
             for (int i = 0; i < allSkillList[id].preIDs.Length; i++)
             {
-                if (!skillDict.ContainsKey(allSkillList[id].preIDs[i])) 
+                if (!skillDict.ContainsKey(allSkillList[id].preIDs[i]))
+                {
                     return false;
-                else 
+                }
+
+                else
+                {
                     return true;
+                }
+
             }
         }
 
@@ -55,9 +63,9 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
             return true;
         }
 
-        else
+        else 
         {
-            return false;
+            return false; 
         }
 
         return false;
@@ -65,12 +73,28 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 
     public void UpgradeSkill(int id)
     {
-        if (skillPoint >= allSkillList[id].skillPointCost && CanUnlock(id))
+        if (ConsumeSkillPoint(allSkillList[id].skillPointCost) && CanUnlock(id))
         {
             if (!skillDict.ContainsKey(id))
             {
                 skillDict.Add(id, new LocalSkillData(id));
+                skillDict[id].currentSkillLevel = 1;
+                UnlockAnimation(id);
             }
+
+            else if (skillDict.ContainsKey(id) && skillDict[id].currentSkillLevel < allSkillList[id].maxSkillLevel)
+            {
+                skillDict[id].currentSkillLevel++;
+            }
+
+            else if (skillDict.ContainsKey(id) && skillDict[id].currentSkillLevel == allSkillList[id].maxSkillLevel)
+            {
+                UIManager.Instance.PlayTipSequence("技能等级到达上限");
+            }
+        }
+        else
+        {
+            UIManager.Instance.PlayTipSequence("无法升级");
         }
 
     }
@@ -88,4 +112,65 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
             return false;
         }
     }
+
+    #region UI部分
+    public StaticSkillData activeSkill;
+    public int currentSkillIndex;
+
+    [Header("UI")]
+    public Image skillImage;
+    public Text skillLv, skillDes, skillName, skillNum;
+    public GameObject upgradeButton;
+    public List<Transform> skillTreeList;
+
+    public void DisplayInfo()
+    {
+        skillImage.sprite = activeSkill.skillSpite;
+        skillDes.text = activeSkill.skillDescription;
+        skillName.text = activeSkill.skillName;
+        if(skillDict.ContainsKey(activeSkill.skillTreeID))
+        {
+            skillNum.text = activeSkill.skillValue[skillDict[activeSkill.skillTreeID].currentSkillLevel - 1].ToString();
+            skillLv.text = skillDict[activeSkill.skillTreeID].currentSkillLevel.ToString();
+        }
+        else
+        {
+            skillNum.text = activeSkill.skillValue[0].ToString();
+            skillLv.text = 0.ToString();
+        }
+        
+    }
+    public void DoUpgrade()
+    {
+        UpgradeSkill(activeSkill.skillTreeID);
+        DisplayInfo();
+    }
+
+    public void SelectSkill(int index)
+    {
+        currentSkillIndex = index;
+
+        for (int i = 0; i < skillTreeList.Count; i++)
+        {
+            if (i != index)
+            {
+                skillTreeList[i].GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                skillTreeList[i].GetChild(0).gameObject.SetActive(true);
+            }
+        }
+        upgradeButton.gameObject.SetActive(true);
+    }
+
+    public void UnlockAnimation(int index)
+    {
+        currentSkillIndex = index;
+
+        skillTreeList[currentSkillIndex].GetChild(2).GetComponent<Image>().DOFillAmount(1, 0.75f);
+
+    }
+
+    #endregion
 }
