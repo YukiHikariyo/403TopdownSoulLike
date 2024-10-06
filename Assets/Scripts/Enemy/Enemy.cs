@@ -158,16 +158,59 @@ public class Enemy : MonoBehaviour, IDamageable
     private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTask>> OnBuffFunc = new();
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
 
+    [Space(16)]
+    [Header("HFSM")]
+    [Space(16)]
+
+    public EnemySubStateMachine currentSubSM;
+    public EnemySubStateMachine defaultSubSM;
+
     #region 生命周期
 
     private void Awake()
     {
         //TODO: 初始化Buff血量
+        
+        //子类记得在此处实例化子状态机
+        //子类记得在此处设置默认状态机
+    }
+
+    private void OnEnable()
+    {
+        currentSubSM = defaultSubSM;
+        currentSubSM.OnEnter();
+    }
+
+    private void OnDisable()
+    {
+        currentSubSM.OnExit();
+    }
+
+    private void Start()
+    {
+        CurrentHealth = maxHealth;
+    }
+
+    private void FixedUpdate()
+    {
+        currentSubSM.PhysicsUpdate();
     }
 
     private void Update()
     {
+        currentSubSM.LogicUpdate();
         buffAction?.Invoke();
+    }
+
+    #endregion
+
+    #region HFSM
+
+    public void ChangeSubSM(EnemySubStateMachine newSubSM)
+    {
+        currentSubSM.OnExit();
+        currentSubSM = newSubSM;
+        currentSubSM.OnEnter();
     }
 
     #endregion
