@@ -12,8 +12,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fastRollSpeed;
     [SerializeField] private float slowRollSpeed;
     [SerializeField] private float lastRollDuration;
+    [Header("运动曲线")]
     public AnimationCurve fastRollCruve;
     public AnimationCurve slowRollCruve;
+    //每段攻击的位移变化曲线
+    public AnimationCurve L1AtkCruve;
+    public AnimationCurve L2AtkCruve;
+    public AnimationCurve L3AtkCurve;
     private float nowSpeed;
     //二段翻滚的移动速度会由快变慢，该参数用于表示减速度，为了方便，向属性传递动作持续时间，属性内部会自行计算减速度
     public float LastRollDuration
