@@ -51,6 +51,7 @@ public class PlayerState : ScriptableObject, IState
     public virtual void Enter()
     {
         stateStartTime = Time.time;
+        playerStateMachine.memory = InputMemory.None;
     }
 
     public virtual void Exit()

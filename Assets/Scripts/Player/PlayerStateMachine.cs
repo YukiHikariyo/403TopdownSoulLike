@@ -23,10 +23,20 @@ public class PlayerStateMachine : StateMachine
     #region 接受输入窗口
     public bool CanAcceptInput { get; set; }
     #endregion
+
+    #region 预输入和后摇开始时刻
+    public InputMemory memory;
+    public bool CanStateSwitch {  get; set; }
+    #endregion
     public float MouseDegree => mousedegree;
     public Vector3 MouseDistance => mouseDistance;
     private void Awake()
     {
+        #region 组件获取
+        #endregion
+        //
+        memory = InputMemory.None;
+        //
         CanAcceptInput = true;
         //
         dict = new Dictionary<System.Type, IState>(stateTable.Length);
@@ -76,4 +86,11 @@ public class PlayerStateMachine : StateMachine
     {
         CanAcceptInput = true;
     }
+    //动画最早打断时间
+    public void AcceptStateSwitch()
+    {
+        CanStateSwitch = true;
+    }
 }
+
+

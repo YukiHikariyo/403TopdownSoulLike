@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/LightAttack_1", fileName = "PlayerState_LightAttack_1")]
+[CreateAssetMenu(menuName = "Data/PlayerState/LightAttack_2", fileName = "PlayerState_LightAttack_2")]
 
-public class PlayerState_LightAttack_1 : PlayerState
+public class PlayerState_LightAttack_2 : PlayerState
 {
     public override void Enter()
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
-        playerAnimator.Play("L1_Attack");
+        playerAnimator.Play("L2_Attack");
         FaceDir = playerStateMachine.MouseDistance.normalized;
-        SetRotationZ(lightAtk_1,playerStateMachine.MouseDegree);
+        SetRotationZ(lightAtk_2, playerStateMachine.MouseDegree);
     }
 
     public override void Exit()
@@ -36,7 +36,7 @@ public class PlayerState_LightAttack_1 : PlayerState
             switch (playerStateMachine.memory)
             {
                 case InputMemory.LightAttack:
-                    Debug.Log("L2");
+                    Debug.Log("L3");
                     break;
                 case InputMemory.RightAttack:
                     Debug.Log("Check");
@@ -64,13 +64,13 @@ public class PlayerState_LightAttack_1 : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
-        playerController.LightAttack_1(FaceDir, StateDuration/AnimationLength);
+        playerController.LightAttack_2(FaceDir, StateDuration / AnimationLength);
     }
 
     #region 偷懒
-    private void SetRotationZ(GameObject obj,float angle)
+    private void SetRotationZ(GameObject obj, float angle)
     {
-        obj.transform.localEulerAngles = new Vector3(obj.transform.localEulerAngles.x, obj.transform.localEulerAngles.y,angle);
+        obj.transform.localEulerAngles = new Vector3(obj.transform.localEulerAngles.x, obj.transform.localEulerAngles.y, angle);
     }
     #endregion
 }

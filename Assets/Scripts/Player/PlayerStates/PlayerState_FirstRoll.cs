@@ -23,9 +23,6 @@ public class PlayerState_FirstRoll : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        //翻滚逻辑
-        playerController.FastRoll(FaceDir, StateDuration/AnimationLength);
-        //
         if (playerStateMachine.CanAcceptInput)
         {
             if (playerInput.Roll)
@@ -52,5 +49,8 @@ public class PlayerState_FirstRoll : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        //翻滚逻辑
+        playerController.FastRoll(FaceDir, StateDuration / AnimationLength);
+        //
     }
 }

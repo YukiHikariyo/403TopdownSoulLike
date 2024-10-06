@@ -12,13 +12,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fastRollSpeed;
     [SerializeField] private float slowRollSpeed;
     [SerializeField] private float lastRollDuration;
+    [SerializeField] private float L1AtkSpeed;
+    [SerializeField] private float L2AtkSpeed;
+    [SerializeField] private float L3AtkSpeed;
     [Header("运动曲线")]
     public AnimationCurve fastRollCruve;
     public AnimationCurve slowRollCruve;
     //每段攻击的位移变化曲线
     public AnimationCurve L1AtkCruve;
     public AnimationCurve L2AtkCruve;
-    public AnimationCurve L3AtkCurve;
+    public AnimationCurve L3AtkCruve;
     private float nowSpeed;
     //二段翻滚的移动速度会由快变慢，该参数用于表示减速度，为了方便，向属性传递动作持续时间，属性内部会自行计算减速度
     public float LastRollDuration
@@ -134,7 +137,20 @@ public class PlayerController : MonoBehaviour
         playerRb.velocity = FaceDir * slowRollSpeed * slowRollCruve.Evaluate(time);
     }
     #endregion
-
+    #region 轻攻击位移
+    public void LightAttack_1(Vector2 FaceDir, float time)
+    {
+        playerRb.velocity = FaceDir * L1AtkSpeed * L1AtkCruve.Evaluate(time);
+    }
+    public void LightAttack_2(Vector2 FaceDir, float time)
+    {
+        playerRb.velocity = FaceDir * L2AtkSpeed * L2AtkCruve.Evaluate(time);
+    }
+    public void LightAttack_3(Vector2 FaceDir, float time)
+    {
+        playerRb.velocity = FaceDir * L3AtkSpeed * L3AtkCruve.Evaluate(time);
+    }
+    #endregion
     private void Update()
     {
         if (inputs.IsPlayerInputEnable)

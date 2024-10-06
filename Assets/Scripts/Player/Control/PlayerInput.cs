@@ -67,3 +67,13 @@ public class PlayerInput : MonoBehaviour
         IsPlayerInputEnable = false;
     }
 }
+
+
+public enum InputMemory
+{
+    None,
+    Roll,
+    LightAttack,
+    RightAttack,
+}
+

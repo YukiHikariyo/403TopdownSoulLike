@@ -22,9 +22,6 @@ public class PlayerState_LastRoll : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        //翻滚逻辑
-        playerController.SlowRoll(FaceDir, StateDuration / AnimationLength);
-        //
         if (IsAnimationEnd)
         {
             //切换至移动
@@ -44,5 +41,8 @@ public class PlayerState_LastRoll : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        //翻滚逻辑
+        playerController.SlowRoll(FaceDir, StateDuration / AnimationLength);
+        //
     }
 }

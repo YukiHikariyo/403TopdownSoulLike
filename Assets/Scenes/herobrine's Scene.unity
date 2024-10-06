@@ -1976,6 +1976,9 @@ MonoBehaviour:
   fastRollSpeed: 10
   slowRollSpeed: 8
   lastRollDuration: 0.3
+  L1AtkSpeed: 10
+  L2AtkSpeed: 0
+  L3AtkSpeed: 0
   fastRollCruve:
     serializedVersion: 2
     m_Curve:
@@ -2096,6 +2099,132 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  L1AtkCruve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  L2AtkCruve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  L3AtkCruve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1494598973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2116,6 +2245,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: babf95d4323233b4e84f16aff96fa5de, type: 2}
   - {fileID: 11400000, guid: 582b92721a61b964297e7f469e313717, type: 2}
   - {fileID: 11400000, guid: 85ee91bc3774835459ae9cc168c794ed, type: 2}
+  - {fileID: 11400000, guid: 9506f76c4ed0c3542b2acb47049468bf, type: 2}
+  - {fileID: 11400000, guid: 1dd0d492991bae74189883ee8a0bd2b3, type: 2}
   mouseDistance: {x: 0, y: 0, z: 0}
   playerInput: {fileID: 1494598971}
   playerController: {fileID: 1494598972}
@@ -2124,6 +2255,7 @@ MonoBehaviour:
   LightAtk_1: {fileID: 558400915}
   LightAtk_2: {fileID: 1361083973}
   LightAtk_3: {fileID: 717224651}
+  memory: 0
 --- !u!95 &1494598974
 Animator:
   serializedVersion: 5
