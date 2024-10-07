@@ -310,7 +310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &558400916
 Transform:
   m_ObjectHideFlags: 0
@@ -372,8 +372,10 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0, y: 0.2}
       - {x: 0, y: -0.2}
-      - {x: 2, y: -1}
-      - {x: 2, y: 1}
+      - {x: 0.85276115, y: -1.5800922}
+      - {x: 2.0771062, y: -0.5620951}
+      - {x: 2.0785003, y: 0.56437194}
+      - {x: 0.7692559, y: 1.5695338}
   m_UseDelaunayMesh: 0
 --- !u!1 &635570750
 GameObject:
@@ -525,7 +527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &717224652
 Transform:
   m_ObjectHideFlags: 0
@@ -585,10 +587,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.2}
-      - {x: 0, y: -0.2}
-      - {x: 2, y: -1}
-      - {x: 2, y: 1}
+    - - {x: 0, y: 0.5}
+      - {x: 0, y: -0.5}
+      - {x: 2.5, y: -1.5}
+      - {x: 2.5, y: 1.5}
   m_UseDelaunayMesh: 0
 --- !u!1 &720292177
 GameObject:
@@ -1782,7 +1784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1361083974
 Transform:
   m_ObjectHideFlags: 0
@@ -1842,10 +1844,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.2}
+    - - {x: 0.7862282, y: 1.6506181}
+      - {x: 0, y: 0.2}
       - {x: 0, y: -0.2}
-      - {x: 2, y: -1}
-      - {x: 2, y: 1}
+      - {x: 0.75377893, y: -1.5438988}
+      - {x: 2.149984, y: -0.71878046}
+      - {x: 2.149984, y: 0.9437561}
   m_UseDelaunayMesh: 0
 --- !u!1 &1494598967
 GameObject:
@@ -1977,8 +1981,10 @@ MonoBehaviour:
   slowRollSpeed: 8
   lastRollDuration: 0.3
   L1AtkSpeed: 10
-  L2AtkSpeed: 0
-  L3AtkSpeed: 0
+  L2AtkSpeed: 10
+  L3AtkSpeed: 8
+  L4AtkSpeed: 20
+  LightAtkRotateAngle: 60
   fastRollCruve:
     serializedVersion: 2
     m_Curve:
@@ -2221,7 +2227,139 @@ MonoBehaviour:
     m_RotationOrder: 4
   L3AtkCruve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  L4AtkCruve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.05
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.35
+      value: 0
+      inSlope: -0.021531345
+      outSlope: -0.021531345
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33780786
+    - serializedVersion: 3
+      time: 0.6742599
+      value: 0
+      inSlope: 0.0024159271
+      outSlope: 0.0024159271
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.8141315
+    - serializedVersion: 3
+      time: 0.8388672
+      value: 0.24526978
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -2247,6 +2385,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 85ee91bc3774835459ae9cc168c794ed, type: 2}
   - {fileID: 11400000, guid: 9506f76c4ed0c3542b2acb47049468bf, type: 2}
   - {fileID: 11400000, guid: 1dd0d492991bae74189883ee8a0bd2b3, type: 2}
+  - {fileID: 11400000, guid: 03ef76a2dd9b59641a1af355c9106075, type: 2}
+  - {fileID: 11400000, guid: 495803d38fd1c224b8a6c1547f8962ec, type: 2}
   mouseDistance: {x: 0, y: 0, z: 0}
   playerInput: {fileID: 1494598971}
   playerController: {fileID: 1494598972}
@@ -2255,6 +2395,7 @@ MonoBehaviour:
   LightAtk_1: {fileID: 558400915}
   LightAtk_2: {fileID: 1361083973}
   LightAtk_3: {fileID: 717224651}
+  LightAtk_4: {fileID: 1581986655}
   memory: 0
 --- !u!95 &1494598974
 Animator:
@@ -2293,7 +2434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1581986656
 Transform:
   m_ObjectHideFlags: 0
@@ -2355,8 +2496,10 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0, y: 0.2}
       - {x: 0, y: -0.2}
-      - {x: 2, y: -1}
-      - {x: 2, y: 1}
+      - {x: 0.4, y: -2}
+      - {x: 2.6, y: -0.9}
+      - {x: 2.6, y: 0.9}
+      - {x: 0.4, y: 2}
   m_UseDelaunayMesh: 0
 --- !u!224 &1613978652 stripped
 RectTransform:

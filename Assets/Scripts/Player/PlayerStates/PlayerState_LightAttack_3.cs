@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/LightAttack_2", fileName = "PlayerState_LightAttack_2")]
-
-public class PlayerState_LightAttack_2 : PlayerState
+[CreateAssetMenu(menuName = "Data/PlayerState/LightAttack_3", fileName = "PlayerState_LightAttack_3")]
+public class PlayerState_LightAttack_3 : PlayerState
 {
     float degree;
-
     public override void Enter()
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
-        playerAnimator.Play("L2_Attack");
-        degree = playerStateMachine.RestrictedRotation(lightAtk_1);
+        playerAnimator.Play("L3_Attack");
+        degree = playerStateMachine.RestrictedRotation(lightAtk_2);
         FaceDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree));
-        lightAtk_2.transform.localEulerAngles = new Vector3(lightAtk_2.transform.localEulerAngles.x, lightAtk_2.transform.localEulerAngles.y, degree);
+        lightAtk_3.transform.localEulerAngles = new Vector3(lightAtk_3.transform.localEulerAngles.x, lightAtk_3.transform.localEulerAngles.y, degree);
     }
 
     public override void Exit()
@@ -39,7 +37,7 @@ public class PlayerState_LightAttack_2 : PlayerState
             switch (playerStateMachine.memory)
             {
                 case InputMemory.LightAttack:
-                    playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_3));
+                    playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_4));
                     break;
                 case InputMemory.RightAttack:
                     Debug.Log("Check");
@@ -67,8 +65,7 @@ public class PlayerState_LightAttack_2 : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
-        playerController.LightAttack_2(FaceDir, StateDuration / AnimationLength);
+        playerController.LightAttack_3(FaceDir, StateDuration / AnimationLength);
     }
 
-    
 }

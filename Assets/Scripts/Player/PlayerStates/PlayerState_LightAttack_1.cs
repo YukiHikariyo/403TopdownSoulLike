@@ -9,6 +9,7 @@ public class PlayerState_LightAttack_1 : PlayerState
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
+        playerStateMachine.CanStateSwitch = false;
         playerAnimator.Play("L1_Attack");
         FaceDir = playerStateMachine.MouseDistance.normalized;
         SetRotationZ(lightAtk_1,playerStateMachine.MouseDegree);
@@ -22,21 +23,12 @@ public class PlayerState_LightAttack_1 : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (playerStateMachine.CanAcceptInput)
-        {
-            if (playerInput.Roll)
-                playerStateMachine.memory = InputMemory.Roll;
-            else if (playerInput.LeftCheck)
-                playerStateMachine.memory = InputMemory.LightAttack;
-            else if (playerInput.RightCheck)
-                playerStateMachine.memory = InputMemory.RightAttack;
-        }
         if (playerStateMachine.CanStateSwitch)
         {
             switch (playerStateMachine.memory)
             {
                 case InputMemory.LightAttack:
-                    Debug.Log("L2");
+                    playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_2));
                     break;
                 case InputMemory.RightAttack:
                     Debug.Log("Check");
@@ -45,6 +37,15 @@ public class PlayerState_LightAttack_1 : PlayerState
                     playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
                     break;
             }
+        }
+        if (playerStateMachine.CanAcceptInput)
+        {
+            if (playerInput.Roll)
+                playerStateMachine.memory = InputMemory.Roll;
+            else if (playerInput.LightAttack)
+                playerStateMachine.memory = InputMemory.LightAttack;
+            else if (playerInput.RightAttack)
+                playerStateMachine.memory = InputMemory.RightAttack;
         }
         if (IsAnimationEnd)
         {

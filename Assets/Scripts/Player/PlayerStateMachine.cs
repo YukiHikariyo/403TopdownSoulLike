@@ -18,6 +18,7 @@ public class PlayerStateMachine : StateMachine
     public GameObject LightAtk_1;
     public GameObject LightAtk_2;
     public GameObject LightAtk_3;
+    public GameObject LightAtk_4;
     #endregion
 
     #region 接受输入窗口
@@ -44,7 +45,7 @@ public class PlayerStateMachine : StateMachine
         playerTransform = transform;
         foreach (PlayerState playerState in stateTable)
         {
-            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,LightAtk_1,LightAtk_2,LightAtk_3);
+            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4);
             dict.Add(playerState.GetType(), playerState);
         }
     }
@@ -64,9 +65,24 @@ public class PlayerStateMachine : StateMachine
     {
         mouseDistance = m_camera.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
         float degree = Mathf.Atan2(mouseDistance.y, mouseDistance.x) * Mathf.Rad2Deg;
-        mousedegree = degree;
+        mousedegree = degree>=0?degree:360f+degree;
     }
 
+    public float RestrictedRotation(GameObject lastobj)
+    {
+        float mousedeg = mousedegree;
+        float result;
+        float z = lastobj.transform.localEulerAngles.z >= 0?lastobj.transform.localEulerAngles.z:360f + lastobj.transform.localEulerAngles.z;
+        if (Mathf.Abs(mousedeg - z) > playerController.LightAtkRotateAngle)
+        {
+            result = z + (mousedeg - z > 0 ? playerController.LightAtkRotateAngle : -playerController.LightAtkRotateAngle);
+        }
+        else
+        {
+            result = mousedeg;
+        }
+        return result;
+    }
     public void ReturnAnimatorValue_Update()
     {
         bool isUp = mouseDistance.y >= 0;
