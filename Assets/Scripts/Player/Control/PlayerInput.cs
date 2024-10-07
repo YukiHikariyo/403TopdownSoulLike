@@ -45,7 +45,6 @@ public class PlayerInput : MonoBehaviour
 
     public bool RightAttackRelease => input.Player.RightAttack.WasReleasedThisFrame();
 
-    //rightAttack
 
     public bool Roll => input.Player.Roll.WasPressedThisFrame();
     #endregion

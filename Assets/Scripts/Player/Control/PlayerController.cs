@@ -17,6 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float L3AtkSpeed;
     [SerializeField] private float L4AtkSpeed;
     [SerializeField] public float LightAtkRotateAngle;
+    [Header("见切相关属性")]
+    //无敌帧持续时间
+    [SerializeField] public float UnDamageableLeftTime;
+    //完美见切判定时间
+    [SerializeField] public float PerfectCheckTime;
+    //见切移动速度
+    [SerializeField] private float catchChanceSpeed;
     [Header("运动曲线")]
     public AnimationCurve fastRollCruve;
     public AnimationCurve slowRollCruve;
@@ -25,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve L2AtkCruve;
     public AnimationCurve L3AtkCruve;
     public AnimationCurve L4AtkCruve;
+
+    public AnimationCurve CatchChanceCruve;
     private float nowSpeed;
     //二段翻滚的移动速度会由快变慢，该参数用于表示减速度，为了方便，向属性传递动作持续时间，属性内部会自行计算减速度
     public float LastRollDuration
@@ -164,5 +173,26 @@ public class PlayerController : MonoBehaviour
         {
             readLastInput();
         }
+    }
+    public void SkillDisplace(Skill_Physics skill, Vector2 FaceDir, float time)
+    {
+        switch (skill)
+        {
+            case Skill_Physics.CatchChance:
+                playerRb.velocity = FaceDir * catchChanceSpeed * CatchChanceCruve.Evaluate(time);
+            break;
+            case Skill_Physics.BackAttack:
+
+            break;
+            case Skill_Physics.RightAttack:
+
+            break;  
+        }
+    }
+    public enum Skill_Physics
+    {
+        CatchChance,
+        BackAttack,
+        RightAttack,
     }
 }

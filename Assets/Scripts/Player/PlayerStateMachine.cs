@@ -6,9 +6,16 @@ public class PlayerStateMachine : StateMachine
 {
     [SerializeField] Camera m_camera;
     private Transform playerTransform;
+    #region 鼠标相关
+    [Header("鼠标相关")]
     [SerializeField] float mousedegree;
     [SerializeField]PlayerState[] stateTable;
     [SerializeField] Vector3 mouseDistance;
+    #endregion
+    #region 特定时间节点
+    [Header("特定时间节点")]
+    private float CatchChancepoint;
+    #endregion
     #region 组件
     //获取组件的方式之后可以调整
     public PlayerInput playerInput;
