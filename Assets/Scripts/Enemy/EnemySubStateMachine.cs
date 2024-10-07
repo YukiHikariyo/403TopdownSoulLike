@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Loading;
 using UnityEngine;
 
 /// <summary>
@@ -8,8 +9,10 @@ using UnityEngine;
 public class EnemySubStateMachine
 {
     protected Enemy enemy;
-    protected EnemyState currentState;
+    public EnemyState currentState;
     protected EnemyState defaultState;
+    public EnemyState whenExitState;    //退出时的状态
+    public EnemySubStateMachine lastSubSM;
 
     public EnemySubStateMachine(Enemy enemy)
     {
@@ -19,9 +22,9 @@ public class EnemySubStateMachine
         //子类记得在此处设置默认状态
     }
 
-    public virtual void OnEnter()
+    public virtual void OnEnter(bool continueState)
     {
-        currentState = defaultState;
+        currentState = (continueState && whenExitState != null) ? whenExitState : defaultState;
         currentState.OnEnter();
     }
     public virtual void OnExit() => currentState.OnExit();
@@ -30,8 +33,21 @@ public class EnemySubStateMachine
 
     public void ChangeState(EnemyState newState)
     {
+        EnemyState lastState = currentState;
         currentState.OnExit();
         currentState = newState;
+        currentState.lastState = lastState;
         currentState.OnEnter();
+    }
+}
+
+public class PublicSM : EnemySubStateMachine
+{
+    public EnemyState voidState;
+
+    public PublicSM(Enemy enemy) : base(enemy)
+    {
+        voidState = new VoidState(enemy, this);
+        defaultState = voidState;
     }
 }

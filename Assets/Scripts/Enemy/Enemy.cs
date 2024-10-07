@@ -11,6 +11,9 @@ using UnityEngine.Events;
 /// </summary>
 public class Enemy : MonoBehaviour, IDamageable
 {
+    private Rigidbody2D rb;
+    private Animator anim;
+
     [Header("基本属性")]
     [Space(16)]
 
@@ -164,12 +167,16 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public EnemySubStateMachine currentSubSM;
     public EnemySubStateMachine defaultSubSM;
+    public EnemySubStateMachine publicSM;
 
     #region 生命周期
 
     private void Awake()
     {
-        //TODO: 初始化Buff血量
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        //TODO: 初始化Buff血量字典
         
         //子类记得在此处实例化子状态机
         //子类记得在此处设置默认状态机
@@ -178,7 +185,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         currentSubSM = defaultSubSM;
-        currentSubSM.OnEnter();
+        currentSubSM.OnEnter(false);
     }
 
     private void OnDisable()
@@ -206,11 +213,29 @@ public class Enemy : MonoBehaviour, IDamageable
 
     #region HFSM
 
-    public void ChangeSubSM(EnemySubStateMachine newSubSM)
+    /// <summary>
+    /// 切换子状态机
+    /// </summary>
+    /// <param name="newSubSM">新子状态机</param>
+    /// <param name="continueState">是否从切换前的状态开始？</param>
+    public void ChangeSubSM(EnemySubStateMachine newSubSM, bool continueState)
     {
+        EnemySubStateMachine lastSubSM = currentSubSM;
+        currentSubSM.whenExitState = currentSubSM.currentState;
         currentSubSM.OnExit();
         currentSubSM = newSubSM;
-        currentSubSM.OnEnter();
+        currentSubSM.lastSubSM = lastSubSM;
+        currentSubSM.OnEnter(continueState);
+    }
+
+    /// <summary>
+    /// 任何状态下都可以直接切换到公共状态
+    /// </summary>
+    /// <param name="state">新公共状态</param>
+    public void ChangeToPublicState(EnemyState state)
+    {
+        ChangeSubSM(publicSM, false);
+        currentSubSM.ChangeState(state);
     }
 
     #endregion
@@ -304,4 +329,9 @@ public class Enemy : MonoBehaviour, IDamageable
     public void RemoveTestBuff1() => RemoveBuff(BuffType.TestBuff);
 
     #endregion
+
+    public void Move(Vector2 direction)
+    {
+        rb.velocity = direction * FinalMoveSpeed;
+    }
 }
