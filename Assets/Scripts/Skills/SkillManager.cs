@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 
 public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 {
@@ -27,6 +28,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 
         skillDict = new Dictionary<int, LocalSkillData>();
         allSkillList.Sort();
+
     }
 
     private void OnEnable()
@@ -38,6 +40,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
     {
         (this as ISaveable).UnRegister();
     }
+
 
     public bool CanUnlock(int id)
     {
@@ -73,18 +76,21 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 
     public void UpgradeSkill(int id)
     {
-        if (ConsumeSkillPoint(allSkillList[id].skillPointCost) && CanUnlock(id))
+        if (skillPoint >= allSkillList[id].skillPointCost && CanUnlock(id))
         {
+            
             if (!skillDict.ContainsKey(id))
             {
                 skillDict.Add(id, new LocalSkillData(id));
                 skillDict[id].currentSkillLevel = 1;
                 UnlockAnimation(id);
+                ConsumeSkillPoint(allSkillList[id].skillPointCost);
             }
 
             else if (skillDict.ContainsKey(id) && skillDict[id].currentSkillLevel < allSkillList[id].maxSkillLevel)
             {
                 skillDict[id].currentSkillLevel++;
+                ConsumeSkillPoint(allSkillList[id].skillPointCost);
             }
 
             else if (skillDict.ContainsKey(id) && skillDict[id].currentSkillLevel == allSkillList[id].maxSkillLevel)
@@ -154,11 +160,11 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         {
             if (i != index)
             {
-                skillTreeList[i].GetChild(0).gameObject.SetActive(false);
+                skillTreeList[i].GetChild(1).gameObject.SetActive(false);
             }
             else
             {
-                skillTreeList[i].GetChild(0).gameObject.SetActive(true);
+                skillTreeList[i].GetChild(1).gameObject.SetActive(true);
             }
         }
         upgradeButton.gameObject.SetActive(true);
@@ -168,9 +174,14 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
     {
         currentSkillIndex = index;
 
-        skillTreeList[currentSkillIndex].GetChild(2).GetComponent<Image>().DOFillAmount(1, 0.75f);
+        skillTreeList[currentSkillIndex].GetChild(3).GetComponent<Image>().DOFillAmount(1, 0.75f);
+
+        skillTreeList[currentSkillIndex].GetChild(0).GetComponent<UILineRenderer>().color = new Color(1,1,1,1);
 
     }
+
+
+
 
     #endregion
 }
