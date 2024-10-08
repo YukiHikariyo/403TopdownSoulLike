@@ -24,6 +24,7 @@ public class AttackArea : MonoBehaviour
     [Tooltip("造成血量伤害")] public bool causeHealthDamage;
     [Tooltip("造成属性伤害")] public bool causeBuffDamage;
     [Tooltip("攻击者是否为弹幕")] public bool isBullet;
+    [Tooltip("是否无视可受击状态")] public bool ignoreDamageableIndex;
     [Space(16)]
     [Tooltip("动作值索引")] public int motionValueIndex;
     [Tooltip("攻击强度索引")] public int attackPowerIndex;
@@ -58,21 +59,21 @@ public class AttackArea : MonoBehaviour
         {
             case AttackerType.NoSource:
                 if (causeHealthDamage)
-                    damageable.TakeDamage(noSourceDamage, noSourcePenetratingPower);
+                    damageable.TakeDamage(noSourceDamage, noSourcePenetratingPower, ignoreDamageableIndex);
                 if (causeBuffDamage)
-                    damageable.TakeBuffDamage(buffType, noSourceBuffDamage);
+                    damageable.TakeBuffDamage(buffType, noSourceBuffDamage, ignoreDamageableIndex);
                 break;
             case AttackerType.Player:
                 if (causeHealthDamage)
-                    damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex], player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform);
+                    damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex], player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
                 if (causeBuffDamage)
-                    damageable.TakeBuffDamage(buffType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex]);
+                    damageable.TakeBuffDamage(buffType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
                 break;
             case AttackerType.Enemy:
                 if (causeHealthDamage)
-                    damageable.TakeDamage(enemy.FinalDamage * enemy.motionValue[motionValueIndex], enemy.FinalPenetratingPower, enemy.attackPower[attackPowerIndex], isBullet ? transform : enemy.transform);
+                    damageable.TakeDamage(enemy.FinalDamage * enemy.motionValue[motionValueIndex], enemy.FinalPenetratingPower, enemy.attackPower[attackPowerIndex], isBullet ? transform : enemy.transform, ignoreDamageableIndex);
                 if (causeBuffDamage)
-                    damageable.TakeBuffDamage(buffType, enemy.FinalBuffDamage * enemy.buffMotionValue[buffMotionValueIndex]);
+                    damageable.TakeBuffDamage(buffType, enemy.FinalBuffDamage * enemy.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
                 break;
             case AttackerType.Trap:
                 //TODO: 陷阱攻击

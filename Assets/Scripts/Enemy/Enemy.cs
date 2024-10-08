@@ -125,6 +125,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [Tooltip("动作值")] public float[] motionValue;
     [Tooltip("攻击强度")] public float[] attackPower;
     [Tooltip("Buff动作值")] public float[] buffMotionValue;
+    [Tooltip("可受击状态索引")] public int damageableIndex;    //0表示可受击，1表示无敌帧
 
     [Space(16)]
     [Header("Buff增量（可为负）")]
@@ -242,28 +243,36 @@ public class Enemy : MonoBehaviour, IDamageable
 
     #region IDamageable接口方法
 
-    public void TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform)
+    public void TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
     {
-        TakeDamage(damage, penetratingPower);
+        TakeDamage(damage, penetratingPower, ignoreDamageableIndex);
 
-        //TODO: 敌人受击硬直
+        if (damageableIndex == 0 || ignoreDamageableIndex)
+        {
+            //TODO: 敌人受击硬直
+
+        }
     }
 
-    public void TakeDamage(float damage, float penetratingPower)
+    public void TakeDamage(float damage, float penetratingPower, bool ignoreDamageableIndex = false)
     {
-        CurrentHealth -= (damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower));
+        if (damageableIndex == 0 || ignoreDamageableIndex)
+            CurrentHealth -= (damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower));
     }
 
-    public void TakeBuffDamage(BuffType buffType, float damage)
+    public void TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
         //以下为测试
         if (!currentBuffDict.ContainsKey(buffType))
         {
-            currentBuffHealth[buffType] += damage;
-            if (currentBuffHealth[buffType] > maxBuffHealth[buffType])
+            if (damageableIndex == 0 || ignoreDamageableIndex)
             {
-                currentBuffHealth[buffType] = maxBuffHealth[buffType];
-                GetBuff(buffType, 30);
+                currentBuffHealth[buffType] += damage;
+                if (currentBuffHealth[buffType] > maxBuffHealth[buffType])
+                {
+                    currentBuffHealth[buffType] = maxBuffHealth[buffType];
+                    GetBuff(buffType, 30);
+                }
             }
         }
     }

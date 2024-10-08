@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, IDamageable
     [Tooltip("动作值")] public float[] motionValue;
     [Tooltip("攻击强度")] public float[] attackPower;
     [Tooltip("Buff动作值")] public float[] buffMotionValue;
+    [Tooltip("可受击状态索引")] public int damageableIndex;    //0表示可受击，1表示无敌帧，2表示见切判定窗口
 
     [Space(16)]
     [Header("Buff方法相关")]
@@ -69,37 +70,44 @@ public class Player : MonoBehaviour, IDamageable
 
     #region IDamageable接口方法
 
-    public void TakeDamage(float damage, float penetratingPower,float attackPower, Transform attackerTransform)
+    public void TakeDamage(float damage, float penetratingPower,float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
     {
-        TakeDamage(damage, penetratingPower);
+        TakeDamage(damage, penetratingPower, ignoreDamageableIndex);
 
         //玩家受击硬直部分，数值待定
-        float stunValue = attackPower - playerData.FinalToughness;
-        if (stunValue <= 0)
-            noStunEvent?.Invoke(attackerTransform);
-        else if (stunValue > 0 && stunValue <= 10)
-            smallStunEvent?.Invoke(attackerTransform);
-        else if (stunValue > 10 && stunValue <= 20)
-            normalStunEvent?.Invoke(attackerTransform);
-        else
-            bigStunEvent?.Invoke(attackerTransform);
+        if (damageableIndex == 0 || ignoreDamageableIndex)
+        {
+            float stunValue = attackPower - playerData.FinalToughness;
+            if (stunValue <= 0)
+                noStunEvent?.Invoke(attackerTransform);
+            else if (stunValue > 0 && stunValue <= 10)
+                smallStunEvent?.Invoke(attackerTransform);
+            else if (stunValue > 10 && stunValue <= 20)
+                normalStunEvent?.Invoke(attackerTransform);
+            else
+                bigStunEvent?.Invoke(attackerTransform);
+        }
     }
 
-    public void TakeDamage(float damage, float penetratingPower)
+    public void TakeDamage(float damage, float penetratingPower, bool ignoreDamageableIndex = false)
     {
-        playerData.CurrentHealth -= (damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower));
+        if (damageableIndex == 0 || ignoreDamageableIndex)
+            playerData.CurrentHealth -= (damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower));
     }
 
-    public void TakeBuffDamage(BuffType buffType, float damage)
+    public void TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
         //以下为测试
         if (!currentBuffDict.ContainsKey(buffType))
         {
-            currentBuffHealth[buffType] += damage;
-            if (currentBuffHealth[buffType] > maxBuffHealth[buffType])
+            if (damageableIndex == 0 || ignoreDamageableIndex)
             {
-                currentBuffHealth[buffType] = maxBuffHealth[buffType];
-                GetBuff(buffType, 30);
+                currentBuffHealth[buffType] += damage;
+                if (currentBuffHealth[buffType] > maxBuffHealth[buffType])
+                {
+                    currentBuffHealth[buffType] = maxBuffHealth[buffType];
+                    GetBuff(buffType, 30);
+                }
             }
         }
     }

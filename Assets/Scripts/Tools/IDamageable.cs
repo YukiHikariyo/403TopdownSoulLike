@@ -14,21 +14,24 @@ public interface IDamageable
     /// <param name="penetratingPower">最终穿透力</param>
     /// <param name="attackPower">攻击强度</param>
     /// <param name="attackerTransform">攻击者的Transform</param>
-    void TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform);
+    /// <param name="ignoreDamageableIndex">是否无视可受伤状态</param>
+    void TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false);
 
     /// <summary>
     /// 受到无来源伤害
     /// </summary>
     /// <param name="damage">最终伤害</param>
     /// <param name="penetratingPower">最终穿透力</param>
-    void TakeDamage(float damage, float penetratingPower);
+    /// <param name="ignoreDamageableIndex">是否无视可受伤状态</param>
+    void TakeDamage(float damage, float penetratingPower, bool ignoreDamageableIndex = false);
 
     /// <summary>
     /// 受到累积性Buff伤害
     /// </summary>
     /// <param name="buffType">Buff种类</param>
     /// <param name="damage">Buff累积条伤害</param>
-    void TakeBuffDamage(BuffType buffType, float damage);
+    /// <param name="ignoreDamageableIndex">是否无视可受伤状态</param>
+    void TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false);
 
     /// <summary>
     /// 获得Buff
