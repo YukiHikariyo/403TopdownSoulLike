@@ -38,7 +38,7 @@ public class AttackArea : MonoBehaviour
     [Tooltip("判定间隔")] public float damageInterval = 1;
     private float timer;
 
-    private void Awake()
+    private void OnEnable()
     {
         timer = 0;
     }

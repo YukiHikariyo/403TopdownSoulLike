@@ -27,7 +27,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             basicMaxHealth = value;
             CurrentHealth = FinalMaxHealth * percent;
 
-            //TODO: 最大血量UI更新
+            UIManager.Instance.healthBar.OnMaxValueChange(FinalMaxHealth, 400);
         }
     }
 
@@ -54,8 +54,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set
         {
             currentHealth = Mathf.Clamp(value, 0, FinalMaxHealth);
-
-            //TODO: 当前血量UI更新
+            UIManager.Instance.healthBar.OnCurrentValueChange(currentHealth, FinalMaxHealth);
         }
     }
 
@@ -70,7 +69,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             basicMaxMana = value;
             CurrentMana = FinalMaxMana * percent;
 
-            //TODO: 最大魔力UI更新
+            UIManager.Instance.manaBar.OnMaxValueChange(FinalMaxMana, 400);
         }
     }
 
@@ -97,8 +96,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set
         {
             currentMana = Mathf.Clamp(value, 0, FinalMaxMana);
-
-            //TODO: 当前魔力UI更新
+            UIManager.Instance.manaBar.OnCurrentValueChange(currentMana, FinalMaxMana);
         }
     }
 
@@ -114,7 +112,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             basicMaxEnergy = value;
             CurrentEnergy = FinalMaxEnergy * percent;
 
-            //TODO: 最大体力UI更新
+            UIManager.Instance.energyBar.OnMaxValueChange(FinalMaxEnergy, 400);
         }
     }
 
@@ -141,8 +139,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set
         {
             currentEnergy = value < FinalMaxEnergy ? value : FinalMaxEnergy;
-
-            //TODO: 当前体力UI更新
+            UIManager.Instance.energyBar.OnCurrentValueChange(currentEnergy, FinalMaxEnergy);
         }
     }
 
@@ -398,7 +395,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             maxHealthIncrement = value;
             CurrentHealth = FinalMaxHealth * percent;
 
-            //TODO: 最大血量UI更新
+            UIManager.Instance.healthBar.OnMaxValueChange(FinalMaxHealth, 400);
         }
     }
 
@@ -411,7 +408,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             maxManaIncrement = value;
             CurrentMana = FinalMaxMana * percent;
 
-            //TODO: 最大魔力UI更新
+            UIManager.Instance.manaBar.OnMaxValueChange(FinalMaxMana, 400);
         }
     }
 
@@ -424,7 +421,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             maxEnergyIncrement = value;
             CurrentEnergy = FinalMaxEnergy * percent;
 
-            //TODO: 最大体力UI更新
+            UIManager.Instance.energyBar.OnMaxValueChange(FinalMaxEnergy, 400);
         }
     }
 
@@ -456,7 +453,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             maxHealthMultiplication = value;
             CurrentHealth = FinalMaxHealth * percent;
 
-            //TODO: 最大血量UI更新
+            UIManager.Instance.healthBar.OnMaxValueChange(FinalMaxHealth, 400);
         }
     }
 
@@ -469,7 +466,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             maxManaMultiplication = value;
             CurrentMana = FinalMaxMana * percent;
 
-            //TODO: 最大魔力UI更新
+            UIManager.Instance.manaBar.OnMaxValueChange(FinalMaxMana, 400);
         }
     }
 
@@ -482,7 +479,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             maxEnergyMultiplication = value;
             CurrentEnergy = FinalMaxEnergy * percent;
 
-            //TODO: 最大体力UI更新
+            UIManager.Instance.energyBar.OnMaxValueChange(FinalMaxEnergy, 400);
         }
     }
 
@@ -532,21 +529,18 @@ public class PlayerData : MonoBehaviour, ISaveable
     public void OnMaxHealthChange(float percent)
     {
         CurrentHealth = FinalMaxHealth * percent;
-
-        //TODO: 最大血量UI更新
+        UIManager.Instance.healthBar.OnMaxValueChange(FinalMaxHealth, 400);
     }
 
     public void OnMaxManaChange(float percent)
     {
         CurrentMana = FinalMaxMana * percent;
-
-        //TODO: 最大魔力UI更新
+        UIManager.Instance.manaBar.OnMaxValueChange(FinalMaxMana, 400);
     }
 
     public void OnMaxEnergyChange(float percent)
     {
         CurrentEnergy = FinalMaxEnergy * percent;
-
-        //TODO: 最大体力UI更新
+        UIManager.Instance.energyBar.OnMaxValueChange(FinalMaxEnergy, 400);
     }
 }

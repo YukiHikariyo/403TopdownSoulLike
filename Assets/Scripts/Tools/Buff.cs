@@ -44,11 +44,11 @@ public class TestBuff : BaseBuff
 
     public override void OnPlayerBuffStay()
     {
-        damageable.TakeDamage(1 * Time.deltaTime, 1000);
+        damageable.TakeDamage(10 * Time.deltaTime, 1000);
     }
 
     public override void OnEnemyBuffStay()
     {
-        damageable.TakeDamage(10 * Time.deltaTime, 1000);
+        damageable.TakeDamage(20 * Time.deltaTime, 1000);
     }
 }

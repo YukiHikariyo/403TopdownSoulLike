@@ -49,16 +49,16 @@ public class TestPassiveSkill : BasePassiveSkill
 
     public override void OnEnter()
     {
-        player.playerData.MaxHealthMultiplication = 2;
+        player.playerData.MaxHealthMultiplication += 2;
     }
 
     public override void OnExit()
     {
-        player.playerData.MaxHealthMultiplication = 1;
+        player.playerData.MaxHealthMultiplication -= 2;
     }
 
     public override void OnTrigger()
     {
-        player.playerData.CurrentHealth += 1;
+        player.playerData.CurrentHealth += 50;
     }
 }

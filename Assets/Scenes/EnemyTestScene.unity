@@ -223,7 +223,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -534,6 +534,7 @@ MonoBehaviour:
   motionValue: []
   attackPower: []
   buffMotionValue: []
+  damageableIndex: 0
   noStunEvent:
     m_PersistentCalls:
       m_Calls: []

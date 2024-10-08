@@ -17,6 +17,14 @@ public class UIManager : MonoSingleton<UIManager>
     public Sequence tipSequence;
 
     [Space(16)]
+    [Header("游戏界面UI")]
+    [Space(16)]
+
+    public PlayerBar healthBar;
+    public PlayerBar manaBar;
+    public PlayerBar energyBar;
+
+    [Space(16)]
     [Header("背包UI")]
     [Space(16)]
 
