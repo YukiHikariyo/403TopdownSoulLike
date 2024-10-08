@@ -7,7 +7,9 @@ using UnityEngine.UI.Extensions;
 
 public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 {
-    [Tooltip("¼¼ÄÜµã")]public int skillPoint;
+    public PlayerData playerData;
+
+    [Tooltip("æŠ€èƒ½ç‚¹")]public int skillPoint;
 
     public void GetSaveData(SaveData saveData)
     {
@@ -19,8 +21,8 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         throw new System.NotImplementedException();
     }
 
-    [Tooltip("ËùÓĞÌì¸³ÁĞ±í")] public List<StaticSkillData> allSkillList;
-    [Tooltip("ÒÑµãÁÁÌì¸³×Öµä")] public Dictionary<int, LocalSkillData> skillDict;
+    [Tooltip("æ‰€æœ‰å¤©èµ‹åˆ—è¡¨")] public List<StaticSkillData> allSkillList;
+    [Tooltip("å·²ç‚¹äº®å¤©èµ‹å­—å…¸")] public Dictionary<int, LocalSkillData> skillDict;
 
     protected override void Awake()
     {
@@ -77,32 +79,105 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
     public void UpgradeSkill(int id)
     {
         if (skillPoint >= allSkillList[id].skillPointCost && CanUnlock(id))
-        {
-            
+        { 
             if (!skillDict.ContainsKey(id))
             {
                 skillDict.Add(id, new LocalSkillData(id));
                 skillDict[id].currentSkillLevel = 1;
                 UnlockAnimation(id);
                 ConsumeSkillPoint(allSkillList[id].skillPointCost);
-            }
 
+                if (allSkillList[id].skillType == SkillType.Value)
+                {
+                    switch (allSkillList[id].skillValueType)
+                    {
+                        case ValueType.MaxHealth:
+                            playerData.BasicMaxHealth += allSkillList[id].skillValue[0];
+                            break;
+                        case ValueType.MaxMana:
+                            playerData.BasicMaxMana += allSkillList[id].skillValue[0];
+                            break;
+                        case ValueType.MaxEnergy:
+                            playerData.BasicMaxEnergy += allSkillList[id].skillValue[0];
+                            break;
+                        case ValueType.EnergyRecovery:
+                            playerData.TalentEnergyRecovery += allSkillList[id].skillValue[0];
+                            break;
+                        case ValueType.Damage:
+                            playerData.TalentDamage += allSkillList[id].skillValue[0];
+                            break;
+                        case ValueType.CritRate:
+                            playerData.TalentCritRate += allSkillList[id].skillValue[0];
+                            break;
+                        case ValueType.CritDamage:
+                            playerData.TalentCritDamage += allSkillList[id].skillValue[0];
+                            break;
+                        case ValueType.PenetratingPower:
+                            playerData.TalentPenetratingPower += allSkillList[id].skillValue[0];
+                            break;
+                        case ValueType.ReductionRate:
+                            playerData.TalentReducitonRate += allSkillList[id].skillValue[0];
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else if (allSkillList[id].skillType == SkillType.UnlockMagic)
+                {
+                    //TODO: è§£é”å¯¹åº”é­”æ³•
+                }
+                else
+                {
+                    playerData.player.GetPassiveSkill(allSkillList[id].passiveSkillType);   //è§£é”å¯¹åº”è¢«åŠ¨
+                }
+            }
             else if (skillDict.ContainsKey(id) && skillDict[id].currentSkillLevel < allSkillList[id].maxSkillLevel)
             {
-                skillDict[id].currentSkillLevel++;
+                int level = ++skillDict[id].currentSkillLevel;
                 ConsumeSkillPoint(allSkillList[id].skillPointCost);
-            }
 
+                switch (allSkillList[id].skillValueType)
+                {
+                    case ValueType.MaxHealth:
+                        playerData.BasicMaxHealth += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    case ValueType.MaxMana:
+                        playerData.BasicMaxMana += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    case ValueType.MaxEnergy:
+                        playerData.BasicMaxEnergy += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    case ValueType.EnergyRecovery:
+                        playerData.TalentEnergyRecovery += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    case ValueType.Damage:
+                        playerData.TalentDamage += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    case ValueType.CritRate:
+                        playerData.TalentCritRate += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    case ValueType.CritDamage:
+                        playerData.TalentCritDamage += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    case ValueType.PenetratingPower:
+                        playerData.TalentPenetratingPower += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    case ValueType.ReductionRate:
+                        playerData.TalentReducitonRate += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        break;
+                    default:
+                        break;
+                }
+            }
             else if (skillDict.ContainsKey(id) && skillDict[id].currentSkillLevel == allSkillList[id].maxSkillLevel)
             {
-                UIManager.Instance.PlayTipSequence("¼¼ÄÜµÈ¼¶µ½´ïÉÏÏŞ");
+                UIManager.Instance.PlayTipSequence("æŠ€èƒ½ç­‰çº§åˆ°è¾¾ä¸Šé™");
             }
         }
         else
         {
-            UIManager.Instance.PlayTipSequence("ÎŞ·¨Éı¼¶");
+            UIManager.Instance.PlayTipSequence("æ— æ³•å‡çº§");
         }
-
     }
 
     public bool ConsumeSkillPoint(int number)
@@ -114,12 +189,12 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         }
         else
         {
-            UIManager.Instance.PlayTipSequence("¼¼ÄÜµã²»×ã");
+            UIManager.Instance.PlayTipSequence("æŠ€èƒ½ç‚¹ä¸è¶³");
             return false;
         }
     }
 
-    #region UI²¿·Ö
+    #region UIéƒ¨åˆ†
     public StaticSkillData activeSkill;
     public int currentSkillIndex;
 

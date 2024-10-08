@@ -2108,6 +2108,7 @@ Transform:
   - {fileID: 1686171218}
   - {fileID: 2044287019}
   - {fileID: 897842291}
+  - {fileID: 1261211520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &260011075
@@ -8359,6 +8360,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257159494}
   m_CullTransparentMesh: 1
+--- !u!1 &1261211519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1261211520}
+  - component: {fileID: 1261211521}
+  m_Layer: 0
+  m_Name: SkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1261211520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261211519}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1080.2802, y: 844.00226, z: 1.1731243}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 260011074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1261211521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261211519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ba6fad6388d9644a487ad7a0de4e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillPoint: 0
+  allSkillList:
+  - {fileID: 11400000, guid: 44ab77a074631544cb0247e9cec75531, type: 2}
+  - {fileID: 11400000, guid: 989ed95f7533fde41b692984647468b0, type: 2}
+  - {fileID: 11400000, guid: d4c63df51589a714db52662de0420826, type: 2}
+  activeSkill: {fileID: 0}
+  currentSkillIndex: 0
+  skillImage: {fileID: 0}
+  skillLv: {fileID: 0}
+  skillDes: {fileID: 0}
+  skillName: {fileID: 0}
+  skillNum: {fileID: 0}
+  upgradeButton: {fileID: 0}
+  skillTreeList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1265526467
 GameObject:
   m_ObjectHideFlags: 0

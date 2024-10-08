@@ -501,6 +501,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     private void Awake()
     {
         PackageManager.Instance.playerData = this;
+        SkillManager.Instance.playerData = this;
         player = GetComponent<Player>();
     }
 

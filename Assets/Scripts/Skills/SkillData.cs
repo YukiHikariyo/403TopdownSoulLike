@@ -5,27 +5,28 @@ using UnityEngine;
 
 public class StaticSkillData : ScriptableObject, IComparable<StaticSkillData>
 {
-    //¿ÉÄÜÐèÒªÏÔÊ¾ÔÚUIÉÏµÄÊý¾Ý
+    //å¯èƒ½éœ€è¦æ˜¾ç¤ºåœ¨UIä¸Šçš„æ•°æ®
     
-    [Tooltip("×î´óµÈ¼¶")] public int maxSkillLevel;
-    [Tooltip("ÐèÇó¼¼ÄÜµã")] public int skillPointCost;//ÐèÇó¼¼ÄÜµã
-    [Tooltip("½ÚµãÌùÍ¼")] public Sprite skillSpite;
-    [Tooltip("Ìì¸³Ãû³Æ")]  public string skillName;
+    [Tooltip("æœ€å¤§ç­‰çº§")] public int maxSkillLevel;
+    [Tooltip("éœ€æ±‚æŠ€èƒ½ç‚¹")] public int skillPointCost;//éœ€æ±‚æŠ€èƒ½ç‚¹
+    [Tooltip("èŠ‚ç‚¹è´´å›¾")] public Sprite skillSpite;
+    [Tooltip("å¤©èµ‹åç§°")]  public string skillName;
 
-    //ÄÚ²¿Êý¾Ý
-    [Tooltip("ID")] public int skillTreeID;//½ÚµãID
-    [Tooltip("Ìì¸³ÀàÐÍ")] public SkillType skillType;//½ÚµãÌì¸³ÀàÐÍ
-    [Tooltip("ÊýÖµÀàÐÍ")] public ValueType skillValueType;//½ÚµãÊýÖµÀàÐÍ
-    [Tooltip("¸Ä±äÊýÖµ´óÐ¡")] public float[] skillValue;//½ÚµãÊýÖµ£¨·ÖµÈ¼¶£©
-    [Tooltip("½âËø¼¼ÄÜID")] public int skillID;//½âËøÄ§·¨ID
+    //å†…éƒ¨æ•°æ®
+    [Tooltip("ID")] public int skillTreeID;//èŠ‚ç‚¹ID
+    [Tooltip("å¤©èµ‹ç±»åž‹")] public SkillType skillType;//èŠ‚ç‚¹å¤©èµ‹ç±»åž‹
+    [Tooltip("æ•°å€¼ç±»åž‹")] public ValueType skillValueType;//èŠ‚ç‚¹æ•°å€¼ç±»åž‹
+    [Tooltip("æ”¹å˜æ•°å€¼å¤§å°")] public float[] skillValue;//èŠ‚ç‚¹æ•°å€¼ï¼ˆåˆ†ç­‰çº§ï¼‰
+    [Tooltip("è§£é”é­”æ³•ID")] public int magicID;//è§£é”é­”æ³•ID
+    [Tooltip("è§£é”è¢«åŠ¨æŠ€èƒ½")] public PassiveSkillType passiveSkillType;//è§£é”è¢«åŠ¨ID
 
 
-    //¼¼ÄÜÃèÊö
+    //æŠ€èƒ½æè¿°
     [TextArea(1,8)]
-    public string skillDescription;//¹Ì¶¨µÄÎÄ×ÖÃèÊö    
+    public string skillDescription;//å›ºå®šçš„æ–‡å­—æè¿°    
 
-    //¼¼ÄÜÇ°ÖÃ
-    [Tooltip("Ç°ÖÃÌì¸³ID")] public int[] preIDs;
+    //æŠ€èƒ½å‰ç½®
+    [Tooltip("å‰ç½®å¤©èµ‹ID")] public int[] preIDs;
 
     public int CompareTo(StaticSkillData other) => skillTreeID - other.skillTreeID;
 }
@@ -43,9 +44,9 @@ public class LocalSkillData
 }
 public enum SkillType
 {
-    Value,Unlock
+    Value, UnlockMagic, UnlockPassiveSkill
 }
 public enum ValueType
 {
-    MaxHealth, MaxMana, MaxEnergy,Damage,CritRate,CritDamage,ReductionRate,DamageRate
+    MaxHealth, MaxMana, MaxEnergy, EnergyRecovery, Damage, CritRate, CritDamage, PenetratingPower, ReductionRate
 }
