@@ -243,7 +243,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     #region IDamageable接口方法
 
-    public void TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
+    public bool TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
     {
         TakeDamage(damage, penetratingPower, ignoreDamageableIndex);
 
@@ -251,16 +251,24 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             //TODO: 敌人受击硬直
 
+            return true;
         }
+
+        return false;
     }
 
-    public void TakeDamage(float damage, float penetratingPower, bool ignoreDamageableIndex = false)
+    public bool TakeDamage(float damage, float penetratingPower, bool ignoreDamageableIndex = false)
     {
         if (damageableIndex == 0 || ignoreDamageableIndex)
+        {
             CurrentHealth -= (damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower));
+            return true;
+        }
+
+        return false;
     }
 
-    public void TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
+    public bool TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
         //以下为测试
         if (!currentBuffDict.ContainsKey(buffType))
@@ -272,9 +280,13 @@ public class Enemy : MonoBehaviour, IDamageable
                 {
                     currentBuffHealth[buffType] = maxBuffHealth[buffType];
                     GetBuff(buffType, 30);
+
+                    return true;
                 }
             }
         }
+
+        return false;
     }
 
     public void GetBuff(BuffType buffType, float duration)

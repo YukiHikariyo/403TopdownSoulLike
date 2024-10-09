@@ -42,6 +42,7 @@ public class Player : MonoBehaviour, IDamageable
     [Tooltip("受击小硬直")] public UnityEvent<Transform> smallStunEvent;
     [Tooltip("受击中硬直")] public UnityEvent<Transform> normalStunEvent;
     [Tooltip("受击大硬直")] public UnityEvent<Transform> bigStunEvent;
+    [Tooltip("见切成功")] public UnityEvent foresightEvent;
 
     [Space(16)]
     [Header("被动技能")]
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour, IDamageable
 
     #region IDamageable接口方法
 
-    public void TakeDamage(float damage, float penetratingPower,float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
+    public bool TakeDamage(float damage, float penetratingPower,float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
     {
         TakeDamage(damage, penetratingPower, ignoreDamageableIndex);
 
@@ -86,16 +87,30 @@ public class Player : MonoBehaviour, IDamageable
                 normalStunEvent?.Invoke(attackerTransform);
             else
                 bigStunEvent?.Invoke(attackerTransform);
+
+            return true;
         }
+        else if (damageableIndex == 2)
+        {
+            foresightEvent?.Invoke();
+            return false;
+        }
+
+        return false;
     }
 
-    public void TakeDamage(float damage, float penetratingPower, bool ignoreDamageableIndex = false)
+    public bool TakeDamage(float damage, float penetratingPower, bool ignoreDamageableIndex = false)
     {
         if (damageableIndex == 0 || ignoreDamageableIndex)
+        {
             playerData.CurrentHealth -= (damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower));
+            return true;
+        }
+
+        return false;
     }
 
-    public void TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
+    public bool TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
         //以下为测试
         if (!currentBuffDict.ContainsKey(buffType))
@@ -108,8 +123,12 @@ public class Player : MonoBehaviour, IDamageable
                     currentBuffHealth[buffType] = maxBuffHealth[buffType];
                     GetBuff(buffType, 30);
                 }
+
+                return true;
             }
         }
+
+        return false;
     }
 
     public void GetBuff(BuffType buffType, float duration)

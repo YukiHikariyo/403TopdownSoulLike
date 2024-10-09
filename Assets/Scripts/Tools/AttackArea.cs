@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 攻击范围类
@@ -21,7 +22,6 @@ public class AttackArea : MonoBehaviour
     public Player player;
     public Enemy enemy;
     [Space(16)]
-    [Tooltip("造成血量伤害")] public bool causeHealthDamage;
     [Tooltip("造成属性伤害")] public bool causeBuffDamage;
     [Tooltip("攻击者是否为弹幕")] public bool isBullet;
     [Tooltip("是否无视可受击状态")] public bool ignoreDamageableIndex;
@@ -37,6 +37,8 @@ public class AttackArea : MonoBehaviour
     [Space(16)]
     [Tooltip("判定间隔")] public float damageInterval = 1;
     private float timer;
+    [Space(16)]
+    [Tooltip("成功造成伤害后触发的事件")] public UnityEvent<IDamageable> successEvent;
 
     private void OnEnable()
     {
@@ -51,37 +53,42 @@ public class AttackArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable damageable = collision.GetComponent<IDamageable>();
-        if (damageable == null || timer > 0)
-            return;
-
-        switch (attackerType)
+        if (timer <= 0 && collision.TryGetComponent<IDamageable>(out IDamageable component))
         {
-            case AttackerType.NoSource:
-                if (causeHealthDamage)
-                    damageable.TakeDamage(noSourceDamage, noSourcePenetratingPower, ignoreDamageableIndex);
-                if (causeBuffDamage)
-                    damageable.TakeBuffDamage(buffType, noSourceBuffDamage, ignoreDamageableIndex);
-                break;
-            case AttackerType.Player:
-                if (causeHealthDamage)
-                    damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex], player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
-                if (causeBuffDamage)
-                    damageable.TakeBuffDamage(buffType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
-                break;
-            case AttackerType.Enemy:
-                if (causeHealthDamage)
-                    damageable.TakeDamage(enemy.FinalDamage * enemy.motionValue[motionValueIndex], enemy.FinalPenetratingPower, enemy.attackPower[attackPowerIndex], isBullet ? transform : enemy.transform, ignoreDamageableIndex);
-                if (causeBuffDamage)
-                    damageable.TakeBuffDamage(buffType, enemy.FinalBuffDamage * enemy.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
-                break;
-            case AttackerType.Trap:
-                //TODO: 陷阱攻击
-                break;
-            default:
-                break;
-        }
+            IDamageable damageable = component;
+            bool isSuccessful = false;
 
-        timer = damageInterval;
+            switch (attackerType)
+            {
+                case AttackerType.NoSource:
+                    isSuccessful = damageable.TakeDamage(noSourceDamage, noSourcePenetratingPower, ignoreDamageableIndex);
+                    if (causeBuffDamage)
+                        damageable.TakeBuffDamage(buffType, noSourceBuffDamage, ignoreDamageableIndex);
+                    if (isSuccessful)
+                        successEvent?.Invoke(damageable);
+                    break;
+                case AttackerType.Player:
+                    isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex], player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                    if (causeBuffDamage)
+                        damageable.TakeBuffDamage(buffType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
+                    if (isSuccessful)
+                        successEvent?.Invoke(damageable);
+                    break;
+                case AttackerType.Enemy:
+                    isSuccessful = damageable.TakeDamage(enemy.FinalDamage * enemy.motionValue[motionValueIndex], enemy.FinalPenetratingPower, enemy.attackPower[attackPowerIndex], isBullet ? transform : enemy.transform, ignoreDamageableIndex);
+                    if (causeBuffDamage)
+                        damageable.TakeBuffDamage(buffType, enemy.FinalBuffDamage * enemy.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
+                    if (isSuccessful)
+                        successEvent?.Invoke(damageable);
+                    break;
+                case AttackerType.Trap:
+                    //TODO: 陷阱攻击
+                    break;
+                default:
+                    break;
+            }
+
+            timer = damageInterval;
+        }
     }
 }
