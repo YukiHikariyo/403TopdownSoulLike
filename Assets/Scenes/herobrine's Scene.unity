@@ -2396,11 +2396,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1dd0d492991bae74189883ee8a0bd2b3, type: 2}
   - {fileID: 11400000, guid: 03ef76a2dd9b59641a1af355c9106075, type: 2}
   - {fileID: 11400000, guid: 495803d38fd1c224b8a6c1547f8962ec, type: 2}
+  - {fileID: 11400000, guid: c1aef5595eb49a145bb4c62de528cd59, type: 2}
+  - {fileID: 11400000, guid: 02d3ff418d0d2944884af0396e313a1b, type: 2}
   mouseDistance: {x: 0, y: 0, z: 0}
   playerInput: {fileID: 1494598971}
   playerController: {fileID: 1494598972}
   playerAnimator: {fileID: 1494598974}
   playerRenderer: {fileID: 913952620}
+  player: {fileID: 0}
   LightAtk_1: {fileID: 558400915}
   LightAtk_2: {fileID: 1361083973}
   LightAtk_3: {fileID: 717224651}
