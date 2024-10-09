@@ -4,18 +4,21 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/PlayerState/BackAttack", fileName = "PlayerState_BackAttack")]
 public class PlayerState_BackAttack : PlayerState
 {
+    bool foresight = false;
     public override void Enter()
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
         playerAnimator.Play("BackAttack");
-        
+        foresight = false;
+        backAttackArea.successEvent.AddListener(foresightCheck);
     }
 
     public override void Exit()
     {
         base.Exit();
+        backAttackArea.successEvent.RemoveListener(foresightCheck);
     }
 
     public override void LogicUpdate()
@@ -55,7 +58,10 @@ public class PlayerState_BackAttack : PlayerState
             }
         }
     }
-
+    private void foresightCheck(IDamageable damageable)
+    {
+        foresight = true;
+    }
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();

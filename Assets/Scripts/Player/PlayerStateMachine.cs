@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -27,15 +28,21 @@ public class PlayerStateMachine : StateMachine
     public GameObject LightAtk_2;
     public GameObject LightAtk_3;
     public GameObject LightAtk_4;
+    public GameObject BackAttack;
     #endregion
-
+    #region 事件声明
+    [Tooltip("蓄力0段")] public UnityEvent ChargeState_0;
+    [Tooltip("蓄力1段")] public UnityEvent ChargeState_1;
+    [Tooltip("蓄力2段")] public UnityEvent ChargeState_2;
+    [Tooltip("蓄力3段")] public UnityEvent ChargeState_3;
+    #endregion
     #region 接受输入窗口
-    public bool CanAcceptInput { get; set; }
+    [Tooltip("是否接收输入")]public bool CanAcceptInput { get; set; }
     #endregion
 
     #region 预输入和后摇开始时刻
     public InputMemory memory;
-    public bool CanStateSwitch {  get; set; }
+    [Tooltip("是否允许状态切换")]public bool CanStateSwitch {  get; set; }
     #endregion
     public float MouseDegree => mousedegree;
     public Vector3 MouseDistance => mouseDistance;
@@ -53,7 +60,7 @@ public class PlayerStateMachine : StateMachine
         playerTransform = transform;
         foreach (PlayerState playerState in stateTable)
         {
-            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4);
+            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4,BackAttack);
             dict.Add(playerState.GetType(), playerState);
         }
     }

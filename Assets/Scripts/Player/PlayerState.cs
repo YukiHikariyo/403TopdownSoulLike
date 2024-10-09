@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -13,11 +14,13 @@ public class PlayerState : ScriptableObject, IState
     protected Animator playerAnimator;
     protected SpriteRenderer playerRenderer;
     protected Player player;
+    protected AttackArea backAttackArea;
 
     protected GameObject lightAtk_1;
     protected GameObject lightAtk_2;
     protected GameObject lightAtk_3;
     protected GameObject lightAtk_4;
+    protected GameObject BackAttack;
     #endregion
 
     #region 通用变量
@@ -32,16 +35,21 @@ public class PlayerState : ScriptableObject, IState
     protected Vector2 FaceDir;
     #endregion
 
-    public void Initialization(PlayerInput playerInput,
+    public void Initialization
+        (//常规组件
+        PlayerInput playerInput,
         PlayerStateMachine playerStateMachine,
         PlayerController playerController,
         Animator playerAnimator,
         SpriteRenderer playerRenderer,
         Player player,
+        //攻击Trigger
         GameObject lightAtk_1,
         GameObject lightAtk_2,
         GameObject lightAtk_3,
-        GameObject lightAtk_4)
+        GameObject lightAtk_4,
+        GameObject BackAttack
+        )
     {
         this.playerInput = playerInput;
         this.playerStateMachine = playerStateMachine;
@@ -53,6 +61,8 @@ public class PlayerState : ScriptableObject, IState
         this.lightAtk_2 = lightAtk_2;
         this.lightAtk_3 = lightAtk_3;
         this.lightAtk_4 = lightAtk_4;
+        this.BackAttack = BackAttack;
+        backAttackArea = this.BackAttack.GetComponent<AttackArea>();
     }
     public virtual void Enter()
     {
