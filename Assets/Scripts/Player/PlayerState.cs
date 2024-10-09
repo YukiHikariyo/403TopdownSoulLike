@@ -12,6 +12,7 @@ public class PlayerState : ScriptableObject, IState
     protected PlayerController playerController;
     protected Animator playerAnimator;
     protected SpriteRenderer playerRenderer;
+    protected Player player;
 
     protected GameObject lightAtk_1;
     protected GameObject lightAtk_2;
@@ -36,6 +37,7 @@ public class PlayerState : ScriptableObject, IState
         PlayerController playerController,
         Animator playerAnimator,
         SpriteRenderer playerRenderer,
+        Player player,
         GameObject lightAtk_1,
         GameObject lightAtk_2,
         GameObject lightAtk_3,
@@ -46,6 +48,7 @@ public class PlayerState : ScriptableObject, IState
         this.playerController = playerController;
         this.playerAnimator = playerAnimator;
         this.playerRenderer = playerRenderer;
+        this.player = player;
         this.lightAtk_1 = lightAtk_1;
         this.lightAtk_2 = lightAtk_2;
         this.lightAtk_3 = lightAtk_3;

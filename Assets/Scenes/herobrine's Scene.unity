@@ -1985,6 +1985,9 @@ MonoBehaviour:
   L3AtkSpeed: 8
   L4AtkSpeed: 20
   LightAtkRotateAngle: 60
+  UnDamageableLeftTime: 0
+  PerfectCheckTime: 0
+  catchChanceSpeed: 0
   fastRollCruve:
     serializedVersion: 2
     m_Curve:
@@ -2085,8 +2088,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.6383845
-      value: 0.010146782
+      time: 0.6427189
+      value: 0.00307131
       inSlope: -0.011738201
       outSlope: -0.011738201
       tangentMode: 0
@@ -2096,8 +2099,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1.0026855
       value: 0.00957489
-      inSlope: -0.0015698327
-      outSlope: -0.0015698327
+      inSlope: 0.018067176
+      outSlope: 0.018067176
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -2360,6 +2363,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CatchChanceCruve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

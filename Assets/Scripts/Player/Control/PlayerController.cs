@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float L4AtkSpeed;
     [SerializeField] public float LightAtkRotateAngle;
     [Header("见切相关属性")]
-    //无敌帧持续时间
+    //无敌帧持续基础时间
     [SerializeField] public float UnDamageableLeftTime;
-    //完美见切判定时间
+    //完美见切判定基础时间
     [SerializeField] public float PerfectCheckTime;
     //见切移动速度
     [SerializeField] private float catchChanceSpeed;
@@ -189,10 +189,10 @@ public class PlayerController : MonoBehaviour
             break;  
         }
     }
-    public enum Skill_Physics
-    {
-        CatchChance,
-        BackAttack,
-        RightAttack,
-    }
+}
+public enum Skill_Physics
+{
+    CatchChance,
+    BackAttack,
+    RightAttack,
 }
