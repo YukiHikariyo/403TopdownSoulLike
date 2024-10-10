@@ -27,7 +27,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             basicMaxHealth = value;
             CurrentHealth = FinalMaxHealth * percent;
 
-            UIManager.Instance.healthBar.OnMaxValueChange(FinalMaxHealth, 400);
+            UIManager.Instance.healthBar.OnMaxValueChange(FinalMaxHealth, 500);
         }
     }
 
@@ -42,7 +42,7 @@ public class PlayerData : MonoBehaviour, ISaveable
                 if (currentAccessoryLocalData.ContainsKey(i))
                     finalMaxHealth += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].maxHealth;
             }
-            return (finalMaxHealth > 0 ? finalMaxHealth : 0) * maxHealthMultiplication;
+            return Mathf.Clamp(finalMaxHealth * maxHealthMultiplication, 0, 500);
         }
     }
 
@@ -69,7 +69,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             basicMaxMana = value;
             CurrentMana = FinalMaxMana * percent;
 
-            UIManager.Instance.manaBar.OnMaxValueChange(FinalMaxMana, 400);
+            UIManager.Instance.manaBar.OnMaxValueChange(FinalMaxMana, 250);
         }
     }
 
@@ -84,7 +84,7 @@ public class PlayerData : MonoBehaviour, ISaveable
                 if (currentAccessoryLocalData.ContainsKey(i))
                     finalMaxMana += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].maxMana;
             }
-            return (finalMaxMana > 0 ? finalMaxMana : 0) * maxManaMultiplication;
+            return Mathf.Clamp(finalMaxMana * maxManaMultiplication, 0, 250);
         }
     }
 
@@ -112,7 +112,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             basicMaxEnergy = value;
             CurrentEnergy = FinalMaxEnergy * percent;
 
-            UIManager.Instance.energyBar.OnMaxValueChange(FinalMaxEnergy, 400);
+            UIManager.Instance.energyBar.OnMaxValueChange(FinalMaxEnergy, 300);
         }
     }
 
@@ -127,7 +127,7 @@ public class PlayerData : MonoBehaviour, ISaveable
                 if (currentAccessoryLocalData.ContainsKey(i))
                     finalMaxEnergy += currentAccessoryStaticData[i].accessoryStats[currentAccessoryLocalData[i].level - 1].maxEnergy;
             }
-            return (finalMaxEnergy > 0 ? finalMaxEnergy : 0) * maxEnergyMultiplication;
+            return Mathf.Clamp(finalMaxEnergy * maxEnergyMultiplication, 0, 300);
         }
     }
 

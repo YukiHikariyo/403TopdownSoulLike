@@ -43,6 +43,7 @@ public class Player : MonoBehaviour, IDamageable
     [Tooltip("受击中硬直")] public UnityEvent<Transform> normalStunEvent;
     [Tooltip("受击大硬直")] public UnityEvent<Transform> bigStunEvent;
     [Tooltip("见切成功")] public UnityEvent foresightEvent;
+    [Tooltip("玩家死亡")] public UnityEvent deathEvent;
 
     [Space(16)]
     [Header("被动技能")]
@@ -73,11 +74,16 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool TakeDamage(float damage, float penetratingPower,float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
     {
-        TakeDamage(damage, penetratingPower, ignoreDamageableIndex);
-
         //玩家受击硬直部分，数值待定
         if (damageableIndex == 0 || ignoreDamageableIndex)
         {
+            playerData.CurrentHealth -= Mathf.Ceil((damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
+            if (playerData.CurrentHealth <= 0)
+            {
+                deathEvent?.Invoke();
+                return true;
+            }
+
             float stunValue = attackPower - playerData.FinalToughness;
             if (stunValue <= 0)
                 noStunEvent?.Invoke(attackerTransform);
@@ -103,7 +109,9 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (damageableIndex == 0 || ignoreDamageableIndex)
         {
-            playerData.CurrentHealth -= (damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower));
+            playerData.CurrentHealth -= Mathf.Ceil((damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
+            if (playerData.CurrentHealth <= 0)
+                deathEvent?.Invoke();
             return true;
         }
 
@@ -154,14 +162,14 @@ public class Player : MonoBehaviour, IDamageable
                     if (currentBuffDict.ContainsKey(buffType))
                     {
                         currentBuffDict[buffType].OnBuffEnter();
-                        buffAction += currentBuffDict[buffType].OnPlayerBuffStay;
+                        buffAction += currentBuffDict[buffType].OnBuffStay;
                     }
 
                     await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: ctk);
 
                     if (currentBuffDict.ContainsKey(buffType))
                     {
-                        buffAction -= currentBuffDict[buffType].OnPlayerBuffStay;
+                        buffAction -= currentBuffDict[buffType].OnBuffStay;
                         currentBuffDict[buffType].OnBuffExit();
                         currentBuffDict.Remove(buffType);
                     }
@@ -179,7 +187,7 @@ public class Player : MonoBehaviour, IDamageable
             if (buffCTK.ContainsKey(buffType))
                 buffCTK[buffType].Cancel();
 
-            buffAction -= currentBuffDict[buffType].OnPlayerBuffStay;
+            buffAction -= currentBuffDict[buffType].OnBuffStay;
             currentBuffDict[buffType].OnBuffExit();
             currentBuffDict.Remove(buffType);
         }

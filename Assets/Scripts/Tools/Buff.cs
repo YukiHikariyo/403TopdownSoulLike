@@ -20,12 +20,13 @@ public abstract class BaseBuff
 
     public abstract void OnBuffEnter();
     public abstract void OnBuffExit();
-    public abstract void OnPlayerBuffStay();
-    public abstract void OnEnemyBuffStay();
+    public abstract void OnBuffStay();
 }
 
 public class TestBuff : BaseBuff
 {
+    float timer = 0;
+
     public TestBuff(float duration, IDamageable damageable) : base(duration, damageable) { }
 
     public override void OnBuffEnter()
@@ -42,13 +43,14 @@ public class TestBuff : BaseBuff
             (damageable as Player).playerData.MaxHealthIncrement += 50;
     }
 
-    public override void OnPlayerBuffStay()
+    public override void OnBuffStay()
     {
-        damageable.TakeDamage(10 * Time.deltaTime, 1000);
-    }
-
-    public override void OnEnemyBuffStay()
-    {
-        damageable.TakeDamage(20 * Time.deltaTime, 1000);
+        if (timer > 0)
+            timer -= Time.deltaTime;
+        else
+        {
+            damageable.TakeDamage(10, 1000);
+            timer = 1;
+        }
     }
 }

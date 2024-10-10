@@ -245,10 +245,15 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public bool TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
     {
-        TakeDamage(damage, penetratingPower, ignoreDamageableIndex);
-
         if (damageableIndex == 0 || ignoreDamageableIndex)
         {
+            CurrentHealth -= Mathf.Ceil((damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
+            if (CurrentHealth < 0)
+            {
+                //TODO: 敌人死亡事件
+                return true;
+            }
+
             //TODO: 敌人受击硬直
 
             return true;
@@ -261,7 +266,11 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (damageableIndex == 0 || ignoreDamageableIndex)
         {
-            CurrentHealth -= (damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower));
+            CurrentHealth -= Mathf.Ceil((damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
+            if (CurrentHealth < 0)
+            {
+                //TODO: 敌人死亡事件
+            }
             return true;
         }
 
@@ -312,14 +321,14 @@ public class Enemy : MonoBehaviour, IDamageable
                     if (currentBuffDict.ContainsKey(buffType))
                     {
                         currentBuffDict[buffType].OnBuffEnter();
-                        buffAction += currentBuffDict[buffType].OnEnemyBuffStay;
+                        buffAction += currentBuffDict[buffType].OnBuffStay;
                     }
 
                     await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: ctk);
 
                     if (currentBuffDict.ContainsKey(buffType))
                     {
-                        buffAction -= currentBuffDict[buffType].OnEnemyBuffStay;
+                        buffAction -= currentBuffDict[buffType].OnBuffStay;
                         currentBuffDict[buffType].OnBuffExit();
                         currentBuffDict.Remove(buffType);
                     }
@@ -337,7 +346,7 @@ public class Enemy : MonoBehaviour, IDamageable
             if (buffCTK.ContainsKey(buffType))
                 buffCTK[buffType].Cancel();
 
-            buffAction -= currentBuffDict[buffType].OnEnemyBuffStay;
+            buffAction -= currentBuffDict[buffType].OnBuffStay;
             currentBuffDict[buffType].OnBuffExit();
             currentBuffDict.Remove(buffType);
         }

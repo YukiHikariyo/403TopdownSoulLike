@@ -406,10 +406,10 @@ MonoBehaviour:
   player: {fileID: 0}
   basicMaxHealth: 100
   currentHealth: 100
-  basicMaxMana: 100
-  currentMana: 100
-  basicMaxEnergy: 100
-  currentEnergy: 100
+  basicMaxMana: 50
+  currentMana: 50
+  basicMaxEnergy: 75
+  currentEnergy: 75
   basicEnergyRecovery: 0
   basicDamage: 0
   basicCritRate: 0
@@ -437,6 +437,7 @@ MonoBehaviour:
   reductionRateIncrement: 0
   vulnerabilityIncrement: 0
   toughnessIncrement: 0
+  foresightTimeIncrement: 0
   maxHealthMultiplication: 1
   maxManaMultiplication: 1
   maxEnergyMultiplication: 1
@@ -450,6 +451,7 @@ MonoBehaviour:
   reductionRateMultiplication: 1
   vulnerabilityMultiplication: 1
   toughnessMultiplication: 1
+  chargeSpeedMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
 --- !u!212 &2025775074
 SpriteRenderer:
@@ -545,6 +547,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   bigStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  foresightEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1660057539 &9223372036854775807
