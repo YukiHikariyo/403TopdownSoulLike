@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("基本属性")]
     [Space(16)]
+
+    public bool isBoss;
 
     [Tooltip("最大血量")][SerializeField] private float maxHealth;
     [Tooltip("最大血量")]
@@ -163,9 +166,16 @@ public class Enemy : MonoBehaviour, IDamageable
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
 
     [Space(16)]
+    [Header("受击事件")]
+    [Space(16)]
+
+    [Tooltip("是否霸体")] public bool isEnduance;
+
+    [Space(16)]
     [Header("HFSM")]
     [Space(16)]
 
+    [Tooltip("能否行动")] public bool canTakeAction = true;
     public EnemySubStateMachine currentSubSM;
     public EnemySubStateMachine defaultSubSM;
     public EnemySubStateMachine publicSM;

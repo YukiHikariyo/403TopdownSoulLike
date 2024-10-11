@@ -385,7 +385,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("伤害减免增量")] public float reductionRateIncrement;
     [Tooltip("易伤增量")] public float vulnerabilityIncrement;
     [Tooltip("韧性增量")] public float toughnessIncrement;
-
+    [Tooltip("光照半径增量")] public float lightRadiusIncrement;
     [Tooltip("见切时间增量")] public float foresightTimeIncrement;
 
     public float MaxHealthIncrement
@@ -445,7 +445,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("伤害减免倍率")] public float reductionRateMultiplication = 1;
     [Tooltip("易伤倍率")] public float vulnerabilityMultiplication = 1;
     [Tooltip("韧性倍率")] public float toughnessMultiplication = 1;
-
+    [Tooltip("光照半径倍率")] public float lightRadiusMultiplication = 1;
     [Tooltip("蓄力速度倍率")] public float chargeSpeedMultiplication = 1;
 
     public float MaxHealthMultiplication

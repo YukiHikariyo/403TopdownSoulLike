@@ -38,6 +38,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header("受击事件")]
     [Space(16)]
 
+    [Tooltip("是否霸体")] public bool isEnduance;
     [Tooltip("受击无硬直")] public UnityEvent<Transform> noStunEvent;
     [Tooltip("受击小硬直")] public UnityEvent<Transform> smallStunEvent;
     [Tooltip("受击中硬直")] public UnityEvent<Transform> normalStunEvent;
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour, IDamageable
             }
 
             float stunValue = attackPower - playerData.FinalToughness;
-            if (stunValue <= 0)
+            if (isEnduance || stunValue <= 0)
                 noStunEvent?.Invoke(attackerTransform);
             else if (stunValue > 0 && stunValue <= 10)
                 smallStunEvent?.Invoke(attackerTransform);

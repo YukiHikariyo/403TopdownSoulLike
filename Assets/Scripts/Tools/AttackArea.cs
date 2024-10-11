@@ -23,6 +23,8 @@ public class AttackArea : MonoBehaviour
     public Enemy enemy;
     [Space(16)]
     [Tooltip("造成属性伤害")] public bool causeBuffDamage;
+    [Tooltip("直接施加Buff")] public bool directlyAssertBuff;
+    [Tooltip("直接施加Buff的概率")] public float directBuffProbability;
     [Tooltip("攻击者是否为弹幕")] public bool isBullet;
     [Tooltip("是否无视可受击状态")] public bool ignoreDamageableIndex;
     [Space(16)]
@@ -30,6 +32,7 @@ public class AttackArea : MonoBehaviour
     [Tooltip("攻击强度索引")] public int attackPowerIndex;
     [Tooltip("属性动作值索引")] public int buffMotionValueIndex;
     [Tooltip("属性伤害的类型")] public BuffType buffType;
+    [Tooltip("直接施加Buff的时间")] public float directBuffDuration;
     [Space(16)]
     [Tooltip("无来源伤害")] public float noSourceDamage;
     [Tooltip("无来源穿透力")] public float noSourcePenetratingPower;
@@ -61,29 +64,53 @@ public class AttackArea : MonoBehaviour
             switch (attackerType)
             {
                 case AttackerType.NoSource:
+
                     isSuccessful = damageable.TakeDamage(noSourceDamage, noSourcePenetratingPower, ignoreDamageableIndex);
-                    if (causeBuffDamage)
+
+                    if (directlyAssertBuff && CalculateProbability(directBuffProbability))
+                        damageable.GetBuff(buffType, directBuffDuration);
+                    else if (causeBuffDamage)
                         damageable.TakeBuffDamage(buffType, noSourceBuffDamage, ignoreDamageableIndex);
+
                     if (isSuccessful)
                         successEvent?.Invoke(damageable);
+
                     break;
+
                 case AttackerType.Player:
+
                     isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex], player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
-                    if (causeBuffDamage)
+
+                    if (directlyAssertBuff && CalculateProbability(directBuffProbability))
+                        damageable.GetBuff(buffType, directBuffDuration);
+                    else if (causeBuffDamage)
                         damageable.TakeBuffDamage(buffType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
+
                     if (isSuccessful)
                         successEvent?.Invoke(damageable);
+
                     break;
+
                 case AttackerType.Enemy:
+
                     isSuccessful = damageable.TakeDamage(enemy.FinalDamage * enemy.motionValue[motionValueIndex], enemy.FinalPenetratingPower, enemy.attackPower[attackPowerIndex], isBullet ? transform : enemy.transform, ignoreDamageableIndex);
-                    if (causeBuffDamage)
+
+                    if (directlyAssertBuff && CalculateProbability(directBuffProbability))
+                        damageable.GetBuff(buffType, directBuffDuration);
+                    else if (causeBuffDamage)
                         damageable.TakeBuffDamage(buffType, enemy.FinalBuffDamage * enemy.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
+
                     if (isSuccessful)
                         successEvent?.Invoke(damageable);
+
                     break;
+
                 case AttackerType.Trap:
+
                     //TODO: 陷阱攻击
+
                     break;
+
                 default:
                     break;
             }
@@ -91,4 +118,6 @@ public class AttackArea : MonoBehaviour
             timer = damageInterval;
         }
     }
+
+    private bool CalculateProbability(float probability) => probability >= Random.Range(0, 1);
 }
