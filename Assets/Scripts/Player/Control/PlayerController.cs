@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float L4AtkSpeed;
     [SerializeField] public float LightAtkRotateAngle;
 
+    [Tooltip("鸡尾酒y轴增值")][Range(0, 32f)][SerializeField] public float Molotov_Y;
+
     [Header("翻滚计数与计时器")]
     [Tooltip("短时间连续翻滚计数")] public int RollCount;
     [Tooltip("翻滚计时器")] public float RollTimer = 0f;

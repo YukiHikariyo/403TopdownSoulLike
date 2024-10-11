@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class PlayerStateMachine : StateMachine
 {
     [SerializeField] Camera m_camera;
-    private Transform playerTransform;
+    public Transform playerTransform;
     #region 鼠标相关
     [Header("鼠标相关")]
     [SerializeField] float mousedegree;
