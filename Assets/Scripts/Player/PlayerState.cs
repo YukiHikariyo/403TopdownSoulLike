@@ -27,7 +27,7 @@ public class PlayerState : ScriptableObject, IState
     //记录动画开始时间
     protected float stateStartTime;
     //计算动画播放时间
-    protected float StateDuration => Time.time - stateStartTime;
+    protected float StateDuration => (Time.time - stateStartTime) * playerAnimator.speed;
 
     protected float AnimationLength => playerAnimator.GetCurrentAnimatorStateInfo(0).length;
     protected bool IsAnimationEnd => StateDuration >= AnimationLength;

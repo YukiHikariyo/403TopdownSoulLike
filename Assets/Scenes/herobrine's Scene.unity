@@ -304,6 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 558400916}
   - component: {fileID: 558400917}
+  - component: {fileID: 558400918}
   m_Layer: 0
   m_Name: L1_AttackRange
   m_TagString: Untagged
@@ -377,6 +378,35 @@ PolygonCollider2D:
       - {x: 2.0785003, y: 0.56437194}
       - {x: 0.7692559, y: 1.5695338}
   m_UseDelaunayMesh: 0
+--- !u!114 &558400918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558400915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc5d252fc0b89944b72e3988ea49895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackerType: 1
+  player: {fileID: 1494598975}
+  enemy: {fileID: 0}
+  causeBuffDamage: 0
+  isBullet: 0
+  ignoreDamageableIndex: 0
+  motionValueIndex: 0
+  attackPowerIndex: 0
+  buffMotionValueIndex: 0
+  buffType: 0
+  noSourceDamage: 0
+  noSourcePenetratingPower: 0
+  noSourceBuffDamage: 0
+  damageInterval: 1
+  successEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &635570750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494598969}
   - component: {fileID: 1494598968}
+  - component: {fileID: 1494598975}
   - component: {fileID: 1494598973}
   - component: {fileID: 1494598972}
   - component: {fileID: 1494598971}
@@ -1985,6 +2016,7 @@ MonoBehaviour:
   L3AtkSpeed: 8
   L4AtkSpeed: 20
   LightAtkRotateAngle: 60
+  ChargeMaxTime: 0
   UnDamageableLeftTime: 0
   PerfectCheckTime: 0
   catchChanceSpeed: 0
@@ -2408,6 +2440,19 @@ MonoBehaviour:
   LightAtk_2: {fileID: 1361083973}
   LightAtk_3: {fileID: 717224651}
   LightAtk_4: {fileID: 1581986655}
+  BackAttack: {fileID: 0}
+  ChargeState_0:
+    m_PersistentCalls:
+      m_Calls: []
+  ChargeState_1:
+    m_PersistentCalls:
+      m_Calls: []
+  ChargeState_2:
+    m_PersistentCalls:
+      m_Calls: []
+  ChargeState_3:
+    m_PersistentCalls:
+      m_Calls: []
   memory: 0
 --- !u!95 &1494598974
 Animator:
@@ -2430,6 +2475,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1494598975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494598967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c9087d317e1314d88347cf272cb87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
+  motionValue: []
+  attackPower: []
+  buffMotionValue: []
+  damageableIndex: 0
+  noStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  smallStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  normalStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  bigStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  foresightEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1581986655
 GameObject:
   m_ObjectHideFlags: 0

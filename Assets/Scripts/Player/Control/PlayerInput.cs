@@ -43,7 +43,7 @@ public class PlayerInput : MonoBehaviour
 
     public bool Charging => input.Player.RightAttack.IsPressed();
 
-    public bool RightAttackRelease => input.Player.RightAttack.WasReleasedThisFrame();
+    public bool ChargeRelease => input.Player.RightAttack.WasReleasedThisFrame();
 
 
     public bool Roll => input.Player.Roll.WasPressedThisFrame();

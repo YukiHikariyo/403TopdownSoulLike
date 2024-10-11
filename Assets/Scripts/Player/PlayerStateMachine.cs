@@ -15,7 +15,7 @@ public class PlayerStateMachine : StateMachine
     #endregion
     #region 特定时间节点
     [Header("特定时间节点")]
-    private float CatchChancepoint;
+    public float CatchChancepoint;
     #endregion
     #region 组件
     //获取组件的方式之后可以调整
@@ -29,12 +29,6 @@ public class PlayerStateMachine : StateMachine
     public GameObject LightAtk_3;
     public GameObject LightAtk_4;
     public GameObject BackAttack;
-    #endregion
-    #region 事件声明
-    [Tooltip("蓄力0段")] public UnityEvent ChargeState_0;
-    [Tooltip("蓄力1段")] public UnityEvent ChargeState_1;
-    [Tooltip("蓄力2段")] public UnityEvent ChargeState_2;
-    [Tooltip("蓄力3段")] public UnityEvent ChargeState_3;
     #endregion
     #region 接受输入窗口
     [Tooltip("是否接收输入")]public bool CanAcceptInput { get; set; }

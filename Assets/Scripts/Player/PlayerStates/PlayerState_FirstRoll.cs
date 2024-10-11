@@ -13,6 +13,7 @@ public class PlayerState_FirstRoll : PlayerState
         SetAnimator_OnStart();
         playerAnimator.Play("FirstRoll");
         FaceDir = playerController.MoveAxis;
+        player.damageableIndex = 1;
     }
 
     public override void Exit()
@@ -27,6 +28,7 @@ public class PlayerState_FirstRoll : PlayerState
         {
             if (playerInput.Roll)
             {
+                player.damageableIndex = 0;
                 playerStateMachine.SwitchState(typeof(PlayerState_SecondRoll));
             }
         }

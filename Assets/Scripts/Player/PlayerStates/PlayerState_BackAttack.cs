@@ -10,6 +10,7 @@ public class PlayerState_BackAttack : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
+        SetAnimator_OnStart();
         playerAnimator.Play("BackAttack");
         foresight = false;
         backAttackArea.successEvent.AddListener(foresightCheck);
@@ -36,8 +37,10 @@ public class PlayerState_BackAttack : PlayerState
             switch (playerStateMachine.memory)
             {
                 case InputMemory.LightAttack:
-                    //攻击命中判定
-                    playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_4));
+                    if(foresight)
+                        playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_4));
+                    else
+                        playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
                     break;
                 case InputMemory.Roll:
                     playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));

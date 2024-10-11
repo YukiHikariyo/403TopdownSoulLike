@@ -9,6 +9,7 @@ public class PlayerState_LightAttack_3 : PlayerState
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
+        SetAnimator_OnStart();
         playerAnimator.Play("L3_Attack");
         degree = playerStateMachine.RestrictedRotation(lightAtk_2);
         FaceDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree));

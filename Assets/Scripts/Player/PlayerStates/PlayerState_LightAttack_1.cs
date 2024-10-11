@@ -10,6 +10,7 @@ public class PlayerState_LightAttack_1 : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
+        SetAnimator_OnStart();
         playerAnimator.Play("L1_Attack");
         FaceDir = playerStateMachine.MouseDistance.normalized;
         SetRotationZ(lightAtk_1,playerStateMachine.MouseDegree);

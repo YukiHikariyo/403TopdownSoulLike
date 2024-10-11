@@ -4,17 +4,23 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/PlayerState/CatchChance", fileName = "PlayerState_CatchChance")]
 public class PlayerState_CatchChance : PlayerState
 {
-    float UnDamageableStartTime;
-    float PerfectCheckStartTime;
-    float UnDamageableTime;
-    float PerfectCheckTime;
+    public float UnDamageableStartTime;
+    public float PerfectCheckStartTime;
+    public float UnDamageableTime;
+    public float PerfectCheckTime;
     public override void Enter()
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
+        SetAnimator_OnStart();
         playerAnimator.Play("CatchChance");
+        //确定判定区间中点
+        UnDamageableStartTime = playerStateMachine.CatchChancepoint - UnDamageableTime / 2;
+        PerfectCheckStartTime = playerStateMachine.CatchChancepoint - PerfectCheckTime / 2;
+        //
         FaceDir = -playerStateMachine.MouseDistance.normalized;
+        SetRotationZ(BackAttack, playerStateMachine.MouseDegree);
     }
 
     public override void Exit()
@@ -72,5 +78,9 @@ public class PlayerState_CatchChance : PlayerState
     {
         base.PhysicUpdate();
         playerController.SkillDisplace(Skill_Physics.CatchChance, FaceDir, StateDuration / AnimationLength);
+    }
+    private void SetRotationZ(GameObject obj, float angle)
+    {
+        obj.transform.localEulerAngles = new Vector3(obj.transform.localEulerAngles.x, obj.transform.localEulerAngles.y, angle);
     }
 }
