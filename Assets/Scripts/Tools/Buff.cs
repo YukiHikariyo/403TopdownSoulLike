@@ -32,10 +32,14 @@ public abstract class BaseBuff
     protected float duration;
     protected IDamageable damageable;
 
-    public BaseBuff(float duration, IDamageable damageable)
+    public BaseBuff(IDamageable damageable)
+    {
+        this.damageable = damageable;
+    }
+
+    public BaseBuff(float duration, IDamageable damageable) : this(damageable)
     {
         this.duration = duration;
-        this.damageable = damageable;
     }
 
     public abstract void OnBuffEnter();
@@ -91,12 +95,16 @@ public class Tough : BaseBuff
     {
         if (damageable is Player)
             (damageable as Player).playerData.toughnessMultiplication += 0.25f;
+
+        UIManager.Instance.buffIcons[0].SetActive(true);
     }
 
     public override void OnBuffExit()
     {
         if (damageable is Player)
             (damageable as Player).playerData.toughnessMultiplication -= 0.25f;
+
+        UIManager.Instance.buffIcons[0].SetActive(false);
     }
 
     public override void OnBuffStay()
@@ -120,6 +128,8 @@ public class Foresight : BaseBuff
             (damageable as Player).playerData.damageMultiplication += 0.25f;
             (damageable as Player).playerData.critRateIncrement += 0.2f;
         }
+
+        UIManager.Instance.buffIcons[1].SetActive(true);
     }
 
     public override void OnBuffExit()
@@ -130,6 +140,8 @@ public class Foresight : BaseBuff
             (damageable as Player).playerData.damageMultiplication -= 0.25f;
             (damageable as Player).playerData.critRateIncrement -= 0.2f;
         }
+
+        UIManager.Instance.buffIcons[1].SetActive(false);
     }
 
     public override void OnBuffStay()
@@ -152,6 +164,8 @@ public class Hot : BaseBuff
             (damageable as Player).playerData.moveSpeedMultiplication += 0.25f;
             (damageable as Player).playerData.lightRadiusMultiplication += 0.5f;
         }
+
+        UIManager.Instance.buffIcons[2].SetActive(true);
     }
 
     public override void OnBuffExit()
@@ -161,6 +175,8 @@ public class Hot : BaseBuff
             (damageable as Player).playerData.moveSpeedMultiplication -= 0.25f;
             (damageable as Player).playerData.lightRadiusMultiplication -= 0.5f;
         }
+
+        UIManager.Instance.buffIcons[2].SetActive(false);
     }
 
     public override void OnBuffStay()
@@ -248,12 +264,12 @@ public class IceBurning : BaseBuff
 
     public override void OnBuffEnter()
     {
-
+        UIManager.Instance.buffIcons[3].SetActive(true);
     }
 
     public override void OnBuffExit()
     {
-
+        UIManager.Instance.buffIcons[3].SetActive(false);
     }
 
     public override void OnBuffStay()
@@ -279,7 +295,7 @@ public class DarkErosion : BaseBuff
     public override void OnBuffEnter()
     {
         if (damageable is Player)
-            damageable.TakeDamage((damageable as Player).playerData.FinalMaxHealth * 0.25f, 114514, true);
+            damageable.TakeDamage((damageable as Player).playerData.FinalMaxHealth * 0.4f, 114514, true);
     }
 
     public override void OnBuffExit()

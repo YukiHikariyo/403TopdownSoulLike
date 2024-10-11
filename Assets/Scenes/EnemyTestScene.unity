@@ -134,6 +134,9 @@ GameObject:
   - component: {fileID: 41832983}
   - component: {fileID: 41832982}
   - component: {fileID: 41832984}
+  - component: {fileID: 41832987}
+  - component: {fileID: 41832986}
+  - component: {fileID: 41832985}
   m_Layer: 6
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -233,8 +236,127 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &41832985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41832981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc5d252fc0b89944b72e3988ea49895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackerType: 2
+  player: {fileID: 0}
+  enemy: {fileID: 41832986}
+  causeBuffDamage: 1
+  directlyAssertBuff: 0
+  directBuffProbability: 0
+  isBullet: 0
+  ignoreDamageableIndex: 0
+  motionValueIndex: 0
+  attackPowerIndex: 0
+  buffMotionValueIndex: 0
+  buffType: 7
+  directBuffDuration: 0
+  noSourceDamage: 0
+  noSourcePenetratingPower: 0
+  noSourceBuffDamage: 0
+  damageInterval: 1
+  successEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &41832986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41832981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16ccb7e9eaabe84e91a725a5e93d931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBoss: 0
+  maxHealth: 100
+  currentHealth: 100
+  basicMoveSpeed: 0
+  basicDamage: 20
+  basicPenetratingPower: 0
+  basicReductionRate: 0
+  basicToughness: 0
+  motionToughness: 0
+  motionValue:
+  - 0
+  attackPower:
+  - 1
+  buffMotionValue:
+  - 1
+  damageableIndex: 0
+  moveSpeedIncrement: 0
+  damageIncrement: 0
+  penetratingPowerIncrement: 0
+  reductionRateIncrement: 0
+  vulnerabilityIncrement: 0
+  toughnessIncrement: 0
+  moveSpeedMultiplication: 1
+  damageMultiplication: 1
+  penetratingPowerMultiplication: 1
+  reductionRateMultiplication: 1
+  vulnerabilityMultiplication: 1
+  toughnessMultiplication: 1
+  isEnduance: 0
+  canTakeAction: 1
+--- !u!61 &41832987
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41832981}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &586988267
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +506,9 @@ GameObject:
   - component: {fileID: 2025775074}
   - component: {fileID: 2025775073}
   - component: {fileID: 2025775076}
+  - component: {fileID: 2025775077}
+  - component: {fileID: 2025775079}
+  - component: {fileID: 2025775078}
   m_Layer: 3
   m_Name: TestPlayer
   m_TagString: Player
@@ -437,6 +562,7 @@ MonoBehaviour:
   reductionRateIncrement: 0
   vulnerabilityIncrement: 0
   toughnessIncrement: 0
+  lightRadiusIncrement: 0
   foresightTimeIncrement: 0
   maxHealthMultiplication: 1
   maxManaMultiplication: 1
@@ -451,6 +577,7 @@ MonoBehaviour:
   reductionRateMultiplication: 1
   vulnerabilityMultiplication: 1
   toughnessMultiplication: 1
+  lightRadiusMultiplication: 1
   chargeSpeedMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
 --- !u!212 &2025775074
@@ -537,6 +664,11 @@ MonoBehaviour:
   attackPower: []
   buffMotionValue: []
   damageableIndex: 0
+  currentBuffHealth:
+  - 0
+  - 0
+  - 0
+  isEnduance: 0
   noStunEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -552,6 +684,84 @@ MonoBehaviour:
   foresightEvent:
     m_PersistentCalls:
       m_Calls: []
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2025775077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025775072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b3bc11baef234c47b9a7e68e7b6a160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+--- !u!58 &2025775078
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025775072}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!50 &2025775079
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025775072}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

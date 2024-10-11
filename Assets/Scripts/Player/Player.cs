@@ -29,10 +29,14 @@ public class Player : MonoBehaviour, IDamageable
 
     private UnityAction buffAction;
     private Dictionary<BuffType, BaseBuff> currentBuffDict = new();
-    private Dictionary<BuffType, float> maxBuffHealth = new();
-    private Dictionary<BuffType, float> currentBuffHealth = new();
     private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTask>> OnBuffFunc = new();
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
+    private PlayerBar[] buffBars;
+
+    private float[] maxBuffHealth = new float[3] { 100, 100, 100 };
+    public float[] currentBuffHealth = new float[3];
+    private float[] buffHealthReduceRate = new float[3] { 10, 40, 100 };
+    private bool[] isBuffStay = new bool[3];
 
     [Space(16)]
     [Header("受击事件")]
@@ -62,11 +66,13 @@ public class Player : MonoBehaviour, IDamageable
         playerData = GetComponent<PlayerData>();
 
         //TODO: 初始化Buff血量
+        buffBars = UIManager.Instance.buffBars;
     }
 
     private void Update()
     {
         buffAction?.Invoke();
+        BuffBarAction();
     }
 
     #endregion
@@ -121,16 +127,31 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
-        //以下为测试
+        int buffBarIndex = buffType switch
+        {
+            BuffType.Cold => 0,
+            BuffType.Frozen => 1,
+            BuffType.DarkErosion => 2,
+
+            _ => -1
+        };
+        PlayerBar buffBar = buffBars[buffBarIndex];
+
         if (!currentBuffDict.ContainsKey(buffType))
         {
             if (damageableIndex == 0 || ignoreDamageableIndex)
             {
-                currentBuffHealth[buffType] += damage;
-                if (currentBuffHealth[buffType] > maxBuffHealth[buffType])
+                if (!buffBar.gameObject.activeSelf)
+                    buffBar.gameObject.SetActive(true);
+
+                currentBuffHealth[buffBarIndex] += damage;
+                buffBar.OnCurrentValueChange(currentBuffHealth[buffBarIndex], maxBuffHealth[buffBarIndex], true);
+
+                if (currentBuffHealth[buffBarIndex] >= maxBuffHealth[buffBarIndex])
                 {
-                    currentBuffHealth[buffType] = maxBuffHealth[buffType];
-                    GetBuff(buffType, 30);
+                    currentBuffHealth[buffBarIndex] = maxBuffHealth[buffBarIndex];
+                    isBuffStay[buffBarIndex] = true;
+                    GetBuff(buffType);
                 }
 
                 return true;
@@ -140,13 +161,29 @@ public class Player : MonoBehaviour, IDamageable
         return false;
     }
 
-    public void GetBuff(BuffType buffType, float duration)
+    public void GetBuff(BuffType buffType, float duration = 0)
     {
+        duration = buffType switch
+        {
+            BuffType.Cold => 10,
+            BuffType.Frozen => 3,
+            BuffType.DarkErosion => 1,
+
+            _ => duration
+        };  //设置某些Buff的固定时间
+
         if (!currentBuffDict.ContainsKey(buffType))
         {
             currentBuffDict.Add(buffType, buffType switch
             {
                 BuffType.TestBuff => new TestBuff(duration, this),
+                BuffType.Tough => new Tough(duration, this),
+                BuffType.Foresight => new Foresight(duration, this),
+                BuffType.Hot => new Hot(duration, this),
+                BuffType.Cold => new Cold(duration, this),
+                BuffType.Frozen => new Frozen(duration, this),
+                BuffType.IceBurning => new IceBurning(duration, this),
+                BuffType.DarkErosion => new DarkErosion(duration, this),
 
                 _ => null
             });
@@ -181,8 +218,17 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    public void RemoveBuff(BuffType buffType)
+    public void RemoveBuff(BuffType buffType, int index = -1)
     {
+        buffType = index switch
+        {
+            0 => BuffType.Cold,
+            1 => BuffType.Frozen,
+            2 => BuffType.DarkErosion,
+
+            _ => buffType
+        };
+
         if (currentBuffDict.ContainsKey(buffType))
         {
             if (buffCTK.ContainsKey(buffType))
@@ -191,6 +237,36 @@ public class Player : MonoBehaviour, IDamageable
             buffAction -= currentBuffDict[buffType].OnBuffStay;
             currentBuffDict[buffType].OnBuffExit();
             currentBuffDict.Remove(buffType);
+        }
+    }
+
+    public void BuffBarAction()
+    {
+        for (int i = 0; i < buffBars.Length; i++)
+        {
+            if (currentBuffHealth[i] > 0 && !isBuffStay[i])
+            {
+                currentBuffHealth[i] -= 5 * Time.deltaTime;
+                buffBars[i].OnCurrentValueChange(currentBuffHealth[i], maxBuffHealth[i], true);
+
+                if (currentBuffHealth[i] <= 0)
+                {
+                    currentBuffHealth[i] = 0;
+                    buffBars[i].gameObject.SetActive(false);
+                }
+            }
+            else if (currentBuffHealth[i] > 0 && isBuffStay[i])
+            {
+                currentBuffHealth[i] -= buffHealthReduceRate[i] * Time.deltaTime;
+                buffBars[i].OnCurrentValueChange(currentBuffHealth[i], maxBuffHealth[i], true);
+
+                if (currentBuffHealth[i] <= 0)
+                {
+                    currentBuffHealth[i] = 0;
+                    buffBars[i].gameObject.SetActive(false);
+                    isBuffStay[i] = false;
+                }
+            }
         }
     }
 

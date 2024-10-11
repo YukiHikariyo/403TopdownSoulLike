@@ -41,11 +41,11 @@ public interface IDamageable
     /// </summary>
     /// <param name="buffType">Buff种类</param>
     /// <param name="duration">持续时间</param>
-    void GetBuff(BuffType buffType, float duration);
+    void GetBuff(BuffType buffType, float duration = 0);
 
     /// <summary>
     /// 移除Buff
     /// </summary>
     /// <param name="buffType">Buff种类</param>
-    void RemoveBuff(BuffType buffType);
+    void RemoveBuff(BuffType buffType, int index = -1);
 }

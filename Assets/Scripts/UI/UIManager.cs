@@ -25,6 +25,11 @@ public class UIManager : MonoSingleton<UIManager>
     public PlayerBar energyBar;
 
     [Space(16)]
+
+    public GameObject[] buffIcons;
+    public PlayerBar[] buffBars;
+
+    [Space(16)]
     [Header("背包UI")]
     [Space(16)]
 

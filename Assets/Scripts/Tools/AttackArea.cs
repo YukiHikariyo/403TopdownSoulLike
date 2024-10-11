@@ -54,7 +54,7 @@ public class AttackArea : MonoBehaviour
             timer -= Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (timer <= 0 && collision.TryGetComponent<IDamageable>(out IDamageable component))
         {
@@ -98,7 +98,7 @@ public class AttackArea : MonoBehaviour
                     if (directlyAssertBuff && CalculateProbability(directBuffProbability))
                         damageable.GetBuff(buffType, directBuffDuration);
                     else if (causeBuffDamage)
-                        damageable.TakeBuffDamage(buffType, enemy.FinalBuffDamage * enemy.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
+                        damageable.TakeBuffDamage(buffType, enemy.FinalDamage * enemy.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
 
                     if (isSuccessful)
                         successEvent?.Invoke(damageable);

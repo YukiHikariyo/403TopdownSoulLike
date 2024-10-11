@@ -68,12 +68,6 @@ public class Enemy : MonoBehaviour, IDamageable
         get => (basicDamage + damageIncrement > 0 ? basicDamage + damageIncrement : 0) * damageMultiplication;
     }
 
-    [Tooltip("最终属性攻击力")]
-    public float FinalBuffDamage
-    {
-        get => FinalDamage * buffDamageMultiplication;
-    }
-
     [SerializeField][Tooltip("基础穿透力")] private float basicPenetratingPower;
     [Tooltip("基础穿透力")]
     public float BasicPenetratingPower
@@ -152,18 +146,19 @@ public class Enemy : MonoBehaviour, IDamageable
     [Tooltip("易伤倍率")] public float vulnerabilityMultiplication = 1;
     [Tooltip("韧性倍率")] public float toughnessMultiplication = 1;
 
-    [Tooltip("属性攻击倍率")] public float buffDamageMultiplication;
-
     [Space(16)]
     [Header("Buff方法相关")]
     [Space(16)]
 
     private UnityAction buffAction;
     private Dictionary<BuffType, BaseBuff> currentBuffDict = new();
-    private Dictionary<BuffType, float> maxBuffHealth = new();
-    private Dictionary<BuffType, float> currentBuffHealth = new();
     private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTask>> OnBuffFunc = new();
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
+
+    private float[] maxBuffHealth = new float[1] { 100 };
+    private float[] currentBuffHealth = new float[1];
+    private float[] buffHealthReduceRate = new float[1] { 100 };
+    private bool[] isBuffStay = new bool[1];
 
     [Space(16)]
     [Header("受击事件")]
@@ -196,12 +191,12 @@ public class Enemy : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         currentSubSM = defaultSubSM;
-        currentSubSM.OnEnter(false);
+        //currentSubSM.OnEnter(false);
     }
 
     private void OnDisable()
     {
-        currentSubSM.OnExit();
+        //currentSubSM.OnExit();
     }
 
     private void Start()
@@ -211,12 +206,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        currentSubSM.PhysicsUpdate();
+        //currentSubSM.PhysicsUpdate();
     }
 
     private void Update()
     {
-        currentSubSM.LogicUpdate();
+        //currentSubSM.LogicUpdate();
         buffAction?.Invoke();
     }
 
@@ -289,16 +284,22 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public bool TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
-        //以下为测试
+        int buffIndex = buffType switch
+        {
+            BuffType.LightBurst => 0,
+
+            _ => -1
+        };
+
         if (!currentBuffDict.ContainsKey(buffType))
         {
             if (damageableIndex == 0 || ignoreDamageableIndex)
             {
-                currentBuffHealth[buffType] += damage;
-                if (currentBuffHealth[buffType] > maxBuffHealth[buffType])
+                currentBuffHealth[buffIndex] += damage;
+                if (currentBuffHealth[buffIndex] > maxBuffHealth[buffIndex])
                 {
-                    currentBuffHealth[buffType] = maxBuffHealth[buffType];
-                    GetBuff(buffType, 30);
+                    currentBuffHealth[buffIndex] = maxBuffHealth[buffIndex];
+                    GetBuff(buffType);
 
                     return true;
                 }
@@ -308,8 +309,15 @@ public class Enemy : MonoBehaviour, IDamageable
         return false;
     }
 
-    public void GetBuff(BuffType buffType, float duration)
+    public void GetBuff(BuffType buffType, float duration = 0)
     {
+        duration = buffType switch
+        {
+            BuffType.LightBurst => 1,
+
+            _ => duration
+        };  //设置某些Buff的固定时间
+
         if (!currentBuffDict.ContainsKey(buffType))
         {
             currentBuffDict.Add(buffType, buffType switch
@@ -349,8 +357,15 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void RemoveBuff(BuffType buffType)
+    public void RemoveBuff(BuffType buffType, int index = -1)
     {
+        buffType = index switch
+        {
+            0 => BuffType.LightBurst,
+
+            _ => buffType
+        };
+
         if (currentBuffDict.ContainsKey(buffType))
         {
             if (buffCTK.ContainsKey(buffType))
@@ -366,7 +381,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public void GetTestBuff1() => GetBuff(BuffType.TestBuff, 3);
 
     [ContextMenu("移除测试Buff1")]
-    public void RemoveTestBuff1() => RemoveBuff(BuffType.TestBuff);
+    public void RemoveTestBuff1() => RemoveBuff(BuffType.TestBuff, -1);
 
     #endregion
 
