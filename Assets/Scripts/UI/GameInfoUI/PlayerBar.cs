@@ -10,18 +10,27 @@ public class PlayerBar : MonoBehaviour
     public Slider currentValueSlider;
     public Slider bufferSlider;
 
-    public void OnMaxValueChange(float newValue, float maxValue)
+    public void OnMaxValueChange(float newValue, float maxValue, bool isInstantChange = false)
     {
-        maxValueSlider.DOValue(newValue / maxValue, 0.5f);
+        if (!isInstantChange)
+            maxValueSlider.DOValue(newValue / maxValue, 0.5f);
+        else
+            maxValueSlider.value = newValue / maxValue;
     }
 
-    public void OnCurrentValueChange(float newValue, float maxValue)
+    public void OnCurrentValueChange(float newValue, float maxValue, bool isInstantChange = false)
     {
-        currentValueSlider.DOValue(newValue / maxValue, 0.25f);
-
-        if (bufferSlider.value < currentValueSlider.value)
-            bufferSlider.DOValue(newValue / maxValue, 0.25f);
+        if (!isInstantChange)
+            currentValueSlider.DOValue(newValue / maxValue, 0.25f);
         else
-            bufferSlider.DOValue(newValue / maxValue, 5);
+            currentValueSlider.value = newValue / maxValue;
+
+        if (bufferSlider != null)
+        {
+            if (bufferSlider.value < currentValueSlider.value)
+                bufferSlider.DOValue(newValue / maxValue, 0.3f);
+            else
+                bufferSlider.DOValue(newValue / maxValue, 5);
+        }
     }
 }
