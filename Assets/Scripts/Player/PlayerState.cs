@@ -21,6 +21,7 @@ public class PlayerState : ScriptableObject, IState
     protected GameObject lightAtk_3;
     protected GameObject lightAtk_4;
     protected GameObject BackAttack;
+    protected GameObject RightAttack;
     #endregion
 
     #region 通用变量
@@ -48,7 +49,8 @@ public class PlayerState : ScriptableObject, IState
         GameObject lightAtk_2,
         GameObject lightAtk_3,
         GameObject lightAtk_4,
-        GameObject BackAttack
+        GameObject BackAttack,
+        GameObject RightAttack
         )
     {
         this.playerInput = playerInput;
@@ -63,6 +65,7 @@ public class PlayerState : ScriptableObject, IState
         this.lightAtk_4 = lightAtk_4;
         this.BackAttack = BackAttack;
         backAttackArea = this.BackAttack.GetComponent<AttackArea>();
+        this.RightAttack = RightAttack;
     }
     public virtual void Enter()
     {

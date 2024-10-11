@@ -5,13 +5,20 @@ using UnityEngine;
 public class PlayerState_BackAttack : PlayerState
 {
     bool foresight = false;
+    float degree;
     public override void Enter()
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
+
         SetAnimator_OnStart();
         playerAnimator.Play("BackAttack");
+
+        degree = playerStateMachine.RestrictedRotation(BackAttack);
+        FaceDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree));
+        BackAttack.transform.localEulerAngles = new Vector3(BackAttack.transform.localEulerAngles.x, BackAttack.transform.localEulerAngles.y, degree);
+
         foresight = false;
         backAttackArea.successEvent.AddListener(foresightCheck);
     }
@@ -20,6 +27,7 @@ public class PlayerState_BackAttack : PlayerState
     {
         base.Exit();
         backAttackArea.successEvent.RemoveListener(foresightCheck);
+        player.damageableIndex = 0;
     }
 
     public override void LogicUpdate()
@@ -43,7 +51,8 @@ public class PlayerState_BackAttack : PlayerState
                         playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
                     break;
                 case InputMemory.Roll:
-                    playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+                    if(playerController.RollCount < 3)
+                        playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
                     break;
             }
         }

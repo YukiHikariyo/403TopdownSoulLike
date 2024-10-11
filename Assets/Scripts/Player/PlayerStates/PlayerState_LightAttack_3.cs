@@ -9,8 +9,11 @@ public class PlayerState_LightAttack_3 : PlayerState
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
+        playerStateMachine.CanStateSwitch = false;
+
         SetAnimator_OnStart();
         playerAnimator.Play("L3_Attack");
+
         degree = playerStateMachine.RestrictedRotation(lightAtk_2);
         FaceDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree));
         lightAtk_3.transform.localEulerAngles = new Vector3(lightAtk_3.transform.localEulerAngles.x, lightAtk_3.transform.localEulerAngles.y, degree);
@@ -41,10 +44,11 @@ public class PlayerState_LightAttack_3 : PlayerState
                     playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_4));
                     break;
                 case InputMemory.RightAttack:
-                    Debug.Log("Check");
+                    playerStateMachine.SwitchState(typeof(PlayerState_CatchChance));
                     break;
                 case InputMemory.Roll:
-                    playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+                    if(playerController.RollCount < 3)
+                        playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
                     break;
             }
         }

@@ -7,18 +7,26 @@ public class PlayerState_FirstRoll : PlayerState
 
     public override void Enter()
     {
-        Debug.Log("First");
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
+
         SetAnimator_OnStart();
         playerAnimator.Play("FirstRoll");
+
         FaceDir = playerController.MoveAxis;
+
         player.damageableIndex = 1;
+
+        if(playerController.RollCount == 0)
+            playerController.RollTimer = playerController.RollColdDown;
+
+        playerController.RollCount++;
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.damageableIndex = 0;
     }
 
     public override void LogicUpdate()
@@ -26,10 +34,10 @@ public class PlayerState_FirstRoll : PlayerState
         base.LogicUpdate();
         if (playerStateMachine.CanAcceptInput)
         {
-            if (playerInput.Roll)
+            player.damageableIndex = 0;
+            if (playerInput.Roll && playerController.RollCount < 3)
             {
-                player.damageableIndex = 0;
-                playerStateMachine.SwitchState(typeof(PlayerState_SecondRoll));
+                playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
             }
         }
 

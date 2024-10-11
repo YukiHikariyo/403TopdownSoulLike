@@ -21,11 +21,13 @@ public class PlayerState_CatchChance : PlayerState
         //
         FaceDir = -playerStateMachine.MouseDistance.normalized;
         SetRotationZ(BackAttack, playerStateMachine.MouseDegree);
+        player.foresightEvent.AddListener(SuccessfulForesight);
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.foresightEvent.RemoveListener(SuccessfulForesight);
     }
 
     public override void LogicUpdate()
@@ -55,6 +57,7 @@ public class PlayerState_CatchChance : PlayerState
                     playerStateMachine.SwitchState(typeof(PlayerState_BackAttack));
                     break;
                 case InputMemory.Roll:
+                    if(playerController.RollCount < 3)
                     playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
                     break;
             }
@@ -82,5 +85,9 @@ public class PlayerState_CatchChance : PlayerState
     private void SetRotationZ(GameObject obj, float angle)
     {
         obj.transform.localEulerAngles = new Vector3(obj.transform.localEulerAngles.x, obj.transform.localEulerAngles.y, angle);
+    }
+    private void SuccessfulForesight()
+    {
+        player.GetBuff(BuffType.Foresight,3);//TODO: buff只为反击和4段攻击提供加成
     }
 }

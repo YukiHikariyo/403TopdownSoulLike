@@ -17,15 +17,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float L3AtkSpeed;
     [SerializeField] private float L4AtkSpeed;
     [SerializeField] public float LightAtkRotateAngle;
-    [Header("蓄力相关属性")]
+
+    [Header("翻滚计数与计时器")]
+    [Tooltip("短时间连续翻滚计数")] public int RollCount;
+    [Tooltip("翻滚计时器")] public float RollTimer = 0f;
+    [Tooltip("短时间连续翻滚最短间隔")] public float RollColdDown;
+
+    [Header("蓄力重击相关属性")]
     [Tooltip("基础蓄力时间")][SerializeField] public float ChargeMaxTime;
     [Tooltip("蓄力时移动速度倍率，速度基值为移动速度")][SerializeField] public float ChargeSpeedFix;
+    [Tooltip("重击移动速度")][SerializeField] public float RightAttackSpeed;
     //蓄力基础速度为1/1s，蓄力时间为从开始到满蓄的时间
+
     [Header("见切相关属性")]
     [Tooltip("无敌帧持续基础时间")][SerializeField] public float UnDamageableLeftTime;
     [Tooltip("完美见切判定基础时间")][SerializeField] public float PerfectCheckTime;
     [Tooltip("见切移动速度")][SerializeField] private float catchChanceSpeed;
-
+    [Tooltip("反击移动速度")][SerializeField] private float backAttackSpeed;
+ 
     [Header("运动曲线")]
     public AnimationCurve fastRollCruve;
     [Tooltip("翻滚运动曲线")]public AnimationCurve slowRollCruve;
@@ -36,6 +45,8 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve L4AtkCruve;
 
     public AnimationCurve CatchChanceCruve;
+    public AnimationCurve BackAttackCruve;
+    public AnimationCurve RightAttackCruve;
 
     private float nowSpeed;
     //二段翻滚的移动速度会由快变慢，该参数用于表示减速度，为了方便，向属性传递动作持续时间，属性内部会自行计算减速度
@@ -54,7 +65,6 @@ public class PlayerController : MonoBehaviour
     {
         
     }
-
     #region 基本移动
     private bool HasPressedX => inputs.MoveLeft || inputs.MoveRight;
     private bool BothPressedX => inputs.MoveLeft && inputs.MoveRight;
@@ -174,12 +184,15 @@ public class PlayerController : MonoBehaviour
         playerRb.velocity = FaceDir * L4AtkSpeed * L4AtkCruve.Evaluate(time);
     }
     #endregion
+    
     private void Update()
     {
         if (inputs.IsPlayerInputEnable)
         {
             readLastInput();
         }
+        if(RollTimer > 0)
+            RollTimer -= Time.deltaTime;
     }
     public void SkillDisplace(Skill_Physics skill, Vector2 FaceDir, float time)
     {
@@ -189,10 +202,10 @@ public class PlayerController : MonoBehaviour
                 playerRb.velocity = FaceDir * catchChanceSpeed * CatchChanceCruve.Evaluate(time);
             break;
             case Skill_Physics.BackAttack:
-
+                playerRb.velocity = FaceDir * ChargeMaxTime * BackAttackCruve.Evaluate(time); 
             break;
             case Skill_Physics.RightAttack:
-
+                playerRb.velocity = FaceDir * RightAttackSpeed * RightAttackCruve.Evaluate(time);
             break;  
         }
     }

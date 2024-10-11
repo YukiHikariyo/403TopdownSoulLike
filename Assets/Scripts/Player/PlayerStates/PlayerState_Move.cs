@@ -17,13 +17,19 @@ public class PlayerState_Move : PlayerState
     public override void LogicUpdate()
     {
         SetAnimator_Update();
-        if (!playerInput.WantsMove)
-            playerStateMachine.SwitchState(typeof(PlayerState_Idle));
+        //TODO:耐力限制
+
+        if (playerInput.RightAttack)
+            playerStateMachine.SwitchState(typeof(PlayerState_Charging));
+
         if (playerInput.LightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
-        //等待添加耐力限制
-        if (playerInput.Roll)
+
+        if (playerInput.Roll && playerController.RollCount < 3)
             playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+
+        if (!playerInput.WantsMove)
+            playerStateMachine.SwitchState(typeof(PlayerState_Idle));
     }
 
     public override void PhysicUpdate()

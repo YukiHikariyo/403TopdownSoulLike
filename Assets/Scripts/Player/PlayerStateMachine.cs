@@ -15,7 +15,7 @@ public class PlayerStateMachine : StateMachine
     #endregion
     #region 特定时间节点
     [Header("特定时间节点")]
-    public float CatchChancepoint;
+    [Tooltip("见切完美判定和无敌帧判定区间中点")]public float CatchChancepoint; 
     #endregion
     #region 组件
     //获取组件的方式之后可以调整
@@ -29,6 +29,7 @@ public class PlayerStateMachine : StateMachine
     public GameObject LightAtk_3;
     public GameObject LightAtk_4;
     public GameObject BackAttack;
+    public GameObject RightAttack;
     #endregion
     #region 接受输入窗口
     [Tooltip("是否接收输入")]public bool CanAcceptInput { get; set; }
@@ -54,7 +55,7 @@ public class PlayerStateMachine : StateMachine
         playerTransform = transform;
         foreach (PlayerState playerState in stateTable)
         {
-            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4,BackAttack);
+            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4,BackAttack,RightAttack);
             dict.Add(playerState.GetType(), playerState);
         }
     }
@@ -116,6 +117,31 @@ public class PlayerStateMachine : StateMachine
     {
         CanStateSwitch = true;
     }
+    #region 受伤和死亡时触发的方法
+    private void OnNoStun(Transform attacker)
+    {
+
+    }
+
+    private void OnSmallStun(Transform attacker)
+    {
+
+    }
+
+    private void OnNormalStun(Transform attacker)
+    {
+
+    }
+
+    private void OnBigStun(Transform attacker)
+    {
+
+    }
+    private void OnDead()
+    {
+
+    }
+    #endregion
 }
 
 

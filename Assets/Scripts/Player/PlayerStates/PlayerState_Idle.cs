@@ -23,12 +23,14 @@ public class PlayerState_Idle : PlayerState
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Move));
         }
+        //TODO:耐力限制
+        if (playerInput.RightAttack)
+            playerStateMachine.SwitchState(typeof(PlayerState_Charging));
 
         if(playerInput.LightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
 
-        //等待添加耐力限制
-        if(playerInput.Roll)
+        if(playerInput.Roll && playerController.RollCount < 3)
             playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
     }
 

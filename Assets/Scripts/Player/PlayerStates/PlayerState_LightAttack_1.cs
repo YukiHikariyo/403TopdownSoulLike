@@ -24,22 +24,24 @@ public class PlayerState_LightAttack_1 : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (playerStateMachine.CanStateSwitch)
+        if (playerStateMachine.CanAcceptInput)
         {
             switch (playerStateMachine.memory)
             {
+                //TODO:耐力限制
                 case InputMemory.LightAttack:
                     playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_2));
                     break;
                 case InputMemory.RightAttack:
-                    Debug.Log("Check");
+                    playerStateMachine.SwitchState(typeof(PlayerState_CatchChance));
                     break;
                 case InputMemory.Roll:
-                    playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+                    if(playerController.RollCount < 3)
+                        playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
                     break;
             }
         }
-        if (playerStateMachine.CanAcceptInput)
+        if (playerStateMachine.CanStateSwitch)
         {
             if (playerInput.Roll)
                 playerStateMachine.memory = InputMemory.Roll;

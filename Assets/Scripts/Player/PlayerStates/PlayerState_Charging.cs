@@ -26,6 +26,9 @@ public class PlayerState_Charging : PlayerState
     {
         base.LogicUpdate();
         SetAnimator_Update();
+        //计时
+        nowTime += Time.deltaTime * chargeSpeed;
+        //蓄力时的移动和站立
         if (chargeState < 3)
         {
             if (nowTime > playerController.ChargeMaxTime)
@@ -43,6 +46,9 @@ public class PlayerState_Charging : PlayerState
                 }
             }
         }
+        if (playerInput.Roll && playerController.RollCount < 3)
+            playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+
         if (playerInput.ChargeRelease)//TODO：体力限制
         {
             switch (chargeState)
@@ -79,9 +85,6 @@ public class PlayerState_Charging : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
-        //计时
-        nowTime += Time.deltaTime * chargeSpeed;
-        //蓄力时的移动和站立
         if (playerInput.WantsMove)
         {
             playerController.Charge_Move();
