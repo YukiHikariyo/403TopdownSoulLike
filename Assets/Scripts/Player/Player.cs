@@ -63,6 +63,8 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+        GameManager.Instance.player = this;
+
         playerData = GetComponent<PlayerData>();
 
         //TODO: 初始化Buff血量

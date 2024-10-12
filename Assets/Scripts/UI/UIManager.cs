@@ -26,6 +26,11 @@ public class UIManager : MonoSingleton<UIManager>
 
     [Space(16)]
 
+    public TextMeshProUGUI levelText;
+    public ExpBar expBar;
+
+    [Space(16)]
+
     public GameObject[] buffIcons;
     public PlayerBar[] buffBars;
 
