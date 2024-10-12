@@ -12,11 +12,13 @@ public class PlayerState_Molotov : PlayerState
         SetAnimator_OnStart();
         pa = playerStateMachine.playerTransform.position;
         pb = pa + playerStateMachine.MouseDistance;
+        playerStateMachine.magicEvent.AddListener(ShootMolotov);
     }
 
     public override void Exit()
     {
         base.Exit();
+        playerStateMachine.magicEvent.RemoveListener(ShootMolotov);
     }
 
     public override void LogicUpdate()
@@ -29,12 +31,8 @@ public class PlayerState_Molotov : PlayerState
     {
         base.PhysicUpdate();
     }
-    // 二阶贝塞尔曲线
-    public Vector3 quardaticBezier(Vector3 a, Vector3 b, Vector3 c, float t)
+    public void ShootMolotov()
     {
-        Vector3 aa = a + (b - a) * t;
-        Vector3 bb = b + (c - b) * t;
-        return aa + (bb - aa) * t;
+        shooter.Molotov(pa, pb,playerController.molotov_Y,playerController.deviation,playerController.molotovBottleCount);
     }
-
 }

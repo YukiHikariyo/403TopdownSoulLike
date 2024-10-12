@@ -24,6 +24,8 @@ public class PlayerStateMachine : StateMachine
     public Animator playerAnimator;
     public SpriteRenderer playerRenderer;
     public Player player;
+    public PlayerShooter shooter;
+
     public GameObject LightAtk_1;
     public GameObject LightAtk_2;
     public GameObject LightAtk_3;
@@ -38,6 +40,10 @@ public class PlayerStateMachine : StateMachine
     #region 预输入和后摇开始时刻
     public InputMemory memory;
     [Tooltip("是否允许状态切换")]public bool CanStateSwitch {  get; set; }
+    #endregion
+
+    #region 事件
+    [Tooltip("魔法中的发射事件")] public UnityEvent magicEvent;
     #endregion
     public float MouseDegree => mousedegree;
     public Vector3 MouseDistance => mouseDistance;
@@ -55,7 +61,7 @@ public class PlayerStateMachine : StateMachine
         playerTransform = transform;
         foreach (PlayerState playerState in stateTable)
         {
-            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4,BackAttack,RightAttack);
+            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,shooter,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4,BackAttack,RightAttack);
             dict.Add(playerState.GetType(), playerState);
         }
     }
@@ -117,6 +123,11 @@ public class PlayerStateMachine : StateMachine
     {
         CanStateSwitch = true;
     }
+    //魔法事件触发
+    public void MagicInvoke()
+    {
+        magicEvent?.Invoke();
+    }
     #region 受伤和死亡时触发的方法
     private void OnNoStun(Transform attacker)
     {
@@ -142,6 +153,7 @@ public class PlayerStateMachine : StateMachine
 
     }
     #endregion
+
 }
 
 

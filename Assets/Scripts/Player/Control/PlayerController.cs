@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float L4AtkSpeed;
     [SerializeField] public float LightAtkRotateAngle;
 
-    [Tooltip("鸡尾酒y轴增值")][Range(0, 32f)][SerializeField] public float Molotov_Y;
 
     [Header("翻滚计数与计时器")]
     [Tooltip("短时间连续翻滚计数")] public int RollCount;
@@ -36,7 +35,14 @@ public class PlayerController : MonoBehaviour
     [Tooltip("完美见切判定基础时间")][SerializeField] public float PerfectCheckTime;
     [Tooltip("见切移动速度")][SerializeField] private float catchChanceSpeed;
     [Tooltip("反击移动速度")][SerializeField] private float backAttackSpeed;
- 
+
+    #region 魔法相关参数
+    [Header("魔法相关参数")]
+    [Tooltip("生成燃烧弹数量")][SerializeField] public int molotovBottleCount;
+    [Tooltip("鸡尾酒y轴增值")][Range(0, 32f)][SerializeField] public float molotov_Y;
+    [Tooltip("落点偏差最大范围")][SerializeField] public float deviation;
+    #endregion
+
     [Header("运动曲线")]
     public AnimationCurve fastRollCruve;
     [Tooltip("翻滚运动曲线")]public AnimationCurve slowRollCruve;

@@ -14,6 +14,7 @@ public class PlayerState : ScriptableObject, IState
     protected Animator playerAnimator;
     protected SpriteRenderer playerRenderer;
     protected Player player;
+    protected PlayerShooter shooter;
     protected AttackArea backAttackArea;
 
     protected GameObject lightAtk_1;
@@ -44,6 +45,7 @@ public class PlayerState : ScriptableObject, IState
         Animator playerAnimator,
         SpriteRenderer playerRenderer,
         Player player,
+        PlayerShooter shooter,
         //攻击Trigger
         GameObject lightAtk_1,
         GameObject lightAtk_2,
@@ -59,6 +61,7 @@ public class PlayerState : ScriptableObject, IState
         this.playerAnimator = playerAnimator;
         this.playerRenderer = playerRenderer;
         this.player = player;
+        this.shooter = shooter;
         this.lightAtk_1 = lightAtk_1;
         this.lightAtk_2 = lightAtk_2;
         this.lightAtk_3 = lightAtk_3;
