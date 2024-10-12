@@ -1625,6 +1625,14 @@ PrefabInstance:
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 984842036}
+    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
+      propertyPath: stateTable.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
+      propertyPath: stateTable.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: a34f351db6704e1469ab7dcfe5d5ca18, type: 2}
     - target: {fileID: 1868925626516101975, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
