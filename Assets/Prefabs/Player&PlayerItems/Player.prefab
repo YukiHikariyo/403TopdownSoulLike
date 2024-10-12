@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 277152700494163732}
   - component: {fileID: 8852895256997032941}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BackAttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7048085151676669089}
   - component: {fileID: 2709651461605722984}
   - component: {fileID: 9029994547736868525}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: L1_AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   molotovBottle: {fileID: 4625383125543985840, guid: daa42cfb64548a949a85b9e2108dfde6, type: 3}
-  lightBullet: {fileID: 0}
+  flashBullet: {fileID: 0}
 --- !u!1 &3675674447321791799
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1486072955476079997}
   - component: {fileID: 1918943946575041276}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: L3_AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,6 +328,127 @@ PolygonCollider2D:
       - {x: 2.4302716, y: -0.50362486}
       - {x: 2.4418569, y: 0.65772843}
   m_UseDelaunayMesh: 0
+--- !u!1 &4844327483664022967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2649160735318460452}
+  - component: {fileID: 3651598282595405741}
+  - component: {fileID: 4166248118589477729}
+  - component: {fileID: 5257692238342260335}
+  m_Layer: 0
+  m_Name: BigLight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2649160735318460452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4844327483664022967}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1868925626516101975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &3651598282595405741
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4844327483664022967}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
+--- !u!114 &4166248118589477729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4844327483664022967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df03e243ebb4884296b9020d3f982d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  existTime: 8
+  nowTime: 0
+  radiusCruve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5257692238342260335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4844327483664022967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc5d252fc0b89944b72e3988ea49895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackerType: 0
+  player: {fileID: 4853331213230003033}
+  enemy: {fileID: 0}
+  causeBuffDamage: 0
+  directlyAssertBuff: 0
+  directBuffProbability: 0
+  isBullet: 0
+  ignoreDamageableIndex: 0
+  motionValueIndex: 0
+  attackPowerIndex: 0
+  buffMotionValueIndex: 0
+  buffType: 12
+  directBuffDuration: 0
+  noSourceDamage: 0
+  noSourcePenetratingPower: 0
+  noSourceBuffDamage: 0
+  damageInterval: 1
+  successEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5482889621539559982
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5782993702005240346}
   - component: {fileID: 1706224364095539509}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'L2_AttackRange '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5256080004609116474}
   - component: {fileID: 4870736366454727565}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: L4_AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1202046446127848913}
   - component: {fileID: 6381140241136995695}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightAttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,13 +826,14 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1452925528119431884}
+  - {fileID: 1774499579747135289}
   - {fileID: 7048085151676669089}
   - {fileID: 5782993702005240346}
   - {fileID: 1486072955476079997}
   - {fileID: 5256080004609116474}
   - {fileID: 277152700494163732}
   - {fileID: 1202046446127848913}
-  - {fileID: 1774499579747135289}
+  - {fileID: 2649160735318460452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5403204324394134040
@@ -768,22 +890,82 @@ MonoBehaviour:
   isEnduance: 0
   noStunEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1691327027149203749}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
+        m_MethodName: OnNoStun
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   smallStunEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1691327027149203749}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
+        m_MethodName: OnSmallStun
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   normalStunEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1691327027149203749}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
+        m_MethodName: OnNormalStun
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   bigStunEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1691327027149203749}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
+        m_MethodName: OnBigStun
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   foresightEvent:
     m_PersistentCalls:
       m_Calls: []
   deathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1691327027149203749}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
+        m_MethodName: OnDead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1691327027149203749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,8 +985,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d26821b8c6e5dde408ad7c24fc70c57a, type: 2}
   - {fileID: 11400000, guid: a3e6f2ee2d051d04f8ddf2b471ba56eb, type: 2}
   - {fileID: 11400000, guid: babf95d4323233b4e84f16aff96fa5de, type: 2}
-  - {fileID: 11400000, guid: 582b92721a61b964297e7f469e313717, type: 2}
-  - {fileID: 11400000, guid: 85ee91bc3774835459ae9cc168c794ed, type: 2}
   - {fileID: 11400000, guid: 9506f76c4ed0c3542b2acb47049468bf, type: 2}
   - {fileID: 11400000, guid: 1dd0d492991bae74189883ee8a0bd2b3, type: 2}
   - {fileID: 11400000, guid: 03ef76a2dd9b59641a1af355c9106075, type: 2}
@@ -815,20 +995,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fed61e08dd35b7f4eb2696c85c5d7357, type: 2}
   - {fileID: 11400000, guid: a3153a77ceed9d046ad673da515c4150, type: 2}
   - {fileID: 11400000, guid: eedb7b65163a90c45884f7511c961c6e, type: 2}
+  - {fileID: 11400000, guid: db51e86b294e5be4daf68c39e10b131e, type: 2}
   mouseDistance: {x: 0, y: 0, z: 0}
   CatchChancepoint: 0
   playerInput: {fileID: 4510489401662688001}
   playerController: {fileID: 5479772352610202664}
   playerAnimator: {fileID: 1766737477993462450}
   playerRenderer: {fileID: 6623208658060552808}
-  player: {fileID: 0}
-  shooter: {fileID: 0}
+  player: {fileID: 4853331213230003033}
+  shooter: {fileID: 2686144180939665577}
+  bigLight: {fileID: 0}
   LightAtk_1: {fileID: 3651964352988571409}
   LightAtk_2: {fileID: 5482889621539559982}
   LightAtk_3: {fileID: 3675674447321791799}
   LightAtk_4: {fileID: 6895493916325047608}
-  BackAttack: {fileID: 0}
-  RightAttack: {fileID: 0}
+  BackAttack: {fileID: 569799687572723538}
+  RightAttack: {fileID: 6988962383995051784}
   memory: 0
   magicEvent:
     m_PersistentCalls:
@@ -858,17 +1040,19 @@ MonoBehaviour:
   LightAtkRotateAngle: 60
   RollCount: 0
   RollTimer: 0
-  RollColdDown: 0
-  ChargeMaxTime: 0
-  ChargeSpeedFix: 0
-  RightAttackSpeed: 0
+  RollColdDown: 5
+  ChargeMaxTime: 2.5
+  ChargeSpeedFix: 0.6
+  RightAttackSpeed: 10
   UnDamageableLeftTime: 0
   PerfectCheckTime: 0
-  catchChanceSpeed: 0
-  backAttackSpeed: 0
-  molotovBottleCount: 0
-  molotov_Y: 0
-  deviation: 0
+  catchChanceSpeed: 15
+  backAttackSpeed: 20
+  molotovBottleCount: 3
+  molotov_Y: 5
+  deviation: 2
+  FlashBangExistTime: 0
+  FlashBangSpeed: 0
   fastRollCruve:
     serializedVersion: 2
     m_Curve:
@@ -1277,7 +1461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d86b34aa60ed8d40899c35afcff6d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4853331213230003033}
   basicMaxHealth: 0
   currentHealth: 0
   basicMaxMana: 0
