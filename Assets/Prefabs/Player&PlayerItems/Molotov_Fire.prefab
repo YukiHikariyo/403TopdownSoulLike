@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2719375960849478017}
   - component: {fileID: 3809450679605315325}
   - component: {fileID: 1161437828205973080}
+  - component: {fileID: 2203780396935645959}
   - component: {fileID: 844462989583917460}
   m_Layer: 7
   m_Name: Molotov_Fire
@@ -47,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509bff2c675c65e489235f583eb14b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  attackArea: {fileID: 0}
+  animator: {fileID: 2203780396935645959}
+  attackArea: {fileID: 844462989583917460}
   existTime: 0
 --- !u!212 &3809450679605315325
 SpriteRenderer:
@@ -137,6 +138,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
+--- !u!95 &2203780396935645959
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110796232140402944}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &844462989583917460
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class PlayerShooter : MonoBehaviour
 {
     [Header("子弹")]
     [Tooltip("燃烧瓶")] public GameObject molotovBottle;
-    [Tooltip("炫目光束")] public GameObject lightBullet;
+    [Tooltip("炫目光束")] public GameObject flashBullet;
     private void Awake()
     {
         
@@ -22,8 +22,14 @@ public class PlayerShooter : MonoBehaviour
             Vector3 bpoint = (start + target)/2 + new Vector3(0,add_y,0);
             MolotovBottle obj = molotovBottle.GetComponent<MolotovBottle>();
             obj.A = start;  obj.B = bpoint; obj.C = target;
-            Instantiate(molotovBottle,transform);
+            Instantiate(molotovBottle);
         }
     }
-    
+    //发射闪光弹，提供发射方向，最长存在时间，发射速度
+    public void FlashBang(Vector3 direction,float existTime,float speed)
+    {
+        FlashBang_Bullet obj = flashBullet.GetComponent<FlashBang_Bullet>();
+        obj.mouse = direction;  obj.existTime = existTime;  obj.bulletSpeed = speed;
+        Instantiate(flashBullet);
+    }
 }

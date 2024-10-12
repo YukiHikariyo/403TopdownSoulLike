@@ -1,27 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/Molotov",fileName = "PlayerState_Molotov")]
-public class PlayerState_Molotov : PlayerState
-{
-    Vector3 pa, pb;
 
+[CreateAssetMenu(menuName = "Data/PlayerState/FlashBang", fileName = "PlayerState_FlashBang")]
+
+public class PlayerState_FlashBang : PlayerState
+{
     public override void Enter()
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
         SetAnimator_OnStart();
-        playerAnimator.Play("Molotov");
-        pa = playerStateMachine.playerTransform.position;
-        pb = pa + playerStateMachine.MouseDistance;
-        playerStateMachine.magicEvent.AddListener(ShootMolotov);
+        playerAnimator.Play("FlashBang");
+        playerStateMachine.magicEvent.AddListener(ShootFlashBang);
     }
 
     public override void Exit()
     {
         base.Exit();
-        playerStateMachine.magicEvent.RemoveListener(ShootMolotov);
+        playerStateMachine.magicEvent.RemoveListener(ShootFlashBang);
     }
 
     public override void LogicUpdate()
@@ -32,16 +30,16 @@ public class PlayerState_Molotov : PlayerState
             if (playerInput.Roll)
                 playerStateMachine.memory = InputMemory.Roll;
 
-            if(playerInput.LightAttack)
+            if (playerInput.LightAttack)
                 playerStateMachine.memory = InputMemory.LightAttack;
         }
         if (playerStateMachine.CanStateSwitch)
         {
-            if(playerStateMachine.memory == InputMemory.Roll && playerController.RollCount < 3)
+            if (playerStateMachine.memory == InputMemory.Roll && playerController.RollCount < 3)
             {
                 playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
             }
-            else if(playerStateMachine.memory == InputMemory.LightAttack)
+            else if (playerStateMachine.memory == InputMemory.LightAttack)
             {
                 playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
             }
@@ -65,8 +63,9 @@ public class PlayerState_Molotov : PlayerState
     {
         base.PhysicUpdate();
     }
-    public void ShootMolotov()
+    
+    public void ShootFlashBang()
     {
-        shooter.Molotov(pa, pb,playerController.molotov_Y,playerController.deviation,playerController.molotovBottleCount);
+        shooter.FlashBang(playerStateMachine.MouseDistance,playerController.FlashBangExistTime,playerController.FlashBangSpeed);
     }
 }

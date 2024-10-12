@@ -25,22 +25,25 @@ public class PlayerController : MonoBehaviour
     [Tooltip("短时间连续翻滚最短间隔")] public float RollColdDown;
 
     [Header("蓄力重击相关属性")]
-    [Tooltip("基础蓄力时间")][SerializeField] public float ChargeMaxTime;
-    [Tooltip("蓄力时移动速度倍率，速度基值为移动速度")][SerializeField] public float ChargeSpeedFix;
-    [Tooltip("重击移动速度")][SerializeField] public float RightAttackSpeed;
+    [Tooltip("基础蓄力时间（每段）")] public float ChargeMaxTime;
+    [Tooltip("蓄力时移动速度倍率，速度基值为移动速度")] public float ChargeSpeedFix;
+    [Tooltip("重击移动速度")] public float RightAttackSpeed;
     //蓄力基础速度为1/1s，蓄力时间为从开始到满蓄的时间
 
     [Header("见切相关属性")]
-    [Tooltip("无敌帧持续基础时间")][SerializeField] public float UnDamageableLeftTime;
-    [Tooltip("完美见切判定基础时间")][SerializeField] public float PerfectCheckTime;
+    [Tooltip("无敌帧持续基础时间")]  public float UnDamageableLeftTime;
+    [Tooltip("完美见切判定基础时间")] public float PerfectCheckTime;
     [Tooltip("见切移动速度")][SerializeField] private float catchChanceSpeed;
     [Tooltip("反击移动速度")][SerializeField] private float backAttackSpeed;
 
     #region 魔法相关参数
     [Header("魔法相关参数")]
-    [Tooltip("生成燃烧弹数量")][SerializeField] public int molotovBottleCount;
-    [Tooltip("鸡尾酒y轴增值")][Range(0, 32f)][SerializeField] public float molotov_Y;
-    [Tooltip("落点偏差最大范围")][SerializeField] public float deviation;
+    [Tooltip("生成燃烧弹数量")]public int molotovBottleCount;
+    [Tooltip("鸡尾酒y轴增值")][Range(0, 32f)]public float molotov_Y;
+    [Tooltip("落点偏差最大范围")]public float deviation;
+    [Space(16)]
+    [Tooltip("闪光弹最长存在时间")][Range(0, 10f)]public float FlashBangExistTime;
+    [Tooltip("闪光弹移动速度")]public float FlashBangSpeed;
     #endregion
 
     [Header("运动曲线")]

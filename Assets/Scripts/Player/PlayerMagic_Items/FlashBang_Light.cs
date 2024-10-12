@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Molotov_Fire : MonoBehaviour
+public class FlashBang_Light : MonoBehaviour
 {
     public Animator animator;
-    public AttackArea attackArea;
+    GameObject damageArea;
     public float existTime;
     private float nowTime;
+    private float animationLength;
     private void Start()
     {
         nowTime = 0;
-        existTime = animator.GetCurrentAnimatorClipInfo(0).Length;
+        animationLength = animator.GetCurrentAnimatorClipInfo(0).Length;
     }
     private void Update()
     {
         nowTime += Time.deltaTime;
+        if(nowTime > animationLength)
+        {
+            damageArea.SetActive(false);
+        }
         if (nowTime > existTime)
         {
             Destroy(gameObject);
