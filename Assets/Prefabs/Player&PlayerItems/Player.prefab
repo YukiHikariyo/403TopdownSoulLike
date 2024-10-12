@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &277152700494163732
 Transform:
   m_ObjectHideFlags: 0
@@ -76,11 +76,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
+    - - {x: 4, y: 0.3}
+      - {x: 0.2, y: 1}
+      - {x: 0.2, y: -1}
+      - {x: 4, y: -0.3}
   m_UseDelaunayMesh: 0
 --- !u!1 &3651964352988571409
 GameObject:
@@ -159,12 +158,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.2}
-      - {x: 0, y: -0.2}
-      - {x: 0.85276115, y: -1.5800922}
-      - {x: 2.0771062, y: -0.5620951}
-      - {x: 2.0785003, y: 0.56437194}
-      - {x: 0.7692559, y: 1.5695338}
+    - - {x: 0.1, y: 0.2}
+      - {x: 0.1, y: -0.2}
+      - {x: 0.65, y: -1.5}
+      - {x: 1.5, y: -1.1}
+      - {x: 2, y: -0.4}
+      - {x: 2, y: 0.4}
+      - {x: 1.5, y: 1.1}
+      - {x: 0.65, y: 1.5}
   m_UseDelaunayMesh: 0
 --- !u!114 &9029994547736868525
 MonoBehaviour:
@@ -207,6 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1774499579747135289}
+  - component: {fileID: 2686144180939665577}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Untagged
@@ -229,6 +231,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1868925626516101975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2686144180939665577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674378244518153506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75dc338e80f1c9742b0138ae5b9652e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  molotovBottle: {fileID: 4625383125543985840, guid: daa42cfb64548a949a85b9e2108dfde6, type: 3}
+  lightBullet: {fileID: 0}
 --- !u!1 &3675674447321791799
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,10 +321,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5}
-      - {x: 0, y: -0.5}
-      - {x: 2.5, y: -1.5}
-      - {x: 2.5, y: 1.5}
+    - - {x: 1.1978619, y: 1.3}
+      - {x: 0.2, y: 0.5}
+      - {x: 0.2, y: -0.5}
+      - {x: 1.2324532, y: -1.3}
+      - {x: 2.4302716, y: -0.50362486}
+      - {x: 2.4418569, y: 0.65772843}
   m_UseDelaunayMesh: 0
 --- !u!1 &5482889621539559982
 GameObject:
@@ -386,12 +404,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.7862282, y: 1.6506181}
-      - {x: 0, y: 0.2}
-      - {x: 0, y: -0.2}
-      - {x: 0.75377893, y: -1.5438988}
-      - {x: 2.149984, y: -0.71878046}
-      - {x: 2.149984, y: 0.9437561}
+    - - {x: 0.1, y: 0.2}
+      - {x: 0.1, y: -0.2}
+      - {x: 0.65, y: -1.5}
+      - {x: 1.5, y: -1.1}
+      - {x: 2, y: -0.4}
+      - {x: 2, y: 0.4}
+      - {x: 1.5, y: 1.1}
+      - {x: 0.65, y: 1.5}
   m_UseDelaunayMesh: 0
 --- !u!1 &5602013492268978419
 GameObject:
@@ -420,7 +440,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1868925626516101975}
@@ -555,10 +575,12 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0, y: 0.2}
       - {x: 0, y: -0.2}
-      - {x: 0.4, y: -2}
-      - {x: 2.6, y: -0.9}
-      - {x: 2.6, y: 0.9}
-      - {x: 0.4, y: 2}
+      - {x: 0.4, y: -2.3}
+      - {x: 2, y: -2}
+      - {x: 3.3, y: -0.9}
+      - {x: 3.3, y: 0.9}
+      - {x: 2, y: 2}
+      - {x: 0.4, y: 2.3}
   m_UseDelaunayMesh: 0
 --- !u!1 &6988962383995051784
 GameObject:
@@ -576,7 +598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1202046446127848913
 Transform:
   m_ObjectHideFlags: 0
@@ -621,7 +643,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -636,11 +658,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
+    - - {x: 0, y: 0.2}
+      - {x: 0, y: -0.2}
+      - {x: 0.4, y: -2.3}
+      - {x: 2, y: -2}
+      - {x: 3, y: -0.97086805}
+      - {x: 3, y: 0.7582637}
+      - {x: 2, y: 2}
+      - {x: 0.4, y: 2.3}
   m_UseDelaunayMesh: 0
 --- !u!1 &7469118394858538438
 GameObject:
@@ -772,7 +797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_camera: {fileID: 0}
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 1868925626516101975}
   mousedegree: 0
   stateTable:
   - {fileID: 11400000, guid: d26821b8c6e5dde408ad7c24fc70c57a, type: 2}
@@ -786,6 +811,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 495803d38fd1c224b8a6c1547f8962ec, type: 2}
   - {fileID: 11400000, guid: c1aef5595eb49a145bb4c62de528cd59, type: 2}
   - {fileID: 11400000, guid: 02d3ff418d0d2944884af0396e313a1b, type: 2}
+  - {fileID: 11400000, guid: fed61e08dd35b7f4eb2696c85c5d7357, type: 2}
+  - {fileID: 11400000, guid: fed61e08dd35b7f4eb2696c85c5d7357, type: 2}
+  - {fileID: 11400000, guid: a3153a77ceed9d046ad673da515c4150, type: 2}
+  - {fileID: 11400000, guid: eedb7b65163a90c45884f7511c961c6e, type: 2}
   mouseDistance: {x: 0, y: 0, z: 0}
   CatchChancepoint: 0
   playerInput: {fileID: 4510489401662688001}
@@ -793,6 +822,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 1766737477993462450}
   playerRenderer: {fileID: 6623208658060552808}
   player: {fileID: 0}
+  shooter: {fileID: 0}
   LightAtk_1: {fileID: 3651964352988571409}
   LightAtk_2: {fileID: 5482889621539559982}
   LightAtk_3: {fileID: 3675674447321791799}
@@ -800,6 +830,9 @@ MonoBehaviour:
   BackAttack: {fileID: 0}
   RightAttack: {fileID: 0}
   memory: 0
+  magicEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5479772352610202664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,7 +856,6 @@ MonoBehaviour:
   L3AtkSpeed: 8
   L4AtkSpeed: 20
   LightAtkRotateAngle: 60
-  Molotov_Y: 0
   RollCount: 0
   RollTimer: 0
   RollColdDown: 0
@@ -834,6 +866,9 @@ MonoBehaviour:
   PerfectCheckTime: 0
   catchChanceSpeed: 0
   backAttackSpeed: 0
+  molotovBottleCount: 0
+  molotov_Y: 0
+  deviation: 0
   fastRollCruve:
     serializedVersion: 2
     m_Curve:

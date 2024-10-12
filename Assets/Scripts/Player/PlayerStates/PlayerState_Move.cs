@@ -19,6 +19,11 @@ public class PlayerState_Move : PlayerState
         SetAnimator_Update();
         //TODO:耐力限制
 
+        if (playerInput.Magic_2)
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
+        }
+
         if (playerInput.RightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_Charging));
 

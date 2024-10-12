@@ -129,26 +129,26 @@ public class PlayerStateMachine : StateMachine
         magicEvent?.Invoke();
     }
     #region 受伤和死亡时触发的方法
-    private void OnNoStun(Transform attacker)
+    public void OnNoStun(Transform attacker)
     {
 
     }
 
-    private void OnSmallStun(Transform attacker)
+    public void OnSmallStun(Transform attacker)
     {
 
     }
 
-    private void OnNormalStun(Transform attacker)
+    public void OnNormalStun(Transform attacker)
     {
 
     }
 
-    private void OnBigStun(Transform attacker)
+    public void OnBigStun(Transform attacker)
     {
 
     }
-    private void OnDead()
+    public void OnDead()
     {
 
     }

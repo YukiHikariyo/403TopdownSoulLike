@@ -24,7 +24,38 @@ public class PlayerState_Molotov : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (playerStateMachine.CanAcceptInput)
+        {
+            if (playerInput.Roll)
+                playerStateMachine.memory = InputMemory.Roll;
 
+            if(playerInput.LightAttack)
+                playerStateMachine.memory = InputMemory.LightAttack;
+        }
+        if (playerStateMachine.CanStateSwitch)
+        {
+            if(playerStateMachine.memory == InputMemory.Roll && playerController.RollCount < 3)
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+            }
+            else if(playerStateMachine.memory == InputMemory.LightAttack)
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
+            }
+        }
+        if (IsAnimationEnd)
+        {
+            //切换至移动
+            if (playerInput.WantsMove)
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_Move));
+            }
+            //切换至常态
+            if (!playerInput.WantsMove)
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_Idle));
+            }
+        }
     }
 
     public override void PhysicUpdate()

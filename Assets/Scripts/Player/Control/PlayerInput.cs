@@ -45,7 +45,11 @@ public class PlayerInput : MonoBehaviour
 
     public bool ChargeRelease => input.Player.RightAttack.WasReleasedThisFrame();
 
+    public bool Magic_1 => input.Player.Magic_1.WasPressedThisFrame();
 
+    public bool Magic_2 => input.Player.Magic_2.WasPressedThisFrame();
+
+    public bool Magic_3 => input.Player.Magic_3.WasPressedThisFrame();
     public bool Roll => input.Player.Roll.WasPressedThisFrame();
     #endregion
 

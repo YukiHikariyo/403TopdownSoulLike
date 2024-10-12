@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MolotovBottle : MonoBehaviour
 {
+    public GameObject fire;
     public Vector3 A, B, C;
     [Range(0,10)]public float existTime;
     public float nowTime = 0;
@@ -33,6 +34,6 @@ public class MolotovBottle : MonoBehaviour
     }
     private void OnDestroy()
     {
-        
+        Instantiate(fire);
     }
 }

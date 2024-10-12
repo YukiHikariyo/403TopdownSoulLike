@@ -23,6 +23,10 @@ public class PlayerState_Idle : PlayerState
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Move));
         }
+        if (playerInput.Magic_2)
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
+        }
         //TODO:耐力限制
         if (playerInput.RightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_Charging));

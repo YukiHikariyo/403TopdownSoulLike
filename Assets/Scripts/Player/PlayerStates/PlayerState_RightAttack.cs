@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Date/PlayerState/RightAttack", fileName = "PlayerState_RightAttack")]
+[CreateAssetMenu(menuName = "Data/PlayerState/RightAttack", fileName = "PlayerState_RightAttack")]
 public class PlayerState_RightAttack : PlayerState
 {
     public override void Enter()

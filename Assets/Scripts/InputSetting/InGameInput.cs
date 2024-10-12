@@ -89,6 +89,33 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Magic_1"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba04cbc6-ce6a-4f21-a5c2-d4e52c1fc257"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Magic_2"",
+                    ""type"": ""Button"",
+                    ""id"": ""229897ab-85e2-423c-92a3-768c4b3b254b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Magic_3"",
+                    ""type"": ""Button"",
+                    ""id"": ""78e29d6a-4edc-4580-9785-108ee4ec4ccd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -168,6 +195,39 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40935cd8-e473-4efe-8bee-d1be001f7c8e"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magic_1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""350baab8-6397-4f17-b698-8dad04937e21"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magic_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b693e354-a223-4faa-a146-62048641b554"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magic_3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -195,6 +255,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
         m_Player_RightAttack = m_Player.FindAction("RightAttack", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
+        m_Player_Magic_1 = m_Player.FindAction("Magic_1", throwIfNotFound: true);
+        m_Player_Magic_2 = m_Player.FindAction("Magic_2", throwIfNotFound: true);
+        m_Player_Magic_3 = m_Player.FindAction("Magic_3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -263,6 +326,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LightAttack;
     private readonly InputAction m_Player_RightAttack;
     private readonly InputAction m_Player_Roll;
+    private readonly InputAction m_Player_Magic_1;
+    private readonly InputAction m_Player_Magic_2;
+    private readonly InputAction m_Player_Magic_3;
     public struct PlayerActions
     {
         private @InGameInput m_Wrapper;
@@ -274,6 +340,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputAction @RightAttack => m_Wrapper.m_Player_RightAttack;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
+        public InputAction @Magic_1 => m_Wrapper.m_Player_Magic_1;
+        public InputAction @Magic_2 => m_Wrapper.m_Player_Magic_2;
+        public InputAction @Magic_3 => m_Wrapper.m_Player_Magic_3;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -304,6 +373,15 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             @Roll.started += instance.OnRoll;
             @Roll.performed += instance.OnRoll;
             @Roll.canceled += instance.OnRoll;
+            @Magic_1.started += instance.OnMagic_1;
+            @Magic_1.performed += instance.OnMagic_1;
+            @Magic_1.canceled += instance.OnMagic_1;
+            @Magic_2.started += instance.OnMagic_2;
+            @Magic_2.performed += instance.OnMagic_2;
+            @Magic_2.canceled += instance.OnMagic_2;
+            @Magic_3.started += instance.OnMagic_3;
+            @Magic_3.performed += instance.OnMagic_3;
+            @Magic_3.canceled += instance.OnMagic_3;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -329,6 +407,15 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             @Roll.started -= instance.OnRoll;
             @Roll.performed -= instance.OnRoll;
             @Roll.canceled -= instance.OnRoll;
+            @Magic_1.started -= instance.OnMagic_1;
+            @Magic_1.performed -= instance.OnMagic_1;
+            @Magic_1.canceled -= instance.OnMagic_1;
+            @Magic_2.started -= instance.OnMagic_2;
+            @Magic_2.performed -= instance.OnMagic_2;
+            @Magic_2.canceled -= instance.OnMagic_2;
+            @Magic_3.started -= instance.OnMagic_3;
+            @Magic_3.performed -= instance.OnMagic_3;
+            @Magic_3.canceled -= instance.OnMagic_3;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -364,5 +451,8 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         void OnLightAttack(InputAction.CallbackContext context);
         void OnRightAttack(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
+        void OnMagic_1(InputAction.CallbackContext context);
+        void OnMagic_2(InputAction.CallbackContext context);
+        void OnMagic_3(InputAction.CallbackContext context);
     }
 }
