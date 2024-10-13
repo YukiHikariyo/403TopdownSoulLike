@@ -38,25 +38,11 @@ public class AttackArea : MonoBehaviour
     [Tooltip("无来源穿透力")] public float noSourcePenetratingPower;
     [Tooltip("无来源属性伤害")] public float noSourceBuffDamage;
     [Space(16)]
-    [Tooltip("判定间隔")] public float damageInterval = 1;
-    private float timer;
-    [Space(16)]
     [Tooltip("成功造成伤害后触发的事件")] public UnityEvent<IDamageable> successEvent;
-
-    private void OnEnable()
-    {
-        timer = 0;
-    }
-
-    private void Update()
-    {
-        if (timer > 0)
-            timer -= Time.deltaTime;
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (timer <= 0 && collision.TryGetComponent<IDamageable>(out IDamageable component))
+        if (collision.TryGetComponent<IDamageable>(out IDamageable component))
         {
             IDamageable damageable = component;
             bool isSuccessful = false;
@@ -114,8 +100,6 @@ public class AttackArea : MonoBehaviour
                 default:
                     break;
             }
-
-            timer = damageInterval;
         }
     }
 
