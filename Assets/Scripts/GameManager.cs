@@ -17,7 +17,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     #region 经验与等级
 
-    private int CalculateExpByLevel() => Mathf.RoundToInt((level + 24) * (level + 24) * 0.17f + (level - 4) * 2);
+    private int CalculateExpByLevel() => Mathf.RoundToInt((level + 25) * (level + 25) * 0.17f + (level - 3) * 2);
 
     public int ExpNumber() => exp;
 
@@ -27,13 +27,13 @@ public class GameManager : MonoSingleton<GameManager>
             return;
 
         int times = 0;
-        int maxExp = CalculateExpByLevel();
 
         exp += number;
-        while (exp >= maxExp)
+        while (exp >= CalculateExpByLevel())
         {
-            exp = exp - maxExp;
+            exp = exp - CalculateExpByLevel();
             level++;
+            SkillManager.Instance.skillPoint++;
             times++;
             if (level >= 85)
             {
@@ -43,10 +43,16 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         if (times == 0)
-            UIManager.Instance.expBar.OnExpUp(exp, maxExp);
+            UIManager.Instance.expBar.OnExpUp(exp, CalculateExpByLevel());
         else
-            UIManager.Instance.expBar.OnLevelUp(exp, maxExp, times, level);
+            UIManager.Instance.expBar.OnLevelUp(exp, CalculateExpByLevel(), times, level);
     }
+
+    [ContextMenu("获得50经验")]
+    public void Get50Exp() => GetExp(50);
+
+    [ContextMenu("获得300经验")]
+    public void Get200Exp() => GetExp(300);
 
     #endregion
 }
