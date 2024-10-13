@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName ="Data/PlayerState/SmallStun",fileName ="PlayerState_SmallStun")]
+[CreateAssetMenu(menuName ="Data/PlayerState/SmallStun",fileName ="PlayerState_SmallStun",order = 14)]
 public class PlayerState_SmallStun : PlayerState
 {
     public override void Enter()

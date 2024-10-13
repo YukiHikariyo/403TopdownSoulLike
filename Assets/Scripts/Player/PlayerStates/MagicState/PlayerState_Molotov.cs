@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/Molotov",fileName = "PlayerState_Molotov")]
+[CreateAssetMenu(menuName = "Data/PlayerState/Molotov",fileName = "PlayerState_Molotov",order = 11)]
 public class PlayerState_Molotov : PlayerState
 {
     Vector3 pa, pb;

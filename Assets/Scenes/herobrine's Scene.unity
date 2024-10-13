@@ -1545,11 +1545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2035591974 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4844327483664022967, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-  m_PrefabInstance: {fileID: 288091662891651692}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &288091662891651692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1559,37 +1554,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: bigLight
-      value: 
-      objectReference: {fileID: 2035591974}
-    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 984842036}
-    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: stateTable.Array.size
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: stateTable.Array.data[10]
-      value: 
-      objectReference: {fileID: 11400000, guid: a3153a77ceed9d046ad673da515c4150, type: 2}
-    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: stateTable.Array.data[11]
-      value: 
-      objectReference: {fileID: 11400000, guid: eedb7b65163a90c45884f7511c961c6e, type: 2}
-    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: stateTable.Array.data[12]
-      value: 
-      objectReference: {fileID: 11400000, guid: db51e86b294e5be4daf68c39e10b131e, type: 2}
-    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: stateTable.Array.data[13]
-      value: 
-      objectReference: {fileID: 11400000, guid: a34f351db6704e1469ab7dcfe5d5ca18, type: 2}
-    - target: {fileID: 1691327027149203749, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: stateTable.Array.data[14]
-      value: 
-      objectReference: {fileID: 11400000, guid: fed61e08dd35b7f4eb2696c85c5d7357, type: 2}
     - target: {fileID: 1868925626516101975, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1629,26 +1596,6 @@ PrefabInstance:
     - target: {fileID: 1868925626516101975, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4844327483664022967, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479772352610202664, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: deviation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479772352610202664, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: molotov_Y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479772352610202664, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: FlashBangSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479772352610202664, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
-      propertyPath: FlashBangExistTime
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7469118394858538438, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
       propertyPath: m_Name

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/FirstRoll", fileName = "PlayerState_FirstRoll")]
+[CreateAssetMenu(menuName = "Data/PlayerState/FirstRoll", fileName = "PlayerState_FirstRoll",order = 2)]
 public class PlayerState_FirstRoll : PlayerState
 {
 

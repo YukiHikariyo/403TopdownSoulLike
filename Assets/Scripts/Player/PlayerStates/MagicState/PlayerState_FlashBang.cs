@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/PlayerState/FlashBang", fileName = "PlayerState_FlashBang")]
+[CreateAssetMenu(menuName = "Data/PlayerState/FlashBang", fileName = "PlayerState_FlashBang",order = 12)]
 
 public class PlayerState_FlashBang : PlayerState
 {

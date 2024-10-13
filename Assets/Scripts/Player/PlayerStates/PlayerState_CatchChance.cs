@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/CatchChance", fileName = "PlayerState_CatchChance")]
+[CreateAssetMenu(menuName = "Data/PlayerState/CatchChance", fileName = "PlayerState_CatchChance",order = 8)]
 public class PlayerState_CatchChance : PlayerState
 {
     public float UnDamageableStartTime;

@@ -2,7 +2,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/Charging", fileName = "PlayerState_Charging")]
+[CreateAssetMenu(menuName = "Data/PlayerState/Charging", fileName = "PlayerState_Charging",order = 9)]
 public class PlayerState_Charging : PlayerState
 {
     float chargeSpeed = 1.0f;

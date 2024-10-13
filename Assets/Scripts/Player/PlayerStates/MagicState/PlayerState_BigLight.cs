@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/PlayerState/BigLight", fileName = "PlayerState_BigLight")]
+[CreateAssetMenu(menuName = "Data/PlayerState/BigLight", fileName = "PlayerState_BigLight",order = 13)]
 public class PlayerState_BigLight : PlayerState
 {
     public override void Enter()

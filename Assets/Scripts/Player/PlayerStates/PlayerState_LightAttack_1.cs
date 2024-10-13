@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/LightAttack_1", fileName = "PlayerState_LightAttack_1")]
+[CreateAssetMenu(menuName = "Data/PlayerState/LightAttack_1", fileName = "PlayerState_LightAttack_1",order =3)]
 
 public class PlayerState_LightAttack_1 : PlayerState
 {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/PlayerState/LightAttack_4", fileName = "PlayerState_LightAttack_4")]
+[CreateAssetMenu(menuName = "Data/PlayerState/LightAttack_4", fileName = "PlayerState_LightAttack_4",order = 6)]
 public class PlayerState_LightAttack_4 : PlayerState
 {
     float degree;
