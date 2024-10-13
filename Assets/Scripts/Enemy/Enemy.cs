@@ -155,10 +155,11 @@ public class Enemy : MonoBehaviour, IDamageable
     private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTask>> OnBuffFunc = new();
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
 
-    private float[] maxBuffHealth = new float[1] { 100 };
     private float[] currentBuffHealth = new float[1];
     private float[] buffHealthReduceRate = new float[1] { 100 };
     private bool[] isBuffStay = new bool[1];
+
+    private float buffDamageTimer;
 
     [Space(16)]
     [Header("受击事件")]
@@ -213,6 +214,9 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         //currentSubSM.LogicUpdate();
         buffAction?.Invoke();
+
+        if (buffDamageTimer > 0)
+            buffDamageTimer -= Time.deltaTime;
     }
 
     #endregion
@@ -284,6 +288,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public bool TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
+        if (buffDamageTimer > 0)
+            return false;
+
         int buffIndex = buffType switch
         {
             BuffType.LightBurst => 0,
@@ -296,11 +303,12 @@ public class Enemy : MonoBehaviour, IDamageable
             if (damageableIndex == 0 || ignoreDamageableIndex)
             {
                 currentBuffHealth[buffIndex] += damage;
-                if (currentBuffHealth[buffIndex] > maxBuffHealth[buffIndex])
+                if (currentBuffHealth[buffIndex] > 100)
                 {
-                    currentBuffHealth[buffIndex] = maxBuffHealth[buffIndex];
+                    currentBuffHealth[buffIndex] = 100;
                     GetBuff(buffType);
 
+                    buffDamageTimer = 1;
                     return true;
                 }
             }
@@ -374,6 +382,30 @@ public class Enemy : MonoBehaviour, IDamageable
             buffAction -= currentBuffDict[buffType].OnBuffStay;
             currentBuffDict[buffType].OnBuffExit();
             currentBuffDict.Remove(buffType);
+        }
+    }
+
+    public void BuffHealthAction()
+    {
+        for (int i = 0; i < currentBuffHealth.Length; i++)
+        {
+            if (currentBuffHealth[i] > 0 && !isBuffStay[i])
+            {
+                currentBuffHealth[i] -= 2.5f * Time.deltaTime;
+
+                if (currentBuffHealth[i] <= 0)
+                    currentBuffHealth[i] = 0;
+            }
+            else if (currentBuffHealth[i] > 0 && isBuffStay[i])
+            {
+                currentBuffHealth[i] -= buffHealthReduceRate[i] * Time.deltaTime;
+
+                if (currentBuffHealth[i] <= 0)
+                {
+                    currentBuffHealth[i] = 0;
+                    isBuffStay[i] = false;
+                }
+            }
         }
     }
 

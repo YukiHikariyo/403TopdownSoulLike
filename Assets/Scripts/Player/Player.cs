@@ -33,10 +33,11 @@ public class Player : MonoBehaviour, IDamageable
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
     private PlayerBar[] buffBars;
 
-    private float[] maxBuffHealth = new float[3] { 100, 100, 100 };
     public float[] currentBuffHealth = new float[3];
     private float[] buffHealthReduceRate = new float[3] { 10, 40, 100 };
     private bool[] isBuffStay = new bool[3];
+
+    private float buffDamageTimer;
 
     [Space(16)]
     [Header("受击事件")]
@@ -74,7 +75,10 @@ public class Player : MonoBehaviour, IDamageable
     private void Update()
     {
         buffAction?.Invoke();
-        BuffBarAction();
+        BuffHealthAction();
+
+        if (buffDamageTimer > 0)
+            buffDamageTimer -= Time.deltaTime;
     }
 
     #endregion
@@ -129,6 +133,9 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
+        if (buffDamageTimer > 0)
+            return false;
+
         int buffBarIndex = buffType switch
         {
             BuffType.Cold => 0,
@@ -147,15 +154,16 @@ public class Player : MonoBehaviour, IDamageable
                     buffBar.gameObject.SetActive(true);
 
                 currentBuffHealth[buffBarIndex] += damage;
-                buffBar.OnCurrentValueChange(currentBuffHealth[buffBarIndex], maxBuffHealth[buffBarIndex], true);
+                buffBar.OnCurrentValueChange(currentBuffHealth[buffBarIndex], 100, true);
 
-                if (currentBuffHealth[buffBarIndex] >= maxBuffHealth[buffBarIndex])
+                if (currentBuffHealth[buffBarIndex] >= 100)
                 {
-                    currentBuffHealth[buffBarIndex] = maxBuffHealth[buffBarIndex];
+                    currentBuffHealth[buffBarIndex] = 100;
                     isBuffStay[buffBarIndex] = true;
                     GetBuff(buffType);
                 }
 
+                buffDamageTimer = 1;
                 return true;
             }
         }
@@ -242,14 +250,14 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    public void BuffBarAction()
+    public void BuffHealthAction()
     {
-        for (int i = 0; i < buffBars.Length; i++)
+        for (int i = 0; i < currentBuffHealth.Length; i++)
         {
             if (currentBuffHealth[i] > 0 && !isBuffStay[i])
             {
-                currentBuffHealth[i] -= 5 * Time.deltaTime;
-                buffBars[i].OnCurrentValueChange(currentBuffHealth[i], maxBuffHealth[i], true);
+                currentBuffHealth[i] -= 2.5f * Time.deltaTime;
+                buffBars[i].OnCurrentValueChange(currentBuffHealth[i], 100, true);
 
                 if (currentBuffHealth[i] <= 0)
                 {
@@ -260,7 +268,7 @@ public class Player : MonoBehaviour, IDamageable
             else if (currentBuffHealth[i] > 0 && isBuffStay[i])
             {
                 currentBuffHealth[i] -= buffHealthReduceRate[i] * Time.deltaTime;
-                buffBars[i].OnCurrentValueChange(currentBuffHealth[i], maxBuffHealth[i], true);
+                buffBars[i].OnCurrentValueChange(currentBuffHealth[i], 100, true);
 
                 if (currentBuffHealth[i] <= 0)
                 {

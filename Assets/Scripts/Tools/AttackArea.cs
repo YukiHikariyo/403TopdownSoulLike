@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class AttackArea : MonoBehaviour
     public Player player;
     public Enemy enemy;
     [Space(16)]
+    [Tooltip("造成血量伤害")] public bool causeHealthDamage;
     [Tooltip("造成属性伤害")] public bool causeBuffDamage;
     [Tooltip("直接施加Buff")] public bool directlyAssertBuff;
     [Tooltip("直接施加Buff的概率")] public float directBuffProbability;
@@ -51,7 +53,8 @@ public class AttackArea : MonoBehaviour
             {
                 case AttackerType.NoSource:
 
-                    isSuccessful = damageable.TakeDamage(noSourceDamage, noSourcePenetratingPower, ignoreDamageableIndex);
+                    if (causeHealthDamage)
+                        isSuccessful = damageable.TakeDamage(noSourceDamage, noSourcePenetratingPower, ignoreDamageableIndex);
 
                     if (directlyAssertBuff && CalculateProbability(directBuffProbability))
                         damageable.GetBuff(buffType, directBuffDuration);
@@ -65,7 +68,8 @@ public class AttackArea : MonoBehaviour
 
                 case AttackerType.Player:
 
-                    isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex], player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                    if (causeHealthDamage)
+                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex], player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
 
                     if (directlyAssertBuff && CalculateProbability(directBuffProbability))
                         damageable.GetBuff(buffType, directBuffDuration);
@@ -79,7 +83,8 @@ public class AttackArea : MonoBehaviour
 
                 case AttackerType.Enemy:
 
-                    isSuccessful = damageable.TakeDamage(enemy.FinalDamage * enemy.motionValue[motionValueIndex], enemy.FinalPenetratingPower, enemy.attackPower[attackPowerIndex], isBullet ? transform : enemy.transform, ignoreDamageableIndex);
+                    if (causeHealthDamage)
+                        isSuccessful = damageable.TakeDamage(enemy.FinalDamage * enemy.motionValue[motionValueIndex], enemy.FinalPenetratingPower, enemy.attackPower[attackPowerIndex], isBullet ? transform : enemy.transform, ignoreDamageableIndex);
 
                     if (directlyAssertBuff && CalculateProbability(directBuffProbability))
                         damageable.GetBuff(buffType, directBuffDuration);

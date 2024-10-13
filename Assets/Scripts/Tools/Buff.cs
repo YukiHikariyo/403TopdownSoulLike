@@ -426,7 +426,7 @@ public class Burning : BaseBuff
             if (damageable is Enemy)
             {
                 if (!(damageable as Enemy).isBoss)
-                    damageable.TakeDamage((damageable as Enemy).MaxHealth * 0.025f, 114514, true);
+                    damageable.TakeDamage((damageable as Enemy).MaxHealth * 0.04f, 114514, true);
                 else
                     damageable.TakeDamage((damageable as Enemy).MaxHealth * 0.005f, 114514, true);
             }
