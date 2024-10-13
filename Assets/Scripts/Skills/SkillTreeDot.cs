@@ -19,7 +19,7 @@ public class SkillTreeDot : MonoBehaviour,IPointerClickHandler,IPointerEnterHand
     public void OnPointerClick(PointerEventData eventData)
     {
         SkillManager.Instance.activeSkill = thisSkillData;
-        SkillManager.Instance.SelectSkill(thisSkillData.skillTreeID);
+        SkillManager.Instance.SelectSkill(thisSkillData.skillDotID);
         SkillManager.Instance.DisplayInfo();
     }
 
@@ -72,7 +72,7 @@ public class SkillTreeDot : MonoBehaviour,IPointerClickHandler,IPointerEnterHand
 
         if (thisSkillData.preIDs.Length > 0)
         {
-            Transform mainTrans = SkillManager.Instance.skillTreeList[thisSkillData.skillTreeID];
+            Transform mainTrans = SkillManager.Instance.skillTreeList[thisSkillData.skillDotID];
             for (int j = 0; j < thisSkillData.preIDs.Length; j++)
             {
                 var pointBegin = new Vector2(0,0);

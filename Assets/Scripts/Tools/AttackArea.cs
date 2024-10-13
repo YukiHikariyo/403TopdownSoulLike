@@ -69,7 +69,7 @@ public class AttackArea : MonoBehaviour
                 case AttackerType.Player:
 
                     if (causeHealthDamage)
-                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex], player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (CalculateProbability(player.playerData.FinalCritRate) ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
 
                     if (directlyAssertBuff && CalculateProbability(directBuffProbability))
                         damageable.GetBuff(buffType, directBuffDuration);

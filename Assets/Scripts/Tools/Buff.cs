@@ -9,6 +9,7 @@ public enum BuffType
     //玩家增益
     Tough,
     Foresight,
+    ForesightEndurance,
     Hot,
     //玩家异常
     Cold,
@@ -142,6 +143,31 @@ public class Foresight : BaseBuff
         }
 
         UIManager.Instance.buffIcons[1].SetActive(false);
+    }
+
+    public override void OnBuffStay()
+    {
+
+    }
+}
+
+/// <summary>
+/// 玩家增益：见切临时霸体
+/// </summary>
+public class ForesightEndurance : BaseBuff
+{
+    public ForesightEndurance(float duration, IDamageable damageable) : base(duration, damageable) { }
+
+    public override void OnBuffEnter()
+    {
+        if (damageable is Player)
+            (damageable as Player).isEnduance = true;
+    }
+
+    public override void OnBuffExit()
+    {
+        if (damageable is Player)
+            (damageable as Player).isEnduance = false;
     }
 
     public override void OnBuffStay()

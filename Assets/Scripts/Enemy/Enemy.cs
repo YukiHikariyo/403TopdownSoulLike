@@ -331,6 +331,11 @@ public class Enemy : MonoBehaviour, IDamageable
             currentBuffDict.Add(buffType, buffType switch
             {
                 BuffType.TestBuff => new TestBuff(duration, this),
+                BuffType.Endurance => new Endurance(duration, this),
+                BuffType.ShadowSneak => new ShadowSneak(duration, this),
+                BuffType.Dizzy => new Dizzy(duration, this),
+                BuffType.Burning => new Burning(duration, this),
+                BuffType.LightBurst => new LightBurst(duration, this),
 
                 _ => null
             });

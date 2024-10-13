@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
@@ -89,7 +90,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 
                 if (allSkillList[id].skillType == SkillType.Value)
                 {
-                    switch (allSkillList[id].skillValueType)
+                    switch (allSkillList[id].valueType)
                     {
                         case ValueType.MaxHealth:
                             playerData.BasicMaxHealth += allSkillList[id].skillValue[0];
@@ -136,7 +137,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
                 int level = ++skillDict[id].currentSkillLevel;
                 ConsumeSkillPoint(allSkillList[id].skillPointCost);
 
-                switch (allSkillList[id].skillValueType)
+                switch (allSkillList[id].valueType)
                 {
                     case ValueType.MaxHealth:
                         playerData.BasicMaxHealth += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
@@ -199,31 +200,27 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
     public int currentSkillIndex;
 
     [Header("UI")]
-    public Image skillImage;
-    public Text skillLv, skillDes, skillName, skillNum;
-    public GameObject upgradeButton;
     public List<Transform> skillTreeList;
+    public TextMeshProUGUI skillLv, skillDes, skillName, skillCost;
+    public GameObject upgradeButton;
 
     public void DisplayInfo()
     {
-        skillImage.sprite = activeSkill.skillSpite;
         skillDes.text = activeSkill.skillDescription;
         skillName.text = activeSkill.skillName;
-        if(skillDict.ContainsKey(activeSkill.skillTreeID))
+        skillLv.text = activeSkill.skillPointCost.ToString();
+        if (skillDict.ContainsKey(activeSkill.skillDotID))
         {
-            skillNum.text = activeSkill.skillValue[skillDict[activeSkill.skillTreeID].currentSkillLevel - 1].ToString();
-            skillLv.text = skillDict[activeSkill.skillTreeID].currentSkillLevel.ToString();
+            skillLv.text = skillDict[activeSkill.skillDotID].currentSkillLevel.ToString();
         }
         else
         {
-            skillNum.text = activeSkill.skillValue[0].ToString();
             skillLv.text = 0.ToString();
         }
-        
     }
     public void DoUpgrade()
     {
-        UpgradeSkill(activeSkill.skillTreeID);
+        UpgradeSkill(activeSkill.skillDotID);
         DisplayInfo();
     }
 

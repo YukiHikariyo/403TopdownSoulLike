@@ -13,6 +13,7 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour, IDamageable
 {
     public PlayerData playerData;
+    public PlayerController playerController;
 
     [Space(16)]
     [Header("固定属性")]
@@ -67,6 +68,7 @@ public class Player : MonoBehaviour, IDamageable
         GameManager.Instance.player = this;
 
         playerData = GetComponent<PlayerData>();
+        playerController = GetComponent<PlayerController>();
 
         //TODO: 初始化Buff血量
         buffBars = UIManager.Instance.buffBars;
@@ -189,6 +191,7 @@ public class Player : MonoBehaviour, IDamageable
                 BuffType.TestBuff => new TestBuff(duration, this),
                 BuffType.Tough => new Tough(duration, this),
                 BuffType.Foresight => new Foresight(duration, this),
+                BuffType.ForesightEndurance => new ForesightEndurance(duration, this),
                 BuffType.Hot => new Hot(duration, this),
                 BuffType.Cold => new Cold(duration, this),
                 BuffType.Frozen => new Frozen(duration, this),
@@ -297,6 +300,12 @@ public class Player : MonoBehaviour, IDamageable
             currentPassiveSkillDict.Add(skillType, skillType switch
             {
                 PassiveSkillType.TestPassiveSkill => new TestPassiveSkill(this),
+                PassiveSkillType.ForesightEnhance => new ForesightEnhance(this),
+                PassiveSkillType.LongerForesightEnhance => new LongerForesightEnhance(this),
+                PassiveSkillType.LongerForesightTime => new LongerForesightTime(this),
+                PassiveSkillType.FastCharge => new FastCharge(this),
+                PassiveSkillType.FasterCharge => new FasterCharge(this),
+                PassiveSkillType.FastestCharge => new FastestCharge(this),
 
                 _ => null
             });
