@@ -16,6 +16,8 @@ public class PlayerState_CatchChance : PlayerState
         SetAnimator_OnStart();
         playerAnimator.Play("CatchChance");
         //确定判定区间中点
+        UnDamageableTime = playerController.UnDamageableLeftTime;
+        PerfectCheckTime = playerController.PerfectCheckTime;
         UnDamageableStartTime = playerStateMachine.CatchChancepoint - UnDamageableTime / 2;
         PerfectCheckStartTime = playerStateMachine.CatchChancepoint - PerfectCheckTime / 2;
         //

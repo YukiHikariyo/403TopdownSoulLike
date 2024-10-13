@@ -64,6 +64,7 @@ public class PlayerState_Molotov : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        playerController.Idle();
     }
     public void ShootMolotov()
     {

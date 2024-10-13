@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName ="Data/PlayerState/Idle",fileName ="PlayerState_Idle")]
+[CreateAssetMenu(menuName ="Data/PlayerState/Idle",fileName ="PlayerState_Idle",order = 0)]
 public class PlayerState_Idle : PlayerState
 {
     public override void Enter()
@@ -23,9 +23,17 @@ public class PlayerState_Idle : PlayerState
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Move));
         }
+        if (playerInput.Magic_1)
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
+        }
         if (playerInput.Magic_2)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
+        }
+        if (playerInput.Magic_3)
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
         }
         //TODO:耐力限制
         if (playerInput.RightAttack)

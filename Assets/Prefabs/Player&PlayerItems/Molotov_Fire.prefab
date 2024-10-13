@@ -52,7 +52,8 @@ MonoBehaviour:
   animator: {fileID: 2203780396935645959}
   Bomb: {fileID: 3459234412102040521}
   Fire: {fileID: 8268261784328414178}
-  existTime: 0
+  existTime: 4
+  bombExistTime: 0.1
 --- !u!212 &3809450679605315325
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -208,6 +209,7 @@ MonoBehaviour:
   attackerType: 1
   player: {fileID: 0}
   enemy: {fileID: 0}
+  causeHealthDamage: 0
   causeBuffDamage: 0
   directlyAssertBuff: 1
   directBuffProbability: 0
@@ -221,7 +223,6 @@ MonoBehaviour:
   noSourceDamage: 0
   noSourcePenetratingPower: 0
   noSourceBuffDamage: 0
-  damageInterval: 1
   successEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -272,6 +273,7 @@ MonoBehaviour:
   attackerType: 0
   player: {fileID: 0}
   enemy: {fileID: 0}
+  causeHealthDamage: 0
   causeBuffDamage: 0
   directlyAssertBuff: 0
   directBuffProbability: 0
@@ -285,7 +287,6 @@ MonoBehaviour:
   noSourceDamage: 0
   noSourcePenetratingPower: 0
   noSourceBuffDamage: 0
-  damageInterval: 1
   successEvent:
     m_PersistentCalls:
       m_Calls: []

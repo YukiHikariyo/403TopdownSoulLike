@@ -35,6 +35,8 @@ public class MolotovBottle : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Instantiate(fire);
+        GameObject b = Instantiate(fire);
+        Molotov_Fire f = b.GetComponent<Molotov_Fire>();
+        f.player = player;
     }
 }

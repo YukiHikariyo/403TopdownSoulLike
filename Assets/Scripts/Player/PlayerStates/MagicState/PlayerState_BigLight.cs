@@ -61,6 +61,7 @@ public class PlayerState_BigLight : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        playerController.Idle();
     }
 
     public void BigLight()

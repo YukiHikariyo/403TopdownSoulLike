@@ -23,7 +23,14 @@ public class PlayerState_Move : PlayerState
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
         }
-
+        if (playerInput.Magic_2)
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
+        }
+        if (playerInput.Magic_3)
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
+        }
         if (playerInput.RightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_Charging));
 

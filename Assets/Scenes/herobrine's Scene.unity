@@ -1642,6 +1642,14 @@ PrefabInstance:
       propertyPath: molotov_Y
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5479772352610202664, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
+      propertyPath: FlashBangSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479772352610202664, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
+      propertyPath: FlashBangExistTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7469118394858538438, guid: 8708477a265c6c348aef3e84b0271cda, type: 3}
       propertyPath: m_Name
       value: Player

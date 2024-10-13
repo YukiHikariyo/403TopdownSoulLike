@@ -62,6 +62,7 @@ public class PlayerState_FlashBang : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        playerController.Idle();
     }
     
     public void ShootFlashBang()

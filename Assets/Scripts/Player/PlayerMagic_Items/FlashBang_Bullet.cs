@@ -39,6 +39,8 @@ public class FlashBang_Bullet : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Instantiate(Light);
+        GameObject b = Instantiate(Light);
+        FlashBang_Light l = b.GetComponent<FlashBang_Light>();
+        l.player = player;
     }
 }

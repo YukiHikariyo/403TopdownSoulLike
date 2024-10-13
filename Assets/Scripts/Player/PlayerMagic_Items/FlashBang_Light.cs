@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class FlashBang_Light : MonoBehaviour
 {
+    public Player player;
     public Animator animator;
-    GameObject damageArea;
+    public GameObject damageArea;
+    AttackArea area;
     public float existTime;
     private float nowTime;
     private float animationLength;
@@ -13,6 +15,8 @@ public class FlashBang_Light : MonoBehaviour
     {
         nowTime = 0;
         animationLength = animator.GetCurrentAnimatorClipInfo(0).Length;
+        area = damageArea.GetComponent<AttackArea>();
+        area.player = player;
     }
     private void Update()
     {
