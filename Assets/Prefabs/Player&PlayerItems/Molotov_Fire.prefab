@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3809450679605315325}
   - component: {fileID: 1161437828205973080}
   - component: {fileID: 2203780396935645959}
-  - component: {fileID: 844462989583917460}
   m_Layer: 7
   m_Name: Molotov_Fire
   m_TagString: Untagged
@@ -33,7 +32,9 @@ Transform:
   m_LocalPosition: {x: 1.3623059, y: 0.40145707, z: -5.7456317}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 716574033710425923}
+  - {fileID: 8785328188014239188}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2719375960849478017
@@ -49,7 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2203780396935645959}
-  attackArea: {fileID: 844462989583917460}
+  Bomb: {fileID: 3459234412102040521}
+  Fire: {fileID: 8268261784328414178}
   existTime: 0
 --- !u!212 &3809450679605315325
 SpriteRenderer:
@@ -159,13 +161,109 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &844462989583917460
+--- !u!1 &4654080398971716606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8785328188014239188}
+  - component: {fileID: 8268261784328414178}
+  m_Layer: 7
+  m_Name: Fire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8785328188014239188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4654080398971716606}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 31309716204087060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8268261784328414178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110796232140402944}
+  m_GameObject: {fileID: 4654080398971716606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc5d252fc0b89944b72e3988ea49895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackerType: 1
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  causeBuffDamage: 0
+  directlyAssertBuff: 1
+  directBuffProbability: 0
+  isBullet: 0
+  ignoreDamageableIndex: 0
+  motionValueIndex: 0
+  attackPowerIndex: 0
+  buffMotionValueIndex: 0
+  buffType: 11
+  directBuffDuration: 8
+  noSourceDamage: 0
+  noSourcePenetratingPower: 0
+  noSourceBuffDamage: 0
+  damageInterval: 1
+  successEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &6690895883241903683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 716574033710425923}
+  - component: {fileID: 3459234412102040521}
+  m_Layer: 7
+  m_Name: Bomb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &716574033710425923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6690895883241903683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 31309716204087060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3459234412102040521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6690895883241903683}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bc5d252fc0b89944b72e3988ea49895, type: 3}
@@ -174,7 +272,7 @@ MonoBehaviour:
   attackerType: 0
   player: {fileID: 0}
   enemy: {fileID: 0}
-  causeBuffDamage: 1
+  causeBuffDamage: 0
   directlyAssertBuff: 0
   directBuffProbability: 0
   isBullet: 0
@@ -182,7 +280,7 @@ MonoBehaviour:
   motionValueIndex: 0
   attackPowerIndex: 0
   buffMotionValueIndex: 0
-  buffType: 11
+  buffType: 0
   directBuffDuration: 0
   noSourceDamage: 0
   noSourcePenetratingPower: 0

@@ -7,6 +7,7 @@ public class PlayerStateMachine : StateMachine
 {
     [SerializeField] Camera m_camera;
     public Transform playerTransform;
+    public Transform attacker;
     #region 鼠标相关
     [Header("鼠标相关")]
     [SerializeField] float mousedegree;
@@ -114,6 +115,15 @@ public class PlayerStateMachine : StateMachine
         playerAnimator.SetFloat("isUp", isUp ? 1 : 0);
     }
 
+    public void ReturnAnimatorValue_OnHurt()
+    {
+        Vector3 direction = (attacker.position - playerTransform.position).normalized;
+        bool isUp = direction.y >= 0;
+        bool isRight = direction.x < 0;
+        playerAnimator.SetFloat("isUp", isUp ? 1 : 0);
+        playerRenderer.flipX = isRight;
+    }
+
     //接受输入帧
     public void AcceptInput()
     {
@@ -137,7 +147,8 @@ public class PlayerStateMachine : StateMachine
 
     public void OnSmallStun(Transform attacker)
     {
-
+        this.attacker = attacker;
+        SwitchState(typeof(PlayerState_SmallStun));
     }
 
     public void OnNormalStun(Transform attacker)

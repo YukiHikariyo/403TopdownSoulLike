@@ -152,7 +152,7 @@ MonoBehaviour:
   attackerType: 0
   player: {fileID: 0}
   enemy: {fileID: 0}
-  causeBuffDamage: 0
+  causeBuffDamage: 1
   directlyAssertBuff: 0
   directBuffProbability: 0
   isBullet: 0

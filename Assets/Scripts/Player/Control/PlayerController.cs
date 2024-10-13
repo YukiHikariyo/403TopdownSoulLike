@@ -46,6 +46,12 @@ public class PlayerController : MonoBehaviour
     [Tooltip("闪光弹移动速度")]public float FlashBangSpeed;
     #endregion
 
+    #region 受击移动速度
+    [Header("受击移动速度")]
+    public float smallStunSpeed;
+    public float normalStunSpeed;
+    public float bigStunSpeed;
+    #endregion
     [Header("运动曲线")]
     public AnimationCurve fastRollCruve;
     [Tooltip("翻滚运动曲线")]public AnimationCurve slowRollCruve;
@@ -58,6 +64,9 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve CatchChanceCruve;
     public AnimationCurve BackAttackCruve;
     public AnimationCurve RightAttackCruve;
+    public AnimationCurve SmallStunCruve;
+    public AnimationCurve NormalStunCruve;
+    public AnimationCurve BigStunCruve;
 
     private float nowSpeed;
     //二段翻滚的移动速度会由快变慢，该参数用于表示减速度，为了方便，向属性传递动作持续时间，属性内部会自行计算减速度
@@ -220,10 +229,28 @@ public class PlayerController : MonoBehaviour
             break;  
         }
     }
+    public void OnHurtDisplace(Stun_Physics stun, Vector2 FaceDir, float time)
+    {
+        switch (stun)
+        {
+            case Stun_Physics.SmallStun:
+                break;
+            case Stun_Physics.NormalStun:
+                break;
+            case Stun_Physics.BigStun:
+                break;
+        }
+    }
 }
 public enum Skill_Physics
 {
     CatchChance,
     BackAttack,
     RightAttack,
+}
+public enum Stun_Physics
+{
+    SmallStun,
+    NormalStun,
+    BigStun,
 }

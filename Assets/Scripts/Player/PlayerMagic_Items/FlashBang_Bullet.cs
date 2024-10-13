@@ -6,6 +6,7 @@ public class FlashBang_Bullet : MonoBehaviour
 {
     public Vector3 mouse;
     public Rigidbody2D rb;
+    public Player player;
     public float bulletSpeed;
     public float existTime;
     public float nowTime = 0;

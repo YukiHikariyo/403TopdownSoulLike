@@ -115,6 +115,10 @@ public class PlayerState : ScriptableObject, IState
         playerStateMachine.ReturnAnimatorValue_Update();
     }
 
+    protected void SetAnimator_OnHurt()
+    {
+        playerStateMachine.ReturnAnimatorValue_OnHurt();
+    }
     //  所有切换逻辑
 
 /*  //切换至移动
