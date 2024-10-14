@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6abf17d8dc4864ba78e70af6e1a5c3, type: 3}
+  m_Name: FastestCharge
+  m_EditorClassIdentifier: 
+  maxSkillLevel: 1
+  skillPointCost: 5
+  skillSpite: {fileID: 0}
+  skillName: "\u8D85\u901F\u84C4\u529B"
+  skillDotID: 20
+  skillType: 1
+  valueType: 0
+  skillValue: []
+  passiveSkillType: 7
+  skillDescription: "\u63D0\u5347 25% \u84C4\u529B\u901F\u5EA6"
+  preIDs: 0f000000
