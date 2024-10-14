@@ -123,10 +123,6 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
                             break;
                     }
                 }
-                else if (allSkillList[id].skillType == SkillType.UnlockMagic)
-                {
-                    //TODO: 解锁对应魔法
-                }
                 else
                 {
                     playerData.player.GetPassiveSkill(allSkillList[id].passiveSkillType);   //解锁对应被动
@@ -177,7 +173,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         }
         else
         {
-            UIManager.Instance.PlayTipSequence("无法升级");
+            UIManager.Instance.PlayTipSequence("改造点不足，无法升级");
         }
     }
 
@@ -200,7 +196,8 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
     public int currentSkillIndex;
 
     [Header("UI")]
-    public List<Transform> skillTreeList;
+    public GameObject detailPanel;
+    public List<Transform> skillDotList;
     public TextMeshProUGUI skillLv, skillDes, skillName, skillCost;
     public GameObject upgradeButton;
 
@@ -208,15 +205,25 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
     {
         skillDes.text = activeSkill.skillDescription;
         skillName.text = activeSkill.skillName;
-        skillLv.text = activeSkill.skillPointCost.ToString();
+        skillCost.text = activeSkill.skillPointCost.ToString();
         if (skillDict.ContainsKey(activeSkill.skillDotID))
         {
-            skillLv.text = skillDict[activeSkill.skillDotID].currentSkillLevel.ToString();
+            skillLv.text = "LV." + skillDict[activeSkill.skillDotID].currentSkillLevel;
         }
         else
         {
-            skillLv.text = 0.ToString();
+            skillLv.text = "LV.0";
         }
+
+        if (CanUnlock(activeSkill.skillDotID))
+            upgradeButton.SetActive(true);
+        else
+            upgradeButton.SetActive(false);
+
+        if (skillDict.ContainsKey(activeSkill.skillDotID) && skillDict[activeSkill.skillDotID].currentSkillLevel >= activeSkill.maxSkillLevel)
+            upgradeButton.SetActive(false);
+
+        detailPanel.SetActive(true);
     }
     public void DoUpgrade()
     {
@@ -224,31 +231,33 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         DisplayInfo();
     }
 
-    public void SelectSkill(int index)
+    public void SelectSkill(int index, StaticSkillData selectedSkill)
     {
+        activeSkill = selectedSkill;
         currentSkillIndex = index;
 
-        for (int i = 0; i < skillTreeList.Count; i++)
+        for (int i = 0; i < skillDotList.Count; i++)
         {
             if (i != index)
             {
-                skillTreeList[i].GetChild(1).gameObject.SetActive(false);
+                skillDotList[i].GetChild(1).gameObject.SetActive(false);
             }
             else
             {
-                skillTreeList[i].GetChild(1).gameObject.SetActive(true);
+                skillDotList[i].GetChild(1).gameObject.SetActive(true);
             }
         }
-        upgradeButton.gameObject.SetActive(true);
+
+        DisplayInfo();
     }
 
     public void UnlockAnimation(int index)
     {
         currentSkillIndex = index;
 
-        skillTreeList[currentSkillIndex].GetChild(3).GetComponent<Image>().DOFillAmount(1, 0.75f);
+        skillDotList[currentSkillIndex].GetChild(3).GetComponent<Image>().DOFillAmount(1, 0.75f);
 
-        skillTreeList[currentSkillIndex].GetChild(0).GetComponent<UILineRenderer>().color = new Color(1,1,1,1);
+        skillDotList[currentSkillIndex].GetChild(0).GetComponent<UILineRenderer>().color = new Color(1,1,1,1);
 
     }
 

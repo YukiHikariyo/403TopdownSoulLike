@@ -10,20 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab6abf17d8dc4864ba78e70af6e1a5c3, type: 3}
-  m_Name: CritRate1
+  m_Name: FastCharge
   m_EditorClassIdentifier: 
-  maxSkillLevel: 3
-  skillPointCost: 1
+  maxSkillLevel: 1
+  skillPointCost: 2
   skillSpite: {fileID: 0}
-  skillName: "\u66B4\u51FB\u5F3A\u5316"
-  skillDotID: 4
-  skillType: 0
-  valueType: 5
-  skillValue:
-  - 0.02
-  - 0.02
-  - 0.02
-  passiveSkillType: 0
-  skillDescription: "\u6BCF\u7EA7\u63D0\u5347 2% \u66B4\u51FB\u7387\uFF0C\u6700\u9AD8
-    3 \u7EA7"
-  preIDs: 01000000
+  skillName: "\u5FEB\u901F\u84C4\u529B"
+  skillDotID: 6
+  skillType: 1
+  valueType: 0
+  skillValue: []
+  passiveSkillType: 5
+  skillDescription: "\u63D0\u5347 10% \u84C4\u529B\u901F\u5EA6"
+  preIDs: 0300000004000000

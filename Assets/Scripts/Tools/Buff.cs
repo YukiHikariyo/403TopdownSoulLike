@@ -126,8 +126,8 @@ public class Foresight : BaseBuff
         if (damageable is Player)
         {
             //以下数值为测试
-            (damageable as Player).playerData.damageMultiplication += 0.25f;
-            (damageable as Player).playerData.critRateIncrement += 0.2f;
+            (damageable as Player).playerData.damageMultiplication += 0.2f;
+            (damageable as Player).playerData.critRateIncrement += 0.1f;
         }
 
         UIManager.Instance.buffIcons[1].SetActive(true);
@@ -138,8 +138,8 @@ public class Foresight : BaseBuff
         if (damageable is Player)
         {
             //以下数值为测试
-            (damageable as Player).playerData.damageMultiplication -= 0.25f;
-            (damageable as Player).playerData.critRateIncrement -= 0.2f;
+            (damageable as Player).playerData.damageMultiplication -= 0.2f;
+            (damageable as Player).playerData.critRateIncrement -= 0.1f;
         }
 
         UIManager.Instance.buffIcons[1].SetActive(false);

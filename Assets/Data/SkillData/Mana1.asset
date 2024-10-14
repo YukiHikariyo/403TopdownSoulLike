@@ -23,7 +23,7 @@ MonoBehaviour:
   - 10
   - 10
   - 10
-  magicID: 0
   passiveSkillType: 0
-  skillDescription: "\u6BCF\u7EA7\u63D0\u5347 10 \u80FD\u6E90\u4E0A\u9650"
+  skillDescription: "\u6BCF\u7EA7\u63D0\u5347 10 \u80FD\u6E90\u4E0A\u9650\uFF0C\u6700\u9AD8
+    3 \u7EA7"
   preIDs: 00000000

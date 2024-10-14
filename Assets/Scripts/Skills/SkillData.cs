@@ -18,7 +18,6 @@ public class StaticSkillData : ScriptableObject, IComparable<StaticSkillData>
     [Tooltip("天赋类型")] public SkillType skillType;//节点天赋类型
     [Tooltip("数值类型")] public ValueType valueType;//节点数值类型
     [Tooltip("改变数值大小")] public float[] skillValue;//节点数值（分等级）
-    [Tooltip("解锁魔法ID")] public int magicID;//解锁魔法ID
     [Tooltip("解锁被动技能")] public PassiveSkillType passiveSkillType;//解锁被动ID
 
 
@@ -45,7 +44,7 @@ public class LocalSkillData
 }
 public enum SkillType
 {
-    Value, UnlockMagic, UnlockPassiveSkill
+    Value, UnlockPassiveSkill
 }
 public enum ValueType
 {
