@@ -16,7 +16,10 @@ public class PlayerStateMachine : StateMachine
     #endregion
     #region 特定时间节点
     [Header("特定时间节点")]
-    [Tooltip("见切完美判定和无敌帧判定区间中点")]public float CatchChancepoint; 
+    [Tooltip("见切完美判定和无敌帧判定区间中点")]public float CatchChancepoint;
+    [Tooltip("无硬直无敌时间")] public float noStunUndamageableTime;
+    //无敌帧计时器
+    private float noStunTimer;
     #endregion
     #region 组件
     //获取组件的方式之后可以调整
@@ -71,12 +74,22 @@ public class PlayerStateMachine : StateMachine
     private void Start()
     {
         SwitchOn(dict[typeof(PlayerState_Idle)]);
+        noStunTimer = -1;
     }
 
     protected override void Update()
     {
         base.Update();
         UpdateMouseDegree();
+        if(noStunTimer > 0 && noStunTimer > -1)
+        {
+            noStunTimer -= Time.deltaTime;
+            if(noStunTimer < 0)
+            {
+                player.damageableIndex = 0;
+                noStunTimer = -1;
+            }
+        }
     }
 
     private void UpdateMouseDegree()
@@ -142,7 +155,8 @@ public class PlayerStateMachine : StateMachine
     #region 受伤和死亡时触发的方法
     public void OnNoStun(Transform attacker)
     {
-
+        player.damageableIndex = 1;
+        noStunTimer = noStunUndamageableTime;
     }
 
     public void OnSmallStun(Transform attacker)

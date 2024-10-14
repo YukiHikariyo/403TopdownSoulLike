@@ -999,8 +999,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eedb7b65163a90c45884f7511c961c6e, type: 2}
   - {fileID: 11400000, guid: db51e86b294e5be4daf68c39e10b131e, type: 2}
   - {fileID: 11400000, guid: a34f351db6704e1469ab7dcfe5d5ca18, type: 2}
+  - {fileID: 11400000, guid: 45dfe9114fa3617458c7129f01ce9509, type: 2}
+  - {fileID: 11400000, guid: 2909330ab95c3bd489eb91cb0e160f2c, type: 2}
   mouseDistance: {x: 0, y: 0, z: 0}
   CatchChancepoint: 0
+  noStunUndamageableTime: 0
   playerInput: {fileID: 4510489401662688001}
   playerController: {fileID: 5479772352610202664}
   playerAnimator: {fileID: 1766737477993462450}

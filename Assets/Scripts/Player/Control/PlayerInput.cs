@@ -84,5 +84,6 @@ public enum InputMemory
     Roll,
     LightAttack,
     RightAttack,
+    Direction,
 }
 
