@@ -168,13 +168,17 @@ public class Enemy : MonoBehaviour, IDamageable
     [Tooltip("是否霸体")] public bool isEnduance;
 
     [Space(16)]
-    [Header("HFSM")]
+    [Header("FSM")]
     [Space(16)]
 
     [Tooltip("能否行动")] public bool canTakeAction = true;
-    public EnemySubStateMachine currentSubSM;
-    public EnemySubStateMachine defaultSubSM;
-    public EnemySubStateMachine publicSM;
+    public EnemyState currentState;
+    public EnemyState defaultState;
+    public EnemyState deadState;
+    public EnemyState smallStunState;
+    public EnemyState normalStunState;
+    public EnemyState bigStunState;
+    public EnemyState dizzyStunState;
 
     #region 生命周期
 
@@ -183,21 +187,18 @@ public class Enemy : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        //TODO: 初始化Buff血量字典
-        
-        //子类记得在此处实例化子状态机
-        //子类记得在此处设置默认状态机
+        //子类记得在此处实例化状态
+        //子类记得在此处设置默认状态
     }
 
     private void OnEnable()
     {
-        currentSubSM = defaultSubSM;
-        //currentSubSM.OnEnter(false);
+        //currentState.OnEnter(false);
     }
 
     private void OnDisable()
     {
-        //currentSubSM.OnExit();
+        //currentState.OnExit();
     }
 
     private void Start()
@@ -207,12 +208,13 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        //currentSubSM.PhysicsUpdate();
+        //currentState.PhysicsUpdate();
     }
 
     private void Update()
     {
-        //currentSubSM.LogicUpdate();
+        //currentState.LogicUpdate();
+
         buffAction?.Invoke();
 
         if (buffDamageTimer > 0)
@@ -221,31 +223,17 @@ public class Enemy : MonoBehaviour, IDamageable
 
     #endregion
 
-    #region HFSM
+    #region FSM
 
-    /// <summary>
-    /// 切换子状态机
-    /// </summary>
-    /// <param name="newSubSM">新子状态机</param>
-    /// <param name="continueState">是否从切换前的状态开始？</param>
-    public void ChangeSubSM(EnemySubStateMachine newSubSM, bool continueState)
+    public void ChangeState(EnemyState newState)
     {
-        EnemySubStateMachine lastSubSM = currentSubSM;
-        currentSubSM.whenExitState = currentSubSM.currentState;
-        currentSubSM.OnExit();
-        currentSubSM = newSubSM;
-        currentSubSM.lastSubSM = lastSubSM;
-        currentSubSM.OnEnter(continueState);
-    }
-
-    /// <summary>
-    /// 任何状态下都可以直接切换到公共状态
-    /// </summary>
-    /// <param name="state">新公共状态</param>
-    public void ChangeToPublicState(EnemyState state)
-    {
-        ChangeSubSM(publicSM, false);
-        currentSubSM.ChangeState(state);
+        if (currentState != null)
+        {
+            newState.lastState = currentState;
+            currentState.OnExit();
+        }
+        currentState = newState;
+        currentState.OnEnter();
     }
 
     #endregion
@@ -259,11 +247,17 @@ public class Enemy : MonoBehaviour, IDamageable
             CurrentHealth -= Mathf.Ceil((damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
             if (CurrentHealth < 0)
             {
-                //TODO: 敌人死亡事件
+                ChangeState(deadState);
                 return true;
             }
 
-            //TODO: 敌人受击硬直
+            float stunValue = attackPower - FinalToughness;
+            if (isEnduance || stunValue <= 0)
+                OnStunFunc(0).Forget();
+            else if (stunValue > 0 && stunValue <= 10)
+                OnStunFunc(1).Forget();
+            else
+                OnStunFunc(2).Forget();
 
             return true;
         }
@@ -414,13 +408,31 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    [ContextMenu("给予测试Buff1")]
-    public void GetTestBuff1() => GetBuff(BuffType.TestBuff, 3);
-
-    [ContextMenu("移除测试Buff1")]
-    public void RemoveTestBuff1() => RemoveBuff(BuffType.TestBuff, -1);
-
     #endregion
+
+    private async UniTask OnStunFunc(int index)
+    {
+        if (index < 0 || index > 3)
+            return;
+
+        damageableIndex = 1;
+
+        if (index != 0)
+        {
+            ChangeState(index switch
+            {
+                1 => smallStunState,
+                2 => normalStunState,
+                3 => bigStunState,
+
+                _ => null
+            });
+        }
+        
+        await UniTask.Delay(TimeSpan.FromSeconds(0.15f));
+
+        damageableIndex = 0;
+    }
 
     public void Move(Vector2 direction)
     {

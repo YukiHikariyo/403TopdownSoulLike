@@ -139,7 +139,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set
         {
             currentEnergy = value < FinalMaxEnergy ? value : FinalMaxEnergy;
-            UIManager.Instance.energyBar.OnCurrentValueChange(currentEnergy, FinalMaxEnergy);
+            UIManager.Instance.energyBar.OnCurrentValueChange(currentEnergy > 0 ? currentEnergy : 0, FinalMaxEnergy);
         }
     }
 
