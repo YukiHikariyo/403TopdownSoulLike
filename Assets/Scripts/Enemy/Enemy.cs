@@ -155,9 +155,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private Dictionary<BuffType, Func<BuffType, float, CancellationToken, UniTask>> OnBuffFunc = new();
     private Dictionary<BuffType, CancellationTokenSource> buffCTK = new();
 
-    private float[] currentBuffHealth = new float[1];
-    private float[] buffHealthReduceRate = new float[1] { 100 };
-    private bool[] isBuffStay = new bool[1];
+    [SerializeField] private float[] maxBuffHealth = new float[1];
+    [SerializeField] private float[] currentBuffHealth = new float[1];
 
     private float buffDamageTimer;
 
@@ -299,7 +298,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 currentBuffHealth[buffIndex] += damage;
                 if (currentBuffHealth[buffIndex] > 100)
                 {
-                    currentBuffHealth[buffIndex] = 100;
+                    currentBuffHealth[buffIndex] = 0;
                     GetBuff(buffType);
 
                     buffDamageTimer = 1;
@@ -381,30 +380,6 @@ public class Enemy : MonoBehaviour, IDamageable
             buffAction -= currentBuffDict[buffType].OnBuffStay;
             currentBuffDict[buffType].OnBuffExit();
             currentBuffDict.Remove(buffType);
-        }
-    }
-
-    public void BuffHealthAction()
-    {
-        for (int i = 0; i < currentBuffHealth.Length; i++)
-        {
-            if (currentBuffHealth[i] > 0 && !isBuffStay[i])
-            {
-                currentBuffHealth[i] -= 2.5f * Time.deltaTime;
-
-                if (currentBuffHealth[i] <= 0)
-                    currentBuffHealth[i] = 0;
-            }
-            else if (currentBuffHealth[i] > 0 && isBuffStay[i])
-            {
-                currentBuffHealth[i] -= buffHealthReduceRate[i] * Time.deltaTime;
-
-                if (currentBuffHealth[i] <= 0)
-                {
-                    currentBuffHealth[i] = 0;
-                    isBuffStay[i] = false;
-                }
-            }
         }
     }
 

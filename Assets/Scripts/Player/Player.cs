@@ -70,7 +70,6 @@ public class Player : MonoBehaviour, IDamageable
         playerData = GetComponent<PlayerData>();
         playerController = GetComponent<PlayerController>();
 
-        //TODO: 初始化Buff血量
         buffBars = UIManager.Instance.buffBars;
     }
 

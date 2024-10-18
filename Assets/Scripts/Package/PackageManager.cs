@@ -13,9 +13,16 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     [SerializeField][Tooltip("当前金币")] private int coin;
 
     [SerializeField][Tooltip("血瓶上限")] private int maxHealthBottle;
+    public int MaxHealthBottle { get => maxHealthBottle; }
+
     [SerializeField][Tooltip("当前血瓶")] private int currentHealthBottle;
+    public int CurrentHealthBottle { get => currentHealthBottle; }
+
     [SerializeField][Tooltip("蓝瓶上限")] private int maxManaBottle;
+    public int MaxManaBottle { get => maxManaBottle; }
+
     [SerializeField][Tooltip("当前血瓶")] private int currentManaBottle;
+    public int CurrentManaBottle { get => currentManaBottle; }
 
     [Tooltip("所有物品列表")] public List<StaticItemData> allItemList;
     [Tooltip("已获得道具字典")] public Dictionary<int, LocalItemData> itemDict = new();
@@ -74,37 +81,37 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// <summary>
     /// 获得血瓶上限
     /// </summary>
+    [ContextMenu("获得血瓶上限")]
     public void GetMaxHealthBottle()
     {
         maxHealthBottle++;
         currentHealthBottle++;
-        UIManager.Instance.healthBottleBar.OnCurrentValueChange(currentHealthBottle, maxHealthBottle);
-        UIManager.Instance.healthBottleText.text = currentHealthBottle + " / " + maxHealthBottle;
+        UIManager.Instance.HealthBottleBarUpdate();
     }
 
     /// <summary>
     /// 获得蓝瓶上限
     /// </summary>
+    [ContextMenu("获得蓝瓶上限")]
     public void GetMaxManaBottle()
     {
         maxManaBottle++;
         currentManaBottle++;
-        UIManager.Instance.manaBottleBar.OnCurrentValueChange(currentManaBottle, maxManaBottle);
-        UIManager.Instance.manaBottleText.text = currentManaBottle + " / " + maxManaBottle;
+        UIManager.Instance.ManaBottleBarUpdate();
     }
 
     /// <summary>
     /// 消耗血瓶恢复血量
     /// </summary>
     /// <returns>是否成功消耗</returns>
+    [ContextMenu("消耗血瓶恢复血量")]
     public bool ConsumeHealthBottle()
     {
         if (currentHealthBottle > 0)
         {
             currentHealthBottle--;
             playerData.CurrentHealth += playerData.FinalMaxHealth * 0.4f;
-            UIManager.Instance.healthBottleBar.OnCurrentValueChange(currentHealthBottle, maxHealthBottle);
-            UIManager.Instance.healthBottleText.text = currentHealthBottle + " / " + maxHealthBottle;
+            UIManager.Instance.HealthBottleBarUpdate();
 
             return true;
         }
@@ -116,14 +123,14 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// 消耗蓝瓶恢复魔力
     /// </summary>
     /// <returns>是否成功消耗</returns>
+    [ContextMenu("消耗蓝瓶恢复魔力")]
     public bool ConsumeManaBottle()
     {
         if (currentManaBottle > 0)
         {
             currentManaBottle--;
             playerData.CurrentMana += playerData.FinalMaxMana * 0.4f;
-            UIManager.Instance.manaBottleBar.OnCurrentValueChange(currentManaBottle, maxManaBottle);
-            UIManager.Instance.manaBottleText.text = currentManaBottle + " / " + maxManaBottle;
+            UIManager.Instance.ManaBottleBarUpdate();
 
             return true;
         }
