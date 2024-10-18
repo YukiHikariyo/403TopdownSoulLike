@@ -12,6 +12,11 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 
     [SerializeField][Tooltip("当前金币")] private int coin;
 
+    [SerializeField][Tooltip("血瓶上限")] private int maxHealthBottle;
+    [SerializeField][Tooltip("当前血瓶")] private int currentHealthBottle;
+    [SerializeField][Tooltip("蓝瓶上限")] private int maxManaBottle;
+    [SerializeField][Tooltip("当前血瓶")] private int currentManaBottle;
+
     [Tooltip("所有物品列表")] public List<StaticItemData> allItemList;
     [Tooltip("已获得道具字典")] public Dictionary<int, LocalItemData> itemDict = new();
 
@@ -64,7 +69,71 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         }
     }
 
-    #region 物品
+    #region 血蓝瓶
+
+    /// <summary>
+    /// 获得血瓶上限
+    /// </summary>
+    public void GetMaxHealthBottle()
+    {
+        maxHealthBottle++;
+        currentHealthBottle++;
+        UIManager.Instance.healthBottleBar.OnCurrentValueChange(currentHealthBottle, maxHealthBottle);
+        UIManager.Instance.healthBottleText.text = currentHealthBottle + " / " + maxHealthBottle;
+    }
+
+    /// <summary>
+    /// 获得蓝瓶上限
+    /// </summary>
+    public void GetMaxManaBottle()
+    {
+        maxManaBottle++;
+        currentManaBottle++;
+        UIManager.Instance.manaBottleBar.OnCurrentValueChange(currentManaBottle, maxManaBottle);
+        UIManager.Instance.manaBottleText.text = currentManaBottle + " / " + maxManaBottle;
+    }
+
+    /// <summary>
+    /// 消耗血瓶恢复血量
+    /// </summary>
+    /// <returns>是否成功消耗</returns>
+    public bool ConsumeHealthBottle()
+    {
+        if (currentHealthBottle > 0)
+        {
+            currentHealthBottle--;
+            playerData.CurrentHealth += playerData.FinalMaxHealth * 0.4f;
+            UIManager.Instance.healthBottleBar.OnCurrentValueChange(currentHealthBottle, maxHealthBottle);
+            UIManager.Instance.healthBottleText.text = currentHealthBottle + " / " + maxHealthBottle;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 消耗蓝瓶恢复魔力
+    /// </summary>
+    /// <returns>是否成功消耗</returns>
+    public bool ConsumeManaBottle()
+    {
+        if (currentManaBottle > 0)
+        {
+            currentManaBottle--;
+            playerData.CurrentMana += playerData.FinalMaxMana * 0.4f;
+            UIManager.Instance.manaBottleBar.OnCurrentValueChange(currentManaBottle, maxManaBottle);
+            UIManager.Instance.manaBottleText.text = currentManaBottle + " / " + maxManaBottle;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    #endregion
+
+    #region 金币
 
     /// <summary>
     /// 查询当前金币数量
@@ -102,6 +171,10 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             return false;
         }
     }
+
+    #endregion
+
+    #region 物品
 
     /// <summary>
     /// 获得物品

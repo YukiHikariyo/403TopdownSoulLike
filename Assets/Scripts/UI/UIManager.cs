@@ -31,6 +31,13 @@ public class UIManager : MonoSingleton<UIManager>
 
     [Space(16)]
 
+    public PlayerBar healthBottleBar;
+    public PlayerBar manaBottleBar;
+    public TextMeshProUGUI healthBottleText;
+    public TextMeshProUGUI manaBottleText;
+
+    [Space(16)]
+
     public GameObject[] buffIcons;
     public PlayerBar[] buffBars;
 
