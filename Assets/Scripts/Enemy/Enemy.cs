@@ -1,8 +1,11 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
+using Pathfinding;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,8 +15,17 @@ using UnityEngine.Events;
 /// </summary>
 public class Enemy : MonoBehaviour, IDamageable
 {
-    private Rigidbody2D rb;
-    private Animator anim;
+    public Rigidbody2D rb;
+    public Animator anim;
+
+    private Seeker seeker;
+    private Path path;
+    public CancellationTokenSource pathCTK = new();
+    private int pathPointIndex;
+    public Vector2 pathDirection;
+
+    public GameObject player;
+    public GameObject target;
 
     [Header("基本属性")]
     [Space(16)]
@@ -171,8 +183,11 @@ public class Enemy : MonoBehaviour, IDamageable
     [Space(16)]
 
     [Tooltip("能否行动")] public bool canTakeAction = true;
+
     public EnemyState currentState;
+    public EnemyState startState;
     public EnemyState defaultState;
+
     public EnemyState deadState;
     public EnemyState smallStunState;
     public EnemyState normalStunState;
@@ -181,10 +196,16 @@ public class Enemy : MonoBehaviour, IDamageable
 
     #region 生命周期
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        seeker = GetComponent<Seeker>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        target = player;
 
         //子类记得在此处实例化状态
         //子类记得在此处设置默认状态
@@ -192,12 +213,17 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        //currentState.OnEnter(false);
+        seeker.pathCallback += OnPathComplete;
+
+        currentState = startState;
+        currentState.OnEnter();
     }
 
     private void OnDisable()
     {
-        //currentState.OnExit();
+        currentState.OnExit();
+
+        seeker.pathCallback -= OnPathComplete;
     }
 
     private void Start()
@@ -207,12 +233,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        //currentState.PhysicsUpdate();
+        currentState.PhysicsUpdate();
     }
 
     private void Update()
     {
-        //currentState.LogicUpdate();
+        currentState.LogicUpdate();
 
         buffAction?.Invoke();
 
@@ -385,6 +411,49 @@ public class Enemy : MonoBehaviour, IDamageable
 
     #endregion
 
+    #region 寻路
+
+    public async UniTask OnSeekPath()
+    {
+        OnPathPointUpdate().Forget();
+
+        while (true)
+        {
+            seeker.StartPath(transform.position, target.transform.position);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: pathCTK.Token);
+        }
+    }
+
+    private async UniTask OnPathPointUpdate()
+    {
+        while (true)
+        {
+            if (path == null || path.vectorPath.Count <= 0 || pathPointIndex >= path.vectorPath.Count - 1)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: pathCTK.Token);
+                continue;
+            }
+
+            if (Vector2.Distance(transform.position, path.vectorPath[pathPointIndex]) > 0.25f)
+                pathDirection = (path.vectorPath[pathPointIndex] - transform.position).normalized;
+            else
+                pathDirection = (path.vectorPath[++pathPointIndex] - transform.position).normalized;
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: pathCTK.Token);
+        }
+    }
+
+    private void OnPathComplete(Path p)
+    {
+        if (p.error)
+            return;
+
+        path = p;
+        pathPointIndex = 0;
+    }
+
+    #endregion
+
     private async UniTask OnStunFunc(int index)
     {
         if (index < 0 || index > 3)
@@ -408,6 +477,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
         damageableIndex = 0;
     }
+
+    
 
     public void Move(Vector2 direction)
     {

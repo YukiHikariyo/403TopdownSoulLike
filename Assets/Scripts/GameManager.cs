@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [Header("引用缓存")]
-    [Space(16)]
-    public Player player;
-
     [Space(16)]
     [Header("全局数值")]
     [Space(16)]

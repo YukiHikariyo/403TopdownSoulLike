@@ -372,6 +372,8 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
                 playerData.currentAccessoryLocalData[position] = accessoryDict[id];
             else
                 playerData.currentAccessoryLocalData.Add(position, accessoryDict[id]);
+
+            UIManager.Instance.PlayTipSequence("成功装备到" + position + "号位");
         }
 
         playerData.OnMaxHealthChange(healthPercent);

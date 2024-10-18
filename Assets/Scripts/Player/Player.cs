@@ -65,8 +65,6 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        GameManager.Instance.player = this;
-
         playerData = GetComponent<PlayerData>();
         playerController = GetComponent<PlayerController>();
 
