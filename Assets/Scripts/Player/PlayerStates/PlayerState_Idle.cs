@@ -44,6 +44,8 @@ public class PlayerState_Idle : PlayerState
 
         if(playerInput.Roll && playerController.RollCount < 3)
             playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+
+        //TODO:打开背包
     }
 
     public override void PhysicUpdate()

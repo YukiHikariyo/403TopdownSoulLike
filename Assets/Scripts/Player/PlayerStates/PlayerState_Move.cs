@@ -42,6 +42,8 @@ public class PlayerState_Move : PlayerState
 
         if (!playerInput.WantsMove)
             playerStateMachine.SwitchState(typeof(PlayerState_Idle));
+
+        //TODO:打开背包
     }
 
     public override void PhysicUpdate()
