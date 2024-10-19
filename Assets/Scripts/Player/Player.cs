@@ -60,7 +60,7 @@ public class Player : MonoBehaviour, IDamageable
     public Dictionary<PassiveSkillType, BasePassiveSkill> currentPassiveSkillDict = new();
     private Dictionary<PassiveSkillType, CancellationTokenSource> passiveSkillCTK = new();
     private Dictionary<PassiveSkillType, Func<float, CancellationToken, UniTask>> OnIntervalPassiveSkillFunc = new();
-    public Dictionary<PlayerPassiveSkill.TriggerType, UnityAction> passiveSkillTriggerAction = new();
+    public Dictionary<PlayerPassiveSkill.TriggerType, UnityAction<IDamageable>> passiveSkillTriggerAction = new();
 
     #region 生命周期
 
@@ -91,6 +91,10 @@ public class Player : MonoBehaviour, IDamageable
         if (damageableIndex == 0 || ignoreDamageableIndex)
         {
             playerData.CurrentHealth -= Mathf.Ceil((damage + playerData.vulnerabilityIncrement > 0 ? damage + playerData.vulnerabilityIncrement : 0) * playerData.vulnerabilityMultiplication * Mathf.Clamp01(1 - (playerData.FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
+            
+            if (passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.GetHit))
+                passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.GetHit]?.Invoke(this);
+
             if (playerData.CurrentHealth <= 0)
             {
                 deathEvent?.Invoke();
@@ -112,10 +116,19 @@ public class Player : MonoBehaviour, IDamageable
         else if (damageableIndex == 2)
         {
             foresightEvent?.Invoke();
+
+            if (passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Foresight))
+                passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Foresight]?.Invoke(this);
+
             return false;
         }
+        else
+        {
+            if (passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Dodge))
+                passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Dodge]?.Invoke(this);
 
-        return false;
+            return false;
+        }
     }
 
     public bool TakeDamage(float damage, float penetratingPower, bool ignoreDamageableIndex = false)
@@ -324,7 +337,7 @@ public class Player : MonoBehaviour, IDamageable
                         while (true)
                         {
                             await UniTask.Delay(TimeSpan.FromSeconds(interval), cancellationToken: ctk);
-                            currentPassiveSkillDict[skillType].OnTrigger();
+                            currentPassiveSkillDict[skillType].OnTrigger(this);
                         }
                     });
                 }

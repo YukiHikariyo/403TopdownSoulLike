@@ -77,7 +77,12 @@ public class AttackArea : MonoBehaviour
                         damageable.TakeBuffDamage(buffType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
 
                     if (isSuccessful)
+                    {
                         successEvent?.Invoke(damageable);
+
+                        if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Hit))
+                            player.passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Hit]?.Invoke(damageable);
+                    }
 
                     break;
 

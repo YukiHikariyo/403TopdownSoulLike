@@ -54,7 +54,7 @@ public class UIManager : MonoSingleton<UIManager>
     public BasePanel currentMenuPanel;
     public List<Transform> menuSelectionList;
     public List<BasePanel> menuPanelList;
-    public string[] menuNameList = { "角色属性", "物品", "武器", "饰品", "改造强化", "设置" };
+    public string[] menuNameList = { "角色属性", "物品", "武器", "配件", "改造强化", "设置" };
     public TextMeshProUGUI menuName;
     public int currentMenuIndex;
     public TextMeshProUGUI coinValue;

@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private int pathPointIndex;
     public Vector2 pathDirection;
 
-    public GameObject player;
+    public Player player;
     public GameObject target;
 
     [Header("基本属性")]
@@ -203,9 +203,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
         seeker = GetComponent<Seeker>();
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
-        target = player;
+        target = player.gameObject;
 
         //子类记得在此处实例化状态
         //子类记得在此处设置默认状态
@@ -272,6 +272,9 @@ public class Enemy : MonoBehaviour, IDamageable
             CurrentHealth -= Mathf.Ceil((damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
             if (CurrentHealth < 0)
             {
+                if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Kill))
+                    player.passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Kill]?.Invoke(this);
+
                 ChangeState(deadState);
                 return true;
             }

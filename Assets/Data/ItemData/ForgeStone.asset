@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ForgeStone
   m_EditorClassIdentifier: 
   itemID: 1
-  itemName: "\u953B\u9020\u77F3"
+  itemName: "\u6B66\u5668\u5F3A\u5316\u96F6\u4EF6"
   itemIcon: {fileID: 0}
   isUseable: 0

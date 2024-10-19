@@ -8,11 +8,11 @@ namespace PlayerPassiveSkill
     public enum TriggerType
     {
         [Tooltip("间隔固定时间触发")] Interval,
-        [Tooltip("攻击触发")] Attack,
         [Tooltip("命中触发")] Hit,
         [Tooltip("击杀触发")] Kill,
-        [Tooltip("受伤触发")] GetHit,
-        [Tooltip("见切触发")] Foresight,
+        [Tooltip("受伤触发")] GetHit,   //仅限受到有来源伤害
+        [Tooltip("闪避触发")] Dodge,    //仅限闪避有来源伤害
+        [Tooltip("见切触发")] Foresight,    //仅限见切有来源伤害
         [Tooltip("改变属性")] ChangeValue,
     }
 
@@ -43,14 +43,14 @@ public abstract class BasePassiveSkill
 
     public abstract void OnEnter();
     public abstract void OnExit();
-    public abstract void OnTrigger();
+    public abstract void OnTrigger(IDamageable damageable); //传入的IDamageable只在击中和击杀触发时有用，其他只是占位用
 }
 
 public class TestPassiveSkill : BasePassiveSkill
 {
     public TestPassiveSkill(Player player) : base(player)
     {
-        triggerType = TriggerType.Interval;
+        triggerType = TriggerType.GetHit;
         interval = 1;
     }
 
@@ -64,7 +64,7 @@ public class TestPassiveSkill : BasePassiveSkill
         player.playerData.MaxHealthMultiplication -= 2;
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(IDamageable damageable)
     {
         player.playerData.CurrentHealth += 50;
     }
@@ -87,7 +87,7 @@ public class ForesightEnhance : BasePassiveSkill
         
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(IDamageable damageable)
     {
         player.GetBuff(BuffType.Foresight, 4);
         player.GetBuff(BuffType.ForesightEndurance, 1);
@@ -111,7 +111,7 @@ public class LongerForesightEnhance : BasePassiveSkill
 
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(IDamageable damageable)
     {
         player.GetBuff(BuffType.Foresight, 8);
         player.GetBuff(BuffType.ForesightEndurance, 1);
@@ -135,7 +135,7 @@ public class LongerForesightTime : BasePassiveSkill
         player.playerController.PerfectCheckTime *= 1.5f;
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(IDamageable damageable)
     {
         
     }
@@ -158,7 +158,7 @@ public class FastCharge : BasePassiveSkill
         player.playerData.chargeSpeedMultiplication -= 0.1f;
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(IDamageable damageable)
     {
 
     }
@@ -181,7 +181,7 @@ public class FasterCharge : BasePassiveSkill
         player.playerData.chargeSpeedMultiplication -= 0.15f;
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(IDamageable damageable)
     {
 
     }
@@ -204,7 +204,7 @@ public class FastestCharge : BasePassiveSkill
         player.playerData.chargeSpeedMultiplication -= 0.25f;
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(IDamageable damageable)
     {
 
     }

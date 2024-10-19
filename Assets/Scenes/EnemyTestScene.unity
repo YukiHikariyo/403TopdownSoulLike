@@ -255,7 +255,7 @@ MonoBehaviour:
   attackerType: 2
   player: {fileID: 0}
   enemy: {fileID: 41832988}
-  causeHealthDamage: 0
+  causeHealthDamage: 1
   causeBuffDamage: 1
   directlyAssertBuff: 0
   directBuffProbability: 0
@@ -1726,7 +1726,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 136
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1788,7 +1788,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 456
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

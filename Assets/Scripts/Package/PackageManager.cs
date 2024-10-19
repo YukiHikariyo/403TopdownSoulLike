@@ -297,7 +297,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
                 UIManager.Instance.PlayTipSequence("强化成功");
             }
             else if (!itemDict.ContainsKey(1) || itemDict[1].number < allWeaponList[id].weaponStats[weaponDict[id].level - 1].stoneCost)
-                UIManager.Instance.PlayTipSequence("锻造石数量不足");
+                UIManager.Instance.PlayTipSequence("武器强化零件数量不足");
             else if (coin < allWeaponList[id].weaponStats[weaponDict[id].level - 1].coinCost)
                 UIManager.Instance.PlayTipSequence("金币不足");
         }
@@ -305,7 +305,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 
     #endregion
 
-    #region 饰品
+    #region 配件（饰品）
 
     /// <summary>
     /// 获得饰品
@@ -317,7 +317,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         {
             accessoryDict.Add(id, new LocalAccessoryData(id));
             UIManager.Instance.GetAccessory(id);
-            UIManager.Instance.OpenConfirmationPanel("获得饰品：" + allAccessoryList[id].accessoryName);
+            UIManager.Instance.OpenConfirmationPanel("获得配件：" + allAccessoryList[id].accessoryName);
         }
     }
 
@@ -409,7 +409,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
                 playerData.OnMaxEnergyChange(energyPercent);
             }
             else if (!itemDict.ContainsKey(2) || itemDict[2].number < allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].stoneCost)
-                UIManager.Instance.PlayTipSequence("强化石数量不足");
+                UIManager.Instance.PlayTipSequence("配件强化零件数量不足");
             else if (coin < allAccessoryList[id].accessoryStats[accessoryDict[id].level - 1].coinCost)
                 UIManager.Instance.PlayTipSequence("金币不足");
         }

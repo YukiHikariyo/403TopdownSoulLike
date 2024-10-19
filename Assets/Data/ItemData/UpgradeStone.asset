@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: UpgradeStone
   m_EditorClassIdentifier: 
   itemID: 2
-  itemName: "\u5F3A\u5316\u77F3"
+  itemName: "\u914D\u4EF6\u5F3A\u5316\u96F6\u4EF6"
   itemIcon: {fileID: 0}
   isUseable: 0
