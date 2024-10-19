@@ -21,14 +21,26 @@ public class InteractiveComponent : MonoBehaviour,ISaveable
             SwitchState();
         }
     }
+    /// <summary>
+    /// 初始化函数
+    /// </summary>
     public virtual void Initialization()
     {
 
     }
-
+    /// <summary>
+    /// 状态切换逻辑
+    /// </summary>
     protected virtual void SwitchState()
     {
-
+        if (state)
+        {
+            animator.Play("Enabled");
+        }
+        else
+        {
+            animator.Play("Disabled");
+        }
     }
     #region 存档接口
     public void GetSaveData(SaveData saveData)

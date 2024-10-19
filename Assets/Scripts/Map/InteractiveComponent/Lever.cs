@@ -14,14 +14,6 @@ public class Lever : InteractiveComponent
     protected override void SwitchState()
     {
         base.SwitchState();
-        if (state)
-        {
-            animator.Play("Enabled");
-        }
-        else
-        {
-            animator.Play("Disabled");
-        }
         foreach (Spike spike in spikes)
         {
             if(state != spike.State)

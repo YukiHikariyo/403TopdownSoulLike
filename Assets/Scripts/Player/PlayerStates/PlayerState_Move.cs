@@ -18,14 +18,7 @@ public class PlayerState_Move : PlayerState
     {
         SetAnimator_Update();
         //TODO:耐力限制
-        if (playerInput.Interaction && playerStateMachine.interactionObj != null)
-        {
-            if(playerStateMachine.interactionObj.State == false)
-            {
-                playerStateMachine.interactionObj.State = true;
-            }
-        }
-        else if (playerInput.Magic_1)
+        if (playerInput.Magic_1)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
         }
