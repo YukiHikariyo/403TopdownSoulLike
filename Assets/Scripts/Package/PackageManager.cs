@@ -196,6 +196,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             itemDict.Add(id, new LocalItemData(id, number));
 
         UIManager.Instance.GetItem(id, number);
+        UIManager.Instance.PlayTipSequence("获得物品：" + allItemList[id].itemName + "x" + number);
     }
 
     [ContextMenu("获得3个测试物品")]
@@ -246,6 +247,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         {
             weaponDict.Add(id, new LocalWeaponData(id));
             UIManager.Instance.GetWeapon(id);
+            UIManager.Instance.OpenConfirmationPanel("获得武器：" + allWeaponList[id].weaponName);
         }
     }
 
@@ -315,6 +317,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         {
             accessoryDict.Add(id, new LocalAccessoryData(id));
             UIManager.Instance.GetAccessory(id);
+            UIManager.Instance.OpenConfirmationPanel("获得饰品：" + allAccessoryList[id].accessoryName);
         }
     }
 

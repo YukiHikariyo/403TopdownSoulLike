@@ -16,6 +16,9 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI tipText;
     public Sequence tipSequence;
 
+    public Image confirmationPanel;
+    public TextMeshProUGUI confirmationText;
+
     [Space(16)]
     [Header("游戏界面UI")]
     [Space(16)]
@@ -151,6 +154,24 @@ public class UIManager : MonoSingleton<UIManager>
         tipSequence.Insert(2.6f, tipPanel.transform.DOMoveY(mainCanvas.rect.height * mainCanvas.lossyScale.y * 0.75f, 0.5f));
         tipSequence.Insert(2.6f, tipText.DOFade(0, 0.5f));
         tipSequence.InsertCallback(3.1f, () => { tipPanel.gameObject.SetActive(false); });
+    }
+
+    /// <summary>
+    /// 弹出确认提示窗口
+    /// </summary>
+    /// <param name="tip">提示内容</param>
+    public void OpenConfirmationPanel(string tip)
+    {
+        confirmationPanel.color = new Color(confirmationPanel.color.r, confirmationPanel.color.g, confirmationPanel.color.b, 0);
+        confirmationPanel.gameObject.SetActive(true);
+        confirmationText.text = tip;
+        confirmationPanel.DOFade(0.4f, 0.2f);
+    }
+
+    public void CloseConfirmationPanel()
+    {
+        confirmationPanel.gameObject.SetActive(false);
+        confirmationPanel.color = new Color(confirmationPanel.color.r, confirmationPanel.color.g, confirmationPanel.color.b, 0);
     }
 
     /// <summary>

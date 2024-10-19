@@ -37,6 +37,7 @@ public class Player : MonoBehaviour, IDamageable
     public float[] currentBuffHealth = new float[3];
     private float[] buffHealthReduceRate = new float[3] { 10, 40, 100 };
     private bool[] isBuffStay = new bool[3];
+    private int buffIndex;
 
     private float buffDamageTimer;
 
@@ -252,29 +253,29 @@ public class Player : MonoBehaviour, IDamageable
 
     public void BuffHealthAction()
     {
-        for (int i = 0; i < currentBuffHealth.Length; i++)
+        for (buffIndex = 0; buffIndex < currentBuffHealth.Length; buffIndex++)
         {
-            if (currentBuffHealth[i] > 0 && !isBuffStay[i])
+            if (currentBuffHealth[buffIndex] > 0 && !isBuffStay[buffIndex])
             {
-                currentBuffHealth[i] -= 2.5f * Time.deltaTime;
-                buffBars[i].OnCurrentValueChange(currentBuffHealth[i], 100, true);
+                currentBuffHealth[buffIndex] -= 2.5f * Time.deltaTime;
+                buffBars[buffIndex].OnCurrentValueChange(currentBuffHealth[buffIndex], 100, true);
 
-                if (currentBuffHealth[i] <= 0)
+                if (currentBuffHealth[buffIndex] <= 0)
                 {
-                    currentBuffHealth[i] = 0;
-                    buffBars[i].gameObject.SetActive(false);
+                    currentBuffHealth[buffIndex] = 0;
+                    buffBars[buffIndex].gameObject.SetActive(false);
                 }
             }
-            else if (currentBuffHealth[i] > 0 && isBuffStay[i])
+            else if (currentBuffHealth[buffIndex] > 0 && isBuffStay[buffIndex])
             {
-                currentBuffHealth[i] -= buffHealthReduceRate[i] * Time.deltaTime;
-                buffBars[i].OnCurrentValueChange(currentBuffHealth[i], 100, true);
+                currentBuffHealth[buffIndex] -= buffHealthReduceRate[buffIndex] * Time.deltaTime;
+                buffBars[buffIndex].OnCurrentValueChange(currentBuffHealth[buffIndex], 100, true);
 
-                if (currentBuffHealth[i] <= 0)
+                if (currentBuffHealth[buffIndex] <= 0)
                 {
-                    currentBuffHealth[i] = 0;
-                    buffBars[i].gameObject.SetActive(false);
-                    isBuffStay[i] = false;
+                    currentBuffHealth[buffIndex] = 0;
+                    buffBars[buffIndex].gameObject.SetActive(false);
+                    isBuffStay[buffIndex] = false;
                 }
             }
         }
