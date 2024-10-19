@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc5d252fc0b89944b72e3988ea49895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackerType: 2
+  attackerType: 3
   player: {fileID: 0}
   enemy: {fileID: 41832988}
   causeHealthDamage: 1

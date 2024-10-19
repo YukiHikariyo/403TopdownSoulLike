@@ -49,6 +49,7 @@ public class AttackArea : MonoBehaviour
         {
             IDamageable damageable = component;
             bool isSuccessful = false;
+            bool isCrit = false;
 
             switch (attackerType)
             {
@@ -70,7 +71,10 @@ public class AttackArea : MonoBehaviour
                 case AttackerType.PlayerBlade:
 
                     if (causeHealthDamage)
-                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (CalculateProbability(player.playerData.FinalCritRate) ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                    {
+                        isCrit = CalculateProbability(player.playerData.FinalCritRate);
+                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (isCrit ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                    }
 
                     if (player.playerData.currentWeaponStaticData.buffDdamageType != BuffType.None)
                         damageable.TakeBuffDamage(player.playerData.currentWeaponStaticData.buffDdamageType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
@@ -83,12 +87,21 @@ public class AttackArea : MonoBehaviour
                             player.passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Hit]?.Invoke(damageable);
                     }
 
+                    if (isCrit)
+                    {
+                        if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Crit))
+                            player.passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Crit]?.Invoke(damageable);
+                    }
+
                     break;
 
                 case AttackerType.PlayerOther:
 
                     if (causeHealthDamage)
-                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (CalculateProbability(player.playerData.FinalCritRate) ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                    {
+                        isCrit = CalculateProbability(player.playerData.FinalCritRate);
+                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (isCrit ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                    }
 
                     if (directlyAssertBuff && CalculateProbability(directBuffProbability))
                         damageable.GetBuff(buffType, directBuffDuration);
@@ -101,6 +114,12 @@ public class AttackArea : MonoBehaviour
 
                         if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Hit))
                             player.passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Hit]?.Invoke(damageable);
+                    }
+
+                    if (isCrit)
+                    {
+                        if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Crit))
+                            player.passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Crit]?.Invoke(damageable);
                     }
 
                     break;

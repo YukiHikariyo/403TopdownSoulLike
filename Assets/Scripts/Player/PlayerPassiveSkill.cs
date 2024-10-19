@@ -9,6 +9,7 @@ namespace PlayerPassiveSkill
     {
         [Tooltip("间隔固定时间触发")] Interval,
         [Tooltip("命中触发")] Hit,
+        [Tooltip("暴击触发")] Crit,
         [Tooltip("击杀触发")] Kill,
         [Tooltip("受伤触发")] GetHit,   //仅限受到有来源伤害
         [Tooltip("闪避触发")] Dodge,    //仅限闪避有来源伤害
