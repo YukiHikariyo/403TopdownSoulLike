@@ -102,19 +102,25 @@ public class PlayerState : ScriptableObject, IState
         else
             playerRenderer.flipX = false;
     }
-
+    /// <summary>
+    /// 仅在动作开始时更新面朝方向
+    /// </summary>
     protected void SetAnimator_OnStart()
     {
         ChangeScale();
         playerStateMachine.ReturnAnimatorValue_OnStart();
     }
-
+    /// <summary>
+    /// 逐帧更新面朝方向
+    /// </summary>
     protected void SetAnimator_Update()
     {
         ChangeScale();
         playerStateMachine.ReturnAnimatorValue_Update();
     }
-
+    /// <summary>
+    /// 受伤时的面朝方向
+    /// </summary>
     protected void SetAnimator_OnHurt()
     {
         playerStateMachine.ReturnAnimatorValue_OnHurt();

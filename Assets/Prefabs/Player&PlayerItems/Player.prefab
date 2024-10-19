@@ -1001,6 +1001,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a34f351db6704e1469ab7dcfe5d5ca18, type: 2}
   - {fileID: 11400000, guid: 45dfe9114fa3617458c7129f01ce9509, type: 2}
   - {fileID: 11400000, guid: 2909330ab95c3bd489eb91cb0e160f2c, type: 2}
+  - {fileID: 11400000, guid: ff4200ac68d101c4b8b45ea3c89eb774, type: 2}
+  - {fileID: 11400000, guid: 650ac8c5908270549a8de855d2ac0554, type: 2}
+  - {fileID: 11400000, guid: 5d579f07d87f46a4cb364431a54d9023, type: 2}
+  - {fileID: 11400000, guid: 61bb2ffb104c7e3479e5dfda897903db, type: 2}
+  - {fileID: 11400000, guid: 8e529ab033e377e47a44e889e067269c, type: 2}
+  - {fileID: 11400000, guid: 674dabf26d4f5704f9226b88de415789, type: 2}
   mouseDistance: {x: 0, y: 0, z: 0}
   CatchChancepoint: 0
   noStunUndamageableTime: 0
