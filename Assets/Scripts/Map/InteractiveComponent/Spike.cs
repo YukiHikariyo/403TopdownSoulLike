@@ -2,26 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spike : InteractiveComponent
+public class Spike : MonoBehaviour
 {
-    
-    public Collider2D collider;
-    public override void Initialization()
+    private bool state;
+    public bool State
     {
-        base.Initialization();
-        SwitchState();
+        get { return state; }
+        set
+        {
+            state = value;
+            SwitchState();
+        }
     }
+    public Animator animator;
+    
 
-    protected override void SwitchState()
+    public void SwitchState()
     {
         if (state)
         {
-            collider.enabled = false;
             animator.Play("Enabled");
         }
         else
         {
-            collider.enabled = true;
             animator.Play("Disabled");
         }
     }

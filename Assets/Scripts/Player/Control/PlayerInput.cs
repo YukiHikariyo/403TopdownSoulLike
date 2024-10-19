@@ -51,6 +51,12 @@ public class PlayerInput : MonoBehaviour
 
     public bool Magic_3 => input.Player.Magic_3.WasPressedThisFrame();
     public bool Roll => input.Player.Roll.WasPressedThisFrame();
+
+    public bool UseHealthBottle => input.Player.Health.WasPressedThisFrame();
+
+    public bool UseManaBottle => input.Player.Mana.WasPressedThisFrame();
+
+    public bool Interaction => input.Player.Interaction.WasPressedThisFrame();
     #endregion
 
     #region 输入检测拓展

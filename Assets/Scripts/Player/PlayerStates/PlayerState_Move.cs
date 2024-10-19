@@ -18,30 +18,40 @@ public class PlayerState_Move : PlayerState
     {
         SetAnimator_Update();
         //TODO:耐力限制
-
-        if (playerInput.Magic_2)
+        if (playerInput.Interaction && playerStateMachine.interactionObj != null)
+        {
+            if(playerStateMachine.interactionObj.State == false)
+            {
+                playerStateMachine.interactionObj.State = true;
+            }
+        }
+        else if (playerInput.Magic_1)
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
+        }
+        else if (playerInput.Magic_2)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
         }
-        if (playerInput.Magic_2)
-        {
-            playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
-        }
-        if (playerInput.Magic_3)
+        else if (playerInput.Magic_3)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
         }
-        if (playerInput.RightAttack)
+        else if (playerInput.RightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_Charging));
 
-        if (playerInput.LightAttack)
+        else if (playerInput.LightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
 
-        if (playerInput.Roll && playerController.RollCount < 3)
+        else if (playerInput.Roll && playerController.RollCount < 3)
             playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
 
-        if (!playerInput.WantsMove)
+        else if (!playerInput.WantsMove)
             playerStateMachine.SwitchState(typeof(PlayerState_Idle));
+        else if (playerInput.UseHealthBottle)
+            playerStateMachine.SwitchState(typeof(PlayerState_UseHealthBottle));
+        else if (playerInput.UseManaBottle)
+            playerStateMachine.SwitchState(typeof(PlayerState_UseManaBottle));
 
         //TODO:打开背包
     }

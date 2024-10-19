@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractiveComponent : MonoBehaviour,ISaveable
 {
     public Animator animator;
-
+    protected PlayerStateMachine stateMachine;
     protected bool state;
    
     /// <summary>

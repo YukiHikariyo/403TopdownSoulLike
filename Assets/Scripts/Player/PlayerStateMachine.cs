@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -47,6 +48,14 @@ public class PlayerStateMachine : StateMachine
     [Tooltip("是否允许状态切换")]public bool CanStateSwitch {  get; set; }
     #endregion
 
+    #region 场景交互
+    /// <summary>
+    /// 是否可以与场景物体交互
+    /// </summary>
+    public bool CanInterAction;
+
+    public InteractiveComponent interactionObj = null;
+    #endregion
     #region 事件
     [Tooltip("魔法中的发射事件")] public UnityEvent magicEvent;
     #endregion
@@ -60,6 +69,8 @@ public class PlayerStateMachine : StateMachine
         memory = InputMemory.None;
         //
         CanAcceptInput = true;
+        //
+        CanInterAction = false;
         //
         dict = new Dictionary<System.Type, IState>(stateTable.Length);
         //
@@ -92,13 +103,21 @@ public class PlayerStateMachine : StateMachine
         }
     }
 
+
+    /// <summary>
+    /// 计算鼠标和玩家的夹角值
+    /// </summary>
     private void UpdateMouseDegree()
     {
         mouseDistance = m_camera.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
         float degree = Mathf.Atan2(mouseDistance.y, mouseDistance.x) * Mathf.Rad2Deg;
         mousedegree = degree>=0?degree:360f+degree;
     }
-
+    /// <summary>
+    /// 计算在有转向限制下的夹角值
+    /// </summary>
+    /// <param name="lastobj"></param>
+    /// <returns>返回最终物体应该朝向的角度</returns>
     public float RestrictedRotation(GameObject lastobj)
     {
         float mousedeg = mousedegree;
@@ -179,7 +198,25 @@ public class PlayerStateMachine : StateMachine
 
     }
     #endregion
+    #region 触发器相关
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Interaction"))
+        {
+            CanInterAction = true;
+            interactionObj = collision.gameObject.GetComponent<InteractiveComponent>();
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interaction"))
+        {
+            CanInterAction = false;
+            interactionObj = null;
+        }
+    }
+    #endregion
 }
 
 

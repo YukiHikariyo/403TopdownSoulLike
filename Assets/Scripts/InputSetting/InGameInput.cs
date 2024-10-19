@@ -116,6 +116,33 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8d88901-f563-481f-adb3-77693263ad3b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Health"",
+                    ""type"": ""Button"",
+                    ""id"": ""ff7a412c-faf8-47aa-9a61-750faf181b2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mana"",
+                    ""type"": ""Button"",
+                    ""id"": ""65bec09e-bd71-4aa8-8e6d-dc53ff7fb88e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -228,6 +255,39 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Magic_3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9601fe12-a8c5-43dc-be8b-fc5662f26813"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7f1c9c8-0618-4923-a790-52a828953a53"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Health"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abd79035-fa7f-4c83-b4a5-b60b76d16cac"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mana"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -258,6 +318,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         m_Player_Magic_1 = m_Player.FindAction("Magic_1", throwIfNotFound: true);
         m_Player_Magic_2 = m_Player.FindAction("Magic_2", throwIfNotFound: true);
         m_Player_Magic_3 = m_Player.FindAction("Magic_3", throwIfNotFound: true);
+        m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
+        m_Player_Health = m_Player.FindAction("Health", throwIfNotFound: true);
+        m_Player_Mana = m_Player.FindAction("Mana", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -329,6 +392,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Magic_1;
     private readonly InputAction m_Player_Magic_2;
     private readonly InputAction m_Player_Magic_3;
+    private readonly InputAction m_Player_Interaction;
+    private readonly InputAction m_Player_Health;
+    private readonly InputAction m_Player_Mana;
     public struct PlayerActions
     {
         private @InGameInput m_Wrapper;
@@ -343,6 +409,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         public InputAction @Magic_1 => m_Wrapper.m_Player_Magic_1;
         public InputAction @Magic_2 => m_Wrapper.m_Player_Magic_2;
         public InputAction @Magic_3 => m_Wrapper.m_Player_Magic_3;
+        public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
+        public InputAction @Health => m_Wrapper.m_Player_Health;
+        public InputAction @Mana => m_Wrapper.m_Player_Mana;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -382,6 +451,15 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             @Magic_3.started += instance.OnMagic_3;
             @Magic_3.performed += instance.OnMagic_3;
             @Magic_3.canceled += instance.OnMagic_3;
+            @Interaction.started += instance.OnInteraction;
+            @Interaction.performed += instance.OnInteraction;
+            @Interaction.canceled += instance.OnInteraction;
+            @Health.started += instance.OnHealth;
+            @Health.performed += instance.OnHealth;
+            @Health.canceled += instance.OnHealth;
+            @Mana.started += instance.OnMana;
+            @Mana.performed += instance.OnMana;
+            @Mana.canceled += instance.OnMana;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -416,6 +494,15 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             @Magic_3.started -= instance.OnMagic_3;
             @Magic_3.performed -= instance.OnMagic_3;
             @Magic_3.canceled -= instance.OnMagic_3;
+            @Interaction.started -= instance.OnInteraction;
+            @Interaction.performed -= instance.OnInteraction;
+            @Interaction.canceled -= instance.OnInteraction;
+            @Health.started -= instance.OnHealth;
+            @Health.performed -= instance.OnHealth;
+            @Health.canceled -= instance.OnHealth;
+            @Mana.started -= instance.OnMana;
+            @Mana.performed -= instance.OnMana;
+            @Mana.canceled -= instance.OnMana;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -454,5 +541,8 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         void OnMagic_1(InputAction.CallbackContext context);
         void OnMagic_2(InputAction.CallbackContext context);
         void OnMagic_3(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
+        void OnHealth(InputAction.CallbackContext context);
+        void OnMana(InputAction.CallbackContext context);
     }
 }

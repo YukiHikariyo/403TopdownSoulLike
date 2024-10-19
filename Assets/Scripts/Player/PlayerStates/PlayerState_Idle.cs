@@ -19,31 +19,40 @@ public class PlayerState_Idle : PlayerState
     {
         SetAnimator_Update();
 
-        if (playerInput.WantsMove)
+        if (playerInput.Interaction && playerStateMachine.interactionObj != null)
+        {
+            if (playerStateMachine.interactionObj.State == false)
+            {
+                playerStateMachine.interactionObj.State = true;
+            }
+        }
+        else if (playerInput.WantsMove)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Move));
         }
-        if (playerInput.Magic_1)
+        else if (playerInput.Magic_1)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
         }
-        if (playerInput.Magic_2)
+        else if (playerInput.Magic_2)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
         }
-        if (playerInput.Magic_3)
+        else if (playerInput.Magic_3)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
         }
         //TODO:耐力限制
-        if (playerInput.RightAttack)
+        else if (playerInput.RightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_Charging));
 
-        if(playerInput.LightAttack)
+        else if (playerInput.LightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
 
-        if(playerInput.Roll && playerController.RollCount < 3)
+        else if (playerInput.Roll && playerController.RollCount < 3)
             playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+
+        
 
         //TODO:打开背包
     }
