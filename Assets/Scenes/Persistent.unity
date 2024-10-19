@@ -10653,7 +10653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 0}
-  coin: 999
+  coin: 0
   maxHealthBottle: 0
   currentHealthBottle: 0
   maxManaBottle: 0
@@ -10662,6 +10662,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 491147848cb3f214f97ade4ee5552391, type: 2}
   - {fileID: 11400000, guid: 25e2a12ad50a5ba4cbbc89a68b9ce9dc, type: 2}
   - {fileID: 11400000, guid: 4b7e7666de316bf4380938e9a754f86c, type: 2}
+  - {fileID: 11400000, guid: 250c0608b3186f142b0c7f5138d5e4c2, type: 2}
   allWeaponList:
   - {fileID: 11400000, guid: df93a7f89228be74f9c90738f46780a9, type: 2}
   allAccessoryList:
