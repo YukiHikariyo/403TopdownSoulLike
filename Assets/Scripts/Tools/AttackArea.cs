@@ -13,7 +13,8 @@ public class AttackArea : MonoBehaviour
     public enum AttackerType
     {
         NoSource,
-        Player,
+        PlayerBlade,
+        PlayerOther,
         Enemy,
         Trap,
     }
@@ -33,7 +34,7 @@ public class AttackArea : MonoBehaviour
     [Tooltip("动作值索引")] public int motionValueIndex;
     [Tooltip("攻击强度索引")] public int attackPowerIndex;
     [Tooltip("属性动作值索引")] public int buffMotionValueIndex;
-    [Tooltip("属性伤害的类型")] public BuffType buffType;
+    [Tooltip("属性伤害的类型（玩家刀光攻击不用管）")] public BuffType buffType;
     [Tooltip("直接施加Buff的时间")] public float directBuffDuration;
     [Space(16)]
     [Tooltip("无来源伤害")] public float noSourceDamage;
@@ -66,7 +67,25 @@ public class AttackArea : MonoBehaviour
 
                     break;
 
-                case AttackerType.Player:
+                case AttackerType.PlayerBlade:
+
+                    if (causeHealthDamage)
+                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (CalculateProbability(player.playerData.FinalCritRate) ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+
+                    if (player.playerData.currentWeaponStaticData.buffDdamageType != BuffType.None)
+                        damageable.TakeBuffDamage(player.playerData.currentWeaponStaticData.buffDdamageType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
+
+                    if (isSuccessful)
+                    {
+                        successEvent?.Invoke(damageable);
+
+                        if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Hit))
+                            player.passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Hit]?.Invoke(damageable);
+                    }
+
+                    break;
+
+                case AttackerType.PlayerOther:
 
                     if (causeHealthDamage)
                         isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (CalculateProbability(player.playerData.FinalCritRate) ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);

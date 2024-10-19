@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum BuffType
 {
+    None,
     TestBuff,
     //玩家增益
     Tough,

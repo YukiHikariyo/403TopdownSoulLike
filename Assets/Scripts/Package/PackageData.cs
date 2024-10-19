@@ -29,6 +29,7 @@ public class StaticWeaponData : ScriptableObject, IComparable<StaticWeaponData>
     [Tooltip("最大等级")] public int maxLevel;
     [Space(16)]
     [Tooltip("数值")] public WeaponStats[] weaponStats;   //数组索引表示武器等级
+    [Tooltip("属性伤害类型")] public BuffType buffDdamageType;
     [Tooltip("被动技能")] public PassiveSkillType passiveSkillType;
 
     public int CompareTo(StaticWeaponData other) => weaponID - other.weaponID;
