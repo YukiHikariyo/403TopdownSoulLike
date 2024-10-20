@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2e57a4af04c434f4eb5038b26dee3d44
+guid: 6a43ed34fc3f41748808c5582dc40a40
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player-roll-frontside_0
+      name: Player-roll-front 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 417748f0df5bec248882076113a26925
-      internalID: 278073208
+      spriteID: 2349baeffd17c3a42b332bc99083c51c
+      internalID: 481677710
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-frontside_1
+      name: Player-roll-front 1_1
       rect:
         serializedVersion: 2
         x: 64
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3010083b21144a345866e660096e804b
-      internalID: -58122188
+      spriteID: 231e426b6371a5c44acf5df4ddd7a0fa
+      internalID: 309556181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-frontside_2
+      name: Player-roll-front 1_2
       rect:
         serializedVersion: 2
         x: 128
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 494191640bdce024586c9504130f9345
-      internalID: 712793372
+      spriteID: 57001b4e3586a21488fa53284355b5a7
+      internalID: -82709826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-frontside_3
+      name: Player-roll-front 1_3
       rect:
         serializedVersion: 2
         x: 192
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef451e7a6e83d824e8949063ac39a236
-      internalID: -2080528388
+      spriteID: 7bd2313fc7185544ab6f259dbd50efc6
+      internalID: 239105254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-frontside_4
+      name: Player-roll-front 1_4
       rect:
         serializedVersion: 2
         x: 256
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa0b0d48f54334649b7a3cffa7ee9851
-      internalID: -27595494
+      spriteID: 181d30d8c0e1ef347bf8158f5e138b2b
+      internalID: -1796969193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-frontside_5
+      name: Player-roll-front 1_5
       rect:
         serializedVersion: 2
         x: 320
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c1910213cb229e489f90dfe5713b477
-      internalID: 1487443375
+      spriteID: 216603382da76bd4a8409e8cb277d3e8
+      internalID: 1067721473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-frontside_6
+      name: Player-roll-front 1_6
       rect:
         serializedVersion: 2
         x: 384
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4441870bdb9fc0742ba26464a877ffb1
-      internalID: -438792111
+      spriteID: 4fc49c2d15b7b1a498fd141dfa023f76
+      internalID: -1204669961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-frontside_7
+      name: Player-roll-front 1_7
       rect:
         serializedVersion: 2
         x: 448
@@ -271,8 +271,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c59e71f85ef1834283f9b3ebdde3513
-      internalID: 1205811924
+      spriteID: ea7531b57b2253242b2fc37312a0360a
+      internalID: -1629036046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-roll-front 1_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca38d1506ea33fa4580c6df15f26065d
+      internalID: -1439639714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-roll-front 1_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04b9ef138c42f5242a7c79e542d6a494
+      internalID: -1768038170
       vertices: []
       indices: 
       edges: []
@@ -288,14 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player-roll-frontside_0: 278073208
-      Player-roll-frontside_1: -58122188
-      Player-roll-frontside_2: 712793372
-      Player-roll-frontside_3: -2080528388
-      Player-roll-frontside_4: -27595494
-      Player-roll-frontside_5: 1487443375
-      Player-roll-frontside_6: -438792111
-      Player-roll-frontside_7: 1205811924
+      Player-roll-front 1_0: 481677710
+      Player-roll-front 1_1: 309556181
+      Player-roll-front 1_2: -82709826
+      Player-roll-front 1_3: 239105254
+      Player-roll-front 1_4: -1796969193
+      Player-roll-front 1_5: 1067721473
+      Player-roll-front 1_6: -1204669961
+      Player-roll-front 1_7: -1629036046
+      Player-roll-front 1_8: -1439639714
+      Player-roll-front 1_9: -1768038170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

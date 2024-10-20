@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 086f9ce8c9311d844928528c2b280724
+guid: 6d7859c7fbcae194dbdd0784d5b27a62
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player-roll-backside_0
+      name: Player-roll-backside 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b5f3959eb299c84893c2008ddb58780
-      internalID: -416294264
+      spriteID: 34999639e2836b94693761d61e3e0445
+      internalID: 1881324966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-backside_1
+      name: Player-roll-backside 1_1
       rect:
         serializedVersion: 2
         x: 64
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e0b3616656de994ba9bacaf79515d1a
-      internalID: 2127478954
+      spriteID: ad0130d56afec1341b0f0a2f741cce27
+      internalID: 2114049622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-backside_2
+      name: Player-roll-backside 1_2
       rect:
         serializedVersion: 2
         x: 128
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdd2f50ec93f16e45967981f8d7ef875
-      internalID: -1181512366
+      spriteID: 6ebb81c1454be5f4491d3c08021bbb99
+      internalID: 252075214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-backside_3
+      name: Player-roll-backside 1_3
       rect:
         serializedVersion: 2
         x: 192
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d211b5d5fca832049b259bba6afbd5b8
-      internalID: -207365715
+      spriteID: 64b161ed18fcda745ab76daafbc33567
+      internalID: 784492561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-backside_4
+      name: Player-roll-backside 1_4
       rect:
         serializedVersion: 2
         x: 256
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 249f5d989ecdacb4ba5d530f74f208a2
-      internalID: 1675788619
+      spriteID: a0044746163bda8429576951d9cbcbf2
+      internalID: -2081795956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-backside_5
+      name: Player-roll-backside 1_5
       rect:
         serializedVersion: 2
         x: 320
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c2df5b6857b5a14dbf5cf5fb9eb0770
-      internalID: 1308422979
+      spriteID: bff150612e09e354fad54a2f5ce4c200
+      internalID: 1432709083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-backside_6
+      name: Player-roll-backside 1_6
       rect:
         serializedVersion: 2
         x: 384
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df815e96733deff43a03202f3a6451b9
-      internalID: -491591278
+      spriteID: 3219e85afffbdb84eafbbc41e043b066
+      internalID: 1858510704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-roll-backside_7
+      name: Player-roll-backside 1_7
       rect:
         serializedVersion: 2
         x: 448
@@ -271,8 +271,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90664438bfe1ffd4db1179f4dc5b713f
-      internalID: -1150846526
+      spriteID: 23059c91fc9ba0249b6b0825fd263316
+      internalID: 794898567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-roll-backside 1_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bc0e1f3a0b786c4e88e5cbb0a8cd69d
+      internalID: -1533299724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-roll-backside 1_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae1d5eb7dd2fa04883236e7a2406687
+      internalID: 342552348
       vertices: []
       indices: 
       edges: []
@@ -288,14 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player-roll-backside_0: -416294264
-      Player-roll-backside_1: 2127478954
-      Player-roll-backside_2: -1181512366
-      Player-roll-backside_3: -207365715
-      Player-roll-backside_4: 1675788619
-      Player-roll-backside_5: 1308422979
-      Player-roll-backside_6: -491591278
-      Player-roll-backside_7: -1150846526
+      Player-roll-backside 1_0: 1881324966
+      Player-roll-backside 1_1: 2114049622
+      Player-roll-backside 1_2: 252075214
+      Player-roll-backside 1_3: 784492561
+      Player-roll-backside 1_4: -2081795956
+      Player-roll-backside 1_5: 1432709083
+      Player-roll-backside 1_6: 1858510704
+      Player-roll-backside 1_7: 794898567
+      Player-roll-backside 1_8: -1533299724
+      Player-roll-backside 1_9: 342552348
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
