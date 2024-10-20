@@ -98,9 +98,9 @@ public class PlayerState : ScriptableObject, IState
     private void ChangeScale()
     {
         if(playerStateMachine.MouseDistance.x < 0)
-            playerRenderer.flipX = true;
-        else
             playerRenderer.flipX = false;
+        else
+            playerRenderer.flipX = true;
     }
     /// <summary>
     /// 仅在动作开始时更新面朝方向

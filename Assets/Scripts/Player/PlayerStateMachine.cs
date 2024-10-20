@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -136,22 +137,26 @@ public class PlayerStateMachine : StateMachine
     public void ReturnAnimatorValue_Update()
     {
         bool isUp = mouseDistance.y >= 0;
+        bool isHorizontal = Mathf.Abs(mouseDistance.x) > Mathf.Abs(mouseDistance.y);
         bool isSameDirtction = Vector3.Dot(mouseDistance,playerController.MoveAxis) > 0;
         playerAnimator.SetFloat("isUp",isUp ? 1 : 0);
+        playerAnimator.SetFloat("isHorizontal", isHorizontal ? 1 : 0);
         playerAnimator.SetFloat("isSameDirection",isSameDirtction ? 1 : 0);
     }
 
     public void ReturnAnimatorValue_OnStart()
     {
         bool isUp = mouseDistance.y >= 0;
+        bool isHorizontal = Mathf.Abs(mouseDistance.x) > Mathf.Abs(mouseDistance.y);
         playerAnimator.SetFloat("isUp", isUp ? 1 : 0);
+        playerAnimator.SetFloat("isHorizontal", isHorizontal ? 1 : 0);
     }
 
     public void ReturnAnimatorValue_OnHurt()
     {
         Vector3 direction = (attacker.position - playerTransform.position).normalized;
         bool isUp = direction.y >= 0;
-        bool isRight = direction.x < 0;
+        bool isRight = direction.x > 0;
         playerAnimator.SetFloat("isUp", isUp ? 1 : 0);
         playerRenderer.flipX = isRight;
     }
