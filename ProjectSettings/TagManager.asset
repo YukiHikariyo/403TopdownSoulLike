@@ -43,9 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Enemy
+  - name: Back
     uniqueID: 1240468911
     locked: 0
-  - name: Player
+  - name: Middle
     uniqueID: 2850486317
+    locked: 0
+  - name: Front
+    uniqueID: 2821035433
     locked: 0
