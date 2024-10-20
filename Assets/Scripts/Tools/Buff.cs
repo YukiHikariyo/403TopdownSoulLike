@@ -410,13 +410,13 @@ public class Dizzy : BaseBuff
     public override void OnBuffEnter()
     {
         if (damageable is Enemy)
-            (damageable as Enemy).canTakeAction = false;
+            (damageable as Enemy).ChangeState((damageable as Enemy).dizzyStunState);
     }
 
     public override void OnBuffExit()
     {
         if (damageable is Enemy)
-            (damageable as Enemy).canTakeAction = true;
+            (damageable as Enemy).ChangeState((damageable as Enemy).defaultState);
     }
 
     public override void OnBuffStay()

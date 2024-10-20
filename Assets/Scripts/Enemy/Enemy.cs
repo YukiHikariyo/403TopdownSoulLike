@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     public Rigidbody2D rb;
     public Animator anim;
+    public SpriteRenderer spriteRenderer;
 
     private Seeker seeker;
     private Path path;
@@ -177,12 +178,13 @@ public class Enemy : MonoBehaviour, IDamageable
     [Space(16)]
 
     [Tooltip("是否霸体")] public bool isEnduance;
+    public Transform attackerTransform;
 
     [Space(16)]
     [Header("FSM")]
     [Space(16)]
 
-    [Tooltip("能否行动")] public bool canTakeAction = true;
+    public bool isMove; //在Animation里调
 
     public EnemyState currentState;
     public EnemyState startState;
@@ -200,6 +202,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         seeker = GetComponent<Seeker>();
 
@@ -208,6 +211,11 @@ public class Enemy : MonoBehaviour, IDamageable
         target = player.gameObject;
 
         //子类记得在此处实例化状态
+        deadState = new EnemyDeadState(this);
+        smallStunState = new EnemySmallStunState(this);
+        normalStunState = new EnemyNormalStunState(this);
+        dizzyStunState = new EnemyDizzyState(this);
+
         //子类记得在此处设置默认状态
     }
 
@@ -269,6 +277,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (damageableIndex == 0 || ignoreDamageableIndex)
         {
+            this.attackerTransform = attackerTransform;
+
             CurrentHealth -= Mathf.Ceil((damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
             if (CurrentHealth < 0)
             {
@@ -341,6 +351,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void GetBuff(BuffType buffType, float duration = 0)
     {
+        if (buffType == BuffType.Dizzy && isBoss)
+            return;
+
         duration = buffType switch
         {
             BuffType.LightBurst => 1,
@@ -464,7 +477,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         damageableIndex = 1;
 
-        if (index != 0)
+        if (index != 0 && currentState != smallStunState && currentState != normalStunState && currentState != bigStunState && currentState != dizzyStunState)
         {
             ChangeState(index switch
             {
@@ -485,6 +498,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void Move(Vector2 direction)
     {
-        rb.velocity = direction * FinalMoveSpeed;
+        if (isMove)
+        {
+            rb.velocity = direction * FinalMoveSpeed;
+            spriteRenderer.flipX = direction.x < 0;
+        }
     }
+
+    public void DestroyEnemy() => Destroy(gameObject);
 }
