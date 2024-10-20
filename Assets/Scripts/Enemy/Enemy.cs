@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Seeker seeker;
     private Path path;
-    public CancellationTokenSource pathCTK = new();
+    public CancellationTokenSource pathCTK;
     private int pathPointIndex;
     public Vector2 pathDirection;
 
@@ -200,6 +200,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [Header("范围检测")]
     [Space(16)]
 
+    public Vector2 checkCenter;
     public float[] checkDistance;
     public LayerMask playerLayer;
     public LayerMask obstacleLayer;
@@ -439,6 +440,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public async UniTask OnSeekPath()
     {
+        pathCTK = new();
         OnPathPointUpdate().Forget();
 
         while (true)
@@ -504,29 +506,37 @@ public class Enemy : MonoBehaviour, IDamageable
 
     
 
-    public void Move(Vector2 direction)
+    public void Move(Vector2 direction, bool isControlled = false)
     {
-        if (isMove)
+        if (isMove || !isControlled)
         {
             rb.velocity = direction * FinalMoveSpeed;
             spriteRenderer.flipX = direction.x < 0;
         }
+        else
+            rb.velocity = Vector2.zero;
     }
 
     public bool PlayerCheck(int index, bool ignoreObstacle)
     {
         if (ignoreObstacle)
-            return Physics2D.OverlapCircle(transform.position, checkDistance[index], playerLayer);
+            return Physics2D.OverlapCircle((Vector2)transform.position + checkCenter, checkDistance[index], playerLayer);
         else
-            return Physics2D.OverlapCircle(transform.position, checkDistance[index], playerLayer) && !Physics2D.Raycast(transform.position, player.transform.position - transform.position, (player.transform.position - transform.position).magnitude, obstacleLayer);
+            return Physics2D.OverlapCircle((Vector2)transform.position + checkCenter, checkDistance[index], playerLayer) && !Physics2D.Raycast((Vector2)transform.position + checkCenter, player.transform.position - transform.position, (player.transform.position - transform.position).magnitude, obstacleLayer);
     }
 
+    public bool ObstacleCheck(Vector2 position, float radius) => Physics2D.OverlapCircle(position, radius, obstacleLayer);
+
     public void DestroyEnemy() => Destroy(gameObject);
+
+    public Vector2 CalculateTargetDirection() => (target.transform.position - transform.position).normalized;
+
+    public float CalculateTargetAngle() => Vector2.SignedAngle(Vector2.right, target.transform.position - transform.position);
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         for (int i = 0; i < checkDistance.Length; i++)
-            Gizmos.DrawWireSphere(transform.position, checkDistance[i]);
+            Gizmos.DrawWireSphere((Vector2)transform.position + checkCenter, checkDistance[i]);
     }
 }

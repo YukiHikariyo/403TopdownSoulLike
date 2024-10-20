@@ -83,7 +83,7 @@ public class SlimeJumpState : EnemyState
 
     public override void PhysicsUpdate()
     {
-        enemy.Move(dir);
+        enemy.Move(dir, true);
     }
 
     public override void OnExit()
@@ -95,7 +95,7 @@ public class SlimeJumpState : EnemyState
     {
         ctk = new();
         await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: ctk.Token);
-        dir = enemy.PlayerCheck(0, false) ? (enemy.player.transform.position - enemy.transform.position).normalized : Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
+        dir = enemy.PlayerCheck(0, false) ? enemy.CalculateTargetDirection() : Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
         enemy.isMove = true;
         await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: ctk.Token);
         enemy.isMove = false;
