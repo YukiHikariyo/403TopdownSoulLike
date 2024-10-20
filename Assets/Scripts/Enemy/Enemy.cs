@@ -196,6 +196,14 @@ public class Enemy : MonoBehaviour, IDamageable
     public EnemyState bigStunState;
     public EnemyState dizzyStunState;
 
+    [Space(16)]
+    [Header("范围检测")]
+    [Space(16)]
+
+    public float[] checkDistance;
+    public LayerMask playerLayer;
+    public LayerMask obstacleLayer;
+
     #region 生命周期
 
     protected virtual void Awake()
@@ -505,5 +513,20 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
+    public bool PlayerCheck(int index, bool ignoreObstacle)
+    {
+        if (ignoreObstacle)
+            return Physics2D.OverlapCircle(transform.position, checkDistance[index], playerLayer);
+        else
+            return Physics2D.OverlapCircle(transform.position, checkDistance[index], playerLayer) && !Physics2D.Raycast(transform.position, player.transform.position - transform.position, (player.transform.position - transform.position).magnitude, obstacleLayer);
+    }
+
     public void DestroyEnemy() => Destroy(gameObject);
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < checkDistance.Length; i++)
+            Gizmos.DrawWireSphere(transform.position, checkDistance[i]);
+    }
 }

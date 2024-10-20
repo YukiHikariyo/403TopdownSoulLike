@@ -199,9 +199,9 @@ GameObject:
   - component: {fileID: 1116650270763785768}
   - component: {fileID: 6482489811352274625}
   - component: {fileID: 4010603200836409311}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -422,3 +422,11 @@ MonoBehaviour:
   isEnduance: 0
   attackerTransform: {fileID: 0}
   isMove: 0
+  checkDistance:
+  - 5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2560

@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 /// <summary>
@@ -60,6 +62,7 @@ public class SlimeJumpState : EnemyState
     Slime slime;
 
     Vector2 dir;
+    CancellationTokenSource ctk;
 
     public SlimeJumpState(Enemy enemy, Slime slime) : base(enemy)
     {
@@ -69,7 +72,7 @@ public class SlimeJumpState : EnemyState
     public override void OnEnter()
     {
         enemy.anim.Play("Jump");
-        dir = Vector2.right;
+        OnJump().Forget();
         StateChangeTimer(1, slime.idleState).Forget();
     }
 
@@ -85,6 +88,16 @@ public class SlimeJumpState : EnemyState
 
     public override void OnExit()
     {
+        ctk.Cancel();
+    }
 
+    private async UniTask OnJump()
+    {
+        ctk = new();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: ctk.Token);
+        dir = enemy.PlayerCheck(0, false) ? (enemy.player.transform.position - enemy.transform.position).normalized : Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
+        enemy.isMove = true;
+        await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: ctk.Token);
+        enemy.isMove = false;
     }
 }

@@ -325,6 +325,13 @@ MonoBehaviour:
   isEnduance: 0
   attackerTransform: {fileID: 0}
   isMove: 0
+  checkDistance: []
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &41832989
 MonoBehaviour:
   m_ObjectHideFlags: 0

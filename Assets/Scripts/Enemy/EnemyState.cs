@@ -12,7 +12,7 @@ public abstract class EnemyState
 {
     protected Enemy enemy;
     public EnemyState lastState;
-    protected CancellationTokenSource changeTimerCTK = new();
+    protected CancellationTokenSource changeTimerCTK;
 
     public EnemyState(Enemy enemy)
     {
@@ -31,6 +31,7 @@ public abstract class EnemyState
     /// <param name="nextState">下个状态</param>
     protected async UniTask StateChangeTimer(float changeTime, EnemyState nextState)
     {
+        changeTimerCTK = new();
         await UniTask.Delay(TimeSpan.FromSeconds(changeTime), cancellationToken: changeTimerCTK.Token);
         enemy.ChangeState(nextState);
     }
