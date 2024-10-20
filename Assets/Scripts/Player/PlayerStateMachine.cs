@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,10 +11,13 @@ public class PlayerStateMachine : StateMachine
     [SerializeField] Camera m_camera;
     public Transform playerTransform;
     public Transform attacker;
+
+    [SerializeField] PlayerState[] stateTable;
+    [SerializeField] float[] energyCost;
+    Dictionary<Type, float> energyCostDict;
     #region 鼠标相关
     [Header("鼠标相关")]
     [SerializeField] float mousedegree;
-    [SerializeField]PlayerState[] stateTable;
     [SerializeField] Vector3 mouseDistance;
     #endregion
     #region 特定时间节点
@@ -23,6 +27,11 @@ public class PlayerStateMachine : StateMachine
     //无敌帧计时器
     private float noStunTimer;
     #endregion
+    #region 体力恢复相关参数
+    [Tooltip("体力开始恢复计时器")][SerializeField]private float energyRecoverTimer;
+    [Tooltip("消耗体力到体力开始恢复的延迟时间")][SerializeField]private float energyRecoverDelay;
+    #endregion
+
     #region 组件
     //获取组件的方式之后可以调整
     public PlayerInput playerInput;
@@ -30,6 +39,7 @@ public class PlayerStateMachine : StateMachine
     public Animator playerAnimator;
     public SpriteRenderer playerRenderer;
     public Player player;
+    public PlayerData playerData;
     public PlayerShooter shooter;
     public GameObject bigLight;
 
@@ -73,12 +83,14 @@ public class PlayerStateMachine : StateMachine
         //
         CanInterAction = false;
         //
-        dict = new Dictionary<System.Type, IState>(stateTable.Length);
+        dict = new Dictionary<Type, IState>(stateTable.Length);
+        //
+        energyCostDict = new Dictionary<Type, float>(energyCost.Length);
         //
         playerTransform = transform;
         foreach (PlayerState playerState in stateTable)
         {
-            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,shooter,bigLight,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4,BackAttack,RightAttack);
+            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,playerData,shooter,bigLight,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4,BackAttack,RightAttack);
             dict.Add(playerState.GetType(), playerState);
         }
     }
@@ -102,6 +114,29 @@ public class PlayerStateMachine : StateMachine
                 noStunTimer = -1;
             }
         }
+
+        if(energyRecoverTimer <= 0)
+        {
+            playerData.CurrentEnergy += playerData.FinalEnergyRecovery * Time.deltaTime;
+        }
+        else
+        {
+            energyRecoverTimer -= Time.deltaTime;
+        }
+    }
+
+    public override void SwitchState(Type newState)
+    {
+        if(playerData.CurrentEnergy >= 0 || energyCostDict[newState] == 0)
+        {
+            playerData.CurrentEnergy -= energyCostDict[newState];
+            if(energyCostDict[newState] != 0)
+            {
+                energyRecoverTimer = energyRecoverDelay;
+            }
+            base.SwitchState(newState); 
+        }
+        
     }
 
 

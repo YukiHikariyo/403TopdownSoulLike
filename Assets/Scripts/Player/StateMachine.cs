@@ -23,13 +23,13 @@ public class StateMachine : MonoBehaviour
         currentState.Enter();
     }
 
-    public void SwitchState(IState newState)
+    public virtual void SwitchState(IState newState)
     {
         currentState.Exit();
         SwitchOn(newState);
     }
-    
-    public void SwitchState(System.Type newState)
+
+    public virtual void SwitchState(System.Type newState)
     {
         SwitchState(dict[newState]);
     }

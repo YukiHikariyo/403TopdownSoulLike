@@ -1154,7 +1154,6 @@ MonoBehaviour:
   m_camera: {fileID: 0}
   playerTransform: {fileID: 1868925626516101975}
   attacker: {fileID: 0}
-  mousedegree: 0
   stateTable:
   - {fileID: 11400000, guid: d26821b8c6e5dde408ad7c24fc70c57a, type: 2}
   - {fileID: 11400000, guid: a3e6f2ee2d051d04f8ddf2b471ba56eb, type: 2}
@@ -1174,14 +1173,37 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2909330ab95c3bd489eb91cb0e160f2c, type: 2}
   - {fileID: 11400000, guid: ff4200ac68d101c4b8b45ea3c89eb774, type: 2}
   - {fileID: 11400000, guid: 650ac8c5908270549a8de855d2ac0554, type: 2}
+  energyCost:
+  - 0
+  - 0
+  - 15
+  - 5
+  - 5
+  - 10
+  - 10
+  - 35
+  - 15
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  mousedegree: 0
   mouseDistance: {x: 0, y: 0, z: 0}
   CatchChancepoint: 0
   noStunUndamageableTime: 0
+  energyRecoverTimer: 0
+  energyRecoverDelay: 0
   playerInput: {fileID: 4510489401662688001}
   playerController: {fileID: 5479772352610202664}
   playerAnimator: {fileID: 1766737477993462450}
   playerRenderer: {fileID: 6623208658060552808}
   player: {fileID: 4853331213230003033}
+  playerData: {fileID: 0}
   shooter: {fileID: 2686144180939665577}
   bigLight: {fileID: 4844327483664022967}
   LightAtk_1: {fileID: 3651964352988571409}
@@ -1664,13 +1686,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4853331213230003033}
-  basicMaxHealth: 0
+  basicMaxHealth: 50
   currentHealth: 0
-  basicMaxMana: 0
+  basicMaxMana: 50
   currentMana: 0
-  basicMaxEnergy: 0
+  basicMaxEnergy: 50
   currentEnergy: 0
-  basicEnergyRecovery: 0
+  basicEnergyRecovery: 10
   basicDamage: 0
   basicCritRate: 0
   basicCritDamage: 0

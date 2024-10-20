@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/PlayerState/Charging", fileName = "PlayerState_Charging",order = 9)]
 public class PlayerState_Charging : PlayerState
 {
-    float chargeSpeed = 1.0f;
+    float chargeSpeed;
     float nowTime;
     int chargeState;
     public override void Enter()
@@ -14,6 +14,7 @@ public class PlayerState_Charging : PlayerState
         playerStateMachine.CanStateSwitch = false;
         nowTime = 0f;
         chargeState = 0;
+        chargeSpeed = playerData.chargeSpeedMultiplication;
         OnChargeStage0();
     }
 
@@ -66,7 +67,7 @@ public class PlayerState_Charging : PlayerState
 
                     break;
                 case 3:
-                    playerAnimator.speed = 0.75f;
+                    playerAnimator.speed = 0.8f;
 
                     break;
             }
