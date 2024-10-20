@@ -34,7 +34,11 @@ public enum PassiveSkillType
     IronShellFurnance,
     FirePenalty,
     //饰品部分
-
+    CombustionEngine,
+    EnergyPump,
+    AdvancedThruster,
+    OverloadDevice,
+    ShockAbsorber,
 }
 
 public abstract class BasePassiveSkill
@@ -78,6 +82,8 @@ public class TestPassiveSkill : BasePassiveSkill
         player.playerData.CurrentHealth += 50;
     }
 }
+
+#region 天赋
 
 public class ForesightEnhance : BasePassiveSkill
 {
@@ -219,6 +225,10 @@ public class FastestCharge : BasePassiveSkill
     }
 }
 
+#endregion
+
+#region 武器
+
 public class IronShellFurnanceSkill : BasePassiveSkill
 {
     public IronShellFurnanceSkill(Player player) : base(player)
@@ -265,3 +275,125 @@ public class FirePenaltySkill : BasePassiveSkill
         damageable.GetBuff(BuffType.Burning, 5.1f);
     }
 }
+
+#endregion
+
+#region 饰品
+
+public class CombustionEngineSkill : BasePassiveSkill
+{
+    public CombustionEngineSkill(Player player) : base(player)
+    {
+        triggerType = TriggerType.Interval;
+        interval = 10;
+    }
+
+    public override void OnEnter()
+    {
+        
+    }
+
+    public override void OnExit()
+    {
+        
+    }
+
+    public override void OnTrigger(IDamageable damageable)
+    {
+        player.playerData.CurrentHealth += player.playerData.FinalMaxHealth * 0.01f;
+    }
+}
+
+public class EnergyPumpSkill : BasePassiveSkill
+{
+    public EnergyPumpSkill(Player player) : base(player)
+    {
+        triggerType = TriggerType.Kill;
+    }
+
+    public override void OnEnter()
+    {
+
+    }
+
+    public override void OnExit()
+    {
+
+    }
+
+    public override void OnTrigger(IDamageable damageable)
+    {
+        player.playerData.CurrentMana += player.playerData.FinalMaxMana * 0.02f;
+    }
+}
+
+public class AdvancedThrusterSkill : BasePassiveSkill
+{
+    public AdvancedThrusterSkill(Player player) : base(player)
+    {
+        triggerType = TriggerType.ChangeValue;
+    }
+
+    public override void OnEnter()
+    {
+        player.playerData.energyCostMultiplication -= 0.1f;
+    }
+
+    public override void OnExit()
+    {
+        player.playerData.energyCostMultiplication += 0.1f;
+    }
+
+    public override void OnTrigger(IDamageable damageable)
+    {
+        
+    }
+}
+
+public class OverloadDeviceSkill : BasePassiveSkill
+{
+    public OverloadDeviceSkill(Player player) : base(player)
+    {
+        triggerType = TriggerType.Foresight;
+    }
+
+    public override void OnEnter()
+    {
+        
+    }
+
+    public override void OnExit()
+    {
+        
+    }
+
+    public override void OnTrigger(IDamageable damageable)
+    {
+        player.playerData.CurrentEnergy += player.playerData.FinalMaxEnergy * 0.2f;
+    }
+}
+
+public class ShockAbsorberSkill : BasePassiveSkill
+{
+    public ShockAbsorberSkill(Player player) : base(player)
+    {
+        triggerType = TriggerType.GetHit;
+    }
+
+    public override void OnEnter()
+    {
+
+    }
+
+    public override void OnExit()
+    {
+
+    }
+
+    public override void OnTrigger(IDamageable damageable)
+    {
+        player.GetBuff(BuffType.Tough, 5);
+    }
+}
+
+#endregion

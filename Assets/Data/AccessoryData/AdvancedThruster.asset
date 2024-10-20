@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5e56c5ba4dbbc4ba4352d4234e49f4, type: 3}
+  m_Name: AdvancedThruster
+  m_EditorClassIdentifier: 
+  accessoryID: 3
+  accessoryName: "\u5148\u8FDB\u63A8\u8FDB\u5668"
+  accessoryIcon: {fileID: 0}
+  maxLevel: 3
+  accessoryStats:
+  - maxHealth: 0
+    maxMana: 0
+    maxEnergy: 8
+    toughness: 0
+    reductionRate: 0
+    coinCost: 0
+    stoneCost: 2
+  - maxHealth: 0
+    maxMana: 0
+    maxEnergy: 15
+    toughness: 0
+    reductionRate: 0
+    coinCost: 0
+    stoneCost: 3
+  - maxHealth: 0
+    maxMana: 0
+    maxEnergy: 25
+    toughness: 0
+    reductionRate: 0
+    coinCost: 0
+    stoneCost: 0
+  passiveSkillType: 12

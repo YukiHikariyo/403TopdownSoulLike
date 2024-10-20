@@ -10671,6 +10671,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 874bc55ee0c304548a197c9d00d90a05, type: 2}
   allAccessoryList:
   - {fileID: 11400000, guid: 411596a242afe4d4ea4b2b933f35f354, type: 2}
+  - {fileID: 11400000, guid: 94fb033f9e370ad459afbce268716063, type: 2}
+  - {fileID: 11400000, guid: cd026e79697db4c4db5260dc934e09d5, type: 2}
+  - {fileID: 11400000, guid: 5bcc8feca3835744aa05f4eb5e5fb18a, type: 2}
+  - {fileID: 11400000, guid: af8b5ff2bc8dfc94b8e075b27b34bcc2, type: 2}
+  - {fileID: 11400000, guid: 8c1d29c7055adee4d837edeab43343c6, type: 2}
 --- !u!1 &910881221
 GameObject:
   m_ObjectHideFlags: 0

@@ -322,7 +322,11 @@ public class Player : MonoBehaviour, IDamageable
                 PassiveSkillType.IronShellFurnance => new IronShellFurnanceSkill(this),
                 PassiveSkillType.FirePenalty => new FirePenaltySkill(this),
                 //饰品部分
-
+                PassiveSkillType.CombustionEngine => new CombustionEngineSkill(this),
+                PassiveSkillType.EnergyPump => new EnergyPumpSkill(this),
+                PassiveSkillType.AdvancedThruster => new AdvancedThrusterSkill(this),
+                PassiveSkillType.OverloadDevice => new OverloadDeviceSkill(this),
+                PassiveSkillType.ShockAbsorber => new ShockAbsorberSkill(this),
 
                 _ => null
             });
