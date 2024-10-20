@@ -310,6 +310,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             currentPassiveSkillDict.Add(skillType, skillType switch
             {
+                //天赋部分
                 PassiveSkillType.TestPassiveSkill => new TestPassiveSkill(this),
                 PassiveSkillType.ForesightEnhance => new ForesightEnhance(this),
                 PassiveSkillType.LongerForesightEnhance => new LongerForesightEnhance(this),
@@ -317,6 +318,11 @@ public class Player : MonoBehaviour, IDamageable
                 PassiveSkillType.FastCharge => new FastCharge(this),
                 PassiveSkillType.FasterCharge => new FasterCharge(this),
                 PassiveSkillType.FastestCharge => new FastestCharge(this),
+                //武器部分
+                PassiveSkillType.IronShellFurnance => new IronShellFurnanceSkill(this),
+                PassiveSkillType.FirePenalty => new FirePenaltySkill(this),
+                //饰品部分
+
 
                 _ => null
             });

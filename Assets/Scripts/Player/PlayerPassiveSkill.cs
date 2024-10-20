@@ -22,6 +22,7 @@ namespace PlayerPassiveSkill
 public enum PassiveSkillType
 {
     None,
+    //天赋树部分
     TestPassiveSkill,
     ForesightEnhance,
     LongerForesightEnhance,
@@ -29,6 +30,11 @@ public enum PassiveSkillType
     FastCharge,
     FasterCharge,
     FastestCharge,
+    //武器部分
+    IronShellFurnance,
+    FirePenalty,
+    //饰品部分
+
 }
 
 public abstract class BasePassiveSkill
@@ -45,6 +51,8 @@ public abstract class BasePassiveSkill
     public abstract void OnEnter();
     public abstract void OnExit();
     public abstract void OnTrigger(IDamageable damageable); //传入的IDamageable只在击中和击杀触发时有用，其他只是占位用
+
+    protected bool CalculateProbability(float probability) => probability >= Random.Range(0, 1);
 }
 
 public class TestPassiveSkill : BasePassiveSkill
@@ -208,5 +216,52 @@ public class FastestCharge : BasePassiveSkill
     public override void OnTrigger(IDamageable damageable)
     {
 
+    }
+}
+
+public class IronShellFurnanceSkill : BasePassiveSkill
+{
+    public IronShellFurnanceSkill(Player player) : base(player)
+    {
+        triggerType = TriggerType.GetHit;
+    }
+
+    public override void OnEnter()
+    {
+        
+    }
+
+    public override void OnExit()
+    {
+        
+    }
+
+    public override void OnTrigger(IDamageable damageable)
+    {
+        if (CalculateProbability(0.1f))
+            player.playerData.CurrentHealth += player.playerData.FinalMaxHealth * 0.2f;
+    }
+}
+
+public class FirePenaltySkill : BasePassiveSkill
+{
+    public FirePenaltySkill(Player player) : base(player)
+    {
+        triggerType = TriggerType.Crit;
+    }
+
+    public override void OnEnter()
+    {
+
+    }
+
+    public override void OnExit()
+    {
+
+    }
+
+    public override void OnTrigger(IDamageable damageable)
+    {
+        damageable.GetBuff(BuffType.Burning, 5.1f);
     }
 }

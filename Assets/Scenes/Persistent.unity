@@ -1956,7 +1956,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0018310547, y: 30.490799}
+  m_AnchoredPosition: {x: 0.001953125, y: 30.490845}
   m_SizeDelta: {x: -0.5999756, y: -61.661606}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &129092909
@@ -10665,6 +10665,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 250c0608b3186f142b0c7f5138d5e4c2, type: 2}
   allWeaponList:
   - {fileID: 11400000, guid: df93a7f89228be74f9c90738f46780a9, type: 2}
+  - {fileID: 11400000, guid: 166fea0bafa302d4f81e1e318e5f94b6, type: 2}
+  - {fileID: 11400000, guid: 4305dd93bc468cd40848f5a9b0b50601, type: 2}
+  - {fileID: 11400000, guid: 89e06c8f41db2bd4bbf0e2e72aa7ee80, type: 2}
+  - {fileID: 11400000, guid: 874bc55ee0c304548a197c9d00d90a05, type: 2}
   allAccessoryList:
   - {fileID: 11400000, guid: 411596a242afe4d4ea4b2b933f35f354, type: 2}
 --- !u!1 &910881221
