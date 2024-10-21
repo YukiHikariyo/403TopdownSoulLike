@@ -21,4 +21,7 @@ public class SaveData
     //SkillManager
     public Dictionary<string, int> savedSkillPointDict = new();
     public Dictionary<int, LocalSkillData> savedSkillDict = new();
+
+    //Interactable
+    public Dictionary<string, bool> savedInteractableObjectDict = new();
 }
