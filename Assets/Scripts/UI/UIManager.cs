@@ -12,6 +12,12 @@ public class UIManager : MonoSingleton<UIManager>
 {
     public RectTransform mainCanvas;
 
+    public GameObject mainMenu;
+    public GameObject gameInfo;
+
+    public Image fadeImage;
+    private Sequence fadeSequence;
+
     public Image tipPanel;
     public TextMeshProUGUI tipText;
     public Sequence tipSequence;
@@ -196,6 +202,30 @@ public class UIManager : MonoSingleton<UIManager>
     {
         tipText.text = tip;
         tipSequence.Restart();
+    }
+
+    public void PlayFadeInSequence(float fadeInTime)
+    {
+        fadeSequence = DOTween.Sequence();
+        fadeSequence.SetAutoKill(false);
+        fadeSequence.Pause();
+        fadeSequence.Append(fadeImage.DOFade(1, fadeInTime));
+
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
+        fadeImage.gameObject.SetActive(true);
+
+        fadeSequence.Play();
+    }
+
+    public void PlayFadeOutSequence(float fadeOutTime)
+    {
+        fadeSequence = DOTween.Sequence();
+        fadeSequence.SetAutoKill(false);
+        fadeSequence.Pause();
+        fadeSequence.Append(fadeImage.DOFade(0, fadeOutTime));
+        fadeSequence.AppendCallback(() => { fadeImage.gameObject.SetActive(false); });
+
+        fadeSequence.Play();
     }
 
     #region 血蓝瓶
@@ -465,6 +495,12 @@ public class UIManager : MonoSingleton<UIManager>
     }
 
     #endregion
+
+    #endregion
+
+    #region 设置
+
+
 
     #endregion
 }

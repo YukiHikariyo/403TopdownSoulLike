@@ -50,6 +50,8 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 
     public void LoadSaveData(SaveData saveData)
     {
+        skillDict.Clear();
+
         if (saveData.savedSkillPointDict.ContainsKey("SkillPoint"))
             skillPoint = saveData.savedSkillPointDict["SkillPoint"];
 
