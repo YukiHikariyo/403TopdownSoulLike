@@ -32,14 +32,18 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
             saveData.savedExpLevelDict.Add("Level", level);
         else
             saveData.savedExpLevelDict["Level"] = level;
-
-        UIManager.Instance.levelText.text = level.ToString();
-        UIManager.Instance.expBar.OnExpUp(exp, CalculateExpByLevel(), true);
     }
 
     public void LoadSaveData(SaveData saveData)
     {
-        
+        if (saveData.savedExpLevelDict.ContainsKey("Exp"))
+            exp = saveData.savedExpLevelDict["Exp"];
+
+        if (saveData.savedExpLevelDict.ContainsKey("Level"))
+            level = saveData.savedExpLevelDict["Level"];
+
+        UIManager.Instance.levelText.text = level.ToString();
+        UIManager.Instance.expBar.OnExpUp(exp, CalculateExpByLevel(), true);
     }
 
     #region 经验与等级
@@ -80,6 +84,12 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
     [ContextMenu("获得300经验")]
     public void Get200Exp() => GetExp(300);
+
+    #endregion
+
+    #region 流程控制与场景切换
+
+    public void QuitGame() => Application.Quit();
 
     #endregion
 }
