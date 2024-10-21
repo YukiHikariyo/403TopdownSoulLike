@@ -122,7 +122,7 @@ public class EnemySmallStunState : EnemyState
 
     public override void OnExit()
     {
-        
+        changeTimerCTK.Cancel();
     }
 }
 
@@ -152,6 +152,6 @@ public class EnemyNormalStunState : EnemyState
 
     public override void OnExit()
     {
-
+        changeTimerCTK.Cancel();
     }
 }

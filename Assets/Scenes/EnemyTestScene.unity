@@ -325,6 +325,7 @@ MonoBehaviour:
   isEnduance: 0
   attackerTransform: {fileID: 0}
   isMove: 0
+  isAnimExit: 0
   checkCenter: {x: 0, y: 0}
   checkDistance: []
   playerLayer:

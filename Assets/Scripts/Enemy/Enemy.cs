@@ -185,6 +185,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [Space(16)]
 
     public bool isMove; //在Animation里调
+    public bool isAnimExit;
 
     public EnemyState currentState;
     public EnemyState startState;

@@ -32,6 +32,9 @@ public class ShadowBat : Enemy
         defaultState = chaseState;
     }
 
+    public void RotateAttackSprite() => attackObj.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle());
+    public void RotateShadowAttackSprite() => shadowAttackObj.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle());
+
     public void ShadowSneak()
     {
         Vector2 position;
@@ -96,7 +99,6 @@ public class ShadowBatChaseState : EnemyState
     public override void OnEnter()
     {
         enemy.anim.Play("Chase");
-        enemy.isMove = true;
         enemy.OnSeekPath().Forget();
     }
 
@@ -129,15 +131,14 @@ public class ShadowBatAttackState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
-        enemy.moveSpeedIncrement += 2;
-        shadowBat.attackObj.transform.rotation = Quaternion.Euler(0, 0, enemy.CalculateTargetAngle());
+        enemy.moveSpeedIncrement += 3;
         enemy.anim.Play("Attack");
-        StateChangeTimer(1.4f, shadowBat.chaseState).Forget();
     }
 
     public override void LogicUpdate()
     {
-        
+        if (enemy.isAnimExit)
+            enemy.ChangeState(shadowBat.chaseState);
     }
 
     public override void PhysicsUpdate()
@@ -149,7 +150,7 @@ public class ShadowBatAttackState : EnemyState
     {
         shadowBat.attackObj.SetActive(false);
         enemy.isMove = false;
-        enemy.moveSpeedIncrement -= 2;
+        enemy.moveSpeedIncrement -= 3;
     }
 }
 
@@ -165,15 +166,15 @@ public class ShadowBatShadowAttackState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
-        enemy.moveSpeedIncrement += 4;
+        enemy.moveSpeedIncrement += 5;
         shadowBat.shadowAttackObj.transform.rotation = Quaternion.Euler(0, 0, enemy.CalculateTargetAngle());
         enemy.anim.Play("ShadowAttack");
-        StateChangeTimer(0.9f, shadowBat.shadowSneakState).Forget();
     }
 
     public override void LogicUpdate()
     {
-
+        if (enemy.isAnimExit)
+            enemy.ChangeState(shadowBat.shadowSneakState);
     }
 
     public override void PhysicsUpdate()
@@ -185,7 +186,7 @@ public class ShadowBatShadowAttackState : EnemyState
     {
         shadowBat.shadowAttackObj.SetActive(false);
         enemy.isMove = false;
-        enemy.moveSpeedIncrement -= 4;
+        enemy.moveSpeedIncrement -= 5;
     }
 }
 
@@ -219,5 +220,6 @@ public class ShadowBatShadowSneakState : EnemyState
     public override void OnExit()
     {
         enemy.damageableIndex = 0;
+        changeTimerCTK.Cancel();
     }
 }

@@ -53,7 +53,7 @@ public class SlimeIdleState : EnemyState
 
     public override void OnExit()
     {
-
+        changeTimerCTK.Cancel();
     }
 }
 
@@ -62,7 +62,7 @@ public class SlimeJumpState : EnemyState
     Slime slime;
 
     Vector2 dir;
-    CancellationTokenSource ctk;
+    CancellationTokenSource jumpCTK;
 
     public SlimeJumpState(Enemy enemy, Slime slime) : base(enemy)
     {
@@ -88,16 +88,17 @@ public class SlimeJumpState : EnemyState
 
     public override void OnExit()
     {
-        ctk.Cancel();
+        jumpCTK.Cancel();
+        changeTimerCTK.Cancel();
     }
 
     private async UniTask OnJump()
     {
-        ctk = new();
-        await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: ctk.Token);
+        jumpCTK = new();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: jumpCTK.Token);
         dir = enemy.PlayerCheck(0, false) ? enemy.CalculateTargetDirection() : Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
         enemy.isMove = true;
-        await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: ctk.Token);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: jumpCTK.Token);
         enemy.isMove = false;
     }
 }
