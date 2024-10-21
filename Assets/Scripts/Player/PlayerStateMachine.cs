@@ -115,9 +115,13 @@ public class PlayerStateMachine : StateMachine
             }
         }
 
+        //体力恢复
         if(energyRecoverTimer <= 0)
         {
-            playerData.CurrentEnergy += playerData.FinalEnergyRecovery * Time.deltaTime;
+            if (playerData.CurrentEnergy >= 0)
+                playerData.CurrentEnergy += playerData.FinalEnergyRecovery * Time.deltaTime;
+            else
+                playerData.CurrentEnergy += (playerData.FinalEnergyRecovery / 2) * Time.deltaTime;
         }
         else
         {
@@ -129,9 +133,9 @@ public class PlayerStateMachine : StateMachine
     {
         if(playerData.CurrentEnergy >= 0 || energyCostDict[newState] == 0)
         {
-            playerData.CurrentEnergy -= energyCostDict[newState];
             if(energyCostDict[newState] != 0)
             {
+                playerData.CurrentEnergy -= energyCostDict[newState] * playerData.energyCostMultiplication;
                 energyRecoverTimer = energyRecoverDelay;
             }
             base.SwitchState(newState); 
