@@ -41,31 +41,34 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 
         foreach (LocalSkillData skill in skillDict.Values)
         {
-            if (!saveData.savedSkillDict.ContainsKey(skill.id))
-                saveData.savedSkillDict.Add(skill.id, skill);
+            if (!saveData.savedSkillDict.ContainsKey(skill.id.ToString()))
+                saveData.savedSkillDict.Add(skill.id.ToString(), skill);
             else
-                saveData.savedSkillDict[skill.id] = skill;
+                saveData.savedSkillDict[skill.id.ToString()] = skill;
         }
     }
 
     public void LoadSaveData(SaveData saveData)
     {
-        foreach (var skillDot in skillDotList)
-            skillDot.GetComponent<SkillTreeDot>().Initialization();
-
-        detailPanel.SetActive(false);
-
         if (saveData.savedSkillPointDict.ContainsKey("SkillPoint"))
             skillPoint = saveData.savedSkillPointDict["SkillPoint"];
 
-        foreach (int skillID in saveData.savedSkillDict.Keys)
+        foreach (string skillID in saveData.savedSkillDict.Keys)
         {
-            if (!skillDict.ContainsKey(skillID))
+            if (!skillDict.ContainsKey(int.Parse(skillID)))
             {
                 for (int i = 0; i < saveData.savedSkillDict[skillID].currentSkillLevel; i++)
-                    UpgradeSkill(skillID, true);
+                    UpgradeSkill(int.Parse(skillID), true);
             }
         }
+    }
+
+    public void Initialize()
+    {
+        foreach (var skillDot in skillDotList)
+            skillDot.GetComponent<SkillTreeDot>().Initialize();
+
+        detailPanel.SetActive(false);
     }
 
     public bool CanUnlock(int id)

@@ -64,7 +64,7 @@ public class SkillTreeDot : MonoBehaviour,IPointerClickHandler,IPointerEnterHand
         DrawTree();
     }
 
-    public void Initialization()
+    public void Initialize()
     {
         thisSkillImage = gameObject.transform.GetChild(3).GetComponent<Image>();
         thisSkillShadow = gameObject.transform.GetChild(2).GetComponent<Image>();

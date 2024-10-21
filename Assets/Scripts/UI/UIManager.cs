@@ -8,7 +8,7 @@ using DG.Tweening;
 /// <summary>
 /// UI管理类
 /// </summary>
-public class UIManager : MonoSingleton<UIManager>, ISaveable
+public class UIManager : MonoSingleton<UIManager>
 {
     public RectTransform mainCanvas;
 
@@ -123,28 +123,13 @@ public class UIManager : MonoSingleton<UIManager>, ISaveable
         InitializeTipSequence();
     }
 
-    private void OnEnable()
-    {
-        (this as ISaveable).Register();
-    }
-
-    private void OnDisable()
-    {
-        (this as ISaveable).UnRegister();
-    }
-
     private void Update()
     {
         if (!isPackageOpen && Input.GetKeyDown(KeyCode.Escape))
             OpenPackage();
     }
 
-    public void GetSaveData(SaveData saveData)
-    {
-
-    }
-
-    public void LoadSaveData(SaveData saveData)
+    public void Initialize()
     {
         itemDetailPanel.gameObject.SetActive(false);
         weaponDetailPanel.gameObject.SetActive(false);

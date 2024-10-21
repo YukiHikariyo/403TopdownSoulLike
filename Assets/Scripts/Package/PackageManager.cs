@@ -70,28 +70,28 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         //物品
         foreach (LocalItemData item in itemDict.Values)
         {
-            if (!saveData.savedItemDict.ContainsKey(item.id))
-                saveData.savedItemDict.Add(item.id, item);
+            if (!saveData.savedItemDict.ContainsKey(item.id.ToString()))
+                saveData.savedItemDict.Add(item.id.ToString(), item);
             else
-                saveData.savedItemDict[item.id] = item;
+                saveData.savedItemDict[item.id.ToString()] = item;
         }
 
         //武器
         foreach (LocalWeaponData weapon in weaponDict.Values)
         {
-            if (!saveData.savedWeaponDict.ContainsKey(weapon.id))
-                saveData.savedWeaponDict.Add(weapon.id, weapon);
+            if (!saveData.savedWeaponDict.ContainsKey(weapon.id.ToString()))
+                saveData.savedWeaponDict.Add(weapon.id.ToString(), weapon);
             else
-                saveData.savedWeaponDict[weapon.id] = weapon;
+                saveData.savedWeaponDict[weapon.id.ToString()] = weapon;
         }
 
         //饰品
         foreach (LocalAccessoryData accessory in accessoryDict.Values)
         {
-            if (!saveData.savedAccessoryDict.ContainsKey(accessory.id))
-                saveData.savedAccessoryDict.Add(accessory.id, accessory);
+            if (!saveData.savedAccessoryDict.ContainsKey(accessory.id.ToString()))
+                saveData.savedAccessoryDict.Add(accessory.id.ToString(), accessory);
             else
-                saveData.savedAccessoryDict[accessory.id] = accessory;
+                saveData.savedAccessoryDict[accessory.id.ToString()] = accessory;
         }
     }
 
@@ -106,25 +106,25 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         maxManaBottle = saveData.savedBottleDict["ManaBottle"];
 
         //物品
-        foreach (int itemID in saveData.savedItemDict.Keys)
+        foreach (string itemID in saveData.savedItemDict.Keys)
         {
-            GetItem(itemID, saveData.savedItemDict[itemID].number, false);
+            GetItem(int.Parse(itemID), saveData.savedItemDict[itemID.ToString()].number, false);
         }
 
         //武器
-        foreach (int weaponID in saveData.savedWeaponDict.Keys)
+        foreach (string weaponID in saveData.savedWeaponDict.Keys)
         {
-            GetWeapon(weaponID, saveData.savedWeaponDict[weaponID].level, false);
+            GetWeapon(int.Parse(weaponID), saveData.savedWeaponDict[weaponID.ToString()].level, false);
             if (saveData.savedWeaponDict[weaponID].isEquipped)
-                EquipWeapon(weaponID, false);
+                EquipWeapon(int.Parse(weaponID), false);
         }
 
         //饰品
-        foreach (int accessoryID in saveData.savedAccessoryDict.Keys)
+        foreach (string accessoryID in saveData.savedAccessoryDict.Keys)
         {
-            GetAccessory(accessoryID, saveData.savedAccessoryDict[accessoryID].level, false);
+            GetAccessory(int.Parse(accessoryID), saveData.savedAccessoryDict[accessoryID].level, false);
             if (saveData.savedAccessoryDict[accessoryID].equipPosition > 0)
-                EquipAccessory(accessoryID, saveData.savedAccessoryDict[accessoryID].equipPosition, false);
+                EquipAccessory(int.Parse(accessoryID), saveData.savedAccessoryDict[accessoryID].equipPosition, false);
         }
     }
 
