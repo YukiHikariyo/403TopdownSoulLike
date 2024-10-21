@@ -10,28 +10,16 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 {
     public PlayerData playerData;
 
-    [Tooltip("技能点")]public int skillPoint;
-
-    public void GetSaveData(SaveData saveData)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void LoadSaveData(SaveData saveData)
-    {
-        throw new System.NotImplementedException();
-    }
+    [Tooltip("技能点")] public int skillPoint;
 
     [Tooltip("所有天赋列表")] public List<StaticSkillData> allSkillList;
-    [Tooltip("已点亮天赋字典")] public Dictionary<int, LocalSkillData> skillDict;
+    [Tooltip("已点亮天赋字典")] public Dictionary<int, LocalSkillData> skillDict = new();
 
     protected override void Awake()
     {
         base.Awake();
 
-        skillDict = new Dictionary<int, LocalSkillData>();
         allSkillList.Sort();
-
     }
 
     private void OnEnable()
@@ -44,6 +32,41 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         (this as ISaveable).UnRegister();
     }
 
+    public void GetSaveData(SaveData saveData)
+    {
+        if (!saveData.savedSkillPointDict.ContainsKey("SkillPoint"))
+            saveData.savedSkillPointDict.Add("SkillPoint", skillPoint);
+        else
+            saveData.savedSkillPointDict["SkillPoint"] = skillPoint;
+
+        foreach (LocalSkillData skill in skillDict.Values)
+        {
+            if (!saveData.savedSkillDict.ContainsKey(skill.id))
+                saveData.savedSkillDict.Add(skill.id, skill);
+            else
+                saveData.savedSkillDict[skill.id] = skill;
+        }
+    }
+
+    public void LoadSaveData(SaveData saveData)
+    {
+        foreach (var skillDot in skillDotList)
+            skillDot.GetComponent<SkillTreeDot>().Initialization();
+
+        detailPanel.SetActive(false);
+
+        if (saveData.savedSkillPointDict.ContainsKey("SkillPoint"))
+            skillPoint = saveData.savedSkillPointDict["SkillPoint"];
+
+        foreach (int skillID in saveData.savedSkillDict.Keys)
+        {
+            if (!skillDict.ContainsKey(skillID))
+            {
+                for (int i = 0; i < saveData.savedSkillDict[skillID].currentSkillLevel; i++)
+                    UpgradeSkill(skillID, true);
+            }
+        }
+    }
 
     public bool CanUnlock(int id)
     {
@@ -77,16 +100,18 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         return false;
     }
 
-    public void UpgradeSkill(int id)
+    public void UpgradeSkill(int id, bool ignoreLimitation = false)
     {
-        if (skillPoint >= allSkillList[id].skillPointCost && CanUnlock(id))
+        if (ignoreLimitation || (skillPoint >= allSkillList[id].skillPointCost && CanUnlock(id)))
         { 
             if (!skillDict.ContainsKey(id))
             {
                 skillDict.Add(id, new LocalSkillData(id));
                 skillDict[id].currentSkillLevel = 1;
                 UnlockAnimation(id);
-                ConsumeSkillPoint(allSkillList[id].skillPointCost);
+
+                if (!ignoreLimitation)
+                    ConsumeSkillPoint(allSkillList[id].skillPointCost);
 
                 if (allSkillList[id].skillType == SkillType.Value)
                 {
@@ -131,7 +156,9 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
             else if (skillDict.ContainsKey(id) && skillDict[id].currentSkillLevel < allSkillList[id].maxSkillLevel)
             {
                 int level = ++skillDict[id].currentSkillLevel;
-                ConsumeSkillPoint(allSkillList[id].skillPointCost);
+
+                if (!ignoreLimitation)
+                    ConsumeSkillPoint(allSkillList[id].skillPointCost);
 
                 switch (allSkillList[id].valueType)
                 {
@@ -260,9 +287,6 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         skillDotList[currentSkillIndex].GetChild(0).GetComponent<UILineRenderer>().color = new Color(1,1,1,1);
 
     }
-
-
-
 
     #endregion
 }

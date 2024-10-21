@@ -1902,6 +1902,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShadowBat
       objectReference: {fileID: 0}
+    - target: {fileID: 326375586025961126, guid: 38c868ddb7efef94988c7426e28d9304, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5985458239079894564, guid: 38c868ddb7efef94988c7426e28d9304, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

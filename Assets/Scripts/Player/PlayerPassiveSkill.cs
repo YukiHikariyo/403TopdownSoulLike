@@ -142,12 +142,12 @@ public class LongerForesightTime : BasePassiveSkill
 
     public override void OnEnter()
     {
-        player.playerController.PerfectCheckTime *= 1.5f;
+        player.playerData.foresightTimeMultiplication += 0.5f;
     }
 
     public override void OnExit()
     {
-        player.playerController.PerfectCheckTime *= 1.5f;
+        player.playerData.foresightTimeMultiplication -= 0.5f;
     }
 
     public override void OnTrigger(IDamageable damageable)

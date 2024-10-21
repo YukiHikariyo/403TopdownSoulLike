@@ -9,12 +9,16 @@ public class SaveData
     //GameManager
     public Dictionary<string, int> savedExpLevelDict = new();
 
+    //PlayerData
+    public Dictionary<string, float> savedPlayerFloatDict = new();
+
     //PackageManager
     public Dictionary<string, int> savedBottleDict = new();    
     public Dictionary<int, LocalItemData> savedItemDict = new();
     public Dictionary<int, LocalWeaponData> savedWeaponDict = new();
     public Dictionary<int, LocalAccessoryData> savedAccessoryDict = new();
 
-    //PlayerData
-    public Dictionary<string, float> savedPlayerFloatDict = new();
+    //SkillManager
+    public Dictionary<string, int> savedSkillPointDict = new();
+    public Dictionary<int, LocalSkillData> savedSkillDict = new();
 }

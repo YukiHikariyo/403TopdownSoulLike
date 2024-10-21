@@ -63,6 +63,22 @@ public class SkillTreeDot : MonoBehaviour,IPointerClickHandler,IPointerEnterHand
     {
         DrawTree();
     }
+
+    public void Initialization()
+    {
+        thisSkillImage = gameObject.transform.GetChild(3).GetComponent<Image>();
+        thisSkillShadow = gameObject.transform.GetChild(2).GetComponent<Image>();
+        thisSkillImage.sprite = thisSkillData.skillSpite;
+        thisSkillShadow.sprite = thisSkillData.skillSpite;
+        thisSkillImage.type = Image.Type.Filled;
+        thisSkillImage.fillMethod = Image.FillMethod.Vertical;
+        thisSkillImage.fillAmount = 0;
+        thisSkillShadow.color = new Color(0, 0, 0, 1);
+
+        lineRenderer = GetComponentInChildren<UILineRenderer>();
+        lineRenderer.color = new Color(0, 0, 0, 1);
+    }
+
     public void DrawTree()
     {
         lineRenderer.LineList = true;

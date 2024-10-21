@@ -376,8 +376,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("最大体力值增量")][SerializeField] private float maxEnergyIncrement;
 
     [Tooltip("体力恢复增量")] public float energyRecoveryIncrement;
-    [Tooltip("体力消耗增量")] public float energyCostIncrement;
-    [Tooltip("移动速度增量")] public float moveSpeedIncrement;
+    [Tooltip("移动速度增量")] public float moveSpeedIncrement;    //*
     [Tooltip("攻击力增量")] public float damageIncrement;
     [Tooltip("暴击率增量")] public float critRateIncrement;
     [Tooltip("暴击伤害增量")] public float critDamageIncrement;
@@ -385,8 +384,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("伤害减免增量")] public float reductionRateIncrement;
     [Tooltip("易伤增量")] public float vulnerabilityIncrement;
     [Tooltip("韧性增量")] public float toughnessIncrement;
-    [Tooltip("光照半径增量")] public float lightRadiusIncrement;
-    [Tooltip("见切时间增量")] public float foresightTimeIncrement;
+    [Tooltip("光照半径增量")] public float lightRadiusIncrement;  //*
 
     public float MaxHealthIncrement
     {
@@ -436,8 +434,8 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("最大体力值倍率")][SerializeField] private float maxEnergyMultiplication = 1;
 
     [Tooltip("体力恢复倍率")] public float energyRecoveryMultiplication = 1;
-    [Tooltip("体力消耗倍率")] public float energyCostMultiplication = 1;
-    [Tooltip("移动速度倍率")] public float moveSpeedMultiplication = 1;
+    [Tooltip("体力消耗倍率")] public float energyCostMultiplication = 1;  //*
+    [Tooltip("移动速度倍率")] public float moveSpeedMultiplication = 1;   //*
     [Tooltip("攻击力倍率")] public float damageMultiplication = 1;
     [Tooltip("暴击率倍率")] public float critRateMultiplication = 1;
     [Tooltip("暴击伤害倍率")] public float critDamageMultiplication = 1;
@@ -445,8 +443,9 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("伤害减免倍率")] public float reductionRateMultiplication = 1;
     [Tooltip("易伤倍率")] public float vulnerabilityMultiplication = 1;
     [Tooltip("韧性倍率")] public float toughnessMultiplication = 1;
-    [Tooltip("光照半径倍率")] public float lightRadiusMultiplication = 1;
-    [Tooltip("蓄力速度倍率")] public float chargeSpeedMultiplication = 1;
+    [Tooltip("光照半径倍率")] public float lightRadiusMultiplication = 1; //*
+    [Tooltip("蓄力速度倍率")] public float chargeSpeedMultiplication = 1; //*
+    [Tooltip("见切时间倍率")] public float foresightTimeMultiplication = 1;    //*
 
     public float MaxHealthMultiplication
     {
@@ -518,37 +517,20 @@ public class PlayerData : MonoBehaviour, ISaveable
 
     public void GetSaveData(SaveData saveData)
     {
-        //SaveByString("BasicMaxHealth", BasicMaxHealth, saveData);
-        //SaveByString("BasicMaxMana", BasicMaxMana, saveData);
-        //SaveByString("BasicMaxEnergy", BasicMaxEnergy, saveData);
-        //SaveByString("BasicEnergyRecovery", BasicEnergyRecovery, saveData);
-        //SaveByString("BasicDamage", BasicDamage, saveData);
-        //SaveByString("BasicCritRate", BasicCritRate, saveData);
-        //SaveByString("BasicCritDamage", BasicCritDamage, saveData);
-        //SaveByString("BasicPenetratingPower", BasicPenetratingPower, saveData);
-        //SaveByString("BasicReductionRate", BasicReductionRate, saveData);
-        //SaveByString("BasicToughness", BasicToughness, saveData);
+        
     }
 
     public void LoadSaveData(SaveData saveData)
     {
-        
-    }
-
-    private void SaveByString(string str, float value, SaveData saveData)
-    {
-        if (!saveData.savedPlayerFloatDict.ContainsKey(str))
-            saveData.savedPlayerFloatDict.Add(str, value);
-        else
-            saveData.savedPlayerFloatDict[str] = value;
-    }
-
-    private void LoadByString(string str, out float value, SaveData saveData)
-    {
-        if (saveData.savedPlayerFloatDict.ContainsKey(str))
-            value = saveData.savedPlayerFloatDict[str];
-        else
-            value = 0;
+        talentDamage = 0;
+        talentCritRate = 0;
+        talentCritDamage = 0;
+        talentEnergyRecovery = 0;
+        talentPenetratingPower = 0;
+        talentReductionRate = 0;
+        BasicMaxHealth = 100;
+        BasicMaxMana = 50;
+        BasicMaxEnergy = 75;
     }
 
     public float CalculateHealthPercent() => currentHealth / FinalMaxHealth;
