@@ -1574,7 +1574,6 @@ MonoBehaviour:
   maxManaIncrement: 0
   maxEnergyIncrement: 0
   energyRecoveryIncrement: 0
-  energyCostIncrement: 0
   moveSpeedIncrement: 0
   damageIncrement: 0
   critRateIncrement: 0
@@ -1584,7 +1583,6 @@ MonoBehaviour:
   vulnerabilityIncrement: 0
   toughnessIncrement: 0
   lightRadiusIncrement: 0
-  foresightTimeIncrement: 0
   maxHealthMultiplication: 1
   maxManaMultiplication: 1
   maxEnergyMultiplication: 1
@@ -1600,6 +1598,7 @@ MonoBehaviour:
   toughnessMultiplication: 1
   lightRadiusMultiplication: 1
   chargeSpeedMultiplication: 1
+  foresightTimeMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
 --- !u!212 &2025775074
 SpriteRenderer:
