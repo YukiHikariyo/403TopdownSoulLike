@@ -518,12 +518,37 @@ public class PlayerData : MonoBehaviour, ISaveable
 
     public void GetSaveData(SaveData saveData)
     {
-        
+        //SaveByString("BasicMaxHealth", BasicMaxHealth, saveData);
+        //SaveByString("BasicMaxMana", BasicMaxMana, saveData);
+        //SaveByString("BasicMaxEnergy", BasicMaxEnergy, saveData);
+        //SaveByString("BasicEnergyRecovery", BasicEnergyRecovery, saveData);
+        //SaveByString("BasicDamage", BasicDamage, saveData);
+        //SaveByString("BasicCritRate", BasicCritRate, saveData);
+        //SaveByString("BasicCritDamage", BasicCritDamage, saveData);
+        //SaveByString("BasicPenetratingPower", BasicPenetratingPower, saveData);
+        //SaveByString("BasicReductionRate", BasicReductionRate, saveData);
+        //SaveByString("BasicToughness", BasicToughness, saveData);
     }
 
     public void LoadSaveData(SaveData saveData)
     {
         
+    }
+
+    private void SaveByString(string str, float value, SaveData saveData)
+    {
+        if (!saveData.savedPlayerFloatDict.ContainsKey(str))
+            saveData.savedPlayerFloatDict.Add(str, value);
+        else
+            saveData.savedPlayerFloatDict[str] = value;
+    }
+
+    private void LoadByString(string str, out float value, SaveData saveData)
+    {
+        if (saveData.savedPlayerFloatDict.ContainsKey(str))
+            value = saveData.savedPlayerFloatDict[str];
+        else
+            value = 0;
     }
 
     public float CalculateHealthPercent() => currentHealth / FinalMaxHealth;

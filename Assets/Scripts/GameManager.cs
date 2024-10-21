@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoSingleton<GameManager>
+public class GameManager : MonoSingleton<GameManager>, ISaveable
 {
     [Space(16)]
     [Header("全局数值")]
@@ -10,6 +10,37 @@ public class GameManager : MonoSingleton<GameManager>
 
     [SerializeField][Tooltip("当前经验")] private int exp;
     [SerializeField][Tooltip("当前等级")] private int level;
+
+    private void OnEnable()
+    {
+        (this as ISaveable).Register();
+    }
+
+    private void OnDisable()
+    {
+        (this as ISaveable).UnRegister();
+    }
+
+    public void GetSaveData(SaveData saveData)
+    {
+        if (!saveData.savedExpLevelDict.ContainsKey("Exp"))
+            saveData.savedExpLevelDict.Add("Exp", exp);
+        else
+            saveData.savedExpLevelDict["Exp"] = exp;
+
+        if (!saveData.savedExpLevelDict.ContainsKey("Level"))
+            saveData.savedExpLevelDict.Add("Level", level);
+        else
+            saveData.savedExpLevelDict["Level"] = level;
+
+        UIManager.Instance.levelText.text = level.ToString();
+        UIManager.Instance.expBar.OnExpUp(exp, CalculateExpByLevel(), true);
+    }
+
+    public void LoadSaveData(SaveData saveData)
+    {
+        
+    }
 
     #region 经验与等级
 

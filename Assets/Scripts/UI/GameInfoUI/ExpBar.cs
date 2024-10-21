@@ -14,10 +14,12 @@ public class ExpBar : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
-    public void OnExpUp(int targetExp, int maxExp)
+    public void OnExpUp(int targetExp, int maxExp, bool isInstantChange = false)
     {
-        slider.DOValue((float)targetExp / (float)maxExp, 2);
-        Debug.Log("111");
+        if (!isInstantChange)
+            slider.DOValue((float)targetExp / (float)maxExp, 2);
+        else
+            slider.value = (float)targetExp / (float)maxExp;
     }
 
     public void OnLevelUp(int targetExp, int maxExp, int times, int finalLevel)

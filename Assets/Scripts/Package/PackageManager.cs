@@ -56,23 +56,75 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 
     public void GetSaveData(SaveData saveData)
     {
+        //两瓶
+        if (!saveData.savedBottleDict.ContainsKey("HealthBottle"))
+            saveData.savedBottleDict.Add("HealthBottle", maxHealthBottle);
+        else
+            saveData.savedBottleDict["HealthBottle"] = maxHealthBottle;
+
+        if (!saveData.savedBottleDict.ContainsKey("ManaBottle"))
+            saveData.savedBottleDict.Add("ManaBottle", maxManaBottle);
+        else
+            saveData.savedBottleDict["ManaBottle"] = maxManaBottle;
+
+        //物品
+        foreach (LocalItemData item in itemDict.Values)
+        {
+            if (!saveData.savedItemDict.ContainsKey(item.id))
+                saveData.savedItemDict.Add(item.id, item);
+            else
+                saveData.savedItemDict[item.id] = item;
+        }
+
+        //武器
         foreach (LocalWeaponData weapon in weaponDict.Values)
         {
-            if (!saveData.weaponDict.ContainsKey(weapon.id))
-                saveData.weaponDict.Add(weapon.id, weapon);
+            if (!saveData.savedWeaponDict.ContainsKey(weapon.id))
+                saveData.savedWeaponDict.Add(weapon.id, weapon);
             else
-                saveData.weaponDict[weapon.id] = weapon;
+                saveData.savedWeaponDict[weapon.id] = weapon;
+        }
+
+        //饰品
+        foreach (LocalAccessoryData accessory in accessoryDict.Values)
+        {
+            if (!saveData.savedAccessoryDict.ContainsKey(accessory.id))
+                saveData.savedAccessoryDict.Add(accessory.id, accessory);
+            else
+                saveData.savedAccessoryDict[accessory.id] = accessory;
         }
     }
 
     public void LoadSaveData(SaveData saveData)
     {
-        foreach (int weaponID in saveData.weaponDict.Keys)
+        itemDict.Clear();
+        weaponDict.Clear();
+        accessoryDict.Clear();
+
+        //两瓶
+        maxHealthBottle = saveData.savedBottleDict["HealthBottle"];
+        maxManaBottle = saveData.savedBottleDict["ManaBottle"];
+
+        //物品
+        foreach (int itemID in saveData.savedItemDict.Keys)
         {
-            if (!weaponDict.ContainsKey(weaponID))
-                weaponDict.Add(weaponID, saveData.weaponDict[weaponID]);
-            else
-                weaponDict[weaponID] = saveData.weaponDict[weaponID];
+            GetItem(itemID, saveData.savedItemDict[itemID].number, false);
+        }
+
+        //武器
+        foreach (int weaponID in saveData.savedWeaponDict.Keys)
+        {
+            GetWeapon(weaponID, saveData.savedWeaponDict[weaponID].level, false);
+            if (saveData.savedWeaponDict[weaponID].isEquipped)
+                EquipWeapon(weaponID, false);
+        }
+
+        //饰品
+        foreach (int accessoryID in saveData.savedAccessoryDict.Keys)
+        {
+            GetAccessory(accessoryID, saveData.savedAccessoryDict[accessoryID].level, false);
+            if (saveData.savedAccessoryDict[accessoryID].equipPosition > 0)
+                EquipAccessory(accessoryID, saveData.savedAccessoryDict[accessoryID].equipPosition, false);
         }
     }
 
@@ -188,7 +240,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// </summary>
     /// <param name="id">物品ID</param>
     /// <param name="number">获得数量</param>
-    public void GetItem(int id, int number)
+    public void GetItem(int id, int number, bool tip = true)
     {
         if (itemDict.ContainsKey(id))
             itemDict[id].number = itemDict[id].number + number < 999 ? itemDict[id].number + number : 999;
@@ -196,7 +248,8 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             itemDict.Add(id, new LocalItemData(id, number));
 
         UIManager.Instance.GetItem(id, number);
-        UIManager.Instance.PlayTipSequence("获得物品：" + allItemList[id].itemName + "x" + number);
+        if (tip)
+            UIManager.Instance.PlayTipSequence("获得物品：" + allItemList[id].itemName + "x" + number);
     }
 
     [ContextMenu("获得3个测试物品")]
@@ -241,13 +294,14 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// 获得武器
     /// </summary>
     /// <param name="id">武器ID</param>
-    public void GetWeapon(int id)
+    public void GetWeapon(int id, int level = 1, bool tip = true)
     {
         if (!weaponDict.ContainsKey(id))
         {
-            weaponDict.Add(id, new LocalWeaponData(id));
+            weaponDict.Add(id, new LocalWeaponData(id, level));
             UIManager.Instance.GetWeapon(id);
-            UIManager.Instance.OpenConfirmationPanel("获得武器：" + allWeaponList[id].weaponName);
+            if (tip)
+                UIManager.Instance.OpenConfirmationPanel("获得武器：" + allWeaponList[id].weaponName);
         }
     }
 
@@ -259,7 +313,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// </summary>
     /// <param name="id">武器ID</param>
     /// <remarks>此方法在UIManager中的EquipWeapon方法中调用</remarks>
-    public void EquipWeapon(int id)
+    public void EquipWeapon(int id, bool tip = true)
     {
         if (weaponDict.ContainsKey(id))
         {
@@ -276,7 +330,8 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             if (playerData.currentWeaponStaticData.passiveSkillType != PassiveSkillType.None)
                 playerData.player.GetPassiveSkill(playerData.currentWeaponStaticData.passiveSkillType);
 
-            UIManager.Instance.PlayTipSequence("装备成功");
+            if (tip)
+                UIManager.Instance.PlayTipSequence("装备成功");
         }
     }
 
@@ -311,13 +366,14 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// 获得饰品
     /// </summary>
     /// <param name="id">饰品ID</param>
-    public void GetAccessory(int id)
+    public void GetAccessory(int id, int level = 1, bool tip = true)
     {
         if (!accessoryDict.ContainsKey(id))
         {
-            accessoryDict.Add(id, new LocalAccessoryData(id));
+            accessoryDict.Add(id, new LocalAccessoryData(id, level));
             UIManager.Instance.GetAccessory(id);
-            UIManager.Instance.OpenConfirmationPanel("获得配件：" + allAccessoryList[id].accessoryName);
+            if (tip)
+                UIManager.Instance.OpenConfirmationPanel("获得配件：" + allAccessoryList[id].accessoryName);
         }
     }
 
@@ -330,7 +386,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
     /// <param name="id">饰品ID</param>
     /// <param name="position">装备位置(1~3)</param>
     /// <remarks>此方法在UIManager中的EquipAccessory方法调用</remarks>
-    public void EquipAccessory(int id, int position)
+    public void EquipAccessory(int id, int position, bool tip = true)
     {
         float healthPercent = playerData.CalculateHealthPercent();
         float manaPercent = playerData.CalculateManaPercent();
@@ -376,7 +432,8 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             else
                 playerData.currentAccessoryLocalData.Add(position, accessoryDict[id]);
 
-            UIManager.Instance.PlayTipSequence("成功装备到" + position + "号位");
+            if (tip)
+                UIManager.Instance.PlayTipSequence("成功装备到" + position + "号位");
         }
 
         playerData.OnMaxHealthChange(healthPercent);
