@@ -1051,10 +1051,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 2154088116047620211}
-  playerController: {fileID: 0}
-  motionValue: []
-  attackPower: []
-  buffMotionValue: []
+  playerController: {fileID: 5479772352610202664}
+  motionValue:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  attackPower:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  buffMotionValue:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   damageableIndex: 0
   currentBuffHealth:
   - 0
@@ -1203,7 +1236,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 1766737477993462450}
   playerRenderer: {fileID: 6623208658060552808}
   player: {fileID: 4853331213230003033}
-  playerData: {fileID: 0}
+  playerData: {fileID: 2154088116047620211}
   shooter: {fileID: 2686144180939665577}
   bigLight: {fileID: 4844327483664022967}
   LightAtk_1: {fileID: 3651964352988571409}
@@ -1710,7 +1743,6 @@ MonoBehaviour:
   maxManaIncrement: 0
   maxEnergyIncrement: 0
   energyRecoveryIncrement: 0
-  energyCostIncrement: 0
   moveSpeedIncrement: 0
   damageIncrement: 0
   critRateIncrement: 0
@@ -1720,7 +1752,6 @@ MonoBehaviour:
   vulnerabilityIncrement: 0
   toughnessIncrement: 0
   lightRadiusIncrement: 0
-  foresightTimeIncrement: 0
   maxHealthMultiplication: 1
   maxManaMultiplication: 1
   maxEnergyMultiplication: 1
@@ -1736,6 +1767,7 @@ MonoBehaviour:
   toughnessMultiplication: 1
   lightRadiusMultiplication: 1
   chargeSpeedMultiplication: 1
+  foresightTimeMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
 --- !u!114 &4510489401662688001
 MonoBehaviour:

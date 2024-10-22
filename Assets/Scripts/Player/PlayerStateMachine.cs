@@ -13,8 +13,12 @@ public class PlayerStateMachine : StateMachine
     public Transform attacker;
 
     [SerializeField] PlayerState[] stateTable;
-    [SerializeField] float[] energyCost;
+    #region 动作消耗索引表
+    [Header("动作消耗索引表")]
+    [Tooltip("动作体力值基础消耗")][SerializeField] float[] energyCost;
+    [Tooltip("法术魔力值基础消耗")][SerializeField] float[] manaCost;
     Dictionary<Type, float> energyCostDict;
+    #endregion
     #region 鼠标相关
     [Header("鼠标相关")]
     [SerializeField] float mousedegree;
@@ -28,11 +32,18 @@ public class PlayerStateMachine : StateMachine
     private float noStunTimer;
     #endregion
     #region 体力恢复相关参数
+    [Header("体力恢复相关参数")]
     [Tooltip("体力开始恢复计时器")][SerializeField]private float energyRecoverTimer;
     [Tooltip("消耗体力到体力开始恢复的延迟时间")][SerializeField]private float energyRecoverDelay;
     #endregion
-
+    #region 魔法冷却计时器
+    [Header("魔法冷却计时器")]
+    [Tooltip("1号位法术计时器")] public float magicTimer_1;
+    [Tooltip("2号位法术计时器")] public float magicTimer_2;
+    [Tooltip("3号位法术计时器")] public float magicTimer_3;
+    #endregion
     #region 组件
+    [Header("组件")]
     //获取组件的方式之后可以调整
     public PlayerInput playerInput;
     public PlayerController playerController;
