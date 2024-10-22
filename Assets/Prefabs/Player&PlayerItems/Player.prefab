@@ -1225,12 +1225,16 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  manaCost: []
   mousedegree: 0
   mouseDistance: {x: 0, y: 0, z: 0}
   CatchChancepoint: 0
   noStunUndamageableTime: 0
   energyRecoverTimer: 0
   energyRecoverDelay: 0
+  magicTimer_1: 0
+  magicTimer_2: 0
+  magicTimer_3: 0
   playerInput: {fileID: 4510489401662688001}
   playerController: {fileID: 5479772352610202664}
   playerAnimator: {fileID: 1766737477993462450}
@@ -1265,7 +1269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: 4151189749885843770}
   inputs: {fileID: 4510489401662688001}
-  moveSpeed: 3
+  moveSpeed: 4.5
   fastRollSpeed: 10
   slowRollSpeed: 8
   lastRollDuration: 0.3
@@ -1274,6 +1278,7 @@ MonoBehaviour:
   L3AtkSpeed: 8
   L4AtkSpeed: 20
   LightAtkRotateAngle: 60
+  isSameDirection: 0
   RollCount: 0
   RollTimer: 0
   RollColdDown: 5
@@ -1297,7 +1302,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.4
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1305,7 +1310,16 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.11195435
+      time: 0.05
+      value: 0.4
+      inSlope: 0.03267873
+      outSlope: 0.03267873
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.3
       value: 0.92597854
       inSlope: 1.4959607
       outSlope: 1.4959607
@@ -1314,17 +1328,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.13034087
-      value: 0.95048857
-      inSlope: 0.21806985
-      outSlope: 0.21806985
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.3737807
-    - serializedVersion: 3
-      time: 0.39054772
-      value: 0.9681349
+      time: 0.4
+      value: 1
       inSlope: 0.01001024
       outSlope: 0.01001024
       tangentMode: 0
@@ -1332,13 +1337,13 @@ MonoBehaviour:
       inWeight: 0.41371658
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.8864541
-      value: 0.97575843
-      inSlope: 0.029723456
-      outSlope: 0.029723456
+      time: 0.7
+      value: 1
+      inSlope: -0.034627616
+      outSlope: -0.034627616
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.51704687
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.99349976
@@ -1348,6 +1353,39 @@ MonoBehaviour:
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MoveCruve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.4
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.12426304
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
