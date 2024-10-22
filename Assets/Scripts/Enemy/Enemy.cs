@@ -518,6 +518,8 @@ public class Enemy : MonoBehaviour, IDamageable
             rb.velocity = Vector2.zero;
     }
 
+    public void FaceToTarget() => spriteRenderer.flipX = (target.transform.position - transform.position).x < 0;
+
     public bool PlayerCheck(int index, bool ignoreObstacle)
     {
         if (ignoreObstacle)

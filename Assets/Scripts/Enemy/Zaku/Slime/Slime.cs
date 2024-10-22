@@ -10,6 +10,12 @@ using UnityEngine;
 /// </summary>
 public class Slime : Enemy
 {
+    [Space(16)]
+    [Header("Slime")]
+    [Space(16)]
+
+    public GameObject attackObj;
+
     public EnemyState idleState;
     public EnemyState jumpState;
 
@@ -88,6 +94,7 @@ public class SlimeJumpState : EnemyState
 
     public override void OnExit()
     {
+        slime.attackObj.SetActive(false);
         jumpCTK.Cancel();
         changeTimerCTK.Cancel();
     }
