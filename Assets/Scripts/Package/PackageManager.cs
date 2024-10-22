@@ -125,7 +125,7 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             GetAccessory(int.Parse(accessoryID), saveData.savedAccessoryDict[accessoryID].level, false);
             if (saveData.savedAccessoryDict[accessoryID].equipPosition > 0)
                 EquipAccessory(int.Parse(accessoryID), saveData.savedAccessoryDict[accessoryID].equipPosition, false);
-        }
+        } 
     }
 
     #region 血蓝瓶

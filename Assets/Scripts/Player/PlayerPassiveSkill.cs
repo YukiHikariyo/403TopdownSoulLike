@@ -56,7 +56,7 @@ public abstract class BasePassiveSkill
     public abstract void OnExit();
     public abstract void OnTrigger(IDamageable damageable); //传入的IDamageable只在击中和击杀触发时有用，其他只是占位用
 
-    protected bool CalculateProbability(float probability) => probability >= Random.Range(0, 1);
+    protected bool CalculateProbability(float probability) => probability >= Random.Range(0f, 1f);
 }
 
 public class TestPassiveSkill : BasePassiveSkill

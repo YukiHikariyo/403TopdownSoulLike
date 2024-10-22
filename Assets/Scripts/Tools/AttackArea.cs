@@ -73,11 +73,12 @@ public class AttackArea : MonoBehaviour
                     if (causeHealthDamage)
                     {
                         isCrit = CalculateProbability(player.playerData.FinalCritRate);
-                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (isCrit ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                        damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (isCrit ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
                     }
 
-                    if (player.playerData.currentWeaponStaticData.buffDdamageType != BuffType.None)
-                        damageable.TakeBuffDamage(player.playerData.currentWeaponStaticData.buffDdamageType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
+                    if (player.playerData.currentWeaponStaticData != null)
+                        if (player.playerData.currentWeaponStaticData.buffDdamageType != BuffType.None)
+                            damageable.TakeBuffDamage(player.playerData.currentWeaponStaticData.buffDdamageType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
 
                     if (isSuccessful)
                     {
@@ -151,5 +152,5 @@ public class AttackArea : MonoBehaviour
         }
     }
 
-    private bool CalculateProbability(float probability) => probability >= Random.Range(0, 1);
+    private bool CalculateProbability(float probability) => probability >= Random.Range(0f, 1f);
 }

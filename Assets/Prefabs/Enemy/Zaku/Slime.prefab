@@ -236,7 +236,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -422,6 +422,8 @@ MonoBehaviour:
   isEnduance: 0
   attackerTransform: {fileID: 0}
   isMove: 0
+  isAnimExit: 0
+  checkCenter: {x: 0, y: 0}
   checkDistance:
   - 5
   playerLayer:

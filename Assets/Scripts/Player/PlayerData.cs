@@ -16,7 +16,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Header("基本数值")]
     [Space(16)]
 
-    [SerializeField][Tooltip("基础最大生命值")] private float basicMaxHealth;
+    [SerializeField][Tooltip("基础最大生命值")] private float basicMaxHealth = 100;
     [Tooltip("基础最大生命值")]
     public float BasicMaxHealth
     {
@@ -58,7 +58,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         }
     }
 
-    [SerializeField][Tooltip("基础最大魔力值")] private float basicMaxMana;
+    [SerializeField][Tooltip("基础最大魔力值")] private float basicMaxMana = 50;
     [Tooltip("基础最大魔力值")]
     public float BasicMaxMana
     {
@@ -100,7 +100,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         }
     }
 
-    [SerializeField][Tooltip("基础最大体力值")] private float basicMaxEnergy;
+    [SerializeField][Tooltip("基础最大体力值")] private float basicMaxEnergy = 75;
 
     [Tooltip("基础最大体力值")]
     public float BasicMaxEnergy
@@ -145,7 +145,7 @@ public class PlayerData : MonoBehaviour, ISaveable
 
     [Space(16)]
 
-    [SerializeField][Tooltip("基础体力恢复速度")] private float basicEnergyRecovery;
+    [SerializeField][Tooltip("基础体力恢复速度")] private float basicEnergyRecovery = 15;
     [Tooltip("基础体力恢复速度")]
     public float BasicEnergyRecovery
     {
@@ -153,7 +153,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set => basicEnergyRecovery = value;
     }
 
-    [SerializeField][Tooltip("基础攻击力")] private float basicDamage;
+    [SerializeField][Tooltip("基础攻击力")] private float basicDamage = 20;
     [Tooltip("基础攻击力")]
     public float BasicDamage
     {
@@ -161,7 +161,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set => basicDamage = value;
     }
 
-    [SerializeField][Tooltip("基础暴击率")] private float basicCritRate;
+    [SerializeField][Tooltip("基础暴击率")] private float basicCritRate = 0;
     [Tooltip("基础暴击率")]
     public float BasicCritRate
     {
@@ -169,7 +169,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set => basicCritRate = value;
     }
 
-    [SerializeField][Tooltip("基础暴击伤害")] private float basicCritDamage;
+    [SerializeField][Tooltip("基础暴击伤害")] private float basicCritDamage = 1.5f;
     [Tooltip("基础暴击伤害")]
     public float BasicCritDamage
     {
@@ -177,7 +177,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set => basicCritDamage = value;
     }
 
-    [SerializeField][Tooltip("基础穿透力")] private float basicPenetratingPower;
+    [SerializeField][Tooltip("基础穿透力")] private float basicPenetratingPower = 0;
     [Tooltip("基础穿透力")]
     public float BasicPenetratingPower
     {
@@ -185,7 +185,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set => basicPenetratingPower = value;
     }
 
-    [SerializeField][Tooltip("基础伤害减免")] private float basicReductionRate;
+    [SerializeField][Tooltip("基础伤害减免")] private float basicReductionRate = 0;
     [Tooltip("基础伤害减免")]
     public float BasicReductionRate
     {
@@ -193,7 +193,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         set => basicReductionRate = value;
     }
 
-    [SerializeField][Tooltip("基础韧性")] private float basicToughness;
+    [SerializeField][Tooltip("基础韧性")] private float basicToughness = 20;
     [Tooltip("基础韧性")]
     public float BasicToughness
     {
