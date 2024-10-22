@@ -88,10 +88,14 @@ public class PlayerState_Charging : PlayerState
         base.PhysicUpdate();
         if (playerInput.WantsMove)
         {
-            playerController.Charge_Move();
+            playerAnimator.speed = 0.6f;
+            playerController.Charge_Move(StateDuration);
         }
         else
+        {
+            playerAnimator.speed = 1f;
             playerController.Idle();
+        }
     }
     private void OnChargeStage0()
     {

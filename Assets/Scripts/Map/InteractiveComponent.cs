@@ -27,22 +27,14 @@ public class InteractiveComponent : MonoBehaviour, ISaveable
         set
         {
             state = value;
-            SwitchState();
+            Initialization();
         }
     }
 
     /// <summary>
-    /// 初始化函数
+    /// 初始化函数,存档加载时调用
     /// </summary>
     public virtual void Initialization()
-    {
-
-    }
-
-    /// <summary>
-    /// 状态切换逻辑
-    /// </summary>
-    protected virtual void SwitchState()
     {
         if (state)
         {
@@ -52,6 +44,14 @@ public class InteractiveComponent : MonoBehaviour, ISaveable
         {
             animator.Play("Disabled");
         }
+    }
+
+    /// <summary>
+    /// 状态切换逻辑，玩家在游戏内互动时触发
+    /// </summary>
+    public virtual void SwitchState()
+    {
+        
     }
 
     #region 存档接口

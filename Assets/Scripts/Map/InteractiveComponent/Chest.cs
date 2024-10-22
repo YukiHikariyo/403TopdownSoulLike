@@ -18,17 +18,9 @@ public class Chest : InteractiveComponent
     public override void Initialization()
     {
         base.Initialization();
-        if (state)
-        {
-            animator.Play("Enabled");
-        }
-        else
-        {
-            animator.Play("Disabled");
-        }
     }
 
-    protected override void SwitchState()
+    public override void SwitchState()
     {
         base.SwitchState();
         OpenChest();

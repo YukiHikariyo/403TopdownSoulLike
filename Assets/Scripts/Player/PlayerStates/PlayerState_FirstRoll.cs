@@ -60,7 +60,7 @@ public class PlayerState_FirstRoll : PlayerState
     {
         base.PhysicUpdate();
         //翻滚逻辑
-        playerController.FastRoll(FaceDir, StateDuration / AnimationLength);
+        playerController.FastRoll(FaceDir == Vector2.zero ? Vector2.right : FaceDir, StateDuration / AnimationLength);
         //
     }
 }

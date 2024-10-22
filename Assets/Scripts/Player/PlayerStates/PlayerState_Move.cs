@@ -51,6 +51,6 @@ public class PlayerState_Move : PlayerState
 
     public override void PhysicUpdate()
     {
-        playerController.Move();
+        playerController.Move(StateDuration);
     }
 }

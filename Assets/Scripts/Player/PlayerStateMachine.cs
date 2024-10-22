@@ -101,8 +101,12 @@ public class PlayerStateMachine : StateMachine
         playerTransform = transform;
         foreach (PlayerState playerState in stateTable)
         {
-            playerState.Initialization(playerInput, this,playerController,playerAnimator,playerRenderer,player,playerData,shooter,bigLight,LightAtk_1,LightAtk_2,LightAtk_3,LightAtk_4,BackAttack,RightAttack);
+            playerState.Initialization(playerInput, this, playerController, playerAnimator, playerRenderer, player, playerData, shooter, bigLight, LightAtk_1, LightAtk_2, LightAtk_3, LightAtk_4, BackAttack, RightAttack);
             dict.Add(playerState.GetType(), playerState);
+        }
+        for(int i = 0;i < stateTable.Length; ++i)
+        {
+            energyCostDict.Add(stateTable[i].GetType(), energyCost[i]);
         }
     }
 
@@ -116,7 +120,7 @@ public class PlayerStateMachine : StateMachine
     {
         base.Update();
         UpdateMouseDegree();
-        if(noStunTimer > 0 && noStunTimer > -1)
+        if(noStunTimer > -1)
         {
             noStunTimer -= Time.deltaTime;
             if(noStunTimer < 0)
@@ -192,6 +196,7 @@ public class PlayerStateMachine : StateMachine
         playerAnimator.SetFloat("isUp",isUp ? 1 : 0);
         playerAnimator.SetFloat("isHorizontal", isHorizontal ? 1 : 0);
         playerAnimator.SetFloat("isSameDirection",isSameDirtction ? 1 : 0);
+        playerController.isSameDirection = isSameDirtction;
     }
 
     public void ReturnAnimatorValue_OnStart()

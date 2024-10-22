@@ -8,10 +8,10 @@ public class Lever : InteractiveComponent
     public override void Initialization()
     {
         base.Initialization();
-        SwitchState();
+
     }
 
-    protected override void SwitchState()
+    public override void SwitchState()
     {
         base.SwitchState();
         foreach (Spike spike in spikes)

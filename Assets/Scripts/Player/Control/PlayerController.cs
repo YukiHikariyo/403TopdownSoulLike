@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float L3AtkSpeed;
     [SerializeField] private float L4AtkSpeed;
     [SerializeField] public float LightAtkRotateAngle;
-
+    [HideInInspector][Tooltip("移动方向是否面朝鼠标")]public bool isSameDirection;
 
     [Header("翻滚计数与计时器")]
     [Tooltip("短时间连续翻滚计数")] public int RollCount;
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     #endregion
     [Header("运动曲线")]
     public AnimationCurve fastRollCruve;
+    public AnimationCurve MoveCruve;
     [Tooltip("翻滚运动曲线")]public AnimationCurve slowRollCruve;
     //每段攻击的位移变化曲线
     public AnimationCurve L1AtkCruve;
@@ -166,13 +167,13 @@ public class PlayerController : MonoBehaviour
     {
         playerRb.velocity = Vector2.zero;
     }
-    public void Move()
+    public void Move(float time)
     {
-        playerRb.velocity = MoveAxis * moveSpeed;
+        playerRb.velocity = MoveAxis * moveSpeed * (isSameDirection ? 1 : 0.8f) * MoveCruve.Evaluate(time);
     }
-    public void Charge_Move()
+    public void Charge_Move(float time)
     {
-        playerRb.velocity = MoveAxis * moveSpeed * ChargeSpeedFix;
+        playerRb.velocity = MoveAxis * moveSpeed * ChargeSpeedFix * (isSameDirection ? 1 : 0.8f) * MoveCruve.Evaluate(time);
     }
     #endregion
     #region 翻滚
@@ -213,6 +214,11 @@ public class PlayerController : MonoBehaviour
         }
         if(RollTimer > 0)
             RollTimer -= Time.deltaTime;
+        else if(RollTimer < 0)
+        {
+            RollCount = 0;
+            RollTimer = 0;
+        }
     }
     public void SkillDisplace(Skill_Physics skill, Vector2 FaceDir, float time)
     {
