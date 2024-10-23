@@ -22,7 +22,7 @@ public class PlayerState_UseHealthBottle : PlayerState
         base.LogicUpdate();
         if (playerStateMachine.CanStateSwitch)
         {
-            if(playerInput.Rolll && playerController.RollCount < 3)
+            if(playerInput.Roll && playerController.RollCount < 3)
                 playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
         }
         if (IsAnimationEnd)
