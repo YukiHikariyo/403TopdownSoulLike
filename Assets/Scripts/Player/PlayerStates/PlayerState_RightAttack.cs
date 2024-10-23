@@ -13,7 +13,7 @@ public class PlayerState_RightAttack : PlayerState
         FaceDir = playerStateMachine.MouseDistance.normalized;
         SetRotationZ(RightAttack,playerStateMachine.MouseDegree);
 
-        SetAnimator_OnStart();
+        SetAnimator_OnStart_Input();
         playerAnimator.Play("RightAttack");
     }
 

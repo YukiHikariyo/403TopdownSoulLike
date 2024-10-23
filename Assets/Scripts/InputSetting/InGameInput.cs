@@ -143,6 +143,15 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e81007f-d294-479b-bc8e-21c5d72414fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -288,6 +297,17 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Mana"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""499dad65-a9f3-40bc-8e63-dc4faa63e17f"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,6 +341,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
         m_Player_Health = m_Player.FindAction("Health", throwIfNotFound: true);
         m_Player_Mana = m_Player.FindAction("Mana", throwIfNotFound: true);
+        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -395,6 +416,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interaction;
     private readonly InputAction m_Player_Health;
     private readonly InputAction m_Player_Mana;
+    private readonly InputAction m_Player_Run;
     public struct PlayerActions
     {
         private @InGameInput m_Wrapper;
@@ -412,6 +434,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
         public InputAction @Health => m_Wrapper.m_Player_Health;
         public InputAction @Mana => m_Wrapper.m_Player_Mana;
+        public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -460,6 +483,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             @Mana.started += instance.OnMana;
             @Mana.performed += instance.OnMana;
             @Mana.canceled += instance.OnMana;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -503,6 +529,9 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
             @Mana.started -= instance.OnMana;
             @Mana.performed -= instance.OnMana;
             @Mana.canceled -= instance.OnMana;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -544,5 +573,6 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
         void OnInteraction(InputAction.CallbackContext context);
         void OnHealth(InputAction.CallbackContext context);
         void OnMana(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
 }

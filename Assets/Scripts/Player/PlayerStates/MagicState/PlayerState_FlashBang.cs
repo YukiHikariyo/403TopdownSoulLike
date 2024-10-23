@@ -11,7 +11,7 @@ public class PlayerState_FlashBang : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
-        SetAnimator_OnStart();
+        SetAnimator_OnStart_Mouse();
         playerAnimator.Play("FlashBang");
         playerStateMachine.magicEvent.AddListener(ShootFlashBang);
     }

@@ -106,12 +106,23 @@ public class PlayerState : ScriptableObject, IState
             playerRenderer.flipX = true;
     }
     /// <summary>
-    /// 仅在动作开始时更新面朝方向
+    /// 仅在动作开始时更新面朝方向,方向面向鼠标方向
     /// </summary>
-    protected void SetAnimator_OnStart()
+    protected void SetAnimator_OnStart_Mouse()
     {
         ChangeScale();
-        playerStateMachine.ReturnAnimatorValue_OnStart();
+        playerStateMachine.ReturnAnimatorValue_OnStart_Mouse();
+    }
+    /// <summary>
+    /// 仅在动作开始时更新面朝方向,方向为输入方向或鼠标移动受限状态时使用
+    /// </summary>
+    protected void SetAnimator_OnStart_Input()
+    {
+        if (FaceDir.x >= 0)
+            playerRenderer.flipX = true;
+        else
+            playerRenderer.flipX = false;
+        playerStateMachine.ReturnAnimatorValue_OnStart_Input(FaceDir);
     }
     /// <summary>
     /// 逐帧更新面朝方向

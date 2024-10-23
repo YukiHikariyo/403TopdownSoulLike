@@ -53,9 +53,8 @@ public class PlayerController : MonoBehaviour
     public float bigStunSpeed;
     #endregion
     [Header("运动曲线")]
-    public AnimationCurve fastRollCruve;
+    [Tooltip("翻滚运动曲线")] public AnimationCurve fastRollCruve;
     public AnimationCurve MoveCruve;
-    [Tooltip("翻滚运动曲线")]public AnimationCurve slowRollCruve;
     //每段攻击的位移变化曲线
     public AnimationCurve L1AtkCruve;
     public AnimationCurve L2AtkCruve;
@@ -182,10 +181,6 @@ public class PlayerController : MonoBehaviour
         playerRb.velocity = FaceDir * fastRollSpeed * fastRollCruve.Evaluate(time);
     }
   
-    public void SlowRoll(Vector2 FaceDir, float time)
-    {
-        playerRb.velocity = FaceDir * slowRollSpeed * slowRollCruve.Evaluate(time);
-    }
     #endregion
     #region 轻攻击位移
     public void LightAttack_1(Vector2 FaceDir, float time)

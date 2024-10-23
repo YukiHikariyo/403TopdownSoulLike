@@ -12,13 +12,14 @@ public class PlayerState_BackAttack : PlayerState
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
 
-        SetAnimator_OnStart();
-        playerAnimator.Play("BackAttack");
 
         degree = playerStateMachine.RestrictedRotation(BackAttack);
         FaceDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree));
-        BackAttack.transform.localEulerAngles = new Vector3(BackAttack.transform.localEulerAngles.x, BackAttack.transform.localEulerAngles.y, degree);
+        SetAnimator_OnStart_Input();
+        playerAnimator.Play("BackAttack");
 
+        BackAttack.transform.localEulerAngles = new Vector3(BackAttack.transform.localEulerAngles.x, BackAttack.transform.localEulerAngles.y, degree);
+        
         foresight = false;
         backAttackArea.successEvent.AddListener(foresightCheck);
     }

@@ -9,7 +9,6 @@ public class PlayerState_UseHealthBottle : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
-        SetAnimator_OnStart();
         playerAnimator.Play("UseBottle");
     }
 

@@ -11,11 +11,11 @@ public class PlayerState_LightAttack_3 : PlayerState
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
 
-        SetAnimator_OnStart();
-        playerAnimator.Play("L3_Attack");
-
         degree = playerStateMachine.RestrictedRotation(lightAtk_2);
         FaceDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree));
+        SetAnimator_OnStart_Input();
+        playerAnimator.Play("L3_Attack");
+
         lightAtk_3.transform.localEulerAngles = new Vector3(lightAtk_3.transform.localEulerAngles.x, lightAtk_3.transform.localEulerAngles.y, degree);
     }
 

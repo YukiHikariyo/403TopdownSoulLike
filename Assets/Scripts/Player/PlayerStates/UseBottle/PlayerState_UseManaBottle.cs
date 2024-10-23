@@ -10,7 +10,6 @@ public class PlayerState_UseManaBottle : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
-        SetAnimator_OnStart();
         playerAnimator.Play("UseBottle");
     }
 

@@ -13,15 +13,15 @@ public class PlayerState_CatchChance : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
-        SetAnimator_OnStart();
-        playerAnimator.Play("CatchChance");
         //确定判定区间中点
         UnDamageableTime = playerController.UnDamageableLeftTime;
         PerfectCheckTime = playerController.PerfectCheckTime * playerData.foresightTimeMultiplication;
         UnDamageableStartTime = playerStateMachine.CatchChancepoint - UnDamageableTime / 2;
         PerfectCheckStartTime = playerStateMachine.CatchChancepoint - PerfectCheckTime / 2;
         //
-        FaceDir = -playerStateMachine.MouseDistance.normalized;
+        FaceDir = playerStateMachine.MouseDistance.normalized;
+        SetAnimator_OnStart_Input();
+        playerAnimator.Play("CatchChance");
         SetRotationZ(BackAttack, playerStateMachine.MouseDegree);
         player.foresightEvent.AddListener(SuccessfulForesight);
     }
@@ -82,7 +82,7 @@ public class PlayerState_CatchChance : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
-        playerController.SkillDisplace(Skill_Physics.CatchChance, FaceDir, StateDuration / AnimationLength);
+        playerController.SkillDisplace(Skill_Physics.CatchChance, -FaceDir, StateDuration / AnimationLength);
     }
     private void SetRotationZ(GameObject obj, float angle)
     {

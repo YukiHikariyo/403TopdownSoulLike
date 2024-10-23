@@ -9,11 +9,11 @@ public class PlayerState_FirstRoll : PlayerState
     {
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
-
-        SetAnimator_OnStart();
-        playerAnimator.Play("FirstRoll");
-
+        playerStateMachine.CanStateSwitch = false;
         FaceDir = playerController.MoveAxis;
+
+        SetAnimator_OnStart_Input();
+        playerAnimator.Play("FirstRoll");
 
         player.damageableIndex = 1;
 

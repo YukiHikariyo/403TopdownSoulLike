@@ -199,7 +199,7 @@ public class PlayerStateMachine : StateMachine
         playerController.isSameDirection = isSameDirtction;
     }
 
-    public void ReturnAnimatorValue_OnStart()
+    public void ReturnAnimatorValue_OnStart_Mouse()
     {
         bool isUp = mouseDistance.y >= 0;
         bool isHorizontal = Mathf.Abs(mouseDistance.x) > Mathf.Abs(mouseDistance.y);
@@ -207,6 +207,13 @@ public class PlayerStateMachine : StateMachine
         playerAnimator.SetFloat("isHorizontal", isHorizontal ? 1 : 0);
     }
 
+    public void ReturnAnimatorValue_OnStart_Input(Vector2 faceDir)
+    {
+        bool isUp = faceDir.y > 0;
+        bool isHorizontal = Mathf.Abs(faceDir.y) <= Mathf.Abs(faceDir.x);
+        playerAnimator.SetFloat("isUp", isUp ? 1 : 0);
+        playerAnimator.SetFloat("isHorizontal", isHorizontal ? 1 : 0);
+    }
     public void ReturnAnimatorValue_OnHurt()
     {
         Vector3 direction = (attacker.position - playerTransform.position).normalized;
@@ -216,43 +223,67 @@ public class PlayerStateMachine : StateMachine
         playerRenderer.flipX = isRight;
     }
 
-    //接受输入帧
+    /// <summary>
+    /// 接受输入帧
+    /// </summary>
     public void AcceptInput()
     {
         CanAcceptInput = true;
     }
-    //动画最早打断时间
+    /// <summary>
+    /// 动画最早打断时间
+    /// </summary>
     public void AcceptStateSwitch()
     {
         CanStateSwitch = true;
     }
-    //魔法事件触发
+    /// <summary>
+    /// 魔法事件触发
+    /// </summary>
     public void MagicInvoke()
     {
         magicEvent?.Invoke();
     }
     #region 受伤和死亡时触发的方法
+    /// <summary>
+    /// 无硬直触发方法
+    /// </summary>
+    /// <param name="attacker">攻击者</param>
     public void OnNoStun(Transform attacker)
     {
         player.damageableIndex = 1;
         noStunTimer = noStunUndamageableTime;
     }
-
+    /// <summary>
+    /// 小硬直触发方法
+    /// </summary>
+    /// <param name="attacker">攻击者</param>
     public void OnSmallStun(Transform attacker)
     {
         this.attacker = attacker;
         SwitchState(typeof(PlayerState_SmallStun));
     }
-
+    /// <summary>
+    /// 普通硬直触发方法
+    /// </summary>
+    /// <param name="attacker">攻击者</param>
     public void OnNormalStun(Transform attacker)
     {
-
+        this.attacker = attacker;
+        SwitchState(typeof(PlayerState_NormalStun));
     }
-
+    /// <summary>
+    /// 大硬直触发方法
+    /// </summary>
+    /// <param name="attacker">攻击者</param>
     public void OnBigStun(Transform attacker)
     {
-
+        this.attacker = attacker;
+        SwitchState(typeof(PlayerState_BigStun));
     }
+    /// <summary>
+    /// 死亡触发方法
+    /// </summary>
     public void OnDead()
     {
 
