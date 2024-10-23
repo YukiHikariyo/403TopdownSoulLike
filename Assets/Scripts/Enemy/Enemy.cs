@@ -536,6 +536,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public float CalculateTargetAngle() => Vector2.SignedAngle(Vector2.right, target.transform.position - transform.position);
 
+    public bool CalculateProbability(float probability) => probability >= UnityEngine.Random.Range(0f, 1f);
+
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

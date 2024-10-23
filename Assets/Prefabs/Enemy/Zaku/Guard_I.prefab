@@ -229,7 +229,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7877822, y: 1.5555497}
+  m_Size: {x: 0.75, y: 1.5}
   m_EdgeRadius: 0
 --- !u!95 &262075397010113031
 Animator:
@@ -305,7 +305,7 @@ MonoBehaviour:
   basicDamage: 20
   basicPenetratingPower: 0
   basicReductionRate: 0
-  basicToughness: 20
+  basicToughness: 15
   motionToughness: 0
   motionValue:
   - 1
