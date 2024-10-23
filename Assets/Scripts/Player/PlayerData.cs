@@ -496,6 +496,12 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("当前饰品静态数据")] public Dictionary<int, StaticAccessoryData> currentAccessoryStaticData = new();
     [Tooltip("当前饰品本地数据")] public Dictionary<int, LocalAccessoryData> currentAccessoryLocalData = new();
 
+    [Space(16)]
+    [Header("法术解锁状态")]
+    [Space(16)]
+
+    [Tooltip("法术解锁状态")] public bool[] magicUnlockState;
+
     #endregion
 
     private void Awake()

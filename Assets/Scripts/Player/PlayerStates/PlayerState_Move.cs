@@ -21,15 +21,15 @@ public class PlayerState_Move : PlayerState
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Run));
         }
-        if (playerInput.Magic_1)
+        if (playerInput.Magic_1 && playerData.magicUnlockState[0] && playerStateMachine.magicTimer[0] <= 0)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
         }
-        else if (playerInput.Magic_2)
+        else if (playerInput.Magic_2 && playerData.magicUnlockState[1] && playerStateMachine.magicTimer[1] <= 0)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
         }
-        else if (playerInput.Magic_3)
+        else if (playerInput.Magic_3 && playerData.magicUnlockState[2] && playerStateMachine.magicTimer[2] <= 0)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
         }

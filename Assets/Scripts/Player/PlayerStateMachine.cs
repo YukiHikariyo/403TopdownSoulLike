@@ -39,11 +39,10 @@ public class PlayerStateMachine : StateMachine
     [Tooltip("体力开始恢复计时器")][SerializeField]private float energyRecoverTimer;
     [Tooltip("消耗体力到体力开始恢复的延迟时间")][SerializeField]private float energyRecoverDelay;
     #endregion
-    #region 魔法冷却计时器
+    #region 魔法冷却计时
     [Header("魔法冷却计时器")]
-    [Tooltip("1号位法术计时器")] public float magicTimer_1;
-    [Tooltip("2号位法术计时器")] public float magicTimer_2;
-    [Tooltip("3号位法术计时器")] public float magicTimer_3;
+    [Tooltip("法术计时器")] public float[] magicTimer;
+    [Tooltip("法术冷却时间")] public float[] magicColdDown;
     #endregion
     #region 组件
     [Header("组件")]
@@ -117,12 +116,31 @@ public class PlayerStateMachine : StateMachine
     {
         SwitchOn(dict[typeof(PlayerState_Idle)]);
         noStunTimer = -1;
+
+        //更新法术解锁状态
+        for(int i = 0; i < magicTimer.Length; ++i)
+        {
+            MagicUIManager.Instance.UpdateUnlockState(i, playerData.magicUnlockState[i]);
+        }
     }
 
     protected override void Update()
     {
         base.Update();
         UpdateMouseDegree();
+        //更新法术冷却UI
+        for(int i = 0;i < magicTimer.Length; i++)
+        {
+            if (playerData.magicUnlockState[i])
+            {
+                if (magicTimer[i] > 0)
+                    magicTimer[i]-=Time.deltaTime;
+
+                UpdateMagicUI(i);
+            }
+        }
+
+        //无硬直无敌
         if(noStunTimer > -1)
         {
             noStunTimer -= Time.deltaTime;
@@ -263,6 +281,17 @@ public class PlayerStateMachine : StateMachine
     public void MagicInvoke()
     {
         magicEvent?.Invoke();
+    }
+    public void UpdateMagicUI(int id)
+    {
+        if (magicTimer[id] > 0)
+        {
+            MagicUIManager.Instance.UpdateMask(id, magicTimer[id] / magicColdDown[id]);
+        }
+        else
+        {
+            MagicUIManager.Instance.UpdateMask(id, 0);
+        }
     }
     #region 受伤和死亡时触发的方法
     /// <summary>

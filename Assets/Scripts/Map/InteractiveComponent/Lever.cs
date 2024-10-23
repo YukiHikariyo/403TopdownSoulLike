@@ -8,7 +8,7 @@ public class Lever : InteractiveComponent
     public override void Initialization()
     {
         base.Initialization();
-
+        SwitchState();
     }
 
     public override void SwitchState()
