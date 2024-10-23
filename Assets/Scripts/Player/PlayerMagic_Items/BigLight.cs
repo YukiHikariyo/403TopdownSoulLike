@@ -20,11 +20,11 @@ public class BigLight : MonoBehaviour
     private void Update()
     {
         nowTime += Time.deltaTime;
-        if(nowTime > existTime)
+        light.pointLightInnerRadius = radiusCruve.Evaluate(nowTime / existTime) * lightInnerRange;
+        light.pointLightOuterRadius = radiusCruve.Evaluate(nowTime / existTime) * lightOuterRange;
+        if (nowTime > existTime)
         {
             gameObject.SetActive(false);
-            light.pointLightInnerRadius = radiusCruve.Evaluate(nowTime) * lightInnerRange;
-            light.pointLightOuterRadius = radiusCruve.Evaluate(nowTime) * lightOuterRange;
         }
     }
 }

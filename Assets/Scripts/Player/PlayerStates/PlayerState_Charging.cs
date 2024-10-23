@@ -47,31 +47,6 @@ public class PlayerState_Charging : PlayerState
                 }
             }
         }
-        if (playerInput.Roll && playerController.RollCount < 3)
-            playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
-
-        if (playerInput.ChargeRelease)//TODO：体力限制
-        {
-            switch (chargeState)
-            {
-                case 0:
-                    playerAnimator.speed = 1.1f;
-
-                    break;
-                case 1:
-                    playerAnimator.speed = 1f;
-
-                    break;
-                case 2:
-                    playerAnimator.speed = 0.9f;
-
-                    break;
-                case 3:
-                    playerAnimator.speed = 0.8f;
-
-                    break;
-            }
-        }
         //TODO：体力限制
         if (playerInput.WantsMove && !playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Move"))
         {
@@ -81,6 +56,33 @@ public class PlayerState_Charging : PlayerState
         {
             playerAnimator.Play("Idle");
         }
+
+        if (playerInput.Roll && playerController.RollCount < 3)
+            playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+
+        else if (playerInput.ChargeRelease || playerStateMachine.ContinuousConsumeEnergy(Time.deltaTime * playerData.energyCostMultiplication))//TODO：体力限制
+        {
+            switch (chargeState)
+            {
+                case 0:
+                    playerAnimator.speed = 1.1f;
+                    playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
+                    break;
+                case 1:
+                    playerAnimator.speed = 1f;
+                    playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
+                    break;
+                case 2:
+                    playerAnimator.speed = 0.9f;
+                    playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
+                    break;
+                case 3:
+                    playerAnimator.speed = 0.8f;
+                    playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
+                    break;
+            }
+        }
+        
     }
 
     public override void PhysicUpdate()
@@ -88,8 +90,8 @@ public class PlayerState_Charging : PlayerState
         base.PhysicUpdate();
         if (playerInput.WantsMove)
         {
-            playerAnimator.speed = 0.6f;
-            playerController.Charge_Move(StateDuration);
+            playerAnimator.speed = 0.8f;
+            playerController.Charge_Move();
         }
         else
         {

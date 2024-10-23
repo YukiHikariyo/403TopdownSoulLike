@@ -20,6 +20,11 @@ public class PlayerState_Run : PlayerState
         base.LogicUpdate();
         SetAnimator_OnStart_Input();
         FaceDir = playerController.MoveAxis;
+        if (!playerStateMachine.ContinuousConsumeEnergy(playerStateMachine.runEnergyCost * Time.deltaTime))
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_Move));
+        }
+
         if (!playerInput.IsRun)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Move));
@@ -57,5 +62,6 @@ public class PlayerState_Run : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        playerController.Run(StateDuration);
     }
 }

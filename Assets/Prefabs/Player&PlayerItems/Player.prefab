@@ -1206,6 +1206,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2909330ab95c3bd489eb91cb0e160f2c, type: 2}
   - {fileID: 11400000, guid: ff4200ac68d101c4b8b45ea3c89eb774, type: 2}
   - {fileID: 11400000, guid: 650ac8c5908270549a8de855d2ac0554, type: 2}
+  - {fileID: 11400000, guid: 5d579f07d87f46a4cb364431a54d9023, type: 2}
+  - {fileID: 11400000, guid: 61bb2ffb104c7e3479e5dfda897903db, type: 2}
+  - {fileID: 11400000, guid: 8e529ab033e377e47a44e889e067269c, type: 2}
+  - {fileID: 11400000, guid: 674dabf26d4f5704f9226b88de415789, type: 2}
+  - {fileID: 11400000, guid: 650ac8c5908270549a8de855d2ac0554, type: 2}
+  - {fileID: 11400000, guid: efe7bce43b41cc9499ccd49d851d4ea2, type: 2}
   energyCost:
   - 0
   - 0
@@ -1216,6 +1222,12 @@ MonoBehaviour:
   - 10
   - 35
   - 15
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0
@@ -1269,8 +1281,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: 4151189749885843770}
   inputs: {fileID: 4510489401662688001}
-  moveSpeed: 4.5
-  fastRollSpeed: 5
+  moveSpeed: 3
+  runSpeed: 5
+  fastRollSpeed: 4.5
   slowRollSpeed: 8
   lastRollDuration: 0.3
   L1AtkSpeed: 10
@@ -1357,33 +1370,33 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MoveCruve:
+  RunCruve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.4
-      inSlope: 2
-      outSlope: 2
+      value: 0.5
+      inSlope: 2.5
+      outSlope: 2.5
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.3
+      time: 0.2
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.12426304
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
@@ -1915,7 +1928,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1
+  m_PointLightInnerRadius: 1.7818042
   m_PointLightOuterRadius: 5
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0

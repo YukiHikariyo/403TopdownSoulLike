@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     //时间相关属性未特殊说明均以秒为单位
     [Header("玩家移动属性")]
     [SerializeField] private float moveSpeed;
+    [Tooltip("疾跑基础速度")][SerializeField] private float runSpeed;
     [SerializeField] private float fastRollSpeed;
     [SerializeField] private float slowRollSpeed;
     [SerializeField] private float lastRollDuration;
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
     #endregion
     [Header("运动曲线")]
     [Tooltip("翻滚运动曲线")] public AnimationCurve fastRollCruve;
-    public AnimationCurve MoveCruve;
+    [Tooltip("疾跑运动曲线")]public AnimationCurve RunCruve;
     //每段攻击的位移变化曲线
     public AnimationCurve L1AtkCruve;
     public AnimationCurve L2AtkCruve;
@@ -68,8 +69,6 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve NormalStunCruve;
     public AnimationCurve BigStunCruve;
 
-    private float nowSpeed;
-    //二段翻滚的移动速度会由快变慢，该参数用于表示减速度，为了方便，向属性传递动作持续时间，属性内部会自行计算减速度
     public float LastRollDuration
     {
         get
@@ -166,13 +165,17 @@ public class PlayerController : MonoBehaviour
     {
         playerRb.velocity = Vector2.zero;
     }
-    public void Move(float time)
+    public void Move()
     {
-        playerRb.velocity = MoveAxis * moveSpeed * (isSameDirection ? 1 : 0.9f) * MoveCruve.Evaluate(time);
+        playerRb.velocity = (isSameDirection ? 1 : 0.9f) * moveSpeed * MoveAxis;
     }
-    public void Charge_Move(float time)
+    public void Run(float time)
     {
-        playerRb.velocity = MoveAxis * moveSpeed * ChargeSpeedFix * (isSameDirection ? 1 : 0.9f) * MoveCruve.Evaluate(time);
+        playerRb.velocity = RunCruve.Evaluate(time) * runSpeed * MoveAxis;
+    }
+    public void Charge_Move()
+    {
+        playerRb.velocity = (isSameDirection ? 1 : 0.9f) * ChargeSpeedFix * moveSpeed * MoveAxis;
     }
     #endregion
     #region 翻滚

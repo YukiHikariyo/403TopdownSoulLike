@@ -45,7 +45,7 @@ public class PlayerState_Successful_Mana : PlayerState
             //切换至移动
             if (playerInput.WantsMove)
             {
-                if (playerInput.IsRun)
+                if (playerInput.IsRun && playerData.CurrentEnergy > playerStateMachine.runEnergyLimit)
                     playerStateMachine.SwitchState(typeof(PlayerState_Run));
                 else
                     playerStateMachine.SwitchState(typeof(PlayerState_Move));

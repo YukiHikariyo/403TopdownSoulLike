@@ -15,6 +15,9 @@ public class PlayerStateMachine : StateMachine
     [SerializeField] PlayerState[] stateTable;
     #region 动作消耗索引表
     [Header("动作消耗索引表")]
+    [Tooltip("奔跑每秒消耗")] public float runEnergyCost;
+    [Tooltip("蓄力每秒消耗")] public float chargeEnergyCost;
+    [Tooltip("允许进入奔跑的最低耐力")] public float runEnergyLimit;
     [Tooltip("动作体力值基础消耗")][SerializeField] float[] energyCost;
     [Tooltip("法术魔力值基础消耗")][SerializeField] float[] manaCost;
     Dictionary<Type, float> energyCostDict;
@@ -143,19 +146,36 @@ public class PlayerStateMachine : StateMachine
             energyRecoverTimer -= Time.deltaTime;
         }
     }
-
+    public bool ContinuousConsumeEnergy(float value)
+    {
+        if(playerData.CurrentEnergy < 0)
+        {
+            return false;
+        }
+        else
+        {
+            playerData.CurrentEnergy -= value;
+            energyRecoverTimer = energyRecoverDelay;
+            return true;
+        }
+    }
     public override void SwitchState(Type newState)
     {
-        if(playerData.CurrentEnergy >= 0 || energyCostDict[newState] == 0)
+        if (newState == typeof(PlayerState_RightAttack))
         {
-            if(energyCostDict[newState] != 0)
+            playerData.CurrentEnergy -= energyCostDict[newState] * playerData.energyCostMultiplication;
+            energyRecoverTimer = energyRecoverDelay;
+            base.SwitchState(newState);
+        }
+        else if (playerData.CurrentEnergy >= 0 || energyCostDict[newState] == 0)
+        {
+            if (energyCostDict[newState] != 0)
             {
                 playerData.CurrentEnergy -= energyCostDict[newState] * playerData.energyCostMultiplication;
                 energyRecoverTimer = energyRecoverDelay;
             }
-            base.SwitchState(newState); 
+            base.SwitchState(newState);
         }
-        
     }
 
 

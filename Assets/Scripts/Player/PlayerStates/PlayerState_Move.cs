@@ -17,7 +17,7 @@ public class PlayerState_Move : PlayerState
     public override void LogicUpdate()
     {
         SetAnimator_Update();
-        if (playerInput.IsRun)
+        if (playerInput.IsRun && playerData.CurrentEnergy > playerStateMachine.runEnergyLimit)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Run));
         }
@@ -54,6 +54,6 @@ public class PlayerState_Move : PlayerState
 
     public override void PhysicUpdate()
     {
-        playerController.Move(StateDuration);
+        playerController.Move();
     }
 }
