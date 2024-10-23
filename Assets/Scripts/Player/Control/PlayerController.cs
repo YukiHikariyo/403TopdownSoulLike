@@ -168,11 +168,11 @@ public class PlayerController : MonoBehaviour
     }
     public void Move(float time)
     {
-        playerRb.velocity = MoveAxis * moveSpeed * (isSameDirection ? 1 : 0.8f) * MoveCruve.Evaluate(time);
+        playerRb.velocity = MoveAxis * moveSpeed * (isSameDirection ? 1 : 0.9f) * MoveCruve.Evaluate(time);
     }
     public void Charge_Move(float time)
     {
-        playerRb.velocity = MoveAxis * moveSpeed * ChargeSpeedFix * (isSameDirection ? 1 : 0.8f) * MoveCruve.Evaluate(time);
+        playerRb.velocity = MoveAxis * moveSpeed * ChargeSpeedFix * (isSameDirection ? 1 : 0.9f) * MoveCruve.Evaluate(time);
     }
     #endregion
     #region 翻滚

@@ -37,6 +37,8 @@ public class PlayerInput : MonoBehaviour
 
     public bool RightCheck => input.Player.MoveRight.WasPressedThisFrame();
 
+    public bool IsRun => input.Player.Run.IsPressed();
+
     public bool LightAttack => input.Player.LightAttack.WasPressedThisFrame();
 
     public bool RightAttack => input.Player.RightAttack.WasPressedThisFrame();

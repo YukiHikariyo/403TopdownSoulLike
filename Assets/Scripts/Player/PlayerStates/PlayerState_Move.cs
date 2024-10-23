@@ -17,7 +17,10 @@ public class PlayerState_Move : PlayerState
     public override void LogicUpdate()
     {
         SetAnimator_Update();
-        //TODO:耐力限制
+        if (playerInput.IsRun)
+        {
+            playerStateMachine.SwitchState(typeof(PlayerState_Run));
+        }
         if (playerInput.Magic_1)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));

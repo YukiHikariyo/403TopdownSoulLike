@@ -15,16 +15,28 @@ public class PlayerState_UseHealthBottle : PlayerState
     public override void Exit()
     {
         base.Exit();
-        if (PackageManager.Instance.ConsumeHealthBottle())
-        {
-            playerStateMachine.SwitchState(typeof(PlayerState_Successful_Health));
-        }
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
+        if (playerStateMachine.CanStateSwitch)
+        {
+            if(playerInput.Rolll && playerController.RollCount < 3)
+                playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+        }
+        if (IsAnimationEnd)
+        {
+            if (PackageManager.Instance.ConsumeHealthBottle())
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_Successful_Health));
+            }
+            else
+            {
+                Debug.Log("Empty!");
+                playerStateMachine.SwitchState(typeof (PlayerState_Idle));
+            }
+        }
     }
 
     public override void PhysicUpdate()

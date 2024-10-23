@@ -16,16 +16,28 @@ public class PlayerState_UseManaBottle : PlayerState
     public override void Exit()
     {
         base.Exit();
-        if (PackageManager.Instance.ConsumeManaBottle())
-        {
-            playerStateMachine.SwitchState(typeof(PlayerState_Successful_Health));
-        }
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
+        if (playerStateMachine.CanStateSwitch)
+        {
+            if (playerInput.Roll && playerController.RollCount < 3)
+                playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+        }
+        if (IsAnimationEnd)
+        {
+            if (PackageManager.Instance.ConsumeManaBottle())
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_Successful_Mana));
+            }
+            else
+            {
+                Debug.Log("Empty!");
+                playerStateMachine.SwitchState(typeof(PlayerState_Idle));
+            }
+        }
     }
 
     public override void PhysicUpdate()

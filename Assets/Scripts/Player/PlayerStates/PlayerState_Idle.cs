@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 [CreateAssetMenu(menuName ="Data/PlayerState/Idle",fileName ="PlayerState_Idle",order = 0)]
 public class PlayerState_Idle : PlayerState
@@ -28,7 +29,10 @@ public class PlayerState_Idle : PlayerState
         }
         else if (playerInput.WantsMove)
         {
-            playerStateMachine.SwitchState(typeof(PlayerState_Move));
+            if (playerInput.IsRun)
+                playerStateMachine.SwitchState(typeof(PlayerState_Run));
+            else
+                playerStateMachine.SwitchState(typeof(PlayerState_Move));
         }
         else if (playerInput.Magic_1)
         {

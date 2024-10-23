@@ -54,7 +54,10 @@ public class PlayerState_LightAttack_4 : PlayerState
             //切换至移动
             if (playerInput.WantsMove)
             {
-                playerStateMachine.SwitchState(typeof(PlayerState_Move));
+                if (playerInput.IsRun)
+                    playerStateMachine.SwitchState(typeof(PlayerState_Run));
+                else
+                    playerStateMachine.SwitchState(typeof(PlayerState_Move));
             }
             //切换至常态
             if (!playerInput.WantsMove)
