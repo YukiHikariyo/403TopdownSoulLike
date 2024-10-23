@@ -53,12 +53,12 @@ public class Patroller_I_PatrolState : EnemyState
     public override void LogicUpdate()
     {
         if (enemy.PlayerCheck(0, false))
-            patroller_I.ChangeState(patroller_I.waitState);
+            enemy.ChangeState(patroller_I.waitState);
     }
 
     public override void PhysicsUpdate()
     {
-        enemy.Move(dir, true);
+        enemy.Move(dir);
     }
     public override void OnExit()
     {
@@ -70,13 +70,7 @@ public class Patroller_I_PatrolState : EnemyState
         while (true)
         {
             dir = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
-            enemy.isMove = true;
-
-            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: patrolCTK.Token);
-
-            enemy.isMove = true;
-
-            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: patrolCTK.Token);
+            await UniTask.Delay(TimeSpan.FromSeconds(2), cancellationToken: patrolCTK.Token);
         }
     }
 }

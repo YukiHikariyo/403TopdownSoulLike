@@ -416,7 +416,7 @@ MonoBehaviour:
   vulnerabilityMultiplication: 1
   toughnessMultiplication: 1
   maxBuffHealth:
-  - 0
+  - 100
   currentBuffHealth:
   - 0
   isEnduance: 0

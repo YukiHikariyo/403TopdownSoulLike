@@ -390,7 +390,7 @@ MonoBehaviour:
   isBoss: 0
   maxHealth: 80
   currentHealth: 80
-  basicMoveSpeed: 1
+  basicMoveSpeed: 2
   basicDamage: 10
   basicPenetratingPower: 0
   basicReductionRate: 0
