@@ -32,8 +32,8 @@ public class Guard_I : Enemy
         defaultState = patrolState;
     }
 
-    public void RotateAttack1Sprite() => attackObj1.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle());
-    public void RotateAttack2Sprite() => attackObj2.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle());
+    public void RotateAttack1Sprite() => attackObj1.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle(transform));
+    public void RotateAttack2Sprite() => attackObj2.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle(transform));
 }
 
 public class Guard_I_PatrolState : EnemyState
@@ -152,7 +152,7 @@ public class Guard_I_Attack1State : EnemyState
 
     public override void PhysicsUpdate()
     {
-        enemy.Move(enemy.CalculateTargetDirection(), true);
+        enemy.Move(enemy.CalculateTargetDirection(enemy.transform), true);
     }
 
     public override void OnExit()
@@ -187,7 +187,7 @@ public class Guard_I_Attack2State : EnemyState
 
     public override void PhysicsUpdate()
     {
-        enemy.Move(enemy.CalculateTargetDirection(), true);
+        enemy.Move(enemy.CalculateTargetDirection(enemy.transform), true);
     }
 
     public override void OnExit()

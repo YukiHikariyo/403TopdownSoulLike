@@ -532,9 +532,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void DestroyEnemy() => Destroy(gameObject);
 
-    public Vector2 CalculateTargetDirection() => (target.transform.position - transform.position).normalized;
+    public Vector2 CalculateTargetDirection(Transform selfTransform) => (target.transform.position - selfTransform.position).normalized;
 
-    public float CalculateTargetAngle() => Vector2.SignedAngle(Vector2.right, target.transform.position - transform.position);
+    public float CalculateTargetAngle(Transform selfTransform) => Vector2.SignedAngle(Vector2.right, target.transform.position - selfTransform.position);
 
     public bool CalculateProbability(float probability) => probability >= UnityEngine.Random.Range(0f, 1f);
 

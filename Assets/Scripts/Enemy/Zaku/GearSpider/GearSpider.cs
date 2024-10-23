@@ -27,7 +27,7 @@ public class GearSpider : Enemy
         defaultState = moveState;
     }
 
-    public void RotateAttackSprite() => attackObj.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle());
+    public void RotateAttackSprite() => attackObj.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle(transform));
 }
 
 public class GearSpiderIdleState : EnemyState
@@ -77,7 +77,7 @@ public class GearSpiderMoveState : EnemyState
     {
         enemy.anim.Play("Move");
         StateChangeTimer(1, gearSpider.idleState).Forget();
-        dir = enemy.PlayerCheck(0, false) ? enemy.CalculateTargetDirection() : Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
+        dir = enemy.PlayerCheck(0, false) ? enemy.CalculateTargetDirection(enemy.transform) : Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
     }
 
     public override void LogicUpdate()
@@ -121,7 +121,7 @@ public class GearSpiderAttackState : EnemyState
 
     public override void PhysicsUpdate()
     {
-        enemy.Move(enemy.CalculateTargetDirection(), true);
+        enemy.Move(enemy.CalculateTargetDirection(enemy.transform), true);
     }
 
     public override void OnExit()

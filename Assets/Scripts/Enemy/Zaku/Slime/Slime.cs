@@ -103,7 +103,7 @@ public class SlimeJumpState : EnemyState
     {
         jumpCTK = new();
         await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: jumpCTK.Token);
-        dir = enemy.PlayerCheck(0, false) ? enemy.CalculateTargetDirection() : Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
+        dir = enemy.PlayerCheck(0, false) ? enemy.CalculateTargetDirection(enemy.transform) : Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)) * Vector2.right;
         enemy.isMove = true;
         await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: jumpCTK.Token);
         enemy.isMove = false;

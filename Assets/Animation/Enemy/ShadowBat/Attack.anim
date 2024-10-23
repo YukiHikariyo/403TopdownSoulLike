@@ -521,7 +521,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.4
+  - time: 0.2
     functionName: RotateAttackSprite
     data: 
     objectReferenceParameter: {fileID: 0}

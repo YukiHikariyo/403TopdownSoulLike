@@ -119,7 +119,7 @@ public class Patroller_I_AttackState : EnemyState
 
     public override void OnEnter()
     {
-        dir = enemy.CalculateTargetDirection();
+        dir = enemy.CalculateTargetDirection(enemy.transform);
         enemy.anim.Play("Attack");
         enemy.moveSpeedIncrement += 3;
     }

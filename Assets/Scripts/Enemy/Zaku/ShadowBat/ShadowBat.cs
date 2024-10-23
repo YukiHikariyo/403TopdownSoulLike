@@ -32,8 +32,8 @@ public class ShadowBat : Enemy
         defaultState = chaseState;
     }
 
-    public void RotateAttackSprite() => attackObj.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle());
-    public void RotateShadowAttackSprite() => shadowAttackObj.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle());
+    public void RotateAttackSprite() => attackObj.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle(transform));
+    public void RotateShadowAttackSprite() => shadowAttackObj.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle(transform));
 
     public void ShadowSneak()
     {
@@ -143,7 +143,7 @@ public class ShadowBatAttackState : EnemyState
 
     public override void PhysicsUpdate()
     {
-        enemy.Move(enemy.CalculateTargetDirection(), true);
+        enemy.Move(enemy.CalculateTargetDirection(enemy.transform), true);
     }
 
     public override void OnExit()
@@ -167,7 +167,7 @@ public class ShadowBatShadowAttackState : EnemyState
     {
         enemy.rb.velocity = Vector2.zero;
         enemy.moveSpeedIncrement += 5;
-        shadowBat.shadowAttackObj.transform.rotation = Quaternion.Euler(0, 0, enemy.CalculateTargetAngle());
+        shadowBat.shadowAttackObj.transform.rotation = Quaternion.Euler(0, 0, enemy.CalculateTargetAngle(enemy.transform));
         enemy.anim.Play("ShadowAttack");
     }
 
@@ -179,7 +179,7 @@ public class ShadowBatShadowAttackState : EnemyState
 
     public override void PhysicsUpdate()
     {
-        enemy.Move(enemy.CalculateTargetDirection(), true);
+        enemy.Move(enemy.CalculateTargetDirection(enemy.transform), true);
     }
 
     public override void OnExit()
