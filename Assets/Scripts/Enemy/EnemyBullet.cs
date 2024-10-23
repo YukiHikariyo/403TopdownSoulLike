@@ -32,6 +32,7 @@ public class EnemyBullet : MonoBehaviour
 
     protected virtual void Update()
     {
+        speed += acceleration * Time.deltaTime;
         rotation += rotateSpeed * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
         transform.Translate(Quaternion.Euler(0, 0, rotation) * Vector3.right * speed * Time.deltaTime, relativeTo: Space.World);

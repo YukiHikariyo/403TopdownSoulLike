@@ -28,7 +28,7 @@ public class Sentinel_I : Enemy
     public void Attack()
     {
         GameObject darkBullet = Instantiate(darkBulletPrefab, attackCenter.position, Quaternion.identity);
-        darkBullet.GetComponent<EnemyBullet>().Initialize(this, 5, 1, CalculateTargetAngle(attackCenter), 0, 10, 0, true, true, false, 0, 0, BuffType.DarkErosion);
+        darkBullet.GetComponent<EnemyBullet>().Initialize(this, 5, 10, CalculateTargetAngle(attackCenter), 0, 10, 0, true, true, false, 0, 0, BuffType.DarkErosion);
     }
 }
 
