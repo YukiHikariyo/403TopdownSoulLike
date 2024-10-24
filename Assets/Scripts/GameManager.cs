@@ -140,6 +140,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
         loadingInfo.SetActive(true);
 
+        await SceneManager.UnloadSceneAsync("MainMenu");
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
         loadOperation.allowSceneActivation = false;
@@ -162,14 +163,15 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
             await UniTask.NextFrame();
         }
 
-        await SceneManager.UnloadSceneAsync("MainMenu");
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
-        
 
-        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
 
         SaveManager.Instance.LoadGame();
+        if (UIManager.Instance.isPackageOpen)
+            UIManager.Instance.ClosePackage();
 
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
 
@@ -219,8 +221,8 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         SaveManager.Instance.SaveGame();
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
-        await SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
         await SceneManager.UnloadSceneAsync("GameScene");
+        await SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
         UIManager.Instance.gameInfo.SetActive(false);
         UIManager.Instance.mainMenu.SetActive(true);

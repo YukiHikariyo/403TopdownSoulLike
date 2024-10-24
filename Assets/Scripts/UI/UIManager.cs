@@ -10,8 +10,9 @@ using DG.Tweening;
 /// </summary>
 public class UIManager : MonoSingleton<UIManager>
 {
-    public RectTransform mainCanvas;
     public Player player;
+
+    public RectTransform mainCanvas;
 
     public GameObject mainMenu;
     public GameObject gameInfo;
@@ -120,6 +121,12 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI accessoryEnergyValue;
     public TextMeshProUGUI accessoryToughnessValue;
     public TextMeshProUGUI accessoryReductionRateValue;
+
+    [Space(16)]
+    [Header("设置与主菜单")]
+    [Space(16)]
+
+    public GameObject newGameConfirm;
 
     protected override void Awake()
     {
@@ -253,6 +260,7 @@ public class UIManager : MonoSingleton<UIManager>
     public void OpenPackage()
     {
         player.playerInput.DisablePlayerInput();
+
         if (!currentMenuPanel)
             currentMenuPanel = menuPanelList[0];
 
@@ -270,6 +278,7 @@ public class UIManager : MonoSingleton<UIManager>
         packagePanel.gameObject.SetActive(false);
         currentMenuPanel.OnClose();
         isPackageOpen = false;
+
         player.playerInput.EnablePlayerInput();
     }
 
@@ -499,9 +508,10 @@ public class UIManager : MonoSingleton<UIManager>
 
     #endregion
 
-    #region 设置
+    #region 设置与主菜单
 
-
+    public void OpenNewGameConfirm() => newGameConfirm.SetActive(true);
+    public void CloseNewGameConfirm() => newGameConfirm.SetActive(false);
 
     #endregion
 }

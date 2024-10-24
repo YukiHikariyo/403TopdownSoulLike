@@ -93,16 +93,12 @@ public class SkillTreeDot : MonoBehaviour,IPointerClickHandler,IPointerEnterHand
                 var pointEnd = new Vector2(SkillManager.Instance.skillDotList[thisSkillData.preIDs[j]].position.x - mainTrans.position.x, SkillManager.Instance.skillDotList[thisSkillData.preIDs[j]].position.y - mainTrans.position.y);
                 pointList.Add(pointBegin);
                 pointList.Add(pointEnd);
-                Debug.Log("2.6");
             }
-            Debug.Log("2");
         }
-        Debug.Log("1");
 
         if (pointList != null)
         {
             lineRenderer.Points = pointList.ToArray();
-            Debug.Log("4");
         }
     }
 
