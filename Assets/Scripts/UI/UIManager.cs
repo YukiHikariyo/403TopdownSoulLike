@@ -123,10 +123,13 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI accessoryReductionRateValue;
 
     [Space(16)]
-    [Header("设置与主菜单")]
+    [Header("设置与主菜单与其他")]
     [Space(16)]
 
     public GameObject newGameConfirm;
+
+    public TextMeshProUGUI deathText;
+    private Sequence deathSequence;
 
     protected override void Awake()
     {
@@ -508,10 +511,26 @@ public class UIManager : MonoSingleton<UIManager>
 
     #endregion
 
-    #region 设置与主菜单
+    #region 设置与主菜单与其他
 
     public void OpenNewGameConfirm() => newGameConfirm.SetActive(true);
     public void CloseNewGameConfirm() => newGameConfirm.SetActive(false);
+
+    public void ShowDeathText()
+    {
+        deathSequence = DOTween.Sequence();
+        deathSequence.SetAutoKill(false);
+        deathSequence.Pause();
+
+        deathSequence.Append(deathText.DOFade(1, 2));
+        deathSequence.AppendInterval(6);
+        deathSequence.Append(deathText.DOFade(0, 2));
+        deathSequence.AppendCallback(() => { deathText.gameObject.SetActive(false); });
+
+        deathText.color = new Color(deathText.color.r, deathText.color.g, deathText.color.b, 0);
+        deathText.gameObject.SetActive(true);
+        deathSequence.Play();
+    }
 
     #endregion
 }

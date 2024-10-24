@@ -234,6 +234,10 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         await UniTask.Delay(TimeSpan.FromSeconds(2));
     }
 
+    /// <summary>
+    /// 传送玩家到指定位置，有切屏动画
+    /// </summary>
+    /// <param name="targetPosition">目标位置</param>
     public void TeleportPlayer(Vector3 targetPosition)
     {
         OnTeleport(targetPosition).Forget();
@@ -256,6 +260,70 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         await UniTask.Delay(TimeSpan.FromSeconds(1));
 
         player.playerInput.EnablePlayerInput();
+    }
+
+    /// <summary>
+    /// 玩家死亡触发的游戏流程逻辑
+    /// </summary>
+    [ContextMenu("死亡")]
+    public void PlayerDeath()
+    {
+        OnPlayerDeath().Forget();
+    }
+
+    private async UniTask OnPlayerDeath()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(3));
+
+        UIManager.Instance.ShowDeathText();
+        UIManager.Instance.PlayFadeInSequence(2);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(10.5f));
+
+        exp = Mathf.CeilToInt(exp * 0.5f);
+        SaveManager.Instance.SaveGame();
+
+        loadingInfo.SetActive(true);
+
+        await SceneManager.UnloadSceneAsync("GameScene");
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
+        loadOperation.allowSceneActivation = false;
+
+        while (!loadOperation.isDone)
+        {
+            loadingSlider.value = loadOperation.progress;
+            loadingValue.text = loadOperation.progress * 100 + "%";
+
+            if (loadOperation.progress >= 0.9f)
+            {
+                loadingSlider.value = 1;
+                loadingValue.text = "100%";
+                loadOperation.allowSceneActivation = true;
+
+                await UniTask.NextFrame();
+                break;
+            }
+
+            await UniTask.NextFrame();
+        }
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
+
+        SaveManager.Instance.LoadGame();
+        if (UIManager.Instance.isPackageOpen)
+            UIManager.Instance.ClosePackage();
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+
+        loadingInfo.SetActive(false);
+        UIManager.Instance.mainMenu.SetActive(false);
+        UIManager.Instance.gameInfo.SetActive(true);
+        UIManager.Instance.PlayFadeOutSequence(2);
     }
 
     #endregion
