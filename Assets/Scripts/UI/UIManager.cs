@@ -11,6 +11,7 @@ using DG.Tweening;
 public class UIManager : MonoSingleton<UIManager>
 {
     public RectTransform mainCanvas;
+    public Player player;
 
     public GameObject mainMenu;
     public GameObject gameInfo;
@@ -251,6 +252,7 @@ public class UIManager : MonoSingleton<UIManager>
     /// </summary>
     public void OpenPackage()
     {
+        player.playerInput.DisablePlayerInput();
         if (!currentMenuPanel)
             currentMenuPanel = menuPanelList[0];
 
@@ -268,6 +270,7 @@ public class UIManager : MonoSingleton<UIManager>
         packagePanel.gameObject.SetActive(false);
         currentMenuPanel.OnClose();
         isPackageOpen = false;
+        player.playerInput.EnablePlayerInput();
     }
 
     /// <summary>

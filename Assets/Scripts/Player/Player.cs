@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IDamageable
 {
     public PlayerData playerData;
     public PlayerController playerController;
+    public PlayerInput playerInput;
 
     [Space(16)]
     [Header("固定属性")]
@@ -67,8 +68,10 @@ public class Player : MonoBehaviour, IDamageable
     private void Awake()
     {
         GameManager.Instance.player = this;
+        UIManager.Instance.player = this;
         playerData = GetComponent<PlayerData>();
         playerController = GetComponent<PlayerController>();
+        playerInput = GetComponent<PlayerInput>();
 
         buffBars = UIManager.Instance.buffBars;
     }

@@ -188,7 +188,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
     private async UniTask OnSaveGame()
     {
-        //TODO: 禁用玩家输入
+        player.playerInput.DisablePlayerInput();
 
         UIManager.Instance.PlayFadeInSequence(2);
 
@@ -202,7 +202,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
         await UniTask.Delay(TimeSpan.FromSeconds(2));
 
-        //TODO: 启用玩家输入
+        player.playerInput.EnablePlayerInput();
     }
 
     public void BackToMainMenu()
@@ -239,7 +239,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
     private async UniTask OnTeleport(Vector3 targetPosition)
     {
-        //TODO: 禁用玩家操作
+        player.playerInput.DisablePlayerInput();
 
         UIManager.Instance.PlayFadeInSequence(1);
 
@@ -253,7 +253,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
         await UniTask.Delay(TimeSpan.FromSeconds(1));
 
-        //TODO: 启用玩家操作
+        player.playerInput.EnablePlayerInput();
     }
 
     #endregion
