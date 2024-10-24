@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D playerRb;
     public PlayerInput inputs;
+    public Light2D playerLight;
+    public PlayerData playerData;
     //时间相关属性未特殊说明均以秒为单位
     [Header("玩家移动属性")]
     [SerializeField] private float moveSpeed;
@@ -82,7 +85,9 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
-        
+        playerRb = GetComponent<Rigidbody2D>();
+        playerData = GetComponent<PlayerData>();
+        playerLight = GetComponentInChildren<Light2D>();
     }
     #region 基本移动
     private bool HasPressedX => inputs.MoveLeft || inputs.MoveRight;
@@ -244,6 +249,14 @@ public class PlayerController : MonoBehaviour
             case Stun_Physics.BigStun:
                 break;
         }
+    }
+    /// <summary>
+    /// 更新玩家光照半径
+    /// </summary>
+    public void UpdateLightRadius()
+    {
+        playerLight.pointLightInnerRadius = playerData.FinalLightRadius;
+        playerLight.pointLightOuterRadius = Mathf.Min(playerData.FinalLightRadius * 2f, 2f);
     }
 }
 public enum Skill_Physics

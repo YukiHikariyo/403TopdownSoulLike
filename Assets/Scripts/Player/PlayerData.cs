@@ -206,7 +206,11 @@ public class PlayerData : MonoBehaviour, ISaveable
     public float BasicLightRadius
     {
         get => basicLightRadius;
-        set => basicLightRadius = value;
+        set
+        {
+            player.playerController.UpdateLightRadius();
+            basicLightRadius = value;
+        }
     }
     [Space(16)]
 
@@ -398,7 +402,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("伤害减免增量")] public float reductionRateIncrement;
     [Tooltip("易伤增量")] public float vulnerabilityIncrement;
     [Tooltip("韧性增量")] public float toughnessIncrement;
-    [Tooltip("光照半径增量")] public float lightRadiusIncrement;  //*
+    [Tooltip("光照半径增量")][SerializeField] private float lightRadiusIncrement;  //*
 
     public float MaxHealthIncrement
     {
@@ -436,6 +440,16 @@ public class PlayerData : MonoBehaviour, ISaveable
             CurrentEnergy = FinalMaxEnergy * percent;
 
             UIManager.Instance.energyBar.OnMaxValueChange(FinalMaxEnergy, 400);
+        }
+    }
+
+    public float LightRadiusIncrement
+    {
+        get => lightRadiusIncrement;
+        set
+        {
+            player.playerController.UpdateLightRadius();
+            lightRadiusIncrement = value;
         }
     }
 
@@ -500,6 +514,15 @@ public class PlayerData : MonoBehaviour, ISaveable
         }
     }
 
+    public float LightRadiusMultiplication
+    {
+        get => lightRadiusMultiplication;
+        set
+        {
+            player.playerController.UpdateLightRadius();
+            lightRadiusIncrement = value;
+        }
+    }
     [Space(16)]
     [Header("装备数据")]
     [Space(16)]

@@ -88,6 +88,8 @@ public class PlayerStateMachine : StateMachine
     private void Awake()
     {
         #region 组件获取
+        m_camera = Camera.main;
+        attacker = null;
         #endregion
         //
         memory = InputMemory.None;

@@ -278,13 +278,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_2
+      name: Light_2_under
       rect:
         serializedVersion: 2
         x: 32
         y: 128
         width: 15
-        height: 47
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,13 +299,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_1
+      name: Light_1_under
       rect:
         serializedVersion: 2
         x: 6
         y: 128
         width: 21
-        height: 47
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -454,7 +454,7 @@ TextureImporter:
         width: 11
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -462,6 +462,48 @@ TextureImporter:
       bones: []
       spriteID: 80ab8031bce45d945a9e45d526c7c92e
       internalID: -171793256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_2_up
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 155
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69ef99861c61139478e86d529df54359
+      internalID: -366717411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_1_up
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 155
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2ef12df2bf7d8a4e9c9b913ef830a60
+      internalID: 1738467929
       vertices: []
       indices: 
       edges: []
@@ -479,8 +521,10 @@ TextureImporter:
     nameFileIdTable:
       Deer: -1536737612
       Draw: -623041514
-      Light_1: 828870462
-      Light_2: -331906332
+      Light_1_under: 828870462
+      Light_1_up: 1738467929
+      Light_2_under: -331906332
+      Light_2_up: -366717411
       candle_10: -171793256
       candles_big: 1669073401
       candles_small: -595190550

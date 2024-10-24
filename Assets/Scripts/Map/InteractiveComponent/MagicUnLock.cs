@@ -17,6 +17,7 @@ public class MagicUnLock : InteractiveComponent
         {
             stateMachine.playerData.magicUnlockState[magicID] = true;
             MagicUIManager.Instance.UpdateUnlockState(magicID,true);
+            UIManager.Instance.OpenConfirmationPanel(text); 
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
