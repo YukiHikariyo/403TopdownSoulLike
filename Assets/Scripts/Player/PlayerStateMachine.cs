@@ -116,12 +116,7 @@ public class PlayerStateMachine : StateMachine
     {
         SwitchOn(dict[typeof(PlayerState_Idle)]);
         noStunTimer = -1;
-
         //更新法术解锁状态
-        for(int i = 0; i < magicTimer.Length; ++i)
-        {
-            MagicUIManager.Instance.UpdateUnlockState(i, playerData.magicUnlockState[i]);
-        }
     }
 
     protected override void Update()
@@ -282,6 +277,10 @@ public class PlayerStateMachine : StateMachine
     {
         magicEvent?.Invoke();
     }
+    /// <summary>
+    /// 更新冷却时间
+    /// </summary>
+    /// <param name="id">魔法索引</param>
     public void UpdateMagicUI(int id)
     {
         if (magicTimer[id] > 0)

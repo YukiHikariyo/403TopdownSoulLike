@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 /// <summary>
 /// 玩家数据类
@@ -559,5 +560,13 @@ public class PlayerData : MonoBehaviour, ISaveable
     {
         CurrentEnergy = FinalMaxEnergy * percent;
         UIManager.Instance.energyBar.OnMaxValueChange(FinalMaxEnergy, 400);
+    }
+
+    public void MagicUI_Initialization()
+    {
+        for (int i = 0;i < magicUnlockState.Length;i++)
+        {
+            MagicUIManager.Instance.UpdateUnlockState(i, magicUnlockState[i]);
+        }
     }
 }
