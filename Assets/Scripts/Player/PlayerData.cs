@@ -201,7 +201,13 @@ public class PlayerData : MonoBehaviour, ISaveable
         get => basicToughness;
         set => basicToughness = value;
     }
-
+    [SerializeField][Tooltip("基础光照半径")] private float basicLightRadius = 4;
+    [Tooltip("基础光照半径")]
+    public float BasicLightRadius
+    {
+        get => basicLightRadius;
+        set => basicLightRadius = value;
+    }
     [Space(16)]
 
     [SerializeField][Tooltip("天赋体力恢复速度")] private float talentEnergyRecovery;
@@ -367,7 +373,14 @@ public class PlayerData : MonoBehaviour, ISaveable
             return (finalToughness > 0 ? finalToughness : 0) * toughnessMultiplication;
         }
     }
-
+    [Tooltip("最终光照半径")]
+    public float FinalLightRadius
+    {
+        get
+        {
+            return (basicLightRadius + lightRadiusIncrement) * (basicLightRadius + lightRadiusIncrement > 0 ? lightRadiusMultiplication : 0f);
+        }
+    }
     [Space(16)]
     [Header("Buff增量（可为负）")]
     [Space(16)]
