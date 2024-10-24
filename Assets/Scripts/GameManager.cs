@@ -10,6 +10,8 @@ using System.IO;
 
 public class GameManager : MonoSingleton<GameManager>, ISaveable
 {
+    public Player player;
+
     private string jsonFolder;
 
     [Space(16)]
@@ -112,7 +114,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
     #region 流程控制与场景切换
 
-    public void NewGame()
+    public void ConfirmNewGame()
     {
         var savePath = jsonFolder + "SaveData.sav";
         if (File.Exists(savePath))
@@ -132,12 +134,13 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
     private async UniTask OnLoadGameScene()
     {
-        UIManager.Instance.PlayFadeInSequence(3);
+        UIManager.Instance.PlayFadeInSequence(2);
 
-        await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
+        await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
 
         loadingInfo.SetActive(true);
 
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
         loadOperation.allowSceneActivation = false;
 
@@ -173,10 +176,85 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         loadingInfo.SetActive(false);
         UIManager.Instance.mainMenu.SetActive(false);
         UIManager.Instance.gameInfo.SetActive(true);
-        UIManager.Instance.PlayFadeOutSequence(3);
+        UIManager.Instance.PlayFadeOutSequence(2);
     }
 
     public void QuitGame() => Application.Quit();
+
+    public void SaveGame()
+    {
+        OnSaveGame().Forget();
+    }
+
+    private async UniTask OnSaveGame()
+    {
+        //TODO: 禁用玩家输入
+
+        UIManager.Instance.PlayFadeInSequence(2);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
+
+        SaveManager.Instance.SaveGame();
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+
+        UIManager.Instance.PlayFadeOutSequence(2);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(2));
+
+        //TODO: 启用玩家输入
+    }
+
+    public void BackToMainMenu()
+    {
+        OnBack().Forget();
+    }
+
+    private async UniTask OnBack()
+    {
+        UIManager.Instance.PlayFadeInSequence(2);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
+
+        SaveManager.Instance.SaveGame();
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
+        await SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
+        await SceneManager.UnloadSceneAsync("GameScene");
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
+        UIManager.Instance.gameInfo.SetActive(false);
+        UIManager.Instance.mainMenu.SetActive(true);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+
+        UIManager.Instance.PlayFadeOutSequence(2);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(2));
+    }
+
+    public void TeleportPlayer(Vector3 targetPosition)
+    {
+        OnTeleport(targetPosition).Forget();
+    }
+
+    private async UniTask OnTeleport(Vector3 targetPosition)
+    {
+        //TODO: 禁用玩家操作
+
+        UIManager.Instance.PlayFadeInSequence(1);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+
+        player.transform.position = targetPosition;
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+
+        UIManager.Instance.PlayFadeOutSequence(1);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
+
+        //TODO: 启用玩家操作
+    }
 
     #endregion
 }

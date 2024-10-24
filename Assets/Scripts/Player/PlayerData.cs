@@ -498,10 +498,11 @@ public class PlayerData : MonoBehaviour, ISaveable
     [Tooltip("当前饰品本地数据")] public Dictionary<int, LocalAccessoryData> currentAccessoryLocalData = new();
 
     [Space(16)]
-    [Header("法术解锁状态")]
+    [Header("其他")]
     [Space(16)]
 
     [Tooltip("法术解锁状态")] public bool[] magicUnlockState;
+    [Tooltip("上次坐火位置")] public Vector3 lastPosition;
 
     #endregion
 
@@ -531,6 +532,12 @@ public class PlayerData : MonoBehaviour, ISaveable
             else
                 saveData.savedMagicDict[i.ToString()] = magicUnlockState[i];
         }
+
+        if (!saveData.savedPositionDict.ContainsKey("X"))
+        {
+            saveData.savedPositionDict.Add("X", lastPosition.x);
+            saveData.savedPositionDict.Add("Y", lastPosition.y);
+        }
     }
 
     public void LoadSaveData(SaveData saveData)
@@ -544,6 +551,14 @@ public class PlayerData : MonoBehaviour, ISaveable
         BasicMaxHealth = 100;
         BasicMaxMana = 50;
         BasicMaxEnergy = 75;
+
+        CurrentHealth = FinalMaxHealth;
+        CurrentMana = FinalMaxMana;
+        CurrentEnergy = FinalMaxEnergy;
+
+        if (saveData.savedPositionDict.ContainsKey("X"))
+            lastPosition = new Vector3(saveData.savedPositionDict["X"], saveData.savedPositionDict["Y"]);
+        transform.position = lastPosition;
 
         for (int i = 0; i < magicUnlockState.Length; i++)
         {

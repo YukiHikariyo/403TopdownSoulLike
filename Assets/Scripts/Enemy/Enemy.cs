@@ -320,7 +320,10 @@ public class Enemy : MonoBehaviour, IDamageable
             CurrentHealth -= Mathf.Ceil((damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
             if (CurrentHealth < 0)
             {
-                //TODO: 敌人死亡事件
+                if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Kill))
+                    player.passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Kill]?.Invoke(this);
+
+                ChangeState(deadState);
             }
             return true;
         }

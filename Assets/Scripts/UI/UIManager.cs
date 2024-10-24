@@ -234,14 +234,12 @@ public class UIManager : MonoSingleton<UIManager>
     {
         healthBottleBar.OnCurrentValueChange(PackageManager.Instance.CurrentHealthBottle, PackageManager.Instance.MaxHealthBottle);
         healthBottleText.text = PackageManager.Instance.CurrentHealthBottle + "/" + PackageManager.Instance.MaxHealthBottle;
-        //TODO: 记得在存档加载完后调用
     }
 
     public void ManaBottleBarUpdate()
     {
         manaBottleBar.OnCurrentValueChange(PackageManager.Instance.CurrentManaBottle, PackageManager.Instance.MaxManaBottle);
         manaBottleText.text = PackageManager.Instance.CurrentManaBottle + "/" + PackageManager.Instance.MaxManaBottle;
-        //TODO: 记得在存档加载完后调用
     }
 
     #endregion

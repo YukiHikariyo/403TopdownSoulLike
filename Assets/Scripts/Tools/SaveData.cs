@@ -19,6 +19,7 @@ public class SaveData
 
     //PlayerData
     public Dictionary<string, bool> savedMagicDict = new();
+    public Dictionary<string, float> savedPositionDict = new();
 
     //Interactable
     public Dictionary<string, bool> savedInteractableObjectDict = new();

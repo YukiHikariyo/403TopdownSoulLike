@@ -67,6 +67,11 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         else
             saveData.savedBottleDict["ManaBottle"] = maxManaBottle;
 
+        currentHealthBottle = maxHealthBottle;
+        currentManaBottle = maxManaBottle;
+        UIManager.Instance.HealthBottleBarUpdate();
+        UIManager.Instance.ManaBottleBarUpdate();
+
         //物品
         foreach (LocalItemData item in itemDict.Values)
         {
@@ -104,6 +109,10 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         //两瓶
         maxHealthBottle = saveData.savedBottleDict["HealthBottle"];
         maxManaBottle = saveData.savedBottleDict["ManaBottle"];
+        currentHealthBottle = maxHealthBottle;
+        currentManaBottle = maxManaBottle;
+        UIManager.Instance.HealthBottleBarUpdate();
+        UIManager.Instance.ManaBottleBarUpdate();
 
         //物品
         foreach (string itemID in saveData.savedItemDict.Keys)
