@@ -338,25 +338,7 @@ public class PlayerStateMachine : StateMachine
 
     }
     #endregion
-    #region 触发器相关
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Interaction"))
-        {
-            CanInterAction = true;
-            interactionObj = collision.gameObject.GetComponent<InteractiveComponent>();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Interaction"))
-        {
-            CanInterAction = false;
-            interactionObj = null;
-        }
-    }
-    #endregion
+    
 }
 
 

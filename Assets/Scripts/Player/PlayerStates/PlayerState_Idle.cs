@@ -25,6 +25,7 @@ public class PlayerState_Idle : PlayerState
             if (playerStateMachine.interactionObj.State == false)
             {
                 playerStateMachine.interactionObj.State = true;
+                playerStateMachine.interactionObj.SwitchState();
             }
         }
         else if (playerInput.WantsMove)

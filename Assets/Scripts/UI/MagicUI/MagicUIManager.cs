@@ -13,7 +13,6 @@ public class MagicUIManager : MonoSingleton<MagicUIManager>
 
     public Image[] mask;
 
-
     public void UpdateUnlockState(int id ,bool state)
     {
         if (state)
