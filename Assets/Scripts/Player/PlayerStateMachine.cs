@@ -116,7 +116,6 @@ public class PlayerStateMachine : StateMachine
     {
         SwitchOn(dict[typeof(PlayerState_Idle)]);
         noStunTimer = -1;
-        //更新法术解锁状态
     }
 
     protected override void Update()
