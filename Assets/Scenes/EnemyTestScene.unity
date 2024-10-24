@@ -1700,6 +1700,7 @@ MonoBehaviour:
   chargeSpeedMultiplication: 1
   foresightTimeMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
+  magicUnlockState: 
 --- !u!212 &2025775074
 SpriteRenderer:
   m_ObjectHideFlags: 0

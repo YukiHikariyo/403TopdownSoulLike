@@ -524,7 +524,13 @@ public class PlayerData : MonoBehaviour, ISaveable
 
     public void GetSaveData(SaveData saveData)
     {
-        
+        for (int i = 0; i < magicUnlockState.Length; i++)
+        {
+            if (!saveData.savedMagicDict.ContainsKey(i.ToString()))
+                saveData.savedMagicDict.Add(i.ToString(), magicUnlockState[i]);
+            else
+                saveData.savedMagicDict[i.ToString()] = magicUnlockState[i];
+        }
     }
 
     public void LoadSaveData(SaveData saveData)
@@ -538,6 +544,16 @@ public class PlayerData : MonoBehaviour, ISaveable
         BasicMaxHealth = 100;
         BasicMaxMana = 50;
         BasicMaxEnergy = 75;
+
+        for (int i = 0; i < magicUnlockState.Length; i++)
+        {
+            if (!saveData.savedMagicDict.ContainsKey(i.ToString()))
+                magicUnlockState[i] = false;
+            else
+                magicUnlockState[i] = saveData.savedMagicDict[i.ToString()];
+        }
+
+        MagicUI_Initialization();
     }
 
     public float CalculateHealthPercent() => currentHealth / FinalMaxHealth;

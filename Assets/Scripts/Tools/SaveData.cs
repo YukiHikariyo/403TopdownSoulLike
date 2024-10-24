@@ -17,6 +17,9 @@ public class SaveData
     public Dictionary<string, int> savedSkillPointDict = new();
     public Dictionary<string, LocalSkillData> savedSkillDict = new();
 
+    //PlayerData
+    public Dictionary<string, bool> savedMagicDict = new();
+
     //Interactable
     public Dictionary<string, bool> savedInteractableObjectDict = new();
 }
