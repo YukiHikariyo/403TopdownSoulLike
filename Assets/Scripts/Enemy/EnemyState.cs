@@ -45,10 +45,12 @@ public class EnemyDeadState : EnemyState
 
     public override void OnEnter()
     {
+        enemy.spawner.isDead = true;
         enemy.damageableIndex = 1;
         enemy.rb.velocity = Vector2.zero;
         enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);
         enemy.anim.Play("Dead");
+        enemy.collider.enabled = false;
     }
 
     public override void LogicUpdate()

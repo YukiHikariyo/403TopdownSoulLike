@@ -23,4 +23,7 @@ public class SaveData
 
     //Interactable
     public Dictionary<string, bool> savedInteractableObjectDict = new();
+
+    //EnemySpawner
+    public Dictionary<string, bool> savedSpawnerDict = new();
 }

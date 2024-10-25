@@ -16,6 +16,8 @@ public class EnemySpawner : MonoBehaviour, ISaveable
     [Tooltip("敌人预制体")] public GameObject enemyPrefab;
     [HideInInspector] public GameObject spawnedEnemy;
     [Tooltip("已经生成")] public bool isSpawned;
+    [Tooltip("敌人已死")][HideInInspector] public bool isDead;
+    [Tooltip("可重复生成")] public bool canSpawnAgain = true;
 
     [Tooltip("玩家层级")] public LayerMask playerLayer = 1 << 3;
     [Tooltip("检测形状")] public CheckShape checkShape;
@@ -38,8 +40,6 @@ public class EnemySpawner : MonoBehaviour, ISaveable
         (this as ISaveable).UnRegister();
     }
 
-
-
     private void Update()
     {
         if (!isSpawned)
@@ -47,6 +47,7 @@ public class EnemySpawner : MonoBehaviour, ISaveable
             if ((checkShape == CheckShape.Circle && CircleCheck()) || (checkShape == CheckShape.Square && SquareCheck()))
             {
                 spawnedEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+                spawnedEnemy.GetComponent<Enemy>().spawner = this;
                 isSpawned = true;
             }
         }
@@ -73,14 +74,33 @@ public class EnemySpawner : MonoBehaviour, ISaveable
 
     public void GetSaveData(SaveData saveData)
     {
-        if (spawnedEnemy != null)
-            Destroy(spawnedEnemy);
-        spawnedEnemy = null;
-        isSpawned = false;
+        if (!canSpawnAgain)
+        {
+            if (spawnedEnemy != null)
+                Destroy(spawnedEnemy);
+            spawnedEnemy = null;
+            isSpawned = false;
+        }
+        else
+        {
+            if (!saveData.savedSpawnerDict.ContainsKey(gameObject.name))
+                saveData.savedSpawnerDict.Add(gameObject.name, isSpawned && isDead);
+            else
+                saveData.savedSpawnerDict[gameObject.name] = isSpawned && isDead;
+
+            if (spawnedEnemy != null)
+                Destroy(spawnedEnemy);
+            spawnedEnemy = null;
+
+            isSpawned = saveData.savedSpawnerDict[gameObject.name];
+        }
     }
 
     public void LoadSaveData(SaveData saveData)
     {
-        
+        if (saveData.savedSpawnerDict.ContainsKey(gameObject.name))
+            isSpawned = isSpawned = saveData.savedSpawnerDict[gameObject.name];
+        else
+            isSpawned = false;
     }
 }

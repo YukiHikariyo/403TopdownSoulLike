@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public Rigidbody2D rb;
     public Animator anim;
     public SpriteRenderer spriteRenderer;
+    public new CircleCollider2D collider;
 
     private Seeker seeker;
     private Path path;
@@ -27,6 +28,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public Player player;
     public GameObject target;
+
+    public EnemySpawner spawner;
 
     [Header("基本属性")]
     [Space(16)]
@@ -179,6 +182,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Tooltip("是否霸体")] public bool isEnduance;
     public Transform attackerTransform;
+    public float totalDamage;
 
     [Space(16)]
     [Header("FSM")]
@@ -283,13 +287,15 @@ public class Enemy : MonoBehaviour, IDamageable
 
     #region IDamageable接口方法
 
-    public bool TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
+    public virtual bool TakeDamage(float damage, float penetratingPower, float attackPower, Transform attackerTransform, bool ignoreDamageableIndex = false)
     {
         if (damageableIndex == 0 || ignoreDamageableIndex)
         {
             this.attackerTransform = attackerTransform;
 
-            CurrentHealth -= Mathf.Ceil((damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
+            float finalDamage = Mathf.Ceil((damage + vulnerabilityIncrement > 0 ? damage + vulnerabilityIncrement : 0) * vulnerabilityMultiplication * Mathf.Clamp01(1 - (FinalReducitonRate - penetratingPower)) * UnityEngine.Random.Range(0.85f, 1.15f));
+            CurrentHealth -= finalDamage;
+            totalDamage += finalDamage;
             if (CurrentHealth < 0)
             {
                 if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Kill))
@@ -302,7 +308,7 @@ public class Enemy : MonoBehaviour, IDamageable
             float stunValue = attackPower - FinalToughness;
             if (isEnduance || stunValue <= 0)
                 OnStunFunc(0).Forget();
-            else if (stunValue > 0 && stunValue <= 10)
+            else if (stunValue > 0 && stunValue <= 20)
                 OnStunFunc(1).Forget();
             else
                 OnStunFunc(2).Forget();
@@ -484,7 +490,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     #endregion
 
-    private async UniTask OnStunFunc(int index)
+    protected async UniTask OnStunFunc(int index)
     {
         if (index < 0 || index > 3)
             return;

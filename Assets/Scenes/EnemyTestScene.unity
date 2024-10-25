@@ -287,6 +287,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   anim: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  collider: {fileID: 0}
   pathDirection: {x: 0, y: 0}
   player: {fileID: 0}
   target: {fileID: 0}
@@ -324,6 +325,7 @@ MonoBehaviour:
   - 0
   isEnduance: 0
   attackerTransform: {fileID: 0}
+  totalDamage: 0
   isMove: 0
   isAnimExit: 0
   checkCenter: {x: 0, y: 0}
@@ -432,6 +434,37 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!1 &224295848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224295849}
+  m_Layer: 6
+  m_Name: AttackCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &224295849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224295848}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 275154074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &269665043
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +600,7 @@ Transform:
   m_Children:
   - {fileID: 1886086158}
   - {fileID: 1888204341}
+  - {fileID: 224295849}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &275154075
@@ -584,16 +618,17 @@ MonoBehaviour:
   rb: {fileID: 0}
   anim: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  collider: {fileID: 275154072}
   pathDirection: {x: 0, y: 0}
   player: {fileID: 0}
   target: {fileID: 0}
   isBoss: 1
-  maxHealth: 3000
-  currentHealth: 3000
+  maxHealth: 2000
+  currentHealth: 2000
   basicMoveSpeed: 1
   basicDamage: 40
   basicPenetratingPower: 0
-  basicReductionRate: 0
+  basicReductionRate: 20
   basicToughness: 25
   motionToughness: 0
   motionValue:
@@ -636,17 +671,28 @@ MonoBehaviour:
   - 0
   isEnduance: 0
   attackerTransform: {fileID: 0}
+  totalDamage: 0
   isMove: 0
   isAnimExit: 0
-  checkCenter: {x: 0, y: 0}
+  checkCenter: {x: 0, y: 0.3}
   checkDistance:
-  - 0
+  - 4
+  - 4
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 2048
+  attackObj1_1: {fileID: 2129415298}
+  attackObj1_2: {fileID: 2019572756}
+  attackObj1_3: {fileID: 1151586173}
+  attackObj2: {fileID: 1663733498}
+  darkBulletPrefab: {fileID: 371544354910690209, guid: 272bddccc19f57b49ab78f6d603788cc, type: 3}
+  fastDarkBulletPrefab: {fileID: 1162403923937035282, guid: 7c0c9fd6d0064ec47b9ad6077044a8b7, type: 3}
+  attackCenter: {fileID: 224295849}
+  bigStunValue: 750
+  landPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &275154076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1640,7 +1686,7 @@ GameObject:
   - component: {fileID: 1663733501}
   - component: {fileID: 1663733500}
   m_Layer: 6
-  m_Name: AttackSprite1_3
+  m_Name: AttackSprite2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2047,7 +2093,7 @@ Transform:
   m_GameObject: {fileID: 1888204340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

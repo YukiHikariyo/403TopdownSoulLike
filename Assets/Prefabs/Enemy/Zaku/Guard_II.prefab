@@ -615,6 +615,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   anim: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  collider: {fileID: 5545198842967266610}
   pathDirection: {x: 0, y: 0}
   player: {fileID: 0}
   target: {fileID: 0}
@@ -658,6 +659,7 @@ MonoBehaviour:
   - 0
   isEnduance: 0
   attackerTransform: {fileID: 0}
+  totalDamage: 0
   isMove: 0
   isAnimExit: 0
   checkCenter: {x: 0, y: 0.5}
