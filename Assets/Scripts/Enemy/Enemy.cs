@@ -516,18 +516,18 @@ public class Enemy : MonoBehaviour, IDamageable
 
     
 
-    public void Move(Vector2 direction, bool isControlled = false)
+    public void Move(Vector2 direction, bool isControlled = false, bool reverse = false)
     {
         if (isMove || !isControlled)
         {
             rb.velocity = direction * FinalMoveSpeed;
-            spriteRenderer.flipX = direction.x < 0;
+            spriteRenderer.flipX = reverse ? direction.x > 0 : direction.x < 0;
         }
         else
             rb.velocity = Vector2.zero;
     }
 
-    public void FaceToTarget() => spriteRenderer.flipX = (target.transform.position - transform.position).x < 0;
+    public void FaceToTarget(bool reverse = false) => spriteRenderer.flipX = reverse ? (target.transform.position - transform.position).x > 0 : (target.transform.position - transform.position).x < 0;
 
     public bool PlayerCheck(int index, bool ignoreObstacle)
     {

@@ -39,6 +39,15 @@ public class Maincenter : Enemy
     {
         base.Awake();
 
+        entryState = new MaincenterEntryState(this, this);
+        chaseState = new MaincenterChaseState(this, this);
+        backJumpState = new MaincenterBackJumpState(this, this);
+        attack1_1State = new MaincenterAttack1_1State(this, this);
+        attack1_2State = new MaincenterAttack1_2State(this, this);
+        attack1_3State = new MaincenterAttack1_3State(this, this);
+        attack2State = new MaincenterAttack2State(this, this);
+        attack3State = new MaincenterAttack3State(this, this);
+
         startState = entryState;
         defaultState = chaseState;
     }
@@ -64,12 +73,14 @@ public class Maincenter : Enemy
 
     public void CalculateLandPosition() => landPosition = target.transform.position;
 
+    public void Attack2() => transform.position = landPosition;
+
     public void Attack3_1()
     {
         for (int i = -1; i <= 1; i++)
         {
             GameObject darkBullet = Instantiate(darkBulletPrefab, attackCenter.position, Quaternion.identity);
-            darkBullet.GetComponent<EnemyBullet>().Initialize(this, 5, 5, CalculateTargetAngle(attackCenter) + i * 30, 0, 10, 4, true, true, false, 0, 0, BuffType.DarkErosion);
+            darkBullet.GetComponent<EnemyBullet>().Initialize(this, 5, 5, CalculateTargetAngle(attackCenter) + i * 25, 0, 10, 4, true, true, false, 0, 0, BuffType.DarkErosion);
         }
     }
 
@@ -78,7 +89,7 @@ public class Maincenter : Enemy
         for (int i = -3; i <= 3; i += 2)
         {
             GameObject darkBullet = Instantiate(darkBulletPrefab, attackCenter.position, Quaternion.identity);
-            darkBullet.GetComponent<EnemyBullet>().Initialize(this, 5, 5, CalculateTargetAngle(attackCenter) + i * 15, -i * 20, 10, 4, true, true, false, 0, 0, BuffType.DarkErosion);
+            darkBullet.GetComponent<EnemyBullet>().Initialize(this, 5, 5, CalculateTargetAngle(attackCenter) + i * 20, -i * 20, 10, 4, true, true, false, 0, 0, BuffType.DarkErosion);
         }
     }
 
@@ -144,7 +155,7 @@ public class MaincenterChaseState : EnemyState
     public override void LogicUpdate()
     {
         stayTimer += Time.deltaTime;
-        if (enemy.CalculateProbability(stayTimer * 0.01f))
+        if (enemy.CalculateProbability(stayTimer * 0.001f))
         {
             if (enemy.CalculateProbability(0.65f))
                 enemy.ChangeState(maincenter.attack3State);
@@ -163,7 +174,7 @@ public class MaincenterChaseState : EnemyState
 
     public override void PhysicsUpdate()
     {
-        enemy.Move(enemy.pathDirection);
+        enemy.Move(enemy.pathDirection, false, true);
     }
 
     public override void OnExit()
@@ -176,6 +187,8 @@ public class MaincenterBackJumpState : EnemyState
 {
     Maincenter maincenter;
 
+    Vector2 dir;
+
     public MaincenterBackJumpState(Enemy enemy, Maincenter maincenter) : base(enemy)
     {
         this.maincenter = maincenter;
@@ -183,21 +196,26 @@ public class MaincenterBackJumpState : EnemyState
 
     public override void OnEnter()
     {
+        enemy.rb.velocity = Vector2.zero;
+        enemy.moveSpeedIncrement += 15;
         enemy.anim.Play("BackJump");
+        dir = -enemy.CalculateTargetDirection(enemy.transform);
     }
 
     public override void LogicUpdate()
     {
-
+        if (enemy.isAnimExit)
+            enemy.ChangeState(maincenter.attack3State);
     }
 
     public override void PhysicsUpdate()
     {
-
+        enemy.Move(dir, true, true);
     }
 
     public override void OnExit()
     {
+        enemy.moveSpeedIncrement -= 15;
 
     }
 }
@@ -246,22 +264,46 @@ public class MaincenterAttack1_1State : EnemyState
 
     public override void OnEnter()
     {
-
+        enemy.rb.velocity = Vector2.zero;
+        enemy.moveSpeedIncrement += 6;
+        enemy.anim.Play("Attack1_1");
     }
 
     public override void LogicUpdate()
     {
-
+        if (enemy.isAnimExit)
+        {
+            if (enemy.PlayerCheck(0, true))
+            {
+                if (enemy.CalculateProbability(0.8f))
+                    enemy.ChangeState(maincenter.attack1_2State);
+                else
+                    enemy.ChangeState(maincenter.backJumpState);
+            }
+            else
+            {
+                if (enemy.CalculateProbability(0.9f))
+                    enemy.ChangeState(maincenter.chaseState);
+                else
+                {
+                    if (enemy.PlayerCheck(1, true))
+                        enemy.ChangeState(maincenter.backJumpState);
+                    else
+                        enemy.ChangeState(maincenter.attack3State);
+                }
+            }
+        }
     }
 
     public override void PhysicsUpdate()
     {
-
+        enemy.Move(enemy.CalculateTargetDirection(enemy.transform), true, true);
     }
 
     public override void OnExit()
     {
-
+        maincenter.attackObj1_1.SetActive(false);
+        enemy.moveSpeedIncrement -= 6;
     }
 }
 
@@ -276,22 +318,41 @@ public class MaincenterAttack1_2State : EnemyState
 
     public override void OnEnter()
     {
-
+        enemy.rb.velocity = Vector2.zero;
+        enemy.moveSpeedIncrement += 8;
+        enemy.anim.Play("Attack1_2");
     }
 
     public override void LogicUpdate()
     {
-
+        if (enemy.isAnimExit)
+        {
+            if (enemy.PlayerCheck(0, true))
+            {
+                if (enemy.CalculateProbability(0.7f))
+                    enemy.ChangeState(maincenter.attack1_3State);
+                else
+                    enemy.ChangeState(maincenter.backJumpState);
+            }
+            else
+            {
+                if (enemy.CalculateProbability(0.6f))
+                    enemy.ChangeState(maincenter.chaseState);
+                else
+                    enemy.ChangeState(maincenter.attack2State);
+            }
+        }
     }
 
     public override void PhysicsUpdate()
     {
-
+        enemy.Move(enemy.CalculateTargetDirection(enemy.transform), true, true);
     }
 
     public override void OnExit()
     {
-
+        maincenter.attackObj1_1.SetActive(false);
+        enemy.moveSpeedIncrement -= 8;
     }
 }
 
@@ -306,22 +367,24 @@ public class MaincenterAttack1_3State : EnemyState
 
     public override void OnEnter()
     {
-
+        enemy.rb.velocity = Vector2.zero;
+        enemy.anim.Play("Attack1_3");
     }
 
     public override void LogicUpdate()
     {
-
+        if (enemy.isAnimExit)
+            enemy.ChangeState(maincenter.chaseState);
     }
 
     public override void PhysicsUpdate()
     {
-
+        
     }
 
     public override void OnExit()
     {
-
+        maincenter.attackObj1_1.SetActive(false);
     }
 }
 
@@ -336,12 +399,14 @@ public class MaincenterAttack2State : EnemyState
 
     public override void OnEnter()
     {
-
+        enemy.rb.velocity = Vector2.zero;
+        enemy.anim.Play("Attack2");
     }
 
     public override void LogicUpdate()
     {
-
+        if (enemy.isAnimExit)
+            enemy.ChangeState(maincenter.chaseState);
     }
 
     public override void PhysicsUpdate()
@@ -351,7 +416,7 @@ public class MaincenterAttack2State : EnemyState
 
     public override void OnExit()
     {
-
+        maincenter.attackObj2.SetActive(false);
     }
 }
 
@@ -366,12 +431,14 @@ public class MaincenterAttack3State : EnemyState
 
     public override void OnEnter()
     {
-
+        enemy.rb.velocity = Vector2.zero;
+        enemy.anim.Play("Attack3");
     }
 
     public override void LogicUpdate()
     {
-
+        if (enemy.isAnimExit)
+            enemy.ChangeState(maincenter.chaseState);
     }
 
     public override void PhysicsUpdate()
