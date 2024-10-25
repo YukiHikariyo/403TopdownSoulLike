@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class TestPlayerMove : MonoBehaviour
 {
+    private Rigidbody2D rb;
+
     public float speed = 5;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
+        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
     }
 }
