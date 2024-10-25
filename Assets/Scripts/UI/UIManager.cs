@@ -127,6 +127,7 @@ public class UIManager : MonoSingleton<UIManager>
     [Space(16)]
 
     public GameObject newGameConfirm;
+    public GameObject settingsPanel;
 
     public TextMeshProUGUI deathText;
     private Sequence deathSequence;
@@ -515,6 +516,9 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void OpenNewGameConfirm() => newGameConfirm.SetActive(true);
     public void CloseNewGameConfirm() => newGameConfirm.SetActive(false);
+
+    public void OpenSettingsPanel() => settingsPanel.SetActive(true);
+    public void CloseSettingsPanel() => settingsPanel.SetActive(false);
 
     public void ShowDeathText()
     {

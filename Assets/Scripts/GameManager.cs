@@ -68,7 +68,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
             level = saveData.savedExpLevelDict["Level"];
 
         UIManager.Instance.levelText.text = level.ToString();
-        UIManager.Instance.expBar.OnExpUp(exp, CalculateExpByLevel(), true);
+        UIManager.Instance.expBar.slider.value = exp / CalculateExpByLevel();
     }
 
     #region 经验与等级
@@ -140,6 +140,10 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
         loadingInfo.SetActive(true);
 
+        SaveManager.Instance.SaveSettings();
+        AudioManager.Instance.ChangeSliders(1);
+        SaveManager.Instance.LoadSettings();
+
         await SceneManager.UnloadSceneAsync("MainMenu");
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
@@ -181,7 +185,11 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         UIManager.Instance.PlayFadeOutSequence(2);
     }
 
-    public void QuitGame() => Application.Quit();
+    public void QuitGame()
+    {
+        SaveManager.Instance.SaveSettings();
+        Application.Quit();
+    }
 
     public void SaveGame()
     {
@@ -219,6 +227,10 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
 
         SaveManager.Instance.SaveGame();
+
+        SaveManager.Instance.SaveSettings();
+        AudioManager.Instance.ChangeSliders(0);
+        SaveManager.Instance.LoadSettings();
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
         await SceneManager.UnloadSceneAsync("GameScene");

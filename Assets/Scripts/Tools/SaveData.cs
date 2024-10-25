@@ -27,3 +27,8 @@ public class SaveData
     //EnemySpawner
     public Dictionary<string, bool> savedSpawnerDict = new();
 }
+
+public class SettingsData
+{
+    public Dictionary<string, float> savedVolumeDict = new();
+}

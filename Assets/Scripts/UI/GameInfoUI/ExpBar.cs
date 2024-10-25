@@ -7,12 +7,7 @@ using UnityEngine.UI;
 public class ExpBar : MonoBehaviour
 {
     private Sequence sequence;
-    private Slider slider;
-
-    private void Awake()
-    {
-        slider = GetComponent<Slider>();
-    }
+    public Slider slider;
 
     public void OnExpUp(int targetExp, int maxExp, bool isInstantChange = false)
     {

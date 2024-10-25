@@ -7,13 +7,25 @@ using UnityEngine.UI;
 public class AudioManager : MonoSingleton<AudioManager>
 {
     public AudioMixer audioMixer;
-    public Slider mainSlider;
-    public Slider musicSlider;
-    public Slider sfxSlider;
+
+    public Slider currentMainSlider;
+    public Slider currentMusicSlider;
+    public Slider currentSFXSlider;
+
+    public Slider[] mainSliders;
+    public Slider[] musicSliders;
+    public Slider[] sfxSliders;
 
     public SFXPool sfxPool;
 
     public AudioClip testClip;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        SaveManager.Instance.LoadSettings();
+    }
 
     public void PlaySFX(AudioClip clip, Vector3 position)
     {
@@ -26,16 +38,30 @@ public class AudioManager : MonoSingleton<AudioManager>
 
     public void OnMainVolumeChange(GameObject image)
     {
-        audioMixer.SetFloat("MainVolume", 5 + 25 * Mathf.Log10(mainSlider.value > 0 ? mainSlider.value : 0.0001f));
+        audioMixer.SetFloat("MainVolume", 5 + 25 * Mathf.Log10(currentMainSlider.value > 0 ? currentMainSlider.value : 0.0001f));
     }
 
     public void OnMusicVolumeChange(GameObject image)
     {
-        audioMixer.SetFloat("MusicVolume", 5 + 25 * Mathf.Log10(musicSlider.value > 0 ? musicSlider.value : 0.0001f));
+        audioMixer.SetFloat("MusicVolume", 5 + 25 * Mathf.Log10(currentMusicSlider.value > 0 ? currentMusicSlider.value : 0.0001f));
     }
 
     public void OnSFXVolumeChange(GameObject image)
     {
-        audioMixer.SetFloat("SFXVolume", 5 + 25 * Mathf.Log10(sfxSlider.value > 0 ? sfxSlider.value : 0.0001f));
+        audioMixer.SetFloat("SFXVolume", 5 + 25 * Mathf.Log10(currentSFXSlider.value > 0 ? currentSFXSlider.value : 0.0001f));
+    }
+
+    public void UpdateVolume()
+    {
+        audioMixer.SetFloat("MainVolume", 5 + 25 * Mathf.Log10(currentMainSlider.value > 0 ? currentMainSlider.value : 0.0001f));
+        audioMixer.SetFloat("MusicVolume", 5 + 25 * Mathf.Log10(currentMusicSlider.value > 0 ? currentMusicSlider.value : 0.0001f));
+        audioMixer.SetFloat("SFXVolume", 5 + 25 * Mathf.Log10(currentSFXSlider.value > 0 ? currentSFXSlider.value : 0.0001f));
+    }
+
+    public void ChangeSliders(int index)
+    {
+        currentMainSlider = mainSliders[index];
+        currentMusicSlider = musicSliders[index];
+        currentSFXSlider = sfxSliders[index];
     }
 }
