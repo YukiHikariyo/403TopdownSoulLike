@@ -45,7 +45,9 @@ public class PlayerStateMachine : StateMachine
     [Tooltip("法术冷却时间")] public float[] magicColdDown;
     #endregion
     #region 蓄力相关
+    [Header("蓄力相关")]
     public int chargeStage;
+    [Tooltip("蓄力每秒消耗体力")] public float chargeCost;
     #endregion
     #region 组件
     [Header("组件")]

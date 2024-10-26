@@ -60,7 +60,7 @@ public class PlayerState_Charging : PlayerState
         if (playerInput.Roll && playerController.RollCount < 3)
             playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
 
-        else if (playerInput.ChargeRelease || playerStateMachine.ContinuousConsumeEnergy(Time.deltaTime * playerData.energyCostMultiplication))//TODO：体力限制
+        else if (playerInput.ChargeRelease || !playerStateMachine.ContinuousConsumeEnergy(Time.deltaTime * playerData.energyCostMultiplication * playerStateMachine.chargeCost))//TODO：体力限制
         {
             switch (chargeState)
             {

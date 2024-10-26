@@ -24,7 +24,7 @@ public class PlayerState_LightAttack_1 : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (playerStateMachine.CanAcceptInput)
+        if (playerStateMachine.CanStateSwitch)
         {
             switch (playerStateMachine.memory)
             {
@@ -41,7 +41,7 @@ public class PlayerState_LightAttack_1 : PlayerState
                     break;
             }
         }
-        if (playerStateMachine.CanStateSwitch)
+        if (playerStateMachine.CanAcceptInput)
         {
             if (playerInput.Roll)
                 playerStateMachine.memory = InputMemory.Roll;

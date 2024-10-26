@@ -143,7 +143,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.1
-    functionName: Set_RTAtkTrigger
+    functionName: SetStage
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
