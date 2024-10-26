@@ -298,13 +298,11 @@ public class UIManager : MonoSingleton<UIManager>
         {
             if (i != index)
             {
-                menuSelectionList[i].GetChild(0).gameObject.SetActive(false);
-                menuSelectionList[i].GetChild(1).gameObject.SetActive(true);
+                menuSelectionList[i].GetChild(1).gameObject.SetActive(false);
             }
             else
             {
-                menuSelectionList[i].GetChild(0).gameObject.SetActive(true);
-                menuSelectionList[i].GetChild(1).gameObject.SetActive(false);
+                menuSelectionList[i].GetChild(1).gameObject.SetActive(true);
             }
         }
 
