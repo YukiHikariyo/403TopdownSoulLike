@@ -210,6 +210,13 @@ public class Enemy : MonoBehaviour, IDamageable
     public LayerMask playerLayer;
     public LayerMask obstacleLayer;
 
+    [Space(16)]
+    [Header("SFX")]
+    [Space(16)]
+
+    public AudioClip attackSFX;
+    public AudioClip hurtSFX;
+
     #region 生命周期
 
     protected virtual void Awake()
@@ -312,6 +319,8 @@ public class Enemy : MonoBehaviour, IDamageable
                 OnStunFunc(1).Forget();
             else
                 OnStunFunc(2).Forget();
+
+            AudioManager.Instance.PlaySFX(hurtSFX, transform.position);
 
             return true;
         }
@@ -547,6 +556,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public bool CalculateProbability(float probability) => probability >= UnityEngine.Random.Range(0f, 1f);
 
+    public void PlayAttackSFX() => AudioManager.Instance.PlaySFX(attackSFX, transform.position);
 
     private void OnDrawGizmosSelected()
     {

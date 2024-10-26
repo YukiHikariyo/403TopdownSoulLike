@@ -337,6 +337,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+  attackSFX: {fileID: 0}
+  hurtSFX: {fileID: 0}
 --- !u!114 &41832989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2270,6 +2272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UncontrolledMaincenter
       objectReference: {fileID: 0}
+    - target: {fileID: 3284992858985874335, guid: 5520261e783623c44a271eed66884e10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3893811825244078752, guid: 5520261e783623c44a271eed66884e10, type: 3}
       propertyPath: m_Radius
       value: 3
@@ -2442,6 +2448,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8884398596262571702, guid: 5520261e783623c44a271eed66884e10, type: 3}
+      propertyPath: hurtSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ec10622d5a8f09439c38691970e429c, type: 3}
+    - target: {fileID: 8884398596262571702, guid: 5520261e783623c44a271eed66884e10, type: 3}
+      propertyPath: shootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 75b104200442ec146a1c73e9faabaf85, type: 3}
+    - target: {fileID: 8884398596262571702, guid: 5520261e783623c44a271eed66884e10, type: 3}
+      propertyPath: attackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 8a30513e4ae50c64e9c0cd868edb0a08, type: 3}
+    - target: {fileID: 8884398596262571702, guid: 5520261e783623c44a271eed66884e10, type: 3}
+      propertyPath: specialAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 38dd878429b036945b312ee5601e8477, type: 3}
     - target: {fileID: 8884398596262571702, guid: 5520261e783623c44a271eed66884e10, type: 3}
       propertyPath: checkDistance.Array.data[0]
       value: 5

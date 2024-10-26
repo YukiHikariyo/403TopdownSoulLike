@@ -45,7 +45,8 @@ public class EnemyDeadState : EnemyState
 
     public override void OnEnter()
     {
-        enemy.spawner.isDead = true;
+        if (enemy.spawner != null)
+            enemy.spawner.isDead = true;
         enemy.damageableIndex = 1;
         enemy.rb.velocity = Vector2.zero;
         enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);

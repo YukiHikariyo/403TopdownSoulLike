@@ -9,6 +9,11 @@ public class Maincenter : Enemy
     [Header("Maincenter")]
     [Space(16)]
 
+    public AudioClip specialAttackSFX;
+    public AudioClip shootSFX;
+
+    [Space(16)]
+
     public GameObject attackObj1_1;
     public GameObject attackObj1_2;
     public GameObject attackObj1_3;
@@ -72,6 +77,9 @@ public class Maincenter : Enemy
     public void RotateAttack1_3Sprite() => attackObj1_3.transform.rotation = Quaternion.Euler(0, 0, CalculateTargetAngle(transform));
 
     public void CalculateLandPosition() => landPosition = target.transform.position;
+
+    public void PlayShootSFX() => AudioManager.Instance.PlaySFX(shootSFX, transform.position);
+    public void PlaySpecialAttackSFX() => AudioManager.Instance.PlaySFX(specialAttackSFX, transform.position);
 
     public void Attack2() => transform.position = landPosition;
 

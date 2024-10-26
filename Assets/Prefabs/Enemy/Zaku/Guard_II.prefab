@@ -619,6 +619,7 @@ MonoBehaviour:
   pathDirection: {x: 0, y: 0}
   player: {fileID: 0}
   target: {fileID: 0}
+  spawner: {fileID: 0}
   isBoss: 0
   maxHealth: 450
   currentHealth: 450
@@ -673,6 +674,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 3584
+  attackSFX: {fileID: 8300000, guid: dad988e6539010842b2b093f97a29147, type: 3}
+  hurtSFX: {fileID: 8300000, guid: d6cbcce8ce76a0e4697bb92f65ba8e0e, type: 3}
   attackObj1: {fileID: 1661640931297410571}
   attackObj2: {fileID: 6742485768427096952}
   chargeAttackObj: {fileID: 3373838896776409144}

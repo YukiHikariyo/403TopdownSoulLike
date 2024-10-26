@@ -214,6 +214,7 @@ MonoBehaviour:
   pathDirection: {x: 0, y: 0}
   player: {fileID: 0}
   target: {fileID: 0}
+  spawner: {fileID: 0}
   isBoss: 0
   maxHealth: 325
   currentHealth: 325
@@ -263,6 +264,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 3584
+  attackSFX: {fileID: 8300000, guid: 75b104200442ec146a1c73e9faabaf85, type: 3}
+  hurtSFX: {fileID: 8300000, guid: d6cbcce8ce76a0e4697bb92f65ba8e0e, type: 3}
   darkBulletPrefab: {fileID: 371544354910690209, guid: 272bddccc19f57b49ab78f6d603788cc, type: 3}
   fastDarkBulletPrefab: {fileID: 1162403923937035282, guid: 7c0c9fd6d0064ec47b9ad6077044a8b7, type: 3}
   attackCenter: {fileID: 184587676433761265}
