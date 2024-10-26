@@ -6,6 +6,7 @@ public class InteractiveComponent : MonoBehaviour, ISaveable
 {
     public Animator animator;
     public bool alwaysInteractive = false;
+    public bool showTips = true;
     protected PlayerStateMachine stateMachine;
     protected bool state;
 

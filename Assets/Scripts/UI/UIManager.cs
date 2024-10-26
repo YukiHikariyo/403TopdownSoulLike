@@ -204,12 +204,14 @@ public class UIManager : MonoSingleton<UIManager>
         confirmationPanel.gameObject.SetActive(true);
         confirmationText.text = tip;
         confirmationPanel.DOFade(0.4f, 0.2f);
+        player.playerInput.DisablePlayerInput();
     }
 
     public void CloseConfirmationPanel()
     {
         confirmationPanel.gameObject.SetActive(false);
         confirmationPanel.color = new Color(confirmationPanel.color.r, confirmationPanel.color.g, confirmationPanel.color.b, 0);
+        player.playerInput.EnablePlayerInput();
     }
 
     /// <summary>

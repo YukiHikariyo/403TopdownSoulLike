@@ -30,7 +30,6 @@ public class TipsAnchor : MonoBehaviour
         if (tips != null)
         {
             float distance = (transform.position - player.transform.position).sqrMagnitude;
-            Debug.Log(distance);
             if (distance < outerRadius * outerRadius)
             {
                 color.a = Mathf.Min((outerRadius * outerRadius - distance) / (outerRadius * outerRadius - innerRadius * innerRadius), 1f);

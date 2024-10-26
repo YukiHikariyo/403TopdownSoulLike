@@ -55,6 +55,7 @@ public class PlayerStateMachine : StateMachine
     public PlayerData playerData;
     public PlayerShooter shooter;
     public GameObject bigLight;
+    public SpriteRenderer playerTip;
 
     public GameObject LightAtk_1;
     public GameObject LightAtk_2;
@@ -105,7 +106,7 @@ public class PlayerStateMachine : StateMachine
         playerTransform = transform;
         foreach (PlayerState playerState in stateTable)
         {
-            playerState.Initialization(playerInput, this, playerController, playerAnimator, playerRenderer, player, playerData, shooter, bigLight, LightAtk_1, LightAtk_2, LightAtk_3, LightAtk_4, BackAttack, RightAttack);
+            playerState.Initialization(playerInput, this, playerController, playerAnimator, playerRenderer, player, playerData, shooter, bigLight, playerTip, LightAtk_1, LightAtk_2, LightAtk_3, LightAtk_4, BackAttack, RightAttack);
             dict.Add(playerState.GetType(), playerState);
         }
         for(int i = 0;i < stateTable.Length; ++i)

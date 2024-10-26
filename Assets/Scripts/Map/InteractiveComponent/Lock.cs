@@ -10,6 +10,7 @@ public class Lock : InteractiveComponent
     [SerializeField] int id;
     public override void Initialization()
     {
+        Debug.Log(state);
         base.Initialization();
         if (state)
         {

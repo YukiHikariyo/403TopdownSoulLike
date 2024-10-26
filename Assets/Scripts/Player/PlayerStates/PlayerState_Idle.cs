@@ -20,7 +20,37 @@ public class PlayerState_Idle : PlayerState
     {
         SetAnimator_Update();
 
-        if (playerInput.Interaction && playerStateMachine.interactionObj != null)
+        if (!playerInput.Interaction || playerStateMachine.interactionObj == null)
+        {
+            if (playerInput.WantsMove)
+            {
+                if (playerInput.IsRun && playerData.CurrentEnergy > playerStateMachine.runEnergyLimit)
+                    playerStateMachine.SwitchState(typeof(PlayerState_Run));
+                else
+                    playerStateMachine.SwitchState(typeof(PlayerState_Move));
+            }
+            else if (playerInput.Magic_1 && playerData.magicUnlockState[0] && playerStateMachine.magicTimer[0] <= 0)
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
+            }
+            else if (playerInput.Magic_2 && playerData.magicUnlockState[1] && playerStateMachine.magicTimer[1] <= 0)
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
+            }
+            else if (playerInput.Magic_3 && playerData.magicUnlockState[2] && playerStateMachine.magicTimer[2] <= 0)
+            {
+                playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
+            }
+            else if (playerInput.RightAttack)
+                playerStateMachine.SwitchState(typeof(PlayerState_Charging));
+
+            else if (playerInput.LightAttack)
+                playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
+
+            else if (playerInput.Roll && playerController.RollCount < 3)
+                playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+        }
+        else
         {
             if (playerStateMachine.interactionObj.alwaysInteractive || playerStateMachine.interactionObj.State == false)
             {
@@ -28,35 +58,8 @@ public class PlayerState_Idle : PlayerState
                     playerStateMachine.interactionObj.State = true;
             }
         }
-        else if (playerInput.WantsMove)
-        {
-            if (playerInput.IsRun && playerData.CurrentEnergy > playerStateMachine.runEnergyLimit)
-                playerStateMachine.SwitchState(typeof(PlayerState_Run));
-            else
-                playerStateMachine.SwitchState(typeof(PlayerState_Move));
-        }
-        else if (playerInput.Magic_1 && playerData.magicUnlockState[0] && playerStateMachine.magicTimer[0] <= 0)
-        {
-            playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
-        }
-        else if (playerInput.Magic_2 && playerData.magicUnlockState[1] && playerStateMachine.magicTimer[1] <= 0)
-        {
-            playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
-        }
-        else if (playerInput.Magic_3 && playerData.magicUnlockState[2] && playerStateMachine.magicTimer[2] <= 0)
-        {
-            playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
-        }
-        else if (playerInput.RightAttack)
-            playerStateMachine.SwitchState(typeof(PlayerState_Charging));
 
-        else if (playerInput.LightAttack)
-            playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
 
-        else if (playerInput.Roll && playerController.RollCount < 3)
-            playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
-
-        
 
         //TODO:打开背包
     }

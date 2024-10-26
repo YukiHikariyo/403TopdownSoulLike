@@ -16,6 +16,8 @@ public class PlayerInteractionTrigger : MonoBehaviour
         {
             playerStateMachine.CanInterAction = true;
             playerStateMachine.interactionObj = collision.gameObject.GetComponent<InteractiveComponent>();
+            if(playerStateMachine.interactionObj.showTips)
+                playerStateMachine.playerTip.enabled = true;
         }
     }
 
@@ -23,8 +25,13 @@ public class PlayerInteractionTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Interaction"))
         {
-            playerStateMachine.CanInterAction = false;
-            playerStateMachine.interactionObj = null;
+            InteractiveComponent outer = collision.gameObject.GetComponent<InteractiveComponent>();
+            if (playerStateMachine.interactionObj == outer)
+            {
+                playerStateMachine.CanInterAction = false;
+                playerStateMachine.interactionObj = null;
+                playerStateMachine.playerTip.enabled = false;
+            }
         }
     }
 }

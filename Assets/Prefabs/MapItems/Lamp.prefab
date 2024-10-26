@@ -300,6 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  alwaysInteractive: 0
+  showTips: 0
   lightcruve:
     serializedVersion: 2
     m_Curve:

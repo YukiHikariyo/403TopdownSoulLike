@@ -595,7 +595,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         if (saveData.savedPositionDict.ContainsKey("X"))
             lastPosition = new Vector3(saveData.savedPositionDict["X"], saveData.savedPositionDict["Y"]);
         else
-            lastPosition = new Vector3(0, -18.5f, 0);//出生点
+            lastPosition = new Vector3(0, -18f, 0);//出生点
         transform.position = lastPosition;
 
         for (int i = 0; i < magicUnlockState.Length; i++)

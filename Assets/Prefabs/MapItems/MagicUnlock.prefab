@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  alwaysInteractive: 0
+  showTips: 1
   magicID: 0
   text: 
 --- !u!95 &1867916302686367349
