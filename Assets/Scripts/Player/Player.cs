@@ -16,6 +16,8 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerController playerController;
     public PlayerInput playerInput;
 
+    private SpriteRenderer spriteRenderer;
+
     [Space(16)]
     [Header("固定属性")]
     [Space(16)]
@@ -73,6 +75,8 @@ public class Player : MonoBehaviour, IDamageable
         playerController = GetComponent<PlayerController>();
         playerInput = GetComponent<PlayerInput>();
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         buffBars = UIManager.Instance.buffBars;
     }
 
@@ -116,6 +120,7 @@ public class Player : MonoBehaviour, IDamageable
                 bigStunEvent?.Invoke(attackerTransform);
 
             VFXManager.Instance.PlayVFX(0, transform, transform.position, 0);
+            OnHurtVFX().Forget();
 
             return true;
         }
@@ -396,6 +401,13 @@ public class Player : MonoBehaviour, IDamageable
     public void RemoveTestPassiveSkill() => RemovePassiveSkill(PassiveSkillType.TestPassiveSkill);
 
     #endregion
+
+    private async UniTask OnHurtVFX()
+    {
+        spriteRenderer.material.SetFloat("_Damaged", 1);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+        spriteRenderer.material.SetFloat("_Damaged", 0);
+    }
 }
 
 
