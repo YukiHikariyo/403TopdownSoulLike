@@ -15,6 +15,17 @@ public class SavePoint : InteractiveComponent
     {
         GameManager.Instance.SaveGame();
         UIManager.Instance.PlayTipSequence(tip);
-        return base.SwitchState();
+        if (!state)
+        {
+            animator.Play("LightUp");
+            return false;
+        }
+        else
+            return true;
+    }
+
+    public void WhenLighted()
+    {
+        State = true;
     }
 }
