@@ -34,6 +34,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         itemID = id;
         itemNumber = number;
         itemNumberText.text = number.ToString();
+        itemIcon.sprite = PackageManager.Instance.allItemList[id].itemIcon;
     }
 
     public void OnPointerClick(PointerEventData eventData)

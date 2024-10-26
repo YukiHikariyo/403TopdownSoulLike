@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponID: 0
   weaponName: "\u6D4B\u8BD5\u6B66\u5668"
-  weaponIcon: {fileID: 0}
+  weaponIcon: {fileID: 1290595103, guid: 38c7703c33a0a6a4f94620459ed7ff97, type: 3}
   maxLevel: 3
   weaponStats:
   - damage: 1
@@ -41,4 +41,6 @@ MonoBehaviour:
     buffDamageMultiplication: 0
     coinCost: 0
     stoneCost: 0
+  buffDdamageType: 0
   passiveSkillType: 0
+  desctiption: 

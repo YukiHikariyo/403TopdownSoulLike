@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accessoryID: 1
   accessoryName: "\u5FAE\u578B\u6052\u52A8\u5185\u71C3\u673A"
-  accessoryIcon: {fileID: 0}
+  accessoryIcon: {fileID: -1929669658, guid: 38c7703c33a0a6a4f94620459ed7ff97, type: 3}
   maxLevel: 3
   accessoryStats:
   - maxHealth: 10
@@ -39,3 +39,4 @@ MonoBehaviour:
     coinCost: 0
     stoneCost: 0
   passiveSkillType: 10
+  desctiption: 

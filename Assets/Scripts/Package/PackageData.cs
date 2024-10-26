@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static StaticWeaponData;
 
 [Serializable]
 public struct WeaponStats
@@ -31,6 +30,8 @@ public class StaticWeaponData : ScriptableObject, IComparable<StaticWeaponData>
     [Tooltip("数值")] public WeaponStats[] weaponStats;   //数组索引表示武器等级
     [Tooltip("属性伤害类型")] public BuffType buffDdamageType;
     [Tooltip("被动技能")] public PassiveSkillType passiveSkillType;
+    [Space(16)]
+    [Tooltip("描述")][TextArea(3, 6)] public string desctiption;
 
     public int CompareTo(StaticWeaponData other) => weaponID - other.weaponID;
 }
@@ -61,6 +62,8 @@ public class StaticItemData : ScriptableObject, IComparable<StaticItemData>
     [Tooltip("名称")] public string itemName;
     [Tooltip("图标")] public Sprite itemIcon;
     [Tooltip("能否使用")] public bool isUseable;
+    [Space(16)]
+    [Tooltip("描述")][TextArea(3, 6)] public string desctiption;
 
     public int CompareTo(StaticItemData other) => itemID - other.itemID;
 }
@@ -105,6 +108,8 @@ public class StaticAccessoryData : ScriptableObject, IComparable<StaticAccessory
     [Space(16)]
     [Tooltip("数值")] public AccessoryStats[] accessoryStats;   //数组索引表示饰品等级
     [Tooltip("被动技能")] public PassiveSkillType passiveSkillType;
+    [Space(16)]
+    [Tooltip("描述")][TextArea(3, 6)] public string desctiption;
 
     public int CompareTo(StaticAccessoryData other) => accessoryID - other.accessoryID;
 }

@@ -79,6 +79,8 @@ public class UIManager : MonoSingleton<UIManager>
     public RectTransform itemDetailPanel;
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemNumber;
+    [Space(16)]
+    public TextMeshProUGUI selectedItemDescription;
 
     [Space(16)]
     [Header("武器")]
@@ -100,6 +102,8 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI weaponCritDamageValue;
     public TextMeshProUGUI weaponPenetratingPowerValue;
     public TextMeshProUGUI weaponReductionRateValue;
+    [Space(16)]
+    public TextMeshProUGUI selectedWeaponDescription;
 
     [Space(16)]
     [Header("饰品")]
@@ -121,6 +125,8 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI accessoryEnergyValue;
     public TextMeshProUGUI accessoryToughnessValue;
     public TextMeshProUGUI accessoryReductionRateValue;
+    [Space(16)]
+    public TextMeshProUGUI selectedAccessoryDescription;
 
     [Space(16)]
     [Header("设置与主菜单与其他")]
@@ -323,6 +329,7 @@ public class UIManager : MonoSingleton<UIManager>
         {
             selectedItemName.text = PackageManager.Instance.allItemList[currentSelectedItem.itemID].itemName;
             selectedItemNumber.text = " 数量：" + PackageManager.Instance.itemDict[currentSelectedItem.itemID].number + "个";
+            selectedItemDescription.text = PackageManager.Instance.allItemList[currentSelectedItem.itemID].desctiption;
         }
         
         itemSlotDict[id].itemNumber = PackageManager.Instance.itemDict[id].number;
@@ -388,6 +395,7 @@ public class UIManager : MonoSingleton<UIManager>
         weaponCritDamageValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].critDamage * 100 + "%";
         weaponPenetratingPowerValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].penetratingPower * 100 + "%";
         weaponReductionRateValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].reductionRate * 100 + "%";
+        selectedWeaponDescription.text = PackageManager.Instance.allWeaponList[id].desctiption;
 
         weaponStoneValue.color = (PackageManager.Instance.itemDict.ContainsKey(1) && PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].stoneCost <= PackageManager.Instance.itemDict[1].number) ? Color.green : Color.red;
         weaponCoinValue.color = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].coinCost <= PackageManager.Instance.CoinNumber() ? Color.green : Color.red;
@@ -451,6 +459,7 @@ public class UIManager : MonoSingleton<UIManager>
         accessoryEnergyValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].maxEnergy * 100 + "";
         accessoryToughnessValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].toughness * 100 + "";
         accessoryReductionRateValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].reductionRate * 100 + "%";
+        selectedAccessoryDescription.text = PackageManager.Instance.allAccessoryList[id].desctiption;
 
         accessoryStoneValue.color = (PackageManager.Instance.itemDict.ContainsKey(2) && PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].stoneCost <= PackageManager.Instance.itemDict[2].number) ? Color.green : Color.red;
         accessoryCoinValue.color = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].coinCost <= PackageManager.Instance.CoinNumber() ? Color.green : Color.red;
