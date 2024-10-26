@@ -44,6 +44,9 @@ public class PlayerStateMachine : StateMachine
     [Tooltip("法术计时器")] public float[] magicTimer;
     [Tooltip("法术冷却时间")] public float[] magicColdDown;
     #endregion
+    #region 蓄力相关
+    public int chargeStage;
+    #endregion
     #region 组件
     [Header("组件")]
     //获取组件的方式之后可以调整
@@ -62,6 +65,11 @@ public class PlayerStateMachine : StateMachine
     public GameObject LightAtk_3;
     public GameObject LightAtk_4;
     public GameObject BackAttack;
+
+    public GameObject RightAttack_1;
+    public GameObject RightAttack_2;
+    public GameObject RightAttack_3;
+
     public GameObject RightAttack;
     #endregion
     #region 接受输入窗口
@@ -106,7 +114,7 @@ public class PlayerStateMachine : StateMachine
         playerTransform = transform;
         foreach (PlayerState playerState in stateTable)
         {
-            playerState.Initialization(playerInput, this, playerController, playerAnimator, playerRenderer, player, playerData, shooter, bigLight, playerTip, LightAtk_1, LightAtk_2, LightAtk_3, LightAtk_4, BackAttack, RightAttack);
+            playerState.Initialization(playerInput, this, playerController, playerAnimator, playerRenderer, player, playerData, shooter, bigLight, playerTip, LightAtk_1, LightAtk_2, LightAtk_3, LightAtk_4, BackAttack, RightAttack_1,RightAttack_2,RightAttack_3);
             dict.Add(playerState.GetType(), playerState);
         }
         for(int i = 0;i < stateTable.Length; ++i)
@@ -292,6 +300,48 @@ public class PlayerStateMachine : StateMachine
         else
         {
             MagicUIManager.Instance.UpdateMask(id, 0);
+        }
+    }
+    /// <summary>
+    /// 蓄力开始时根据蓄力段数更换攻击判定物体
+    /// </summary>
+    public void SetStage()
+    {
+        switch (chargeStage) { 
+            case 0:
+                RightAttack = RightAttack_1;
+                break;
+            case 1:
+                RightAttack = RightAttack_2;
+                break;
+            case 2:
+                RightAttack = RightAttack_3;
+                break;
+        }
+    }
+
+    public void PlayRtAtkAnimation()
+    {
+        Animator animator = RightAttack.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.Play("Enabled");
+        }
+    }
+    /// <summary>
+    /// 启用或禁用重击攻击判定
+    /// </summary>
+    public void Set_RTAtkTrigger()
+    {
+        Collider2D collider = RightAttack.GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            if (collider.enabled)
+            {
+                collider.enabled = false;
+            }
+            else
+                collider.enabled = true;
         }
     }
     #region 受伤和死亡时触发的方法

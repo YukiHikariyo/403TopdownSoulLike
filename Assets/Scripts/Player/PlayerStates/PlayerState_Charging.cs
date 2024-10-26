@@ -66,22 +66,22 @@ public class PlayerState_Charging : PlayerState
             {
                 case 0:
                     playerAnimator.speed = 1.1f;
-                    playerAnimator.SetFloat("Stage", 0);
+                    playerStateMachine.chargeStage = 0;
                     playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
                     break;
                 case 1:
                     playerAnimator.speed = 1f;
-                    playerAnimator.SetFloat("Stage", 0);
+                    playerStateMachine.chargeStage = 0;
                     playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
                     break;
                 case 2:
                     playerAnimator.speed = 0.9f;
-                    playerAnimator.SetFloat("Stage", 1);
+                    playerStateMachine.chargeStage = 1;
                     playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
                     break;
                 case 3:
                     playerAnimator.speed = 0.8f;
-                    playerAnimator.SetFloat("Stage", 2);
+                    playerStateMachine.chargeStage = 2;
                     playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
                     break;
             }
