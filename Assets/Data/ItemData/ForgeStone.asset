@@ -16,4 +16,4 @@ MonoBehaviour:
   itemName: "\u6B66\u5668\u5F3A\u5316\u96F6\u4EF6"
   itemIcon: {fileID: 1793312099, guid: 38c7703c33a0a6a4f94620459ed7ff97, type: 3}
   isUseable: 0
-  desctiption: 
+  desctiption: "\u53EF\u4EE5\u5F3A\u5316\u6B66\u5668"

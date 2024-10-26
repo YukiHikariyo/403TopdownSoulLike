@@ -43,4 +43,4 @@ MonoBehaviour:
     stoneCost: 0
   buffDdamageType: 0
   passiveSkillType: 9
-  desctiption: 
+  desctiption: "\u66B4\u51FB\u540E\u4E3A\u654C\u4EBA\u9644\u52A05s\u71C3\u70E7\n\n\u6700\u9AD83\u7EA7\uFF0C\u6BCF\u7EA7\u589E\u52A03/6/10\u653B\u51FB\u529B\uFF0C8%/14%/22%\u66B4\u51FB\u7387\uFF0C10%/17%/25%\u66B4\u51FB\u4F24\u5BB3"
