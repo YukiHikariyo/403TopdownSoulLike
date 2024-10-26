@@ -2461,6 +2461,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 8a30513e4ae50c64e9c0cd868edb0a08, type: 3}
     - target: {fileID: 8884398596262571702, guid: 5520261e783623c44a271eed66884e10, type: 3}
+      propertyPath: basicMoveSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884398596262571702, guid: 5520261e783623c44a271eed66884e10, type: 3}
       propertyPath: specialAttackSFX
       value: 
       objectReference: {fileID: 8300000, guid: 38dd878429b036945b312ee5601e8477, type: 3}

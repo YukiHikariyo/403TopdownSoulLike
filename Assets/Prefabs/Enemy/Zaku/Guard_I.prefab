@@ -301,12 +301,12 @@ MonoBehaviour:
   target: {fileID: 0}
   spawner: {fileID: 0}
   isBoss: 0
-  maxHealth: 300
+  maxHealth: 280
   currentHealth: 300
-  basicMoveSpeed: 1
+  basicMoveSpeed: 2.2
   basicDamage: 20
   basicPenetratingPower: 0
-  basicReductionRate: 0
+  basicReductionRate: 10
   basicToughness: 15
   motionToughness: 0
   motionValue:
@@ -332,7 +332,7 @@ MonoBehaviour:
   vulnerabilityMultiplication: 1
   toughnessMultiplication: 1
   maxBuffHealth:
-  - 0
+  - 125
   currentBuffHealth:
   - 0
   isEnduance: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0.5}
   checkDistance:
-  - 5
+  - 10
   - 1.8
   playerLayer:
     serializedVersion: 2

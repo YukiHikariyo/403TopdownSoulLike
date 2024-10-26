@@ -394,10 +394,10 @@ MonoBehaviour:
   isBoss: 1
   maxHealth: 2000
   currentHealth: 2000
-  basicMoveSpeed: 2
+  basicMoveSpeed: 2.5
   basicDamage: 40
-  basicPenetratingPower: 0
-  basicReductionRate: 20
+  basicPenetratingPower: 15
+  basicReductionRate: 25
   basicToughness: 25
   motionToughness: 0
   motionValue:
@@ -435,7 +435,7 @@ MonoBehaviour:
   vulnerabilityMultiplication: 1
   toughnessMultiplication: 1
   maxBuffHealth:
-  - 0
+  - 200
   currentBuffHealth:
   - 0
   isEnduance: 0
@@ -453,6 +453,10 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 2048
+  attackSFX: {fileID: 0}
+  hurtSFX: {fileID: 0}
+  specialAttackSFX: {fileID: 0}
+  shootSFX: {fileID: 0}
   attackObj1_1: {fileID: 7988723444618127371}
   attackObj1_2: {fileID: 4511037352168303898}
   attackObj1_3: {fileID: 2632572028404561493}

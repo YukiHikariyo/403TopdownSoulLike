@@ -292,8 +292,8 @@ MonoBehaviour:
   isBoss: 0
   maxHealth: 110
   currentHealth: 110
-  basicMoveSpeed: 1
-  basicDamage: 10
+  basicMoveSpeed: 3
+  basicDamage: 15
   basicPenetratingPower: 0
   basicReductionRate: 0
   basicToughness: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   motionValue:
   - 1
   attackPower:
-  - 0
+  - 21
   buffMotionValue:
   - 0
   damageableIndex: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0}
   checkDistance:
-  - 5
+  - 8
   - 1.5
   playerLayer:
     serializedVersion: 2

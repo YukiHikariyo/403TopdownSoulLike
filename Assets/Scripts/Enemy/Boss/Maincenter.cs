@@ -274,6 +274,7 @@ public class MaincenterAttack1_1State : EnemyState
     {
         enemy.rb.velocity = Vector2.zero;
         enemy.moveSpeedIncrement += 6;
+        enemy.MotionToughness += 5;
         enemy.anim.Play("Attack1_1");
     }
 
@@ -312,6 +313,7 @@ public class MaincenterAttack1_1State : EnemyState
     {
         maincenter.attackObj1_1.SetActive(false);
         enemy.moveSpeedIncrement -= 6;
+        enemy.MotionToughness -= 5;
     }
 }
 
@@ -328,6 +330,7 @@ public class MaincenterAttack1_2State : EnemyState
     {
         enemy.rb.velocity = Vector2.zero;
         enemy.moveSpeedIncrement += 8;
+        enemy.MotionToughness += 5;
         enemy.anim.Play("Attack1_2");
     }
 
@@ -361,6 +364,7 @@ public class MaincenterAttack1_2State : EnemyState
     {
         maincenter.attackObj1_1.SetActive(false);
         enemy.moveSpeedIncrement -= 8;
+        enemy.MotionToughness -= 5;
     }
 }
 
@@ -376,6 +380,7 @@ public class MaincenterAttack1_3State : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 25;
         enemy.anim.Play("Attack1_3");
     }
 
@@ -393,6 +398,7 @@ public class MaincenterAttack1_3State : EnemyState
     public override void OnExit()
     {
         maincenter.attackObj1_1.SetActive(false);
+        enemy.MotionToughness -= 25;
     }
 }
 
@@ -408,6 +414,7 @@ public class MaincenterAttack2State : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 100;
         enemy.anim.Play("Attack2");
     }
 
@@ -425,6 +432,7 @@ public class MaincenterAttack2State : EnemyState
     public override void OnExit()
     {
         maincenter.attackObj2.SetActive(false);
+        enemy.MotionToughness -= 100;
     }
 }
 

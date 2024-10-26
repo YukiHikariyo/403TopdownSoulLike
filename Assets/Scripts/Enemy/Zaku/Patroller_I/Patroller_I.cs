@@ -120,6 +120,7 @@ public class Patroller_I_AttackState : EnemyState
     public override void OnEnter()
     {
         dir = enemy.CalculateTargetDirection(enemy.transform);
+        enemy.MotionToughness += 25;
         enemy.anim.Play("Attack");
         enemy.moveSpeedIncrement += 3;
     }
@@ -138,5 +139,6 @@ public class Patroller_I_AttackState : EnemyState
     {
         patroller_I.attackObj.SetActive(false);
         enemy.moveSpeedIncrement -= 3;
+        enemy.MotionToughness -= 25;
     }
 }

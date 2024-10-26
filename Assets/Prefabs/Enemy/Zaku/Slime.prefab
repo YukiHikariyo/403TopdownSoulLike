@@ -392,8 +392,8 @@ MonoBehaviour:
   isBoss: 0
   maxHealth: 80
   currentHealth: 80
-  basicMoveSpeed: 2
-  basicDamage: 10
+  basicMoveSpeed: 3
+  basicDamage: 15
   basicPenetratingPower: 0
   basicReductionRate: 0
   basicToughness: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0}
   checkDistance:
-  - 5
+  - 8
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

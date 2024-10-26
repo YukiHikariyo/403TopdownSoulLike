@@ -395,13 +395,13 @@ MonoBehaviour:
   basicMoveSpeed: 1
   basicDamage: 20
   basicPenetratingPower: 0
-  basicReductionRate: 0
+  basicReductionRate: 10
   basicToughness: 10
   motionToughness: 0
   motionValue:
   - 1
   attackPower:
-  - 10
+  - 30
   buffMotionValue:
   - 0
   damageableIndex: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0}
   checkDistance:
-  - 5
+  - 10
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

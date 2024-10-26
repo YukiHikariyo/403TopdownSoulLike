@@ -621,12 +621,12 @@ MonoBehaviour:
   target: {fileID: 0}
   spawner: {fileID: 0}
   isBoss: 0
-  maxHealth: 450
-  currentHealth: 450
-  basicMoveSpeed: 1
+  maxHealth: 400
+  currentHealth: 400
+  basicMoveSpeed: 2.6
   basicDamage: 30
-  basicPenetratingPower: 0
-  basicReductionRate: 0
+  basicPenetratingPower: 10
+  basicReductionRate: 10
   basicToughness: 15
   motionToughness: 0
   motionValue:
@@ -655,7 +655,7 @@ MonoBehaviour:
   vulnerabilityMultiplication: 1
   toughnessMultiplication: 1
   maxBuffHealth:
-  - 0
+  - 150
   currentBuffHealth:
   - 0
   isEnduance: 0
@@ -665,7 +665,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0.5}
   checkDistance:
-  - 5
+  - 12
   - 1.8
   - 3
   playerLayer:

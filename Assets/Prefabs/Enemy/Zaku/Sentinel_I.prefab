@@ -335,7 +335,7 @@ MonoBehaviour:
   currentHealth: 225
   basicMoveSpeed: 0
   basicDamage: 20
-  basicPenetratingPower: 0
+  basicPenetratingPower: 10
   basicReductionRate: 0
   basicToughness: 10
   motionToughness: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   vulnerabilityMultiplication: 1
   toughnessMultiplication: 1
   maxBuffHealth:
-  - 0
+  - 100
   currentBuffHealth:
   - 0
   isEnduance: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0.8}
   checkDistance:
-  - 5
+  - 12
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

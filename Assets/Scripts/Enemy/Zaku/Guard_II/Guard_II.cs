@@ -147,6 +147,7 @@ public class Guard_II_Attack1State : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 5;
         enemy.moveSpeedIncrement += 3;
         enemy.anim.Play("Attack1");
     }
@@ -172,6 +173,7 @@ public class Guard_II_Attack1State : EnemyState
         guard_II.attackObj1.SetActive(false);
         enemy.isMove = false;
         enemy.moveSpeedIncrement -= 3;
+        enemy.MotionToughness -= 5;
     }
 }
 
@@ -187,7 +189,8 @@ public class Guard_II_Attack2State : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
-        enemy.moveSpeedIncrement += 3;
+        enemy.moveSpeedIncrement += 3; 
+        enemy.MotionToughness += 5;
         enemy.anim.Play("Attack2");
     }
 
@@ -217,6 +220,7 @@ public class Guard_II_Attack2State : EnemyState
         guard_II.attackObj2.SetActive(false);
         enemy.isMove = false;
         enemy.moveSpeedIncrement -= 3;
+        enemy.MotionToughness -= 5;
     }
 }
 
@@ -232,6 +236,7 @@ public class Guard_II_ChargeState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 5;
         enemy.anim.Play("Charge");
         StateChangeTimer(2, guard_II.chargeAttackState).Forget();
     }
@@ -248,6 +253,7 @@ public class Guard_II_ChargeState : EnemyState
 
     public override void OnExit()
     {
+        enemy.MotionToughness -= 5;
         changeTimerCTK.Cancel();
     }
 }
@@ -264,6 +270,7 @@ public class Guard_II_ChargeAttackState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 100;
         enemy.moveSpeedIncrement += 14;
         enemy.anim.Play("ChargeAttack");
     }
@@ -284,5 +291,6 @@ public class Guard_II_ChargeAttackState : EnemyState
         guard_II.chargeAttackObj.SetActive(false);
         enemy.isMove = false;
         enemy.moveSpeedIncrement -= 14;
+        enemy.MotionToughness -= 100;
     }
 }

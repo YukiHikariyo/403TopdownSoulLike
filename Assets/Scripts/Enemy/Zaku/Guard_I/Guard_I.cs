@@ -135,6 +135,7 @@ public class Guard_I_Attack1State : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 5;
         enemy.moveSpeedIncrement += 3;
         enemy.anim.Play("Attack1");
     }
@@ -160,6 +161,7 @@ public class Guard_I_Attack1State : EnemyState
         guard_I.attackObj1.SetActive(false);
         enemy.isMove = false;
         enemy.moveSpeedIncrement -= 3;
+        enemy.MotionToughness -= 5;
     }
 }
 
@@ -175,6 +177,7 @@ public class Guard_I_Attack2State : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 5;
         enemy.moveSpeedIncrement += 3;
         enemy.anim.Play("Attack2");
     }
@@ -195,5 +198,6 @@ public class Guard_I_Attack2State : EnemyState
         guard_I.attackObj2.SetActive(false);
         enemy.isMove = false;
         enemy.moveSpeedIncrement -= 3;
+        enemy.MotionToughness -= 5;
     }
 }

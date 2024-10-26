@@ -131,6 +131,7 @@ public class ShadowBatAttackState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 5;
         enemy.moveSpeedIncrement += 3;
         enemy.anim.Play("Attack");
     }
@@ -151,6 +152,7 @@ public class ShadowBatAttackState : EnemyState
         shadowBat.attackObj.SetActive(false);
         enemy.isMove = false;
         enemy.moveSpeedIncrement -= 3;
+        enemy.MotionToughness -= 5;
     }
 }
 
@@ -166,6 +168,7 @@ public class ShadowBatShadowAttackState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
+        enemy.MotionToughness += 100;
         enemy.moveSpeedIncrement += 5;
         shadowBat.shadowAttackObj.transform.rotation = Quaternion.Euler(0, 0, enemy.CalculateTargetAngle(enemy.transform));
         enemy.anim.Play("ShadowAttack");
@@ -187,6 +190,7 @@ public class ShadowBatShadowAttackState : EnemyState
         shadowBat.shadowAttackObj.SetActive(false);
         enemy.isMove = false;
         enemy.moveSpeedIncrement -= 5;
+        enemy.MotionToughness -= 100;
     }
 }
 
