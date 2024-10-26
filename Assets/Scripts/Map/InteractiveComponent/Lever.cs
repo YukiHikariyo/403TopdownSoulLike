@@ -11,7 +11,7 @@ public class Lever : InteractiveComponent
         SwitchState();
     }
 
-    public override void SwitchState()
+    public override bool SwitchState()
     {
         base.SwitchState();
         foreach (Spike spike in spikes)
@@ -21,6 +21,7 @@ public class Lever : InteractiveComponent
                 spike.State = state;
             }
         }
+        return base.SwitchState();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractiveComponent : MonoBehaviour, ISaveable
 {
     public Animator animator;
+    public bool alwaysInteractive = false;
     protected PlayerStateMachine stateMachine;
     protected bool state;
 
@@ -47,11 +48,11 @@ public class InteractiveComponent : MonoBehaviour, ISaveable
     }
 
     /// <summary>
-    /// 状态切换逻辑，玩家在游戏内互动时触发
+    /// 状态切换逻辑，玩家在游戏内互动时触发，返回值表示是否成功改变组件State
     /// </summary>
-    public virtual void SwitchState()
+    public virtual bool SwitchState()
     {
-        
+        return true;
     }
 
     #region 存档接口

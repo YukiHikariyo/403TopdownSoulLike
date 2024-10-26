@@ -22,10 +22,10 @@ public class PlayerState_Idle : PlayerState
 
         if (playerInput.Interaction && playerStateMachine.interactionObj != null)
         {
-            if (playerStateMachine.interactionObj.State == false)
+            if (playerStateMachine.interactionObj.alwaysInteractive || playerStateMachine.interactionObj.State == false)
             {
-                playerStateMachine.interactionObj.State = true;
-                playerStateMachine.interactionObj.SwitchState();
+                if (playerStateMachine.interactionObj.SwitchState())
+                    playerStateMachine.interactionObj.State = true;
             }
         }
         else if (playerInput.WantsMove)
@@ -47,7 +47,6 @@ public class PlayerState_Idle : PlayerState
         {
             playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
         }
-        //TODO:耐力限制
         else if (playerInput.RightAttack)
             playerStateMachine.SwitchState(typeof(PlayerState_Charging));
 

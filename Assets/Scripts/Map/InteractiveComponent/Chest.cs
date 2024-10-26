@@ -20,10 +20,10 @@ public class Chest : InteractiveComponent
         base.Initialization();
     }
 
-    public override void SwitchState()
+    public override bool SwitchState()
     {
-        base.SwitchState();
         OpenChest();
+        return base.SwitchState();
     }
 
     private void OpenChest()

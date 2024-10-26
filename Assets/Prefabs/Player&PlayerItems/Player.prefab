@@ -1804,7 +1804,7 @@ MonoBehaviour:
   foresightTimeMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
   magicUnlockState: 000000
-  lastPosition: {x: 0, y: 0, z: 0}
+  lastPosition: {x: 0, y: -18.5, z: 0}
 --- !u!114 &4510489401662688001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1841,7 +1841,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!95 &1766737477993462450

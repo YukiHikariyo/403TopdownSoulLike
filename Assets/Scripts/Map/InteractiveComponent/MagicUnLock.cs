@@ -11,14 +11,16 @@ public class MagicUnLock : InteractiveComponent
         base.Initialization();
     }
 
-    public override void SwitchState()
+    public override bool SwitchState()
     {
         if(stateMachine != null)
         {
             stateMachine.playerData.magicUnlockState[magicID] = true;
             MagicUIManager.Instance.UpdateUnlockState(magicID,true);
             UIManager.Instance.OpenConfirmationPanel(text); 
+            return true;
         }
+        return false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
