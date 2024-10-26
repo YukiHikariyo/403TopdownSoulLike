@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 094a9eb53e87c3b45bedf277c0957af1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -1473931863
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 1212646398, guid: 3e14e0e662048194aae19479db15c8ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.5
+  m_Radius: 5
 --- !u!114 &8187787725270742685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 2632572028404561493}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -396,8 +396,8 @@ MonoBehaviour:
   currentHealth: 2000
   basicMoveSpeed: 2.5
   basicDamage: 40
-  basicPenetratingPower: 15
-  basicReductionRate: 25
+  basicPenetratingPower: 0.15
+  basicReductionRate: 0.25
   basicToughness: 25
   motionToughness: 0
   motionValue:
@@ -445,18 +445,18 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0.3}
   checkDistance:
-  - 4
-  - 6
+  - 5
+  - 8
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 2048
-  attackSFX: {fileID: 0}
-  hurtSFX: {fileID: 0}
-  specialAttackSFX: {fileID: 0}
-  shootSFX: {fileID: 0}
+  attackSFX: {fileID: 8300000, guid: 8a30513e4ae50c64e9c0cd868edb0a08, type: 3}
+  hurtSFX: {fileID: 8300000, guid: 4ec10622d5a8f09439c38691970e429c, type: 3}
+  specialAttackSFX: {fileID: 8300000, guid: 38dd878429b036945b312ee5601e8477, type: 3}
+  shootSFX: {fileID: 8300000, guid: 75b104200442ec146a1c73e9faabaf85, type: 3}
   attackObj1_1: {fileID: 7988723444618127371}
   attackObj1_2: {fileID: 4511037352168303898}
   attackObj1_3: {fileID: 2632572028404561493}
@@ -520,7 +520,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 094a9eb53e87c3b45bedf277c0957af1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -541,7 +541,7 @@ SpriteRenderer:
   m_SortingLayerID: -1473931863
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -885752467, guid: 20cde6949ff9acc48a90b8851c53c2a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -588,7 +588,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 8, y: 8}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -596,9 +596,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.331168, y: 1.5384741}
-      - {x: 2.339364, y: -1.2663226}
-      - {x: 3.5443885, y: 0.058962345}
+    - - {x: 3.6624944, y: 1.9718713}
+      - {x: 3.06722, y: 2.776565}
+      - {x: 0, y: 0}
+      - {x: 3.0829477, y: -2.788976}
+      - {x: 3.678833, y: -1.9549994}
+      - {x: 4.058968, y: -0.91924644}
+      - {x: 4.0650024, y: 0.95820475}
   m_UseDelaunayMesh: 0
 --- !u!114 &8889054674229381514
 MonoBehaviour:
@@ -680,7 +684,7 @@ GameObject:
   - component: {fileID: 3893811825244078752}
   - component: {fileID: 1296677474442713882}
   m_Layer: 6
-  m_Name: AttackSprite2
+  m_Name: AttackSprite1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -697,7 +701,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5713623090329122327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -721,7 +725,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 094a9eb53e87c3b45bedf277c0957af1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -742,7 +746,7 @@ SpriteRenderer:
   m_SortingLayerID: -1473931863
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 211086295, guid: 2de515db03630054cbbf4a2a5c35ca0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -787,7 +791,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 3
 --- !u!114 &1296677474442713882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,7 +876,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: c2d680bb805c5374ab4661924ae86904, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -989,7 +993,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 094a9eb53e87c3b45bedf277c0957af1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1010,7 +1014,7 @@ SpriteRenderer:
   m_SortingLayerID: -1473931863
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 378396316, guid: 1bdcf04fc5238934ab0f21a1b2a99e14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1057,7 +1061,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 8, y: 8}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1065,9 +1069,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.331168, y: 1.5384741}
-      - {x: 2.339364, y: -1.2663226}
-      - {x: 3.5443885, y: 0.058962345}
+    - - {x: 3.7492974, y: 1.864005}
+      - {x: 3.153972, y: 2.7725344}
+      - {x: 1.7296122, y: 1.5686948}
+      - {x: 0, y: 0}
+      - {x: 1.7313371, y: -1.5098138}
+      - {x: 2.3505566, y: -2.0915604}
+      - {x: 3.0481658, y: -2.7840383}
+      - {x: 3.682801, y: -1.9183235}
+      - {x: 4.0687227, y: -0.936172}
+      - {x: 4.063196, y: 0.87647724}
   m_UseDelaunayMesh: 0
 --- !u!114 &5740477172476377384
 MonoBehaviour:

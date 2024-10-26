@@ -321,6 +321,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 OnStunFunc(2).Forget();
 
             AudioManager.Instance.PlaySFX(hurtSFX, transform.position);
+            VFXManager.Instance.PlayVFX(0, transform, transform.position, 0);
 
             return true;
         }
@@ -505,6 +506,7 @@ public class Enemy : MonoBehaviour, IDamageable
             return;
 
         damageableIndex = 1;
+        spriteRenderer.material.SetFloat("_Damaged", 1);
 
         if (index != 0 && currentState != smallStunState && currentState != normalStunState && currentState != bigStunState && currentState != dizzyStunState)
         {
@@ -517,8 +519,12 @@ public class Enemy : MonoBehaviour, IDamageable
                 _ => null
             });
         }
-        
-        await UniTask.Delay(TimeSpan.FromSeconds(0.15f));
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+
+        spriteRenderer.material.SetFloat("_Damaged", 0);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.05f));
 
         damageableIndex = 0;
     }

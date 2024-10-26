@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2376815947491364593}
   - component: {fileID: 214920781171694376}
   - component: {fileID: 1263088778613154570}
+  - component: {fileID: -5173886381616299338}
   m_Layer: 0
   m_Name: VFX-Burn
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2021857419230126481}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.84, y: -0.89, z: 1}
+  m_LocalPosition: {x: 8.84, y: -0.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4828,3 +4829,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-5173886381616299338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021857419230126481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69e545b4ad308f4a818e91b13198e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLoop: 1

@@ -137,7 +137,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: c2d680bb805c5374ab4661924ae86904, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -625,8 +625,8 @@ MonoBehaviour:
   currentHealth: 400
   basicMoveSpeed: 2.6
   basicDamage: 30
-  basicPenetratingPower: 10
-  basicReductionRate: 10
+  basicPenetratingPower: 0.1
+  basicReductionRate: 0.1
   basicToughness: 15
   motionToughness: 0
   motionValue:

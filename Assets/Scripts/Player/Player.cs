@@ -115,6 +115,8 @@ public class Player : MonoBehaviour, IDamageable
             else
                 bigStunEvent?.Invoke(attackerTransform);
 
+            VFXManager.Instance.PlayVFX(0, transform, transform.position, 0);
+
             return true;
         }
         else if (damageableIndex == 2)
@@ -123,6 +125,8 @@ public class Player : MonoBehaviour, IDamageable
 
             if (passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Foresight))
                 passiveSkillTriggerAction[PlayerPassiveSkill.TriggerType.Foresight]?.Invoke(this);
+
+            VFXManager.Instance.PlayVFX(1, transform, transform.position, 0);
 
             return false;
         }

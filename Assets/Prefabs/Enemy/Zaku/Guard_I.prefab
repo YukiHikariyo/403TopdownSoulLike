@@ -302,11 +302,11 @@ MonoBehaviour:
   spawner: {fileID: 0}
   isBoss: 0
   maxHealth: 280
-  currentHealth: 300
+  currentHealth: 280
   basicMoveSpeed: 2.2
   basicDamage: 20
   basicPenetratingPower: 0
-  basicReductionRate: 10
+  basicReductionRate: 0.1
   basicToughness: 15
   motionToughness: 0
   motionValue:
@@ -523,7 +523,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: a94b508a7a240fe409a6bbb81d640ff8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

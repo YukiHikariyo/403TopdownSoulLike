@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public enum BuffType
 {
@@ -126,9 +127,9 @@ public class Foresight : BaseBuff
     {
         if (damageable is Player)
         {
-            //以下数值为测试
             (damageable as Player).playerData.damageMultiplication += 0.2f;
             (damageable as Player).playerData.critRateIncrement += 0.1f;
+            VFXManager.Instance.PlayVFX(1, (damageable as Player).transform, (damageable as Player).transform.position, 0);
         }
 
         UIManager.Instance.buffIcons[1].SetActive(true);
@@ -138,7 +139,6 @@ public class Foresight : BaseBuff
     {
         if (damageable is Player)
         {
-            //以下数值为测试
             (damageable as Player).playerData.damageMultiplication -= 0.2f;
             (damageable as Player).playerData.critRateIncrement -= 0.1f;
         }
@@ -322,7 +322,10 @@ public class DarkErosion : BaseBuff
     public override void OnBuffEnter()
     {
         if (damageable is Player)
+        {
             damageable.TakeDamage((damageable as Player).playerData.FinalMaxHealth * 0.4f, 114514, true);
+            VFXManager.Instance.PlayVFX(2, (damageable as Player).transform, (damageable as Player).transform.position, 0);
+        }
     }
 
     public override void OnBuffExit()
@@ -436,7 +439,7 @@ public class Burning : BaseBuff
 
     public override void OnBuffEnter()
     {
-
+        VFXManager.Instance.PlayVFX(4, (damageable as Enemy).transform, (damageable as Enemy).transform.position, duration);
     }
 
     public override void OnBuffExit()
@@ -461,6 +464,9 @@ public class Burning : BaseBuff
     }
 }
 
+/// <summary>
+/// 敌人异常：光爆
+/// </summary>
 public class LightBurst : BaseBuff
 {
     public LightBurst(float duration, IDamageable damageable) : base(duration, damageable) { }
@@ -473,6 +479,8 @@ public class LightBurst : BaseBuff
                 damageable.TakeDamage((damageable as Enemy).MaxHealth * 0.25f, 114514, true);
             else
                 damageable.TakeDamage((damageable as Enemy).MaxHealth * 0.05f, 114514, true);
+
+            VFXManager.Instance.PlayVFX(4, (damageable as Enemy).transform, (damageable as Enemy).transform.position, 0);
         }
     }
 
