@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 966a6f7c5d9a4b6468e1f410422732f0
+guid: 11a39d884d59cfd40a46ba14000927ec
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,232 +110,358 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Panel
+      name: Head
       rect:
         serializedVersion: 2
         x: 1
-        y: 1
-        width: 158
-        height: 158
+        y: 94
+        width: 70
+        height: 49
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 6, y: 6, z: 6, w: 6}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a5bdaff046b6ba41a09cbc4f787b0dc
-      internalID: 1902781369
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Handle1
-      rect:
-        serializedVersion: 2
-        x: 173
-        y: 109
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6a804703157b4e4095cb697fafc877a
-      internalID: -1884410446
+      spriteID: 47300b5a0cb87c141a7278e28bfc3a17
+      internalID: 810271689
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Handle2
+      name: BottleFrame
       rect:
         serializedVersion: 2
-        x: 188
-        y: 108
-        width: 8
-        height: 8
+        x: 18
+        y: 44
+        width: 23
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 276d38668ccdecc489563c979ed90139
-      internalID: 1285549171
+      spriteID: 7c64e11338c247047ab65b7e0fb256b2
+      internalID: -2126041757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Handle3
+      name: ExpFrame
       rect:
         serializedVersion: 2
-        x: 205
-        y: 108
-        width: 7
-        height: 8
+        x: 18
+        y: 16
+        width: 23
+        height: 23
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1df42de5c0fea2408726f5f4f49c24b
-      internalID: -1733190181
+      spriteID: ce805c931d8a1474190be250bd9e028c
+      internalID: 1146992547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Handle4
+      name: SkillFrame
       rect:
         serializedVersion: 2
-        x: 188
-        y: 121
-        width: 8
-        height: 8
+        x: 47
+        y: 14
+        width: 24
+        height: 24
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d2ea7aba520a9f4d823964d2bdeede0
-      internalID: -1426167034
+      spriteID: 489ad6b8f91706242963e6d21a377308
+      internalID: -179453640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Button
+      name: BarFrame2
       rect:
         serializedVersion: 2
-        x: 217
-        y: 96
+        x: 49
+        y: 50
+        width: 44
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e6df0eae9ff69d4f99fed67a94b04c6
+      internalID: -1806452075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarFill2
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 63
+        width: 42
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54e385e4638572247966dd80f39a9e68
+      internalID: -2125498349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarFrame1
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 139
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 3, y: 1, z: 3, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7db41ca3315179408d868497fdb81db
+      internalID: 1218489883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarFill1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 122
         width: 32
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 1, z: 2, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e8baea2c6ef3a64790f0029f8e88726
+      internalID: 2103462138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mana
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 96
+        width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 3, z: 3, w: 3}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b2a84be2e86166409f88cc7297ee029
-      internalID: -1473681281
+      spriteID: 161d3f61034cfd74aad00fd771f2658f
+      internalID: 235548384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Selection
+      name: Health
       rect:
         serializedVersion: 2
-        x: 272
+        x: 128
         y: 96
-        width: 32
+        width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 0, z: 3, w: 3}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ecab323b3a4166341a99e1a837339ea8
-      internalID: -1295823549
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SelectionTip
-      rect:
-        serializedVersion: 2
-        x: 270
-        y: 123
-        width: 36
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 0, z: 4, w: 4}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 93c3cd298f46a1e4eac6b4f8dd4039b1
-      internalID: 470869174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SliderBG2
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 32
-        width: 128
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 2, z: 2, w: 2}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6517930c0d8da374fb07917b7825d39d
-      internalID: -906114830
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SliderFill
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 47
-        width: 160
-        height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bae0472f8fe8f249b37b2160f5dbff8
-      internalID: 1611926567
+      spriteID: dda891d398396db49b4ff39a6c74e703
+      internalID: 1832159091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SliderBG
+      name: Energy
       rect:
         serializedVersion: 2
-        x: 160
-        y: 79
-        width: 158
-        height: 2
+        x: 144
+        y: 96
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1604cff4be6b364da24f74a586c3dd2
-      internalID: 643132414
+      spriteID: 5316e83e0c3f2ff4db93525b1309f534
+      internalID: 1906759729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Damage
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fbb6569f4f6b314d9fc0cc682663895
+      internalID: -1709909048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PenetratingPower
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf815dc7db4c3f34581334e3c2982e11
+      internalID: -28833217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Special
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68a6da87b1fdbf34aa0a43048204371d
+      internalID: 503645463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ReductionRate
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9132c9d2b65434f46a9d4f9bdee5fe75
+      internalID: 660232029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CritDamage
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a6f925edf424844fbe74ee1c8d77fe8
+      internalID: 269403684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CritRate
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f998c24ded6f1f4f9b36a02883e1b2e
+      internalID: -1315786623
       vertices: []
       indices: 
       edges: []
@@ -351,18 +477,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      49EB469D42606B197CCED8BD0F1DDB21_0: 1611926567
-      Button: -1473681281
-      Handle1: -1884410446
-      Handle2: 1285549171
-      Handle3: -1733190181
-      Handle4: -1426167034
-      Panel: 1902781369
-      Selection: -1295823549
-      SelectionTip: 470869174
-      SliderBG: 643132414
-      SliderBG2: -906114830
-      SliderFill: 1611926567
+      BarFill1: 2103462138
+      BarFill2: -2125498349
+      BarFrame1: 1218489883
+      BarFrame2: -1806452075
+      BottleFrame: -2126041757
+      CritDamage: 269403684
+      CritRate: -1315786623
+      Damage: -1709909048
+      Energy: 1906759729
+      ExpFrame: 1146992547
+      Head: 810271689
+      Health: 1832159091
+      Mana: 235548384
+      PenetratingPower: -28833217
+      ReductionRate: 660232029
+      SkillFrame: -179453640
+      Special: 503645463
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
