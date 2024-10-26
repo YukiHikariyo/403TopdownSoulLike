@@ -266,7 +266,7 @@ public class UIManager : MonoSingleton<UIManager>
         player.playerInput.DisablePlayerInput();
 
         if (!currentMenuPanel)
-            currentMenuPanel = menuPanelList[0];
+            currentMenuPanel = menuPanelList[1];
 
         coinValue.text = PackageManager.Instance.CoinNumber().ToString();
         currentMenuPanel.OnOpen();

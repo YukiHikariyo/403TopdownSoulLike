@@ -1198,7 +1198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &63965867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2394,7 +2394,7 @@ RectTransform:
   m_AnchorMin: {x: 0.15078898, y: 0}
   m_AnchorMax: {x: 0.85278904, y: 1}
   m_AnchoredPosition: {x: 0.35791016, y: 0}
-  m_SizeDelta: {x: -247.13812, y: 0}
+  m_SizeDelta: {x: -447.13812, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129092911
 MonoBehaviour:
@@ -7129,7 +7129,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1050, y: -50.039978}
+  m_AnchoredPosition: {x: 850.00006, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464294175
@@ -7521,7 +7521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 650, y: -50.039978}
+  m_AnchoredPosition: {x: 450.00003, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495873808
@@ -7858,7 +7858,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -50.039978}
+  m_AnchoredPosition: {x: 50.000008, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515066578
@@ -13771,7 +13771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &880198882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18801,7 +18801,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u73A9\u5BB6\u5C5E\u6027"
+  m_text: "\u7269\u54C1"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 295935abffa6ddd4aa05a081d976dea2, type: 2}
   m_sharedMaterial: {fileID: 3301500681553840597, guid: 295935abffa6ddd4aa05a081d976dea2, type: 2}
@@ -20796,7 +20796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 850, y: -50.039978}
+  m_AnchoredPosition: {x: 650.00006, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1290056569
@@ -21728,7 +21728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1350761118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21858,7 +21858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1361941852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25184,7 +25184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 450, y: -50.039978}
+  m_AnchoredPosition: {x: 250.00003, y: -50.039978}
   m_SizeDelta: {x: 100, y: 100.079956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1566618427
@@ -27075,7 +27075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1700338901
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28100,7 +28100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1771538562
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32564,7 +32564,7 @@ MonoBehaviour:
   - {fileID: 823857586}
   packagePanel: {fileID: 1801819867}
   isPackageOpen: 0
-  currentMenuPanel: {fileID: 1700338902}
+  currentMenuPanel: {fileID: 1361941853}
   menuSelectionList:
   - {fileID: 63965867}
   - {fileID: 515066576}
@@ -32587,7 +32587,7 @@ MonoBehaviour:
   - "\u5929\u8D4B\u6811"
   - "\u8BBE\u7F6E"
   menuName: {fileID: 1165384710}
-  currentMenuIndex: 0
+  currentMenuIndex: 1
   coinValue: {fileID: 144540038}
   itemSlots: {fileID: 45528494}
   itemSlotPrefab: {fileID: 3546014802300172941, guid: 81f40fbf73b5c3e408992369911acbd3, type: 3}
