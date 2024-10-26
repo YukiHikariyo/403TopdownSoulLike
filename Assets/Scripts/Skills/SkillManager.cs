@@ -289,7 +289,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
 
         skillDotList[currentSkillIndex].GetChild(3).GetComponent<Image>().DOFillAmount(1, 0.75f);
 
-        skillDotList[currentSkillIndex].GetChild(0).GetComponent<UILineRenderer>().color = new Color(1,1,1,1);
+        skillDotList[currentSkillIndex].GetChild(0).GetComponent<UILineRenderer>().color = new Color(0.9137f,0.6078f,0.1098f,1);
 
     }
 

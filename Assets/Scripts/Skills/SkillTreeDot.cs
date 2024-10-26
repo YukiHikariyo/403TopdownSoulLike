@@ -76,7 +76,7 @@ public class SkillTreeDot : MonoBehaviour,IPointerClickHandler,IPointerEnterHand
         thisSkillShadow.color = new Color(0, 0, 0, 1);
 
         lineRenderer = GetComponentInChildren<UILineRenderer>();
-        lineRenderer.color = new Color(0, 0, 0, 1);
+        lineRenderer.color = new Color(1, 1, 1, 0.7f);
     }
 
     public void DrawTree()
