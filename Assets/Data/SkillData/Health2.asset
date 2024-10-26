@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSkillLevel: 5
   skillPointCost: 1
-  skillSpite: {fileID: 0}
+  skillSpite: {fileID: -1076682741, guid: 18bd7d11cca79cf43a14c0f780db7e9a, type: 3}
   skillName: "\u4F59\u706B\u5F3A\u5316"
   skillDotID: 14
   skillType: 0
