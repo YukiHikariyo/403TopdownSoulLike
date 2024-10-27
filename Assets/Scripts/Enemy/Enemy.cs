@@ -364,32 +364,33 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public bool TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
-        if (buffDamageTimer > 0)
-            return false;
-
-        int buffIndex = buffType switch
+        if (buffDamageTimer <= 0)
         {
-            BuffType.LightBurst => 0,
+            buffDamageTimer = 1;
 
-            _ => -1
-        };
-
-        if (!currentBuffDict.ContainsKey(buffType))
-        {
-            if (damageableIndex == 0 || ignoreDamageableIndex)
+            int buffIndex = buffType switch
             {
-                currentBuffHealth[buffIndex] += damage;
-                if (currentBuffHealth[buffIndex] > 100)
-                {
-                    currentBuffHealth[buffIndex] = 0;
-                    GetBuff(buffType);
+                BuffType.LightBurst => 0,
 
-                    buffDamageTimer = 1;
-                    return true;
+                _ => -1
+            };
+
+            if (!currentBuffDict.ContainsKey(buffType))
+            {
+                if (damageableIndex == 0 || ignoreDamageableIndex)
+                {
+                    currentBuffHealth[buffIndex] += damage;
+                    if (currentBuffHealth[buffIndex] > 100)
+                    {
+                        currentBuffHealth[buffIndex] = 0;
+                        GetBuff(buffType);
+                        
+                        return true;
+                    }
                 }
             }
         }
-
+        
         return false;
     }
 
