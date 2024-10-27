@@ -307,6 +307,7 @@ public class IceBurning : BaseBuff
         {
             if (damageable is Player)
                 damageable.TakeDamage((damageable as Player).playerData.FinalMaxHealth * 0.02f, 114514, true);
+
             timer = 1;
         }
     }
@@ -439,7 +440,7 @@ public class Burning : BaseBuff
 
     public override void OnBuffEnter()
     {
-        VFXManager.Instance.PlayVFX(4, (damageable as Enemy).transform, (damageable as Enemy).transform.position, duration);
+        VFXManager.Instance.PlayVFX(3, (damageable as Enemy).transform, (damageable as Enemy).transform.position, duration);
     }
 
     public override void OnBuffExit()
@@ -460,6 +461,8 @@ public class Burning : BaseBuff
                 else
                     damageable.TakeDamage((damageable as Enemy).MaxHealth * 0.005f, 114514, true);
             }
+
+            timer = 1;
         }
     }
 }
