@@ -59,7 +59,11 @@ public class AttackArea : MonoBehaviour
                         isSuccessful = damageable.TakeDamage(noSourceDamage, noSourcePenetratingPower, ignoreDamageableIndex);
 
                     if (directlyAssertBuff && CalculateProbability(directBuffProbability))
+                    {
+                        if (damageable is Enemy)
+                            (damageable as Enemy).attackerTransform = isBullet ? transform : player.transform;
                         damageable.GetBuff(buffType, directBuffDuration);
+                    }
                     else if (causeBuffDamage)
                         damageable.TakeBuffDamage(buffType, noSourceBuffDamage, ignoreDamageableIndex);
 
