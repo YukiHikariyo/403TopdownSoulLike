@@ -48,6 +48,7 @@ public class PlayerStateMachine : StateMachine
     [Header("蓄力相关")]
     public int chargeStage;
     [Tooltip("蓄力每秒消耗体力")] public float chargeCost;
+    [Tooltip("是否完成上次蓄力")] public bool hasReleasedRight;
     #endregion
     #region 组件
     [Header("组件")]
@@ -68,6 +69,7 @@ public class PlayerStateMachine : StateMachine
     public GameObject LightAtk_4;
     public GameObject BackAttack;
 
+    public GameObject RightAttack_0;  
     public GameObject RightAttack_1;
     public GameObject RightAttack_2;
     public GameObject RightAttack_3;
@@ -311,12 +313,15 @@ public class PlayerStateMachine : StateMachine
     {
         switch (chargeStage) { 
             case 0:
-                RightAttack = RightAttack_1;
+                RightAttack = RightAttack_0;
                 break;
             case 1:
-                RightAttack = RightAttack_2;
+                RightAttack = RightAttack_1;
                 break;
             case 2:
+                RightAttack = RightAttack_2;
+                break;
+            case 3:
                 RightAttack = RightAttack_3;
                 break;
         }
@@ -388,9 +393,14 @@ public class PlayerStateMachine : StateMachine
     /// </summary>
     public void OnDead()
     {
-
+        SwitchState(typeof(PlayerState_Dead));
     }
     #endregion
+
+    public void GameOver()
+    {
+        GameManager.Instance.PlayerDeath();
+    }
     
 }
 

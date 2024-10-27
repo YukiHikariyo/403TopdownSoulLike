@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName ="Data/PlayerState/UseManaBottle",fileName ="PlayerState_UseManaBottle",order =20)]
+[CreateAssetMenu(menuName = "Data/PlayerState/UseManaBottle", fileName = "PlayerState_UseManaBottle", order =20)]
 
 public class PlayerState_UseManaBottle : PlayerState
 {
@@ -28,15 +28,7 @@ public class PlayerState_UseManaBottle : PlayerState
         }
         if (IsAnimationEnd)
         {
-            if (PackageManager.Instance.ConsumeManaBottle())
-            {
-                playerStateMachine.SwitchState(typeof(PlayerState_Successful_Mana));
-            }
-            else
-            {
-                Debug.Log("Empty!");
-                playerStateMachine.SwitchState(typeof(PlayerState_Idle));
-            }
+            playerStateMachine.SwitchState(typeof(PlayerState_Successful_Mana));
         }
     }
 

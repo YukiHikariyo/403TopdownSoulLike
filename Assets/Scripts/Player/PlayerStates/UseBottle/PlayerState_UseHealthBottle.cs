@@ -27,15 +27,7 @@ public class PlayerState_UseHealthBottle : PlayerState
         }
         if (IsAnimationEnd)
         {
-            if (PackageManager.Instance.ConsumeHealthBottle())
-            {
-                playerStateMachine.SwitchState(typeof(PlayerState_Successful_Health));
-            }
-            else
-            {
-                Debug.Log("Empty!");
-                playerStateMachine.SwitchState(typeof (PlayerState_Idle));
-            }
+            playerStateMachine.SwitchState(typeof(PlayerState_Successful_Health));
         }
     }
 

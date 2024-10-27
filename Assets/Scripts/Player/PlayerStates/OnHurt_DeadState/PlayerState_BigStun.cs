@@ -12,7 +12,7 @@ public class PlayerState_BigStun : PlayerState
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
         SetAnimator_OnHurt();
-        playerAnimator.Play("NormalStun");
+        playerAnimator.Play("BigStun");
         FaceDir = (playerStateMachine.attacker.position - playerStateMachine.playerTransform.position).normalized;
     }
 

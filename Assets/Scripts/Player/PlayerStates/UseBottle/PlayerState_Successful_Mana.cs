@@ -9,8 +9,13 @@ public class PlayerState_Successful_Mana : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
-        playerAnimator.Play("Successful_Mana");
+        if (PackageManager.Instance.ConsumeManaBottle())
+        {
 
+            playerAnimator.Play("Successful");
+        }
+        else
+            playerAnimator.Play("UnSuccessful");
     }
 
     public override void Exit()

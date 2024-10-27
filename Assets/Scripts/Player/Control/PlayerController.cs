@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
                 playerRb.velocity = FaceDir * catchChanceSpeed * CatchChanceCruve.Evaluate(time);
             break;
             case Skill_Physics.BackAttack:
-                playerRb.velocity = FaceDir * ChargeMaxTime * BackAttackCruve.Evaluate(time); 
+                playerRb.velocity = FaceDir * backAttackSpeed * BackAttackCruve.Evaluate(time); 
             break;
             case Skill_Physics.RightAttack:
                 playerRb.velocity = FaceDir * RightAttackSpeed * RightAttackCruve.Evaluate(time);

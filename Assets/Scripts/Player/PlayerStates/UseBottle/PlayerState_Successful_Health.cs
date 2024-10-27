@@ -9,8 +9,12 @@ public class PlayerState_Successful_Health : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
-        playerAnimator.Play("Successful_Health");
-
+        if (PackageManager.Instance.ConsumeHealthBottle())
+        {
+            playerAnimator.Play("Successful");
+        }
+        else
+            playerAnimator.Play("UnSuccessful");
     }
 
     public override void Exit()

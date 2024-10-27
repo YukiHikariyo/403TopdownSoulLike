@@ -44,10 +44,6 @@ public class PlayerState_Move : PlayerState
 
         else if (!playerInput.WantsMove)
             playerStateMachine.SwitchState(typeof(PlayerState_Idle));
-        else if (playerInput.UseHealthBottle)
-            playerStateMachine.SwitchState(typeof(PlayerState_UseHealthBottle));
-        else if (playerInput.UseManaBottle)
-            playerStateMachine.SwitchState(typeof(PlayerState_UseManaBottle));
 
         //TODO:打开背包
     }

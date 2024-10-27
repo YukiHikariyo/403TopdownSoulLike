@@ -49,6 +49,10 @@ public class PlayerState_Idle : PlayerState
 
             else if (playerInput.Roll && playerController.RollCount < 3)
                 playerStateMachine.SwitchState(typeof(PlayerState_FirstRoll));
+            else if (playerInput.UseHealthBottle)
+                playerStateMachine.SwitchState(typeof(PlayerState_UseHealthBottle));
+            else if (playerInput.UseManaBottle)
+                playerStateMachine.SwitchState(typeof(PlayerState_UseManaBottle));
         }
         else
         {

@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    [SerializeField]IState currentState;
+    [SerializeField] IState currentState;
     
-    protected Dictionary<System.Type, IState> dict;
+    protected Dictionary<Type, IState> dict;
     protected virtual void Update()
     {
         currentState.LogicUpdate();

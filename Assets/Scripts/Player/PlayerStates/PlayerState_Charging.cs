@@ -1,4 +1,5 @@
 using BehaviorDesigner.Runtime.Tasks;
+using NodeCanvas.StateMachines;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -65,23 +66,19 @@ public class PlayerState_Charging : PlayerState
             switch (chargeState)
             {
                 case 0:
-                    playerAnimator.speed = 1.1f;
                     playerStateMachine.chargeStage = 0;
                     playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
                     break;
                 case 1:
-                    playerAnimator.speed = 1f;
-                    playerStateMachine.chargeStage = 0;
-                    playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
-                    break;
-                case 2:
-                    playerAnimator.speed = 0.9f;
                     playerStateMachine.chargeStage = 1;
                     playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
                     break;
-                case 3:
-                    playerAnimator.speed = 0.8f;
+                case 2:
                     playerStateMachine.chargeStage = 2;
+                    playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
+                    break;
+                case 3:
+                    playerStateMachine.chargeStage = 3;
                     playerStateMachine.SwitchState(typeof(PlayerState_RightAttack));
                     break;
             }

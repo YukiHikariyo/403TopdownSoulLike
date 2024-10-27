@@ -82,6 +82,7 @@ public class PlayerState : ScriptableObject, IState
         this.lightAtk_3 = lightAtk_3;
         this.lightAtk_4 = lightAtk_4;
         this.BackAttack = BackAttack;
+        backAttackArea = BackAttack.GetComponent<AttackArea>();
         this.RightAttack_1 = RightAttack_1;
         this.RightAttack_2 = RightAttack_2;
         this.RightAttack_3 = RightAttack_3;
