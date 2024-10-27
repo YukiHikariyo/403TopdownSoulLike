@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5159887991482179207}
   - component: {fileID: 1403126491504120449}
   - component: {fileID: 9200935262921746429}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlashBang_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   damageArea: {fileID: 5340315189113993683}
+  area: {fileID: 3837779193927179943}
   existTime: 5
   damageLength: 0.1
 --- !u!212 &1403126491504120449
@@ -165,7 +166,7 @@ GameObject:
   - component: {fileID: 5896429501147768108}
   - component: {fileID: 3837779193927179943}
   - component: {fileID: 7138009483538968173}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DamageArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +203,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32703
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -234,13 +235,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc5d252fc0b89944b72e3988ea49895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackerType: 0
+  attackerType: 2
   player: {fileID: 0}
   enemy: {fileID: 0}
   causeHealthDamage: 0
-  causeBuffDamage: 1
-  directlyAssertBuff: 0
-  directBuffProbability: 0
+  causeBuffDamage: 0
+  directlyAssertBuff: 1
+  directBuffProbability: 1
   isBullet: 1
   ignoreDamageableIndex: 0
   motionValueIndex: 0

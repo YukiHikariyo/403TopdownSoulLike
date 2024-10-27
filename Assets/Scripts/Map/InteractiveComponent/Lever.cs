@@ -9,6 +9,7 @@ public class Lever : InteractiveComponent
     {
         base.Initialization();
         SwitchState();
+        showTips = !state;
     }
 
     public override bool SwitchState()

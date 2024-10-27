@@ -15,6 +15,7 @@ public class Lock : InteractiveComponent
         {
             OpenGate();
         }
+        showTips = !state;
     }
 
     public void OpenGate()

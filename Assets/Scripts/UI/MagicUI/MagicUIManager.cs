@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class MagicUIManager : MonoSingleton<MagicUIManager>
 {
-    public Sprite emptySprite;
 
     public Sprite[] magicSprites;
 
@@ -17,11 +16,11 @@ public class MagicUIManager : MonoSingleton<MagicUIManager>
     {
         if (state)
         {
-            magicImages[id].sprite = magicSprites[id];
+            magicImages[id].fillAmount = 1;
         }
         else
         {
-            magicImages[id].sprite = emptySprite;
+            magicImages[id].fillAmount = 0;
         }
     }
     public void UpdateMask(int id ,float value)

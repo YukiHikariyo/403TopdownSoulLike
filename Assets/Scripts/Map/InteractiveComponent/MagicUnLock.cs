@@ -9,6 +9,7 @@ public class MagicUnLock : InteractiveComponent
     public override void Initialization()
     {
         base.Initialization();
+        showTips = !state;
     }
 
     public override bool SwitchState()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8344192191810377051}
   - component: {fileID: 5241899731697175011}
   - component: {fileID: 158094267673702870}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlashBang_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,10 +93,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 30143
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Move()
     {
-        playerRb.velocity = (isSameDirection ? 1 : 0.9f) * moveSpeed * MoveAxis;
+        playerRb.velocity = moveSpeed * MoveAxis;
     }
     public void Run(float time)
     {
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Charge_Move()
     {
-        playerRb.velocity = (isSameDirection ? 1 : 0.9f) * ChargeSpeedFix * moveSpeed * MoveAxis;
+        playerRb.velocity = ChargeSpeedFix * moveSpeed * MoveAxis;
     }
     #endregion
     #region 翻滚

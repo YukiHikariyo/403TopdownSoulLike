@@ -10,7 +10,7 @@ public class PlayerShooter : MonoBehaviour
     [Tooltip("炫目光束")] public GameObject flashBullet;
     private void Awake()
     {
-        player = gameObject.GetComponent<Player>();
+        player = transform.parent.GetComponent<Player>();
     }
     //发射莫洛托夫鸡尾酒，target为鼠标位置，add_y用于模拟抛物线最高点高度，num为发射的瓶子数量
     public void Molotov(Vector3 start, Vector3 target, float add_y,float deviation, int num)

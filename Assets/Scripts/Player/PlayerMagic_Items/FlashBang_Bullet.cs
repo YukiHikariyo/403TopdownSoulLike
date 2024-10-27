@@ -26,22 +26,22 @@ public class FlashBang_Bullet : MonoBehaviour
         }
         else
         {
+            GameObject b = Instantiate(Light);
+            b.transform.position = transform.position;
+            FlashBang_Light l = b.GetComponent<FlashBang_Light>();
+            l.player = player;
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-        {
-            Destroy(gameObject);
-        }
-    }
-    private void OnDestroy()
-    {
+        Debug.Log(collision);
         GameObject b = Instantiate(Light);
         b.transform.position = transform.position;
         FlashBang_Light l = b.GetComponent<FlashBang_Light>();
         l.player = player;
+        l.area.player = player;
+        Destroy(gameObject);
     }
 }

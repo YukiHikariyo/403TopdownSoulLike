@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5041836006172010060}
   - component: {fileID: 3063291606401770162}
   - component: {fileID: 8129499438457739342}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MolotovBottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,14 +6,13 @@ public class FlashBang_Light : MonoBehaviour
 {
     public Player player;
     public GameObject damageArea;
-    AttackArea area;
+    public AttackArea area;
     public float existTime;
     private float nowTime;
     public float damageLength;
     private void Start()
     {
         nowTime = 0;
-        area = damageArea.GetComponent<AttackArea>();
         area.player = player;
     }
     private void Update()
