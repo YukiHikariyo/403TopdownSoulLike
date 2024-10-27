@@ -52,7 +52,8 @@ public class EnemyDeadState : EnemyState
         }
         enemy.damageableIndex = 1;
         enemy.rb.velocity = Vector2.zero;
-        enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);
+        if (enemy.attackerTransform != null)
+            enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);
         enemy.anim.Play("Dead");
         enemy.collider.enabled = false;
 
@@ -89,7 +90,8 @@ public class EnemyDizzyState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
-        enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);
+        if (enemy.attackerTransform != null)
+            enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);
         enemy.anim.Play("Dizzy");
     }
 
@@ -105,7 +107,7 @@ public class EnemyDizzyState : EnemyState
 
     public override void OnExit()
     {
-        
+        enemy.attackerTransform = null;
     }
 }
 
@@ -118,7 +120,8 @@ public class EnemySmallStunState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
-        enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 5, ForceMode2D.Impulse);
+        if (enemy.attackerTransform != null)
+            enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 5, ForceMode2D.Impulse);
         enemy.anim.Play("SmallStun");
         StateChangeTimer(0.5f, enemy.defaultState).Forget();
     }
@@ -135,6 +138,7 @@ public class EnemySmallStunState : EnemyState
 
     public override void OnExit()
     {
+        enemy.attackerTransform = null;
         changeTimerCTK.Cancel();
     }
 }
@@ -148,7 +152,8 @@ public class EnemyNormalStunState : EnemyState
     public override void OnEnter()
     {
         enemy.rb.velocity = Vector2.zero;
-        enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);
+        if (enemy.attackerTransform != null)
+            enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);
         enemy.anim.Play("NormalStun");
         StateChangeTimer(1.2f, enemy.defaultState).Forget();
     }
@@ -165,6 +170,7 @@ public class EnemyNormalStunState : EnemyState
 
     public override void OnExit()
     {
+        enemy.attackerTransform = null;
         changeTimerCTK.Cancel();
     }
 }
