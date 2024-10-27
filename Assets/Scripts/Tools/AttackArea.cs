@@ -115,7 +115,7 @@ public class AttackArea : MonoBehaviour
                         damageable.GetBuff(buffType, directBuffDuration);
                     }
                     else if (causeBuffDamage)
-                        damageable.TakeBuffDamage(buffType, player.playerData.FinalBuffDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
+                        damageable.TakeBuffDamage(buffType, player.playerData.FinalDamage * player.buffMotionValue[buffMotionValueIndex], ignoreDamageableIndex);
 
                     if (isSuccessful)
                     {
