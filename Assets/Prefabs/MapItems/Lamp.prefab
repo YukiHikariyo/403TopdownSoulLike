@@ -302,6 +302,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   alwaysInteractive: 0
   showTips: 0
+  stateMachine: {fileID: 0}
   lightcruve:
     serializedVersion: 2
     m_Curve:
@@ -370,7 +371,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32759
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -405,7 +406,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32759
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

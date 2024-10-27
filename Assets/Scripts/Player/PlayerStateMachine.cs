@@ -213,7 +213,7 @@ public class PlayerStateMachine : StateMachine
     private void UpdateMouseDegree()
     {
         Vector3 mmouseDistance = m_camera.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
-        mouseDistance = new Vector3(mmouseDistance.x, mmouseDistance.y, 0f);
+        Vector3 mouseDistance = new Vector3(mmouseDistance.x, mmouseDistance.y, 0f);
         float degree = Mathf.Atan2(mouseDistance.y, mouseDistance.x) * Mathf.Rad2Deg;
         mousedegree = degree>=0?degree:360f+degree;
     }

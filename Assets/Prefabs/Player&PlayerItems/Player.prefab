@@ -215,7 +215,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -3351,7 +3351,7 @@ MonoBehaviour:
   chargeSpeedMultiplication: 1
   foresightTimeMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
-  magicUnlockState: 000100
+  magicUnlockState: 000000
   lastPosition: {x: 0, y: -18, z: 0}
 --- !u!114 &4510489401662688001
 MonoBehaviour:

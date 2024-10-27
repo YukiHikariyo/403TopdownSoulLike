@@ -48,7 +48,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32759
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -93,4 +93,5 @@ MonoBehaviour:
   animator: {fileID: 0}
   alwaysInteractive: 1
   showTips: 1
+  stateMachine: {fileID: 0}
   target: {fileID: 0}
