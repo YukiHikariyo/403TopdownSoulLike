@@ -1026,6 +1026,61 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!1 &1223223608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1223223610}
+  - component: {fileID: 1223223609}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1223223609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223223608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac1dbfba9d071a48b4011ea8408efed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 6818002402047405135, guid: cf13741d99db6654bac4aaab546b66c5, type: 3}
+  spawnedEnemy: {fileID: 0}
+  isSpawned: 0
+  isDead: 0
+  canSpawnAgain: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  checkShape: 0
+  radius: 20
+  size: {x: 40, y: 40}
+--- !u!4 &1223223610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223223608}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1244068109
 GameObject:
   m_ObjectHideFlags: 0
@@ -2137,7 +2192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4595694198364618283, guid: 0f8bee8f8926ebb4d9cabf5179a6dd20, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8303829855967246284, guid: 0f8bee8f8926ebb4d9cabf5179a6dd20, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2446,3 +2501,4 @@ SceneRoots:
   - {fileID: 1071944875909651751}
   - {fileID: 7235421850548351509}
   - {fileID: 7086896218922202499}
+  - {fileID: 1223223610}

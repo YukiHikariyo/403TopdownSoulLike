@@ -46,12 +46,22 @@ public class EnemyDeadState : EnemyState
     public override void OnEnter()
     {
         if (enemy.spawner != null)
+        {
             enemy.spawner.isDead = true;
+            enemy.spawner.spawnedEnemy = null;
+        }
         enemy.damageableIndex = 1;
         enemy.rb.velocity = Vector2.zero;
         enemy.rb.AddForce((enemy.transform.position - enemy.attackerTransform.position).normalized * 10, ForceMode2D.Impulse);
         enemy.anim.Play("Dead");
         enemy.collider.enabled = false;
+
+        GameManager.Instance.GetExp(enemy.exp);
+        for (int i = 0; i < enemy.dropItems.Length; i++)
+        {
+            if (enemy.CalculateProbability(enemy.dropItems[i].probability))
+                PackageManager.Instance.GetItem(enemy.dropItems[i].id, enemy.dropItems[i].number);
+        }
     }
 
     public override void LogicUpdate()

@@ -31,6 +31,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public EnemySpawner spawner;
 
+    [Serializable]
+    public struct DropItem
+    {
+        public int id;
+        public int number;
+        public float probability;
+    }
+
     [Header("基本属性")]
     [Space(16)]
 
@@ -216,6 +224,13 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public AudioClip attackSFX;
     public AudioClip hurtSFX;
+
+    [Space(16)]
+    [Header("掉落")]
+    [Space(16)]
+
+    public int exp;
+    public DropItem[] dropItems;
 
     #region 生命周期
 

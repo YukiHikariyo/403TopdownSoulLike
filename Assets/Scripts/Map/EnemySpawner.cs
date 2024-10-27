@@ -14,9 +14,9 @@ public class EnemySpawner : MonoBehaviour, ISaveable
     }
 
     [Tooltip("敌人预制体")] public GameObject enemyPrefab;
-    [HideInInspector] public GameObject spawnedEnemy;
+    public GameObject spawnedEnemy;
     [Tooltip("已经生成")] public bool isSpawned;
-    [Tooltip("敌人已死")][HideInInspector] public bool isDead;
+    [Tooltip("敌人已死")] public bool isDead;
     [Tooltip("可重复生成")] public bool canSpawnAgain = true;
 
     [Tooltip("玩家层级")] public LayerMask playerLayer = 1 << 3;
