@@ -20,6 +20,7 @@ public class PlayerState_FirstRoll : PlayerState
         if(playerController.RollCount == 0)
             playerController.RollTimer = playerController.RollColdDown;
 
+        playerData.MotionToughness -= 10f;
         playerController.RollCount++;
     }
 
@@ -27,6 +28,7 @@ public class PlayerState_FirstRoll : PlayerState
     {
         base.Exit();
         player.damageableIndex = 0;
+        playerData.MotionToughness = 0;
     }
 
     public override void LogicUpdate()

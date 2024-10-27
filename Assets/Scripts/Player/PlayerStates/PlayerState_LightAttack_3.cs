@@ -17,11 +17,14 @@ public class PlayerState_LightAttack_3 : PlayerState
         playerAnimator.Play("L3_Attack");
 
         lightAtk_3.transform.localEulerAngles = new Vector3(lightAtk_3.transform.localEulerAngles.x, lightAtk_3.transform.localEulerAngles.y, degree);
+
+        playerData.MotionToughness += 5f;
     }
 
     public override void Exit()
     {
         base.Exit();
+        playerData.MotionToughness = 0;
     }
 
     public override void LogicUpdate()

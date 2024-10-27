@@ -14,9 +14,10 @@ public class Player : MonoBehaviour, IDamageable
 {
     public PlayerData playerData;
     public PlayerController playerController;
+    public PlayerStateMachine playerStateMachine;
     public PlayerInput playerInput;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     [Space(16)]
     [Header("固定属性")]
@@ -73,9 +74,9 @@ public class Player : MonoBehaviour, IDamageable
         UIManager.Instance.player = this;
         playerData = GetComponent<PlayerData>();
         playerController = GetComponent<PlayerController>();
+        playerStateMachine = GetComponent<PlayerStateMachine>();
         playerInput = GetComponent<PlayerInput>();
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         buffBars = UIManager.Instance.buffBars;
     }
@@ -111,13 +112,13 @@ public class Player : MonoBehaviour, IDamageable
 
             float stunValue = attackPower - playerData.FinalToughness;
             if (isEnduance || stunValue <= 0)
-                noStunEvent?.Invoke(attackerTransform);
+                playerStateMachine.OnNoStun(attackerTransform);
             else if (stunValue > 0 && stunValue <= 10)
-                smallStunEvent?.Invoke(attackerTransform);
+                playerStateMachine.OnSmallStun(attackerTransform);
             else if (stunValue > 10 && stunValue <= 20)
-                normalStunEvent?.Invoke(attackerTransform);
+                playerStateMachine.OnNormalStun(attackerTransform);
             else
-                bigStunEvent?.Invoke(attackerTransform);
+                playerStateMachine.OnBigStun(attackerTransform);
 
             VFXManager.Instance.PlayVFX(0, transform, transform.position, 0);
             OnHurtVFX().Forget();

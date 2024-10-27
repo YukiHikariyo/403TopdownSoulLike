@@ -17,11 +17,14 @@ public class PlayerState_Charging : PlayerState
         chargeState = 0;
         chargeSpeed = playerData.chargeSpeedMultiplication;
         OnChargeStage0();
+
+        playerData.MotionToughness -= 10f;
     }
 
     public override void Exit()
     {
         base.Exit();
+        playerData.MotionToughness = 0f;
     }
 
     public override void LogicUpdate()

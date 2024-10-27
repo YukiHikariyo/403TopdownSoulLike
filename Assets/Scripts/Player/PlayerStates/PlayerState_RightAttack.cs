@@ -15,12 +15,16 @@ public class PlayerState_RightAttack : PlayerState
 
         SetAnimator_OnStart_Input();
         playerAnimator.Play("RightAttack");
+
+        playerData.MotionToughness += 10f;
     }
 
     public override void Exit()
     {
         base.Exit();
         playerAnimator.speed = 1f;
+        playerData.MotionToughness = 0;
+
     }
 
     public override void LogicUpdate()

@@ -22,6 +22,7 @@ public class PlayerState_BackAttack : PlayerState
         
         foresight = false;
         backAttackArea.successEvent.AddListener(foresightCheck);
+        playerData.MotionToughness += 80f;
     }
 
     public override void Exit()
@@ -29,6 +30,7 @@ public class PlayerState_BackAttack : PlayerState
         base.Exit();
         backAttackArea.successEvent.RemoveListener(foresightCheck);
         player.damageableIndex = 0;
+        playerData.MotionToughness = 0f;
     }
 
     public override void LogicUpdate()

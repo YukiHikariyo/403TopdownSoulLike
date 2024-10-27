@@ -27,5 +27,6 @@ public class PlayerState_Dead : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        playerController.Idle();
     }
 }

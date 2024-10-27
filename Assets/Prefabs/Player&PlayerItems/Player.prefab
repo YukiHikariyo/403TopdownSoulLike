@@ -1982,7 +1982,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2435,6 +2435,7 @@ Transform:
   - {fileID: 509273474749122926}
   - {fileID: 2067578634040806722}
   - {fileID: 5291257720636655406}
+  - {fileID: 2595555299159510364}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5403204324394134040
@@ -2481,7 +2482,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 2154088116047620211}
   playerController: {fileID: 5479772352610202664}
+  playerStateMachine: {fileID: 1691327027149203749}
   playerInput: {fileID: 4510489401662688001}
+  spriteRenderer: {fileID: 6623208658060552808}
   motionValue:
   - 0.8
   - 0.9
@@ -2676,8 +2679,8 @@ MonoBehaviour:
   - 40
   mousedegree: 0
   mouseDistance: {x: 0, y: 0, z: 0}
-  CatchChancepoint: 0
-  noStunUndamageableTime: 0
+  CatchChancepoint: 0.4
+  noStunUndamageableTime: 0.55
   energyRecoverTimer: 0
   energyRecoverDelay: 2
   magicTimer:
@@ -2730,8 +2733,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: 4151189749885843770}
   inputs: {fileID: 4510489401662688001}
-  playerLight: {fileID: 0}
-  playerData: {fileID: 0}
+  playerLight: {fileID: 8680380314532487408}
+  playerData: {fileID: 2154088116047620211}
   moveSpeed: 2.5
   runSpeed: 4
   fastRollSpeed: 4
@@ -2749,15 +2752,15 @@ MonoBehaviour:
   ChargeMaxTime: 2
   ChargeSpeedFix: 0.6
   RightAttackSpeed: 12
-  UnDamageableLeftTime: 0
-  PerfectCheckTime: 0
+  UnDamageableLeftTime: 0.8
+  PerfectCheckTime: 0.4
   catchChanceSpeed: 8
   backAttackSpeed: 12
   molotovBottleCount: 3
   molotov_Y: 5
   deviation: 1
-  FlashBangExistTime: 1
-  FlashBangSpeed: 10
+  FlashBangExistTime: 0.6
+  FlashBangSpeed: 15
   smallStunSpeed: 0
   normalStunSpeed: 0
   bigStunSpeed: 0
@@ -3314,19 +3317,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4853331213230003033}
-  basicMaxHealth: 50
-  currentHealth: 0
+  basicMaxHealth: 100
+  currentHealth: 100
   basicMaxMana: 50
-  currentMana: 0
+  currentMana: 50
   basicMaxEnergy: 75
-  currentEnergy: 0
+  currentEnergy: 75
   basicEnergyRecovery: 20
-  basicDamage: 0
+  basicDamage: 20
   basicCritRate: 0
-  basicCritDamage: 0
+  basicCritDamage: 1.5
   basicPenetratingPower: 0
   basicReductionRate: 0
-  basicToughness: 0
+  basicToughness: 20
   basicLightRadius: 4
   talentEnergyRecovery: 0
   talentDamage: 0
@@ -3507,6 +3510,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6434505, y: 1.3816199}
   m_EdgeRadius: 0
+--- !u!1 &7475301072836836205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2595555299159510364}
+  m_Layer: 3
+  m_Name: PlayerVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2595555299159510364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7475301072836836205}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1868925626516101975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8267541646454369684
 GameObject:
   m_ObjectHideFlags: 0

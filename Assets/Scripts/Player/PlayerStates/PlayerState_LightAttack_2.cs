@@ -20,11 +20,14 @@ public class PlayerState_LightAttack_2 : PlayerState
 
 
         lightAtk_2.transform.localEulerAngles = new Vector3(lightAtk_2.transform.localEulerAngles.x, lightAtk_2.transform.localEulerAngles.y, degree);
+
+        playerData.MotionToughness += 1f;
     }
 
     public override void Exit()
     {
         base.Exit();
+        playerData.MotionToughness -= 1f;
     }
 
     public override void LogicUpdate()
