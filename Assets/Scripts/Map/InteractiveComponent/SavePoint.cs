@@ -13,6 +13,7 @@ public class SavePoint : InteractiveComponent
 
     public override bool SwitchState()
     {
+        GameManager.Instance.player.playerData.lastPosition = GameManager.Instance.player.transform.position;
         GameManager.Instance.SaveGame();
         UIManager.Instance.PlayTipSequence(tip);
         if (!state)

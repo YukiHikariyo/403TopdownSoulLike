@@ -58,6 +58,8 @@ public class PlayerInput : MonoBehaviour
     public bool UseManaBottle => input.Player.Mana.WasPressedThisFrame();
 
     public bool Interaction => input.Player.Interaction.WasPressedThisFrame();
+
+    public bool OpenPackage => input.Player.Package.WasPressedThisFrame();
     #endregion
 
     #region 输入检测拓展

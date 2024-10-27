@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -213,7 +212,7 @@ public class PlayerStateMachine : StateMachine
     private void UpdateMouseDegree()
     {
         Vector3 mmouseDistance = m_camera.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
-        Vector3 mouseDistance = new Vector3(mmouseDistance.x, mmouseDistance.y, 0f);
+        mouseDistance = new Vector3(mmouseDistance.x, mmouseDistance.y, 0f);
         float degree = Mathf.Atan2(mouseDistance.y, mouseDistance.x) * Mathf.Rad2Deg;
         mousedegree = degree>=0?degree:360f+degree;
     }
@@ -268,7 +267,9 @@ public class PlayerStateMachine : StateMachine
         Vector3 direction = (attacker.position - playerTransform.position).normalized;
         bool isUp = direction.y >= 0;
         bool isRight = direction.x > 0;
+        bool isHorizontal = Mathf.Abs(direction.y) <= Mathf.Abs(direction.x);
         playerAnimator.SetFloat("isUp", isUp ? 1 : 0);
+        playerAnimator.SetFloat("isHorizontal", isHorizontal ? 1 : 0);
         playerRenderer.flipX = isRight;
     }
 

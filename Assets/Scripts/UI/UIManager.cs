@@ -147,12 +147,6 @@ public class UIManager : MonoSingleton<UIManager>
         InitializeTipSequence();
     }
 
-    private void Update()
-    {
-        if (!isPackageOpen && Input.GetKeyDown(KeyCode.Escape))
-            OpenPackage();
-    }
-
     public void Initialize()
     {
         itemDetailPanel.gameObject.SetActive(false);

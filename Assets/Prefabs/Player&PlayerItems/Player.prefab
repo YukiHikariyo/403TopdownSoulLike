@@ -1604,7 +1604,7 @@ GameObject:
   - component: {fileID: 3651598282595405741}
   - component: {fileID: 4166248118589477729}
   - component: {fileID: 5257692238342260335}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BigLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1641,7 +1641,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32703
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1719,19 +1719,19 @@ MonoBehaviour:
   player: {fileID: 4853331213230003033}
   enemy: {fileID: 0}
   causeHealthDamage: 0
-  causeBuffDamage: 0
+  causeBuffDamage: 1
   directlyAssertBuff: 0
   directBuffProbability: 0
   isBullet: 0
-  ignoreDamageableIndex: 0
+  ignoreDamageableIndex: 1
   motionValueIndex: 0
   attackPowerIndex: 0
   buffMotionValueIndex: 0
-  buffType: 12
+  buffType: 14
   directBuffDuration: 0
   noSourceDamage: 0
   noSourcePenetratingPower: 0
-  noSourceBuffDamage: 0
+  noSourceBuffDamage: 25
   successEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1956,7 +1956,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: c3fb87b76a368e445ae834dd9475e9ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2497,6 +2497,7 @@ MonoBehaviour:
   - 3.2
   - 5
   - 2
+  - 0
   attackPower:
   - 15
   - 20
@@ -2509,6 +2510,7 @@ MonoBehaviour:
   - 40
   - 50
   - 30
+  - 15
   buffMotionValue:
   - 1
   - 1.2
@@ -2521,6 +2523,7 @@ MonoBehaviour:
   - 2.8
   - 4.5
   - 2
+  - 0
   damageableIndex: 0
   currentBuffHealth:
   - 0
@@ -2744,7 +2747,7 @@ MonoBehaviour:
   L1AtkSpeed: 8
   L2AtkSpeed: 8
   L3AtkSpeed: 3
-  L4AtkSpeed: 12
+  L4AtkSpeed: 11
   LightAtkRotateAngle: 60
   isSameDirection: 0
   RollCount: 0
@@ -2756,15 +2759,15 @@ MonoBehaviour:
   UnDamageableLeftTime: 0.8
   PerfectCheckTime: 0.4
   catchChanceSpeed: 8
-  backAttackSpeed: 12
+  backAttackSpeed: 10
   molotovBottleCount: 3
   molotov_Y: 5
   deviation: 1
   FlashBangExistTime: 0.6
   FlashBangSpeed: 15
-  smallStunSpeed: 0
-  normalStunSpeed: 0
-  bigStunSpeed: 0
+  smallStunSpeed: 1
+  normalStunSpeed: 1.5
+  bigStunSpeed: 4
   fastRollCruve:
     serializedVersion: 2
     m_Curve:
@@ -2873,14 +2876,14 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.02
       value: 0.6
-      inSlope: 7.142857
-      outSlope: 7.142857
+      inSlope: 8.333334
+      outSlope: 8.333334
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.14
+      time: 0.12
       value: 1
       inSlope: 0
       outSlope: 0
@@ -2889,10 +2892,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.25
-      value: 0.0054365396
-      inSlope: -0.02528623
-      outSlope: -0.02528623
+      time: 0.2
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
@@ -2924,14 +2927,14 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.02
       value: 0.6
-      inSlope: 7.142857
-      outSlope: 7.142857
+      inSlope: 8.333334
+      outSlope: 8.333334
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.14
+      time: 0.12
       value: 1
       inSlope: 0
       outSlope: 0
@@ -2940,10 +2943,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.25
-      value: 0.0054365396
-      inSlope: -0.02528623
-      outSlope: -0.02528623
+      time: 0.2
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
@@ -3271,19 +3274,100 @@ MonoBehaviour:
     m_RotationOrder: 4
   SmallStunCruve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   NormalStunCruve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   BigStunCruve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11127174
+      outWeight: 0.09590163
+    - serializedVersion: 3
+      time: 0.99927735
+      value: 0.003508771
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

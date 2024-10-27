@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 [CreateAssetMenu(menuName ="Data/PlayerState/Idle",fileName ="PlayerState_Idle",order = 0)]
 public class PlayerState_Idle : PlayerState
@@ -19,6 +18,11 @@ public class PlayerState_Idle : PlayerState
     public override void LogicUpdate()
     {
         SetAnimator_Update();
+
+        if (playerInput.OpenPackage)
+        {
+            UIManager.Instance.OpenPackage();
+        }
 
         if (!playerInput.Interaction || playerStateMachine.interactionObj == null)
         {
