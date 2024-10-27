@@ -17,6 +17,8 @@ public class BigLight : MonoBehaviour
     {
         playerData.LightRadiusMultiplication += 1f;
         nowTime = 0;
+        playerLight.color = Color.yellow;
+        playerLight.intensity = 3f;
     }
 
     private void Update()
@@ -26,8 +28,14 @@ public class BigLight : MonoBehaviour
         playerLight.pointLightOuterRadius = radiusCruve.Evaluate(nowTime / existTime) * lightOuterRange;
         if (nowTime > existTime)
         {
-            playerData.LightRadiusMultiplication -= 1f;
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnDisable()
+    {
+        playerData.LightRadiusMultiplication -= 1f;
+        playerLight.color = Color.white;
+        playerLight.intensity = 2f;
     }
 }

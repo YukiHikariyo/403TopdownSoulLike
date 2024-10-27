@@ -13,7 +13,7 @@ public class TPpoint : InteractiveComponent
 
     public override bool SwitchState()
     {
-        targetPosition = transform.position;
+        targetPosition = target.transform.position;
         GameManager.Instance.TeleportPlayer(targetPosition);
         return false;
     }

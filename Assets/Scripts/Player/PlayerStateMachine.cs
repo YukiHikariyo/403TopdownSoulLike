@@ -30,6 +30,7 @@ public class PlayerStateMachine : StateMachine
     [Header("特定时间节点")]
     [Tooltip("见切完美判定和无敌帧判定区间中点")]public float CatchChancepoint;
     [Tooltip("无硬直无敌时间")] public float noStunUndamageableTime;
+    [Tooltip("反击是否命中")] public bool successfulBack;
     //无敌帧计时器
     private float noStunTimer;
     #endregion
@@ -74,6 +75,10 @@ public class PlayerStateMachine : StateMachine
     public GameObject RightAttack_3;
 
     public GameObject RightAttack;
+    [Tooltip("蓄力提示VFX")]
+    public ParticleSystem chargeVFX;
+    [Tooltip("蓄力提示物体")]
+    public GameObject chargeVFXobj;
     #endregion
     #region 接受输入窗口
     [Tooltip("是否接收输入")]public bool CanAcceptInput { get; set; }
@@ -102,6 +107,7 @@ public class PlayerStateMachine : StateMachine
         #region 组件获取
         m_camera = Camera.main;
         attacker = null;
+        chargeVFX = chargeVFXobj.GetComponent<ParticleSystem>();
         #endregion
         //
         memory = InputMemory.None;
@@ -293,6 +299,11 @@ public class PlayerStateMachine : StateMachine
     public void MagicInvoke()
     {
         magicEvent?.Invoke();
+    }
+
+    public void BackAttackOnAttack(IDamageable damageable)
+    {
+        successfulBack = true;
     }
     /// <summary>
     /// 更新冷却时间

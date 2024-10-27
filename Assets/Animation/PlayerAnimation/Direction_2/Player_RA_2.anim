@@ -58,18 +58,6 @@ AnimationClip:
       value: {fileID: -1912109295, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
     - time: 1.8
       value: {fileID: -82666371, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - time: 1.9
-      value: {fileID: 797448822, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - time: 2
-      value: {fileID: -2146340711, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - time: 2.1
-      value: {fileID: 258975622, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - time: 2.2
-      value: {fileID: 741785979, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - time: 2.3
-      value: {fileID: 186341041, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - time: 2.4
-      value: {fileID: -315880936, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
     attribute: m_Sprite
     path: Square
     classID: 212
@@ -111,18 +99,12 @@ AnimationClip:
     - {fileID: -1330914428, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
     - {fileID: -1912109295, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
     - {fileID: -82666371, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - {fileID: 797448822, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - {fileID: -2146340711, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - {fileID: 258975622, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - {fileID: 741785979, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - {fileID: 186341041, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
-    - {fileID: -315880936, guid: d18dce9d9a70a0c44979d80206cfb350, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 2.5
+    m_StopTime: 1.9
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -170,14 +152,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2
+  - time: 0.8
     functionName: AcceptInput
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.9
+  - time: 1.5
     functionName: AcceptStateSwitch
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -73,11 +73,11 @@ public class AttackArea : MonoBehaviour
                     break;
 
                 case AttackerType.PlayerBlade:
-
+                    
                     if (causeHealthDamage)
                     {
                         isCrit = CalculateProbability(player.playerData.FinalCritRate);
-                        damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (isCrit ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
+                        isSuccessful = damageable.TakeDamage(player.playerData.FinalDamage * player.motionValue[motionValueIndex] * (isCrit ? player.playerData.FinalCritDamage : 1), player.playerData.FinalPenetratingPower, player.attackPower[attackPowerIndex], isBullet ? transform : player.transform, ignoreDamageableIndex);
                     }
 
                     if (player.playerData.currentWeaponStaticData != null)
@@ -86,6 +86,7 @@ public class AttackArea : MonoBehaviour
 
                     if (isSuccessful)
                     {
+ 
                         successEvent?.Invoke(damageable);
 
                         if (player.passiveSkillTriggerAction.ContainsKey(PlayerPassiveSkill.TriggerType.Hit))

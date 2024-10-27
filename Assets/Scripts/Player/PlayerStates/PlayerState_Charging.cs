@@ -9,6 +9,8 @@ public class PlayerState_Charging : PlayerState
     float chargeSpeed;
     float nowTime;
     int chargeState;
+    Color color = Color.white;
+    ParticleSystem.MainModule mainModule;
     public override void Enter()
     {
         base.Enter();
@@ -17,7 +19,7 @@ public class PlayerState_Charging : PlayerState
         chargeState = 0;
         chargeSpeed = playerData.chargeSpeedMultiplication;
         OnChargeStage0();
-
+        mainModule = playerStateMachine.chargeVFX.main;
         playerData.MotionToughness -= 10f;
     }
 
@@ -110,16 +112,25 @@ public class PlayerState_Charging : PlayerState
 
     private void OnChargeStage1()
     {
-
+        playerStateMachine.chargeVFXobj.SetActive(false);
+        color = Color.white;
+        mainModule.startColor = color;
+        playerStateMachine.chargeVFXobj.SetActive(true);
     }
 
     private void OnChargeStage2()
     {
-
+        playerStateMachine.chargeVFXobj.SetActive(false);
+        color = Color.yellow;
+        mainModule.startColor = color;
+        playerStateMachine.chargeVFXobj.SetActive(true);
     }
 
     private void OnChargeStage3()
     {
-
+        playerStateMachine.chargeVFXobj.SetActive(false);
+        color = Color.red;
+        mainModule.startColor = color;
+        playerStateMachine.chargeVFXobj.SetActive(true);
     }
 }

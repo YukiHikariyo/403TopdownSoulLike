@@ -4,7 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/PlayerState/BackAttack", fileName = "PlayerState_BackAttack",order = 10)]
 public class PlayerState_BackAttack : PlayerState
 {
-    bool foresight = false;
     float degree;
     public override void Enter()
     {
@@ -20,15 +19,13 @@ public class PlayerState_BackAttack : PlayerState
 
         BackAttack.transform.localEulerAngles = new Vector3(BackAttack.transform.localEulerAngles.x, BackAttack.transform.localEulerAngles.y, degree);
         
-        foresight = false;
-        backAttackArea.successEvent.AddListener(foresightCheck);
+        playerStateMachine.successfulBack = false;
         playerData.MotionToughness += 80f;
     }
 
     public override void Exit()
     {
         base.Exit();
-        backAttackArea.successEvent.RemoveListener(foresightCheck);
         player.damageableIndex = 0;
         playerData.MotionToughness = 0f;
     }
@@ -48,7 +45,7 @@ public class PlayerState_BackAttack : PlayerState
             switch (playerStateMachine.memory)
             {
                 case InputMemory.LightAttack:
-                    if(foresight)
+                    if(playerStateMachine.successfulBack)
                         playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_4));
                     else
                         playerStateMachine.SwitchState(typeof(PlayerState_LightAttack_1));
@@ -75,10 +72,6 @@ public class PlayerState_BackAttack : PlayerState
                 playerStateMachine.SwitchState(typeof(PlayerState_Idle));
             }
         }
-    }
-    private void foresightCheck(IDamageable damageable)
-    {
-        foresight = true;
     }
     public override void PhysicUpdate()
     {

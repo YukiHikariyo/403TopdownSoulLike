@@ -256,7 +256,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateLightRadius()
     {
         playerLight.pointLightInnerRadius = playerData.FinalLightRadius;
-        playerLight.pointLightOuterRadius = Mathf.Min(playerData.FinalLightRadius * 2f, 2f);
+        playerLight.pointLightOuterRadius = Mathf.Max(playerData.FinalLightRadius * 2f, 2f);
     }
 }
 public enum Skill_Physics
