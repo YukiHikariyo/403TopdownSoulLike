@@ -20,6 +20,7 @@ public class MagicUIManager : MonoSingleton<MagicUIManager>
         }
         else
         {
+            Debug.Log("0");
             magicImages[id].fillAmount = 0;
         }
     }
