@@ -388,7 +388,7 @@ public class UIManager : MonoSingleton<UIManager>
 
         int id = currentSelectedWeapon.weaponID;
         int level = PackageManager.Instance.weaponDict[id].level;
-        selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].name;
+        selectedWeaponName.text = PackageManager.Instance.allWeaponList[id].weaponName;
         selectedWeaponLevel.text = "LV." + level + (level >= PackageManager.Instance.allWeaponList[id].maxLevel ? "\n（满级）" : "");
         weaponStoneValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].stoneCost + "";
         weaponCoinValue.text = PackageManager.Instance.allWeaponList[id].weaponStats[level - 1].coinCost + "";
@@ -452,7 +452,7 @@ public class UIManager : MonoSingleton<UIManager>
 
         int id = currentSelectedAccessory.accessoryID;
         int level = PackageManager.Instance.accessoryDict[id].level;
-        selectedAccessoryName.text = PackageManager.Instance.allAccessoryList[id].name;
+        selectedAccessoryName.text = PackageManager.Instance.allAccessoryList[id].accessoryName;
         selectedAccessoryLevel.text = "LV." + level + (level >= PackageManager.Instance.allAccessoryList[id].maxLevel ? "\n（满级）" : "");
         accessoryStoneValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].stoneCost + "";
         accessoryCoinValue.text = PackageManager.Instance.allAccessoryList[id].accessoryStats[level - 1].coinCost + "";

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 背包管理类
@@ -105,6 +106,12 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         itemDict.Clear();
         weaponDict.Clear();
         accessoryDict.Clear();
+        for (int i = 0; i < UIManager.Instance.itemSlots.transform.childCount; i++)
+            Destroy(UIManager.Instance.itemSlots.GetChild(i).gameObject);
+        for (int i = 0; i < UIManager.Instance.weaponSlots.transform.childCount; i++)
+            Destroy(UIManager.Instance.weaponSlots.GetChild(i).gameObject);
+        for (int i = 0; i < UIManager.Instance.accessorySlots.transform.childCount; i++)
+            Destroy(UIManager.Instance.accessorySlots.GetChild(i).gameObject);
 
         //两瓶
         if (saveData.savedBottleDict.ContainsKey("HealthBottle"))
@@ -119,24 +126,50 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         //物品
         foreach (string itemID in saveData.savedItemDict.Keys)
         {
-            GetItem(int.Parse(itemID), saveData.savedItemDict[itemID.ToString()].number, false);
+            int id = int.Parse(itemID);
+            GetItem(id, saveData.savedItemDict[itemID.ToString()].number, false);
         }
 
         //武器
         foreach (string weaponID in saveData.savedWeaponDict.Keys)
         {
-            GetWeapon(int.Parse(weaponID), saveData.savedWeaponDict[weaponID.ToString()].level, false);
+            int id = int.Parse(weaponID);
+            GetWeapon(id, saveData.savedWeaponDict[weaponID.ToString()].level, false);
             if (saveData.savedWeaponDict[weaponID].isEquipped)
-                EquipWeapon(int.Parse(weaponID), false);
+                EquipWeapon(id, false);
         }
 
         //饰品
         foreach (string accessoryID in saveData.savedAccessoryDict.Keys)
         {
-            GetAccessory(int.Parse(accessoryID), saveData.savedAccessoryDict[accessoryID].level, false);
+            int id = int.Parse(accessoryID);
+            GetAccessory(id, saveData.savedAccessoryDict[accessoryID].level, false);
             if (saveData.savedAccessoryDict[accessoryID].equipPosition > 0)
-                EquipAccessory(int.Parse(accessoryID), saveData.savedAccessoryDict[accessoryID].equipPosition, false);
+                EquipAccessory(id, saveData.savedAccessoryDict[accessoryID].equipPosition, false);
         } 
+
+        foreach (int id in UIManager.Instance.itemSlotDict.Keys)
+        {
+            UIManager.Instance.itemSlotDict[id].itemNumber = itemDict[id].number;
+            UIManager.Instance.itemSlotDict[id].itemNumberText.text = itemDict[id].number.ToString();
+        }
+
+        for (int i = 0; i < UIManager.Instance.weaponSlots.childCount; i++)
+        {
+            if (weaponDict[UIManager.Instance.weaponSlots.GetChild(i).GetComponent<WeaponSlotUI>().weaponID].isEquipped)
+                UIManager.Instance.weaponSlots.GetChild(i).GetComponent<WeaponSlotUI>().transform.GetChild(4).gameObject.SetActive(true);
+        }
+
+        for (int i = 0; i < UIManager.Instance.accessorySlots.childCount; i++)
+        {
+            int position = accessoryDict[UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().accessoryID].equipPosition;
+            if (position != 0)
+            {
+                UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().equipPosition.text = position + "号位";
+                UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().transform.GetChild(4).gameObject.SetActive(true);
+            }
+                
+        }
     }
 
     #region 血蓝瓶
