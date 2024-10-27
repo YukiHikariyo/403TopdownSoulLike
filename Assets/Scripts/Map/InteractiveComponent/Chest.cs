@@ -11,10 +11,11 @@ public class Chest : InteractiveComponent
         public int id;
         public int num;
     }
-
+    public string text;
     public Item[] itemTable;
     public int[] weaponTable;
     public int[] accessoryTable;
+    public int[] magicTable;
     public override void Initialization()
     {
         base.Initialization();
@@ -40,6 +41,19 @@ public class Chest : InteractiveComponent
         for (int i = 0;i < accessoryTable.Length; i++)
         {
             PackageManager.Instance.GetAccessory(accessoryTable[i]);
+        }
+        for (int i = 0; i < magicTable.Length; ++i)
+        {
+            stateMachine.playerData.magicUnlockState[magicTable[i]] = true;
+            MagicUIManager.Instance.UpdateUnlockState(magicTable[i], true);
+            UIManager.Instance.OpenConfirmationPanel(text);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            stateMachine = collision.gameObject.GetComponent<PlayerStateMachine>();
         }
     }
 }

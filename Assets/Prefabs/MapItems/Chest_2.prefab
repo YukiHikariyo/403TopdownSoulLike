@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1095411361058399732}
   - component: {fileID: 2297763502291426532}
   - component: {fileID: 2424996263483879173}
+  - component: {fileID: 4569950665967664611}
   m_Layer: 9
   m_Name: Chest_2
   m_TagString: Interaction
@@ -122,9 +123,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3057627612816944072}
+  alwaysInteractive: 0
+  showTips: 1
+  stateMachine: {fileID: 0}
+  text: 
   itemTable: []
   weaponTable: 
   accessoryTable: 
+  magicTable: 
 --- !u!50 &2297763502291426532
 Rigidbody2D:
   serializedVersion: 4
@@ -197,3 +203,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7540684, y: 1.0657028}
   m_EdgeRadius: 0
+--- !u!58 &4569950665967664611
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5366513249662855687}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.21}
+  serializedVersion: 2
+  m_Radius: 2
