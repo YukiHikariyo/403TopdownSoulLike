@@ -574,20 +574,15 @@ public class PlayerData : MonoBehaviour, ISaveable
             saveData.savedPositionDict.Add("X", lastPosition.x);
             saveData.savedPositionDict.Add("Y", lastPosition.y);
         }
+        else
+        {
+            saveData.savedPositionDict["X"] = lastPosition.x;
+            saveData.savedPositionDict["Y"] = lastPosition.y;
+        }
     }
 
     public void LoadSaveData(SaveData saveData)
     {
-        talentDamage = 0;
-        talentCritRate = 0;
-        talentCritDamage = 0;
-        talentEnergyRecovery = 0;
-        talentPenetratingPower = 0;
-        talentReductionRate = 0;
-        BasicMaxHealth = 100;
-        BasicMaxMana = 50;
-        BasicMaxEnergy = 75;
-
         CurrentHealth = FinalMaxHealth;
         CurrentMana = FinalMaxMana;
         CurrentEnergy = FinalMaxEnergy;

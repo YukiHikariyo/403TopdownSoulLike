@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
@@ -214,6 +215,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         if (skillPoint >= number)
         {
             skillPoint -= number;
+            skillPointText.text = skillPoint.ToString();
             return true;
         }
         else
@@ -230,7 +232,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
     [Header("UI")]
     public GameObject detailPanel;
     public List<Transform> skillDotList;
-    public TextMeshProUGUI skillLv, skillDes, skillName, skillCost;
+    public TextMeshProUGUI skillLv, skillDes, skillName, skillCost, skillPointText;
     public GameObject upgradeButton;
 
     public void DisplayInfo()

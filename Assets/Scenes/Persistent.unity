@@ -20867,6 +20867,7 @@ MonoBehaviour:
   skillDes: {fileID: 1955027681}
   skillName: {fileID: 1805487197}
   skillCost: {fileID: 1182432307}
+  skillPointText: {fileID: 2092446133}
   upgradeButton: {fileID: 2123808625}
 --- !u!1 &1265526467
 GameObject:
