@@ -29,9 +29,11 @@ public class PlayerShooter : MonoBehaviour
         }
     }
     //发射闪光弹，提供发射方向，最长存在时间，发射速度
-    public void FlashBang(Vector3 direction,float existTime,float speed)
+    public void FlashBang(Vector3 start,Vector3 direction,float existTime,float speed,float degree)
     { 
         GameObject obj =Instantiate(flashBullet);
+        obj.transform.position = start;
+        obj.transform.Rotate(0,0,degree);
         FlashBang_Bullet bullet = obj.GetComponent<FlashBang_Bullet>();
         bullet.mouse = direction;   bullet.existTime = existTime;   bullet.bulletSpeed = speed;
         bullet.player = player;

@@ -10,6 +10,7 @@ public class PlayerState_BigLight : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
+        playerStateMachine.magicTimer[2] = playerStateMachine.magicColdDown[2];
         SetAnimator_OnStart_Mouse();
         playerAnimator.Play("BigLight");
         playerStateMachine.magicEvent.AddListener(BigLight);

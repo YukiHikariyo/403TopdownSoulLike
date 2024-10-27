@@ -11,6 +11,7 @@ public class PlayerState_Molotov : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
+        playerStateMachine.magicTimer[1] = playerStateMachine.magicColdDown[1];
         SetAnimator_OnStart_Mouse();
         playerAnimator.Play("Molotov");
         pa = playerStateMachine.playerTransform.position;

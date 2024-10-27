@@ -10,6 +10,7 @@ public class PlayerState_Dead : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
+        player.damageableIndex = 1;
         playerAnimator.Play("Dead");
     }
 

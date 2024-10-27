@@ -8,6 +8,7 @@ public class MolotovBottle : MonoBehaviour
     public Player player;
     public GameObject fire;
     public Vector3 A, B, C;
+    public float rotateSpeed = 1f;
     [Range(0,10)]public float existTime;
     public float nowTime = 0;
     public void Awake()
@@ -21,6 +22,7 @@ public class MolotovBottle : MonoBehaviour
         {
             nowTime += Time.fixedDeltaTime / existTime;
             transform.position = quardaticBezier(A, B, C, nowTime);
+            transform.Rotate(0, 0, rotateSpeed);
         }
         else
         {

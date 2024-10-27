@@ -15,7 +15,6 @@ public class FlashBang_Bullet : MonoBehaviour
     public void Awake()
     {
         nowTime = 0;
-        rb.velocity = mouse.normalized * bulletSpeed;
     }
 
     public void FixedUpdate()
@@ -23,6 +22,7 @@ public class FlashBang_Bullet : MonoBehaviour
         if(nowTime < existTime)
         {
             nowTime += Time.deltaTime;
+            rb.velocity = mouse.normalized * bulletSpeed;
         }
         else
         {
@@ -40,6 +40,7 @@ public class FlashBang_Bullet : MonoBehaviour
     private void OnDestroy()
     {
         GameObject b = Instantiate(Light);
+        b.transform.position = transform.position;
         FlashBang_Light l = b.GetComponent<FlashBang_Light>();
         l.player = player;
     }

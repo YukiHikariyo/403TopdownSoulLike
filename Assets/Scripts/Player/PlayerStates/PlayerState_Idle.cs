@@ -31,15 +31,28 @@ public class PlayerState_Idle : PlayerState
             }
             else if (playerInput.Magic_1 && playerData.magicUnlockState[0] && playerStateMachine.magicTimer[0] <= 0)
             {
-                playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
+                if (playerData.CurrentMana >= playerStateMachine.manaCost[0])
+                {
+                    playerData.CurrentMana -= playerStateMachine.manaCost[0];
+                    playerStateMachine.SwitchState(typeof(PlayerState_FlashBang));
+                }
+
             }
             else if (playerInput.Magic_2 && playerData.magicUnlockState[1] && playerStateMachine.magicTimer[1] <= 0)
             {
-                playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
+                if (playerData.CurrentMana >= playerStateMachine.manaCost[1])
+                {
+                    playerData.CurrentMana -= playerStateMachine.manaCost[1];
+                    playerStateMachine.SwitchState(typeof(PlayerState_Molotov));
+                }
             }
             else if (playerInput.Magic_3 && playerData.magicUnlockState[2] && playerStateMachine.magicTimer[2] <= 0)
             {
-                playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
+                if (playerData.CurrentMana >= playerStateMachine.manaCost[2])
+                {
+                    playerData.CurrentMana -= playerStateMachine.manaCost[2];
+                    playerStateMachine.SwitchState(typeof(PlayerState_BigLight));
+                }
             }
             else if (playerInput.RightAttack)
                 playerStateMachine.SwitchState(typeof(PlayerState_Charging));

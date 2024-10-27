@@ -11,6 +11,7 @@ public class PlayerState_FlashBang : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
+        playerStateMachine.magicTimer[0] = playerStateMachine.magicColdDown[0];
         SetAnimator_OnStart_Mouse();
         playerAnimator.Play("FlashBang");
         playerStateMachine.magicEvent.AddListener(ShootFlashBang);
@@ -70,6 +71,6 @@ public class PlayerState_FlashBang : PlayerState
     
     public void ShootFlashBang()
     {
-        shooter.FlashBang(playerStateMachine.MouseDistance,playerController.FlashBangExistTime,playerController.FlashBangSpeed);
+        shooter.FlashBang(playerStateMachine.transform.position, playerStateMachine.MouseDistance, playerController.FlashBangExistTime, playerController.FlashBangSpeed, playerStateMachine.MouseDegree);
     }
 }

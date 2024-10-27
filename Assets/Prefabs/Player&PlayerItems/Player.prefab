@@ -1302,7 +1302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75dc338e80f1c9742b0138ae5b9652e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4853331213230003033}
   molotovBottle: {fileID: 4625383125543985840, guid: daa42cfb64548a949a85b9e2108dfde6, type: 3}
   flashBullet: {fileID: 9019889957293387996, guid: 251e0e234e8957e4b99f10ab0cbce246, type: 3}
 --- !u!1 &3675674447321791799
@@ -2641,6 +2641,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e529ab033e377e47a44e889e067269c, type: 2}
   - {fileID: 11400000, guid: 674dabf26d4f5704f9226b88de415789, type: 2}
   - {fileID: 11400000, guid: efe7bce43b41cc9499ccd49d851d4ea2, type: 2}
+  - {fileID: 11400000, guid: 4dc65dc4a9121d3459d8ade5886f1d9d, type: 2}
   runEnergyCost: 10
   chargeEnergyCost: 10
   runEnergyLimit: 10
@@ -3319,7 +3320,7 @@ MonoBehaviour:
   currentMana: 0
   basicMaxEnergy: 75
   currentEnergy: 0
-  basicEnergyRecovery: 15
+  basicEnergyRecovery: 20
   basicDamage: 0
   basicCritRate: 0
   basicCritDamage: 0
@@ -3364,7 +3365,7 @@ MonoBehaviour:
   chargeSpeedMultiplication: 1
   foresightTimeMultiplication: 1
   currentWeaponStaticData: {fileID: 0}
-  magicUnlockState: 000000
+  magicUnlockState: 000100
   lastPosition: {x: 0, y: -18, z: 0}
 --- !u!114 &4510489401662688001
 MonoBehaviour:

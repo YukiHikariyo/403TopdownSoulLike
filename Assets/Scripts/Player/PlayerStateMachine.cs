@@ -19,7 +19,7 @@ public class PlayerStateMachine : StateMachine
     [Tooltip("蓄力每秒消耗")] public float chargeEnergyCost;
     [Tooltip("允许进入奔跑的最低耐力")] public float runEnergyLimit;
     [Tooltip("动作体力值基础消耗")][SerializeField] float[] energyCost;
-    [Tooltip("法术魔力值基础消耗")][SerializeField] float[] manaCost;
+    [Tooltip("法术魔力值基础消耗")] public float[] manaCost;
     Dictionary<Type, float> energyCostDict;
     #endregion
     #region 鼠标相关
@@ -131,6 +131,7 @@ public class PlayerStateMachine : StateMachine
     {
         SwitchOn(dict[typeof(PlayerState_Idle)]);
         noStunTimer = -1;
+        player.damageableIndex = 0;
     }
 
     protected override void Update()
