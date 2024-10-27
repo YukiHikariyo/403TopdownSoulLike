@@ -64,6 +64,8 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
                     UpgradeSkill(int.Parse(skillID), true);
             }
         }
+
+        Initialize();
     }
 
     public void Initialize()
