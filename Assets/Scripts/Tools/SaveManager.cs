@@ -47,14 +47,14 @@ public class SaveManager : MonoSingleton<SaveManager>
     public void LoadGame()
     {
         var resultPath = jsonFolder + "SaveData.sav";
-        if (!File.Exists(resultPath))
-            return;
-
-        var stringData = File.ReadAllText(resultPath);
-        var jsonData = JsonConvert.DeserializeObject<SaveData>(stringData);
+        if (File.Exists(resultPath))
+        {
+            var stringData = File.ReadAllText(resultPath);
+            saveData = JsonConvert.DeserializeObject<SaveData>(stringData);
+        }
 
         foreach (var saveable in saveableList)
-            saveable.LoadSaveData(jsonData);
+            saveable.LoadSaveData(saveData);
     }
 
     public void SaveSettings()

@@ -107,8 +107,10 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
         accessoryDict.Clear();
 
         //两瓶
-        maxHealthBottle = saveData.savedBottleDict["HealthBottle"];
-        maxManaBottle = saveData.savedBottleDict["ManaBottle"];
+        if (saveData.savedBottleDict.ContainsKey("HealthBottle"))
+            maxHealthBottle = saveData.savedBottleDict["HealthBottle"];
+        if (saveData.savedBottleDict.ContainsKey("ManaBottle"))
+            maxManaBottle = saveData.savedBottleDict["ManaBottle"];
         currentHealthBottle = maxHealthBottle;
         currentManaBottle = maxManaBottle;
         UIManager.Instance.HealthBottleBarUpdate();
