@@ -276,11 +276,11 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
         {
             if (i != index)
             {
-                skillDotList[i].GetChild(1).gameObject.SetActive(false);
+                skillDotList[i].GetChild(2).gameObject.SetActive(false);
             }
             else
             {
-                skillDotList[i].GetChild(1).gameObject.SetActive(true);
+                skillDotList[i].GetChild(2).gameObject.SetActive(true);
             }
         }
 
@@ -291,7 +291,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
     {
         currentSkillIndex = index;
 
-        skillDotList[currentSkillIndex].GetChild(3).GetComponent<Image>().DOFillAmount(1, 0.75f);
+        skillDotList[currentSkillIndex].GetChild(4).GetComponent<Image>().DOFillAmount(1, 0.75f);
 
         skillDotList[currentSkillIndex].GetChild(0).GetComponent<UILineRenderer>().color = new Color(0.9137f,0.6078f,0.1098f,1);
 

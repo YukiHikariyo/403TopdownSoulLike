@@ -36,8 +36,8 @@ public class SkillTreeDot : MonoBehaviour,IPointerClickHandler,IPointerEnterHand
 
     private void Awake()
     {
-        thisSkillImage = gameObject.transform.GetChild(3).GetComponent<Image>();
-        thisSkillShadow = gameObject.transform.GetChild(2).GetComponent<Image>();
+        thisSkillImage = gameObject.transform.GetChild(4).GetComponent<Image>();
+        thisSkillShadow = gameObject.transform.GetChild(3).GetComponent<Image>();
         thisSkillImage.sprite = thisSkillData.skillSpite;
         thisSkillShadow.sprite = thisSkillData.skillSpite;
         thisSkillImage.type = Image.Type.Filled;
@@ -66,8 +66,8 @@ public class SkillTreeDot : MonoBehaviour,IPointerClickHandler,IPointerEnterHand
 
     public void Initialize()
     {
-        thisSkillImage = gameObject.transform.GetChild(3).GetComponent<Image>();
-        thisSkillShadow = gameObject.transform.GetChild(2).GetComponent<Image>();
+        thisSkillImage = gameObject.transform.GetChild(4).GetComponent<Image>();
+        thisSkillShadow = gameObject.transform.GetChild(3).GetComponent<Image>();
         thisSkillImage.sprite = thisSkillData.skillSpite;
         thisSkillShadow.sprite = thisSkillData.skillSpite;
         thisSkillImage.type = Image.Type.Filled;
