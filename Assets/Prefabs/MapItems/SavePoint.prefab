@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 431160127322563877}
   - component: {fileID: 3445380282516378029}
   - component: {fileID: 1506661355301979568}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SavePoint
   m_TagString: Interaction
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   animator: {fileID: 3445380282516378029}
   alwaysInteractive: 1
   showTips: 1
+  stateMachine: {fileID: 0}
   tip: "\u5B58\u6863\u5DF2\u5B8C\u6210"
 --- !u!95 &3445380282516378029
 Animator:
@@ -116,7 +117,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 1.8, y: 1.8}
   m_EdgeRadius: 0
 --- !u!1 &3033647103248009946
 GameObject:
