@@ -15312,10 +15312,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 0}
   coin: 0
-  maxHealthBottle: 0
-  currentHealthBottle: 0
-  maxManaBottle: 0
-  currentManaBottle: 0
+  maxHealthBottle: 2
+  currentHealthBottle: 2
+  maxManaBottle: 1
+  currentManaBottle: 1
   allItemList:
   - {fileID: 11400000, guid: 491147848cb3f214f97ade4ee5552391, type: 2}
   - {fileID: 11400000, guid: 25e2a12ad50a5ba4cbbc89a68b9ce9dc, type: 2}
