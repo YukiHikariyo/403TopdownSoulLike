@@ -75,6 +75,7 @@ public class PlayerStateMachine : StateMachine
     public GameObject RightAttack_3;
 
     public GameObject RightAttack;
+    public GameObject realRightAttack;
     [Tooltip("蓄力提示VFX")]
     public ParticleSystem chargeVFX;
     [Tooltip("蓄力提示物体")]
@@ -111,7 +112,7 @@ public class PlayerStateMachine : StateMachine
     [Tooltip("魔法中的发射事件")] public UnityEvent magicEvent;
     #endregion
     public float MouseDegree => mousedegree;
-    public Vector3 MouseDistance => mouseDistance;
+    public Vector2 MouseDistance => mouseDistance;
     private void Awake()
     {
         #region 组件获取
@@ -228,9 +229,8 @@ public class PlayerStateMachine : StateMachine
     private void UpdateMouseDegree()
     {
         Vector3 mmouseDistance = m_camera.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
-        mouseDistance = new Vector3(mmouseDistance.x, mmouseDistance.y, 0f);
-        float degree = Mathf.Atan2(mouseDistance.y, mouseDistance.x) * Mathf.Rad2Deg;
-        mousedegree = degree>=0?degree:360f+degree;
+        mouseDistance = (Vector2)mmouseDistance;
+        mousedegree = Vector2.SignedAngle(Vector2.right,mouseDistance);
     }
     /// <summary>
     /// 计算在有转向限制下的夹角值

@@ -2750,13 +2750,13 @@ MonoBehaviour:
   RightAttack_2: {fileID: 6087445501870383209}
   RightAttack_3: {fileID: 3399123402137907263}
   RightAttack: {fileID: 3320563005013439170}
+  realRightAttack: {fileID: 6988962383995051784}
   chargeVFX: {fileID: 3541888413614013618}
   chargeVFXobj: {fileID: 8340668812198600710}
   memory: 0
   CanInterAction: 0
   interactionObj: {fileID: 0}
   attack_1: {fileID: 8300000, guid: a5e5ea713415fcc42904ca06876a4d6a, type: 3}
-  attack_3: {fileID: 8300000, guid: b67ba8a8dfb9fea41b5773472721cce9, type: 3}
   attack_4: {fileID: 8300000, guid: 54325f5026a533c428be8a593ef11bb0, type: 3}
   fs: {fileID: 8300000, guid: e9665f3b8073bfc4e9626827cfb8a433, type: 3}
   gun: {fileID: 8300000, guid: a0c582e2bcf0e4d4f9be3f09dd985298, type: 3}

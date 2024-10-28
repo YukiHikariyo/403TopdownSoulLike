@@ -15,7 +15,7 @@ public class PlayerState_Molotov : PlayerState
         SetAnimator_OnStart_Mouse();
         playerAnimator.Play("Molotov");
         pa = playerStateMachine.playerTransform.position;
-        pb = pa + playerStateMachine.MouseDistance;
+        pb = pa + (Vector3)playerStateMachine.MouseDistance;
         playerStateMachine.magicEvent.AddListener(ShootMolotov);
     }
 

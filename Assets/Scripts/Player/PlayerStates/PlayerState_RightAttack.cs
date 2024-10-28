@@ -11,7 +11,7 @@ public class PlayerState_RightAttack : PlayerState
         playerStateMachine.CanStateSwitch = false;
 
         FaceDir = playerStateMachine.MouseDistance.normalized;
-        SetRotationZ(playerStateMachine.RightAttack,playerStateMachine.MouseDegree);
+        SetRotationZ(playerStateMachine.realRightAttack,playerStateMachine.MouseDegree);
 
         SetAnimator_OnStart_Input();
         playerAnimator.Play("RightAttack");

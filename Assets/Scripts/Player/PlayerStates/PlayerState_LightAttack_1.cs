@@ -78,9 +78,9 @@ public class PlayerState_LightAttack_1 : PlayerState
     }
 
     #region 偷懒
-    private void SetRotationZ(GameObject obj,float angle)
+    private void SetRotationZ(GameObject obj, float angle)
     {
-        obj.transform.localEulerAngles = new Vector3(obj.transform.localEulerAngles.x, obj.transform.localEulerAngles.y,angle);
+        obj.transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
     #endregion
 }

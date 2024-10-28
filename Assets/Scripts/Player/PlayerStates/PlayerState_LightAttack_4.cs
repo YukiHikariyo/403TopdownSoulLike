@@ -10,13 +10,10 @@ public class PlayerState_LightAttack_4 : PlayerState
         base.Enter();
         playerStateMachine.CanAcceptInput = false;
         playerStateMachine.CanStateSwitch = false;
-
-        degree = playerStateMachine.RestrictedRotation(lightAtk_3);
-        FaceDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree));
+        FaceDir = playerStateMachine.MouseDistance.normalized;
         SetAnimator_OnStart_Input();
         playerAnimator.Play("L4_Attack");
-
-        lightAtk_4.transform.localEulerAngles = new Vector3(lightAtk_4.transform.localEulerAngles.x, lightAtk_4.transform.localEulerAngles.y, degree);
+        SetRotationZ(lightAtk_4, playerStateMachine.MouseDegree);
 
         playerData.MotionToughness += 10f;
     }
@@ -74,5 +71,10 @@ public class PlayerState_LightAttack_4 : PlayerState
     {
         base.PhysicUpdate();
         playerController.LightAttack_4(FaceDir, StateDuration / AnimationLength);
+    }
+
+    private void SetRotationZ(GameObject obj, float angle)
+    {
+        obj.transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 }
