@@ -180,8 +180,12 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 
         for (int i = 0; i < UIManager.Instance.accessorySlots.childCount; i++)
         {
-            foreach (int position in UIManager.Instance.currentEquippedAccessory.Keys)
-                UIManager.Instance.currentEquippedAccessory[position] = null;
+            if (UIManager.Instance.currentEquippedAccessory.ContainsKey(1))
+                UIManager.Instance.currentEquippedAccessory[1] = null;
+            if (UIManager.Instance.currentEquippedAccessory.ContainsKey(2))
+                UIManager.Instance.currentEquippedAccessory[2] = null;
+            if (UIManager.Instance.currentEquippedAccessory.ContainsKey(3))
+                UIManager.Instance.currentEquippedAccessory[3] = null;
 
             if (accessoryDict.ContainsKey(UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().accessoryID))
             {
