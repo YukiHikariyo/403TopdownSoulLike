@@ -222,6 +222,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
     private async UniTask OnBack()
     {
+        player.gameObject.layer = 2;
         UIManager.Instance.PlayFadeInSequence(2);
 
         await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
@@ -285,6 +286,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
     private async UniTask OnPlayerDeath()
     {
+        player.gameObject.layer = 2;
         await UniTask.Delay(TimeSpan.FromSeconds(3));
 
         UIManager.Instance.ShowDeathText();
@@ -297,8 +299,8 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
         loadingInfo.SetActive(true);
 
-        await SceneManager.UnloadSceneAsync("GameScene");
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
+        await SceneManager.UnloadSceneAsync("GameScene");
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
         loadOperation.allowSceneActivation = false;
 
