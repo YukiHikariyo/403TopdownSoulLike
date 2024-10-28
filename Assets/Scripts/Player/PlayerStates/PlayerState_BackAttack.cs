@@ -12,13 +12,11 @@ public class PlayerState_BackAttack : PlayerState
         playerStateMachine.CanStateSwitch = false;
 
 
-        degree = playerStateMachine.RestrictedRotation(BackAttack);
-        FaceDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree));
+        FaceDir = playerStateMachine.MouseDistance.normalized;
         SetAnimator_OnStart_Input();
         playerAnimator.Play("BackAttack");
+        SetRotationZ(BackAttack, playerStateMachine.MouseDegree);
 
-        BackAttack.transform.localEulerAngles = new Vector3(BackAttack.transform.localEulerAngles.x, BackAttack.transform.localEulerAngles.y, degree);
-        
         playerStateMachine.successfulBack = false;
         playerData.MotionToughness += 80f;
     }
@@ -77,5 +75,10 @@ public class PlayerState_BackAttack : PlayerState
     {
         base.PhysicUpdate();
         playerController.SkillDisplace(Skill_Physics.BackAttack, FaceDir, StateDuration / AnimationLength);
+    }
+
+    private void SetRotationZ(GameObject obj, float angle)
+    {
+        obj.transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 }
