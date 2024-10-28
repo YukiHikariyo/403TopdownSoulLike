@@ -9,7 +9,6 @@ public class EnemyBullet : MonoBehaviour
 {
     private Animator anim;
     private AttackArea attackArea;
-    private new Collider2D collider;
 
     public float speed;
     public float acceleration;
@@ -20,8 +19,7 @@ public class EnemyBullet : MonoBehaviour
     protected virtual void Awake()
     {
         anim = GetComponent<Animator>();
-        attackArea = GetComponent<AttackArea>();
-        collider = GetComponent<Collider2D>();
+        attackArea = GetComponentInChildren<AttackArea>();
     }
 
     protected virtual void OnEnable()
@@ -73,7 +71,6 @@ public class EnemyBullet : MonoBehaviour
         acceleration = 0;
         speed = 0;
         anim.Play("Hit");
-        collider.enabled = false;
     }
 
     public void DestroyBullet() => Destroy(gameObject);
