@@ -36,7 +36,6 @@ public class FlashBang_Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
         GameObject b = Instantiate(Light);
         b.transform.position = transform.position;
         FlashBang_Light l = b.GetComponent<FlashBang_Light>();
