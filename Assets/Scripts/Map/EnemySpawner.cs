@@ -81,19 +81,17 @@ public class EnemySpawner : MonoBehaviour, ISaveable
             spawnedEnemy = null;
             if (!isDead)
                 isSpawned = false;
-        }
-        else
-        {
+
             if (!saveData.savedSpawnerDict.ContainsKey(gameObject.name))
                 saveData.savedSpawnerDict.Add(gameObject.name, isSpawned && isDead);
             else
                 saveData.savedSpawnerDict[gameObject.name] = isSpawned && isDead;
-
+        }
+        else
+        {
             if (spawnedEnemy != null)
                 Destroy(spawnedEnemy);
             spawnedEnemy = null;
-
-            isSpawned = saveData.savedSpawnerDict[gameObject.name];
         }
     }
 
