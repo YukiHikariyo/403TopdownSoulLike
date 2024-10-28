@@ -52,6 +52,7 @@ public class Maincenter : Enemy
         attack1_3State = new MaincenterAttack1_3State(this, this);
         attack2State = new MaincenterAttack2State(this, this);
         attack3State = new MaincenterAttack3State(this, this);
+        bigStunState = new MaincenterBigStunState(this, this);
 
         startState = entryState;
         defaultState = chaseState;
