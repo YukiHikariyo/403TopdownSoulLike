@@ -448,8 +448,8 @@ public class PlayerData : MonoBehaviour, ISaveable
         get => lightRadiusIncrement;
         set
         {
-            player.playerController.UpdateLightRadius();
             lightRadiusIncrement = value;
+            player.playerController.UpdateLightRadius();
         }
     }
 
@@ -519,8 +519,8 @@ public class PlayerData : MonoBehaviour, ISaveable
         get => lightRadiusMultiplication;
         set
         {
-            player.playerController.UpdateLightRadius();
             lightRadiusIncrement = value;
+            player.playerController.UpdateLightRadius();
         }
     }
     [Space(16)]
