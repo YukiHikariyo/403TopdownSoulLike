@@ -8,7 +8,7 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     private Animator anim;
-    private AttackArea attackArea;
+    public AttackArea attackArea;
 
     public float speed;
     public float acceleration;
@@ -19,7 +19,6 @@ public class EnemyBullet : MonoBehaviour
     protected virtual void Awake()
     {
         anim = GetComponent<Animator>();
-        attackArea = GetComponentInChildren<AttackArea>();
     }
 
     protected virtual void OnEnable()

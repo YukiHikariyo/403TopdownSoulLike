@@ -336,8 +336,8 @@ MonoBehaviour:
   - 1
   - 0
   attackPower:
-  - 25
-  - 35
+  - 30
+  - 40
   buffMotionValue:
   - 0.8
   - 1.5

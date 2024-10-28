@@ -160,38 +160,39 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool TakeBuffDamage(BuffType buffType, float damage, bool ignoreDamageableIndex = false)
     {
-        if (buffDamageTimer > 0)
-            return false;
-
-        int buffBarIndex = buffType switch
+        if (buffDamageTimer < 0)
         {
-            BuffType.Cold => 0,
-            BuffType.Frozen => 1,
-            BuffType.DarkErosion => 2,
+            buffDamageTimer = 1;
 
-            _ => -1
-        };
-        PlayerBar buffBar = buffBars[buffBarIndex];
-
-        if (!currentBuffDict.ContainsKey(buffType))
-        {
-            if (damageableIndex == 0 || ignoreDamageableIndex)
+            int buffBarIndex = buffType switch
             {
-                if (!buffBar.gameObject.activeSelf)
-                    buffBar.gameObject.SetActive(true);
+                BuffType.Cold => 0,
+                BuffType.Frozen => 1,
+                BuffType.DarkErosion => 2,
 
-                currentBuffHealth[buffBarIndex] += damage;
-                buffBar.OnCurrentValueChange(currentBuffHealth[buffBarIndex], 100, true);
+                _ => -1
+            };
+            PlayerBar buffBar = buffBars[buffBarIndex];
 
-                if (currentBuffHealth[buffBarIndex] >= 100)
+            if (!currentBuffDict.ContainsKey(buffType))
+            {
+                if (damageableIndex == 0 || ignoreDamageableIndex)
                 {
-                    currentBuffHealth[buffBarIndex] = 100;
-                    isBuffStay[buffBarIndex] = true;
-                    GetBuff(buffType);
-                }
+                    if (!buffBar.gameObject.activeSelf)
+                        buffBar.gameObject.SetActive(true);
 
-                buffDamageTimer = 1;
-                return true;
+                    currentBuffHealth[buffBarIndex] += damage;
+                    buffBar.OnCurrentValueChange(currentBuffHealth[buffBarIndex], 100, true);
+
+                    if (currentBuffHealth[buffBarIndex] >= 100)
+                    {
+                        currentBuffHealth[buffBarIndex] = 100;
+                        isBuffStay[buffBarIndex] = true;
+                        GetBuff(buffType);
+                    }
+
+                    return true;
+                }
             }
         }
 

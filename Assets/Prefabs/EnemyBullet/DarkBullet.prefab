@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4004741472048313598}
   - component: {fileID: 1308632964874933451}
   - component: {fileID: 3322545988243037632}
-  - component: {fileID: 6397200342047373006}
   m_Layer: 8
   m_Name: DarkBullet
   m_TagString: Untagged
@@ -195,42 +194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64968617c8280c4408db22b853a4da5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackArea: {fileID: 306277235790737888}
   speed: 0
   acceleration: 0
   rotation: 0
   rotateSpeed: 0
---- !u!114 &6397200342047373006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371544354910690209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bc5d252fc0b89944b72e3988ea49895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackerType: 3
-  player: {fileID: 0}
-  enemy: {fileID: 0}
-  causeHealthDamage: 0
-  causeBuffDamage: 0
-  directlyAssertBuff: 0
-  directBuffProbability: 0
-  isBullet: 1
-  ignoreDamageableIndex: 0
-  motionValueIndex: 0
-  attackPowerIndex: 0
-  buffMotionValueIndex: 0
-  buffType: 0
-  directBuffDuration: 0
-  noSourceDamage: 0
-  noSourcePenetratingPower: 0
-  noSourceBuffDamage: 0
-  successEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &4457578928182681455
 GameObject:
   m_ObjectHideFlags: 0

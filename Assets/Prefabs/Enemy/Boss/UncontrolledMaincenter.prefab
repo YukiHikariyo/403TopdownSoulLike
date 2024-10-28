@@ -410,10 +410,10 @@ MonoBehaviour:
   attackPower:
   - 30
   - 30
-  - 50
+  - 40
   - 200
   - 30
-  - 50
+  - 40
   buffMotionValue:
   - 0
   - 0

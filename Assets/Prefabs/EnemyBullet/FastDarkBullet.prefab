@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1984934ecfcb2dc468e47d0eba8b62ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackArea: {fileID: 6273642336200890065}
   speed: 0
   acceleration: 0
   rotation: 0
