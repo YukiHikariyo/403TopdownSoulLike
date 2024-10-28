@@ -61,7 +61,9 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
             if (!skillDict.ContainsKey(int.Parse(skillID)))
             {
                 for (int i = 0; i < saveData.savedSkillDict[skillID].currentSkillLevel; i++)
+                {
                     UpgradeSkill(int.Parse(skillID), true);
+                }
             }
         }
 
@@ -163,6 +165,7 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
             }
             else if (skillDict.ContainsKey(id) && skillDict[id].currentSkillLevel < allSkillList[id].maxSkillLevel)
             {
+
                 int level = ++skillDict[id].currentSkillLevel;
 
                 if (!ignoreLimitation)
@@ -171,31 +174,31 @@ public class SkillManager : MonoSingleton<SkillManager>, ISaveable
                 switch (allSkillList[id].valueType)
                 {
                     case ValueType.MaxHealth:
-                        playerData.BasicMaxHealth += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.BasicMaxHealth += allSkillList[id].skillValue[level - 1];
                         break;
                     case ValueType.MaxMana:
-                        playerData.BasicMaxMana += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.BasicMaxMana += allSkillList[id].skillValue[level - 1];
                         break;
                     case ValueType.MaxEnergy:
-                        playerData.BasicMaxEnergy += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.BasicMaxEnergy += allSkillList[id].skillValue[level - 1];
                         break;
                     case ValueType.EnergyRecovery:
-                        playerData.TalentEnergyRecovery += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.TalentEnergyRecovery += allSkillList[id].skillValue[level - 1];
                         break;
                     case ValueType.Damage:
-                        playerData.TalentDamage += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.TalentDamage += allSkillList[id].skillValue[level - 1];
                         break;
                     case ValueType.CritRate:
-                        playerData.TalentCritRate += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.TalentCritRate += allSkillList[id].skillValue[level - 1];
                         break;
                     case ValueType.CritDamage:
-                        playerData.TalentCritDamage += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.TalentCritDamage += allSkillList[id].skillValue[level - 1];
                         break;
                     case ValueType.PenetratingPower:
-                        playerData.TalentPenetratingPower += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.TalentPenetratingPower += allSkillList[id].skillValue[level - 1];
                         break;
                     case ValueType.ReductionRate:
-                        playerData.TalentReducitonRate += allSkillList[id].skillValue[level - 1] - allSkillList[id].skillValue[level - 2];
+                        playerData.TalentReducitonRate += allSkillList[id].skillValue[level - 1];
                         break;
                     default:
                         break;
