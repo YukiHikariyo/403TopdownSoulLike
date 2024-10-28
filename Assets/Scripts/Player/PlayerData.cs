@@ -583,10 +583,6 @@ public class PlayerData : MonoBehaviour, ISaveable
 
     public void LoadSaveData(SaveData saveData)
     {
-        CurrentHealth = FinalMaxHealth;
-        CurrentMana = FinalMaxMana;
-        CurrentEnergy = FinalMaxEnergy;
-
         if (saveData.savedPositionDict.ContainsKey("X"))
             lastPosition = new Vector3(saveData.savedPositionDict["X"], saveData.savedPositionDict["Y"]);
         else

@@ -177,6 +177,10 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         if (UIManager.Instance.isPackageOpen)
             UIManager.Instance.ClosePackage();
 
+        player.playerData.CurrentHealth = player.playerData.FinalMaxHealth;
+        player.playerData.CurrentMana = player.playerData.FinalMaxMana;
+        player.playerData.CurrentEnergy = player.playerData.FinalMaxEnergy;
+
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
 
         loadingInfo.SetActive(false);
@@ -205,6 +209,10 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
 
         SaveManager.Instance.SaveGame();
+
+        player.playerData.CurrentHealth = player.playerData.FinalMaxHealth;
+        player.playerData.CurrentMana = player.playerData.FinalMaxMana;
+        player.playerData.CurrentEnergy = player.playerData.FinalMaxEnergy;
 
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
 
@@ -331,6 +339,10 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         SaveManager.Instance.LoadGame();
         if (UIManager.Instance.isPackageOpen)
             UIManager.Instance.ClosePackage();
+
+        player.playerData.CurrentHealth = player.playerData.FinalMaxHealth;
+        player.playerData.CurrentMana = player.playerData.FinalMaxMana;
+        player.playerData.CurrentEnergy = player.playerData.FinalMaxEnergy;
 
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
 
