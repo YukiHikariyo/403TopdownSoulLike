@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4482933168662739172}
   - component: {fileID: 4932953521852906360}
   m_Layer: 0
-  m_Name: SpawnPoint_Boss_1
+  m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,4 +54,4 @@ MonoBehaviour:
     m_Bits: 8
   checkShape: 1
   radius: 20
-  size: {x: 40, y: 15}
+  size: {x: 28, y: 27}
