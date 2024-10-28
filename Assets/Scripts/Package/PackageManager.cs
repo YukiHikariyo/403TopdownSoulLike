@@ -163,19 +163,22 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 
         for (int i = 0; i < UIManager.Instance.weaponSlots.childCount; i++)
         {
-            if (weaponDict[UIManager.Instance.weaponSlots.GetChild(i).GetComponent<WeaponSlotUI>().weaponID].isEquipped)
-                UIManager.Instance.weaponSlots.GetChild(i).GetComponent<WeaponSlotUI>().transform.GetChild(4).gameObject.SetActive(true);
+            if (weaponDict.ContainsKey(UIManager.Instance.weaponSlots.GetChild(i).GetComponent<WeaponSlotUI>().weaponID))
+                if (weaponDict[UIManager.Instance.weaponSlots.GetChild(i).GetComponent<WeaponSlotUI>().weaponID].isEquipped)
+                    UIManager.Instance.weaponSlots.GetChild(i).GetComponent<WeaponSlotUI>().transform.GetChild(4).gameObject.SetActive(true);
         }
 
         for (int i = 0; i < UIManager.Instance.accessorySlots.childCount; i++)
         {
-            int position = accessoryDict[UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().accessoryID].equipPosition;
-            if (position != 0)
+            if (accessoryDict.ContainsKey(UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().accessoryID))
             {
-                UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().equipPosition.text = position + "号位";
-                UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().transform.GetChild(4).gameObject.SetActive(true);
+                int position = accessoryDict[UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().accessoryID].equipPosition;
+                if (position != 0)
+                {
+                    UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().equipPosition.text = position + "号位";
+                    UIManager.Instance.accessorySlots.GetChild(i).GetComponent<AccessorySlotUI>().transform.GetChild(4).gameObject.SetActive(true);
+                }
             }
-                
         }
     }
 
