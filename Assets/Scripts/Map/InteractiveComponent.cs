@@ -67,10 +67,18 @@ public class InteractiveComponent : MonoBehaviour, ISaveable
             saveData.savedInteractableObjectDict.Add(gameObject.name, State);
         else
             saveData.savedInteractableObjectDict[gameObject.name] = State;
+
+        if (!saveData.savedInteractableObjectDict.ContainsKey(gameObject.name + "Upper"))
+            saveData.savedInteractableObjectDict.Add(gameObject.name + "Upper", UpperState);
+        else
+            saveData.savedInteractableObjectDict[gameObject.name + "Upper"] = UpperState;
     }
 
     public void LoadSaveData(SaveData saveData) 
     {
+        if (saveData.savedInteractableObjectDict.ContainsKey(gameObject.name + "Upper"))
+            UpperState = saveData.savedInteractableObjectDict[gameObject.name + "Upper"];
+
         if (saveData.savedInteractableObjectDict.ContainsKey(gameObject.name))
             State = saveData.savedInteractableObjectDict[gameObject.name];
     }
