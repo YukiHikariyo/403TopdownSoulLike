@@ -288,7 +288,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d7f1c9c8-0618-4923-a790-52a828953a53"",
-                    ""path"": ""<Keyboard>/t"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -299,7 +299,7 @@ public partial class @InGameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""abd79035-fa7f-4c83-b4a5-b60b76d16cac"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
