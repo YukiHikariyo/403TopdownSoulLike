@@ -102,9 +102,17 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
 
     public void LoadSaveData(SaveData saveData)
     {
+        UIManager.Instance.currentSelectedItem = null;
+        UIManager.Instance.currentSelectedWeapon = null;
+        UIManager.Instance.currentSelectedAccessory = null;
+        UIManager.Instance.itemDetailPanel.gameObject.SetActive(false);
+        UIManager.Instance.weaponDetailPanel.gameObject.SetActive(false);
+        UIManager.Instance.accessoryDetailPanel.gameObject.SetActive(false);
+
         itemDict.Clear();
         weaponDict.Clear();
         accessoryDict.Clear();
+
         for (int i = 0; i < UIManager.Instance.itemSlots.transform.childCount; i++)
             Destroy(UIManager.Instance.itemSlots.GetChild(i).gameObject);
         for (int i = 0; i < UIManager.Instance.weaponSlots.transform.childCount; i++)
