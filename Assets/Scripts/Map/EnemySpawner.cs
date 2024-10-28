@@ -79,7 +79,8 @@ public class EnemySpawner : MonoBehaviour, ISaveable
             if (spawnedEnemy != null)
                 Destroy(spawnedEnemy);
             spawnedEnemy = null;
-            isSpawned = false;
+            if (!isDead)
+                isSpawned = false;
         }
         else
         {

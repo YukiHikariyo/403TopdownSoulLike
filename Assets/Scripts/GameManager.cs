@@ -68,7 +68,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
             level = saveData.savedExpLevelDict["Level"];
 
         UIManager.Instance.levelText.text = level.ToString();
-        UIManager.Instance.expBar.slider.value = exp / CalculateExpByLevel();
+        UIManager.Instance.expBar.slider.value = (float)exp / (float)CalculateExpByLevel();
     }
 
     #region 经验与等级
@@ -152,7 +152,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         while (!loadOperation.isDone)
         {
             loadingSlider.value = loadOperation.progress;
-            loadingValue.text = loadOperation.progress * 100 + "%";
+            loadingValue.text = (int)loadOperation.progress * 100 + "%";
 
             if (loadOperation.progress >= 0.9f)
             {
@@ -305,7 +305,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         while (!loadOperation.isDone)
         {
             loadingSlider.value = loadOperation.progress;
-            loadingValue.text = loadOperation.progress * 100 + "%";
+            loadingValue.text = (int)loadOperation.progress * 100 + "%";
 
             if (loadOperation.progress >= 0.9f)
             {

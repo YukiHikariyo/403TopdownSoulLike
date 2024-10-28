@@ -246,13 +246,13 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void HealthBottleBarUpdate()
     {
-        healthBottleBar.OnCurrentValueChange(PackageManager.Instance.CurrentHealthBottle, PackageManager.Instance.MaxHealthBottle);
+        healthBottleBar.OnCurrentValueChange((float)PackageManager.Instance.CurrentHealthBottle, (float)PackageManager.Instance.MaxHealthBottle);
         healthBottleText.text = PackageManager.Instance.CurrentHealthBottle + "/" + PackageManager.Instance.MaxHealthBottle;
     }
 
     public void ManaBottleBarUpdate()
     {
-        manaBottleBar.OnCurrentValueChange(PackageManager.Instance.CurrentManaBottle, PackageManager.Instance.MaxManaBottle);
+        manaBottleBar.OnCurrentValueChange((float)PackageManager.Instance.CurrentManaBottle, (float)PackageManager.Instance.MaxManaBottle);
         manaBottleText.text = PackageManager.Instance.CurrentManaBottle + "/" + PackageManager.Instance.MaxManaBottle;
     }
 

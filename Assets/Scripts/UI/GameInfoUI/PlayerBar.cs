@@ -27,10 +27,20 @@ public class PlayerBar : MonoBehaviour
 
         if (bufferSlider != null)
         {
-            if (bufferSlider.value < currentValueSlider.value)
-                bufferSlider.DOValue(newValue / maxValue, 0.3f);
+            if (!isInstantChange)
+            {
+                if (bufferSlider.value < currentValueSlider.value)
+                    bufferSlider.DOValue(newValue / maxValue, 0.3f);
+                else
+                    bufferSlider.DOValue(newValue / maxValue, 5);
+            }
             else
-                bufferSlider.DOValue(newValue / maxValue, 5);
+            {
+                if (bufferSlider.value < currentValueSlider.value)
+                    bufferSlider.value = newValue / maxValue;
+                else
+                    bufferSlider.DOValue(newValue / maxValue, 5);
+            }
         }
     }
 }
