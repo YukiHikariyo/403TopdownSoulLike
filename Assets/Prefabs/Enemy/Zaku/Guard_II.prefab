@@ -621,13 +621,13 @@ MonoBehaviour:
   target: {fileID: 0}
   spawner: {fileID: 0}
   isBoss: 0
-  maxHealth: 400
-  currentHealth: 400
+  maxHealth: 300
+  currentHealth: 300
   basicMoveSpeed: 2.6
   basicDamage: 30
   basicPenetratingPower: 0.1
   basicReductionRate: 0.1
-  basicToughness: 15
+  basicToughness: 10
   motionToughness: 0
   motionValue:
   - 1
@@ -665,7 +665,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0.5}
   checkDistance:
-  - 12
+  - 9
   - 1.8
   - 3
   playerLayer:
@@ -676,6 +676,11 @@ MonoBehaviour:
     m_Bits: 3584
   attackSFX: {fileID: 8300000, guid: dad988e6539010842b2b093f97a29147, type: 3}
   hurtSFX: {fileID: 8300000, guid: d6cbcce8ce76a0e4697bb92f65ba8e0e, type: 3}
+  exp: 220
+  dropItems:
+  - id: 1
+    number: 1
+    probability: 0.2
   attackObj1: {fileID: 1661640931297410571}
   attackObj2: {fileID: 6742485768427096952}
   chargeAttackObj: {fileID: 3373838896776409144}

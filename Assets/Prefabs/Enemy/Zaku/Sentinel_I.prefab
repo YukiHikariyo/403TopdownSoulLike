@@ -331,13 +331,13 @@ MonoBehaviour:
   target: {fileID: 0}
   spawner: {fileID: 0}
   isBoss: 0
-  maxHealth: 225
-  currentHealth: 225
+  maxHealth: 150
+  currentHealth: 150
   basicMoveSpeed: 0
   basicDamage: 20
   basicPenetratingPower: 0.1
   basicReductionRate: 0
-  basicToughness: 10
+  basicToughness: -10
   motionToughness: 0
   motionValue:
   - 1
@@ -369,7 +369,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0.8}
   checkDistance:
-  - 12
+  - 8
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -378,5 +378,10 @@ MonoBehaviour:
     m_Bits: 3584
   attackSFX: {fileID: 8300000, guid: 75b104200442ec146a1c73e9faabaf85, type: 3}
   hurtSFX: {fileID: 8300000, guid: d6cbcce8ce76a0e4697bb92f65ba8e0e, type: 3}
+  exp: 80
+  dropItems:
+  - id: 2
+    number: 1
+    probability: 0.05
   darkBulletPrefab: {fileID: 371544354910690209, guid: 272bddccc19f57b49ab78f6d603788cc, type: 3}
   attackCenter: {fileID: 474293107648702428}

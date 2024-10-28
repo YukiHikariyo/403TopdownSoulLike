@@ -392,8 +392,8 @@ MonoBehaviour:
   target: {fileID: 0}
   spawner: {fileID: 0}
   isBoss: 1
-  maxHealth: 2000
-  currentHealth: 2000
+  maxHealth: 1790
+  currentHealth: 1790
   basicMoveSpeed: 2.5
   basicDamage: 40
   basicPenetratingPower: 0.15
@@ -455,6 +455,14 @@ MonoBehaviour:
     m_Bits: 2048
   attackSFX: {fileID: 8300000, guid: 8a30513e4ae50c64e9c0cd868edb0a08, type: 3}
   hurtSFX: {fileID: 8300000, guid: 4ec10622d5a8f09439c38691970e429c, type: 3}
+  exp: 4060
+  dropItems:
+  - id: 1
+    number: 10
+    probability: 1
+  - id: 2
+    number: 5
+    probability: 1
   specialAttackSFX: {fileID: 8300000, guid: 38dd878429b036945b312ee5601e8477, type: 3}
   shootSFX: {fileID: 8300000, guid: 75b104200442ec146a1c73e9faabaf85, type: 3}
   attackObj1_1: {fileID: 7988723444618127371}
@@ -464,7 +472,7 @@ MonoBehaviour:
   darkBulletPrefab: {fileID: 371544354910690209, guid: 272bddccc19f57b49ab78f6d603788cc, type: 3}
   fastDarkBulletPrefab: {fileID: 1162403923937035282, guid: 7c0c9fd6d0064ec47b9ad6077044a8b7, type: 3}
   attackCenter: {fileID: 7138381643854517929}
-  bigStunValue: 750
+  bigStunValue: 600
   landPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4511037352168303898
 GameObject:
