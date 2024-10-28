@@ -481,7 +481,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         if (currentEquippedAccessory.ContainsKey(position))
         {
-            currentEquippedAccessory[position].transform.GetChild(4).gameObject.SetActive(false);
+            currentEquippedAccessory[position]?.transform.GetChild(4).gameObject.SetActive(false);
             currentEquippedAccessory[position] = currentSelectedAccessory;
         }
         else

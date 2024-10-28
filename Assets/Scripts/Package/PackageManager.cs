@@ -154,7 +154,17 @@ public class PackageManager : MonoSingleton<PackageManager>, ISaveable
             GetAccessory(id, saveData.savedAccessoryDict[accessoryID].level, false);
             if (saveData.savedAccessoryDict[accessoryID].equipPosition > 0)
                 EquipAccessory(id, saveData.savedAccessoryDict[accessoryID].equipPosition, false);
-        } 
+        }
+
+        for (int i = 0; i < UIManager.Instance.itemSlots.childCount; i++)
+        {
+            int id = UIManager.Instance.itemSlots.GetChild(i).GetComponent<ItemSlotUI>().itemID;
+            if (itemDict.ContainsKey(id))
+            {
+                UIManager.Instance.itemSlotDict[id].itemNumber = itemDict[id].number;
+                UIManager.Instance.itemSlotDict[id].itemNumberText.text = itemDict[id].number.ToString();
+            }
+        }
 
         foreach (int id in UIManager.Instance.itemSlotDict.Keys)
         {
