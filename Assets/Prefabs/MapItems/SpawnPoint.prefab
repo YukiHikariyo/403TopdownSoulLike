@@ -54,4 +54,4 @@ MonoBehaviour:
     m_Bits: 8
   checkShape: 1
   radius: 20
-  size: {x: 28, y: 27}
+  size: {x: 35, y: 27}
