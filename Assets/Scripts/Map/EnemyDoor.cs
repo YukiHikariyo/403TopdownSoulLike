@@ -5,23 +5,29 @@ using UnityEngine;
 public class EnemyDoor : InteractiveComponent
 {
     public EnemySpawner spawner;
+    private bool doorState = false;
 
+    public override void Initialization()
+    {
+        animator.Play("Disabled");
+    }
     private void Update()
     {
-        if(UpperState && State)
+        if (!state)
         {
-            State = false;
-        }
-
-        if (!UpperState)
-        {
-            if(State != spawner.isSpawned ^ spawner.isDead)
+            if(doorState != spawner.isDead ^ spawner.isSpawned)
             {
-                State = spawner.isSpawned ^ spawner.isDead;
+                doorState = spawner.isDead ^ spawner.isSpawned;
+                if (doorState)
+                {
+                    animator.Play("Enabled");
+                }
+                else
+                {
+                    animator.Play("Disabled");
+                    state = true;
+                }
             }
-
-            if(spawner.isSpawned && spawner.isDead)
-                UpperState = true;
         }
     }
 }
