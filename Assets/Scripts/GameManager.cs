@@ -144,7 +144,7 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
         AudioManager.Instance.ChangeSliders(1);
         SaveManager.Instance.LoadSettings();
 
-        await SceneManager.UnloadSceneAsync("MainMenu");
+        //await SceneManager.UnloadSceneAsync("MainMenu");
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
         loadOperation.allowSceneActivation = false;
