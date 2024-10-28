@@ -8,9 +8,20 @@ public class EnemyDoor : InteractiveComponent
 
     private void Update()
     {
-        if(State != spawner.isSpawned ^ spawner.isDead)
+        if(UpperState && State)
         {
-            State = spawner.isSpawned ^ spawner.isDead;
+            State = false;
+        }
+
+        if (!UpperState)
+        {
+            if(State != spawner.isSpawned ^ spawner.isDead)
+            {
+                State = spawner.isSpawned ^ spawner.isDead;
+            }
+
+            if(spawner.isSpawned && spawner.isDead)
+                UpperState = true;
         }
     }
 }

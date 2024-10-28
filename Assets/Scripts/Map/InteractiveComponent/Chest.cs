@@ -16,6 +16,8 @@ public class Chest : InteractiveComponent
     public int[] weaponTable;
     public int[] accessoryTable;
     public int[] magicTable;
+    public int healthCount;
+    public int manaCount;
     public override void Initialization()
     {
         base.Initialization();
@@ -47,6 +49,14 @@ public class Chest : InteractiveComponent
             stateMachine.playerData.magicUnlockState[magicTable[i]] = true;
             MagicUIManager.Instance.UpdateUnlockState(magicTable[i], true);
             UIManager.Instance.OpenConfirmationPanel(text);
+        }
+        if(healthCount > 0)
+        {
+            PackageManager.Instance.GetMaxHealthBottle();
+        }
+        if(manaCount > 0)
+        {
+            PackageManager.Instance.GetMaxManaBottle();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

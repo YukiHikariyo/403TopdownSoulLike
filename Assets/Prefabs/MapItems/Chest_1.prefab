@@ -110,6 +110,8 @@ MonoBehaviour:
   weaponTable: 
   accessoryTable: 
   magicTable: 
+  healthCount: 0
+  manaCount: 0
 --- !u!95 &5748705942806962989
 Animator:
   serializedVersion: 5

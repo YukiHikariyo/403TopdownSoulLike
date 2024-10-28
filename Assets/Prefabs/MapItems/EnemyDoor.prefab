@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6830626493083614960}
   - component: {fileID: 7934681721557082157}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: door1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8090227769092298507}
   - component: {fileID: 3558889727762742782}
   - component: {fileID: 4895724000287148358}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EnemyDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,8 +227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3558889727762742782}
+  alwaysInteractive: 0
+  showTips: 1
+  stateMachine: {fileID: 0}
   spawner: {fileID: 0}
-  state: 0
 --- !u!1 &8064434294153919024
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7686760258315251274}
   - component: {fileID: 3794897858264192993}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: door2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,6 +9,8 @@ public class InteractiveComponent : MonoBehaviour, ISaveable
     public bool showTips = true;
     public PlayerStateMachine stateMachine;
     protected bool state;
+    protected bool upperState;
+
 
     private void OnEnable()
     {
@@ -32,6 +34,8 @@ public class InteractiveComponent : MonoBehaviour, ISaveable
             Initialization();
         }
     }
+
+    public bool UpperState { get; set; }
 
     /// <summary>
     /// 初始化函数,存档加载时调用
