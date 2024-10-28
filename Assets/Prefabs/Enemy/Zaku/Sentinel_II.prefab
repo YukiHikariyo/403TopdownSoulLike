@@ -257,7 +257,7 @@ MonoBehaviour:
   isAnimExit: 0
   checkCenter: {x: 0, y: 0.8}
   checkDistance:
-  - 9
+  - 15
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
