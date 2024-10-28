@@ -14,6 +14,7 @@ public class PlayerState_LightAttack_1 : PlayerState
         SetAnimator_OnStart_Input();
         playerAnimator.Play("L1_Attack");
         SetRotationZ(lightAtk_1,playerStateMachine.MouseDegree);
+
         playerData.MotionToughness += 1f;
     }
 

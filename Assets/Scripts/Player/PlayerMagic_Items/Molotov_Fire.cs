@@ -9,6 +9,7 @@ public class Molotov_Fire : MonoBehaviour
     //public Animator animator;
     public AttackArea Bomb;
     public AttackArea Fire;
+    public AudioClip fire;
     public float existTime;
     public float bombExistTime;
     private float nowTime;
@@ -20,6 +21,7 @@ public class Molotov_Fire : MonoBehaviour
     private void Start()
     {
         nowTime = 0;
+        AudioManager.Instance.PlaySFX(fire, transform.position);
     }
     private void Update()
     {

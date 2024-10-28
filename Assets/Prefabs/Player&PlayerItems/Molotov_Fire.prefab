@@ -52,6 +52,7 @@ MonoBehaviour:
   player: {fileID: 0}
   Bomb: {fileID: 3459234412102040521}
   Fire: {fileID: 8268261784328414178}
+  fire: {fileID: 8300000, guid: 022b6e35c73a5274cae995091cc25dfd, type: 3}
   existTime: 4
   bombExistTime: 0.1
 --- !u!212 &3809450679605315325

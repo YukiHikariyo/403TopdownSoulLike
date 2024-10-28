@@ -8,6 +8,7 @@ public class PlayerShooter : MonoBehaviour
     public Player player;
     [Tooltip("燃烧瓶")] public GameObject molotovBottle;
     [Tooltip("炫目光束")] public GameObject flashBullet;
+    [Tooltip("发射音效")] public AudioClip gun;
     private void Awake()
     {
         player = transform.parent.GetComponent<Player>();
@@ -15,6 +16,7 @@ public class PlayerShooter : MonoBehaviour
     //发射莫洛托夫鸡尾酒，target为鼠标位置，add_y用于模拟抛物线最高点高度，num为发射的瓶子数量
     public void Molotov(Vector3 start, Vector3 target, float add_y,float deviation, int num)
     {
+        AudioManager.Instance.PlaySFX(gun, transform.position);
         for (int i = 0; i < num; i++)
         {
             if(i != 0)
@@ -30,7 +32,8 @@ public class PlayerShooter : MonoBehaviour
     }
     //发射闪光弹，提供发射方向，最长存在时间，发射速度
     public void FlashBang(Vector3 start,Vector3 direction,float existTime,float speed,float degree)
-    { 
+    {
+        AudioManager.Instance.PlaySFX(gun, transform.position);
         GameObject obj =Instantiate(flashBullet);
         obj.transform.position = start;
         obj.transform.Rotate(0,0,degree);

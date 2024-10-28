@@ -51,6 +51,7 @@ MonoBehaviour:
   player: {fileID: 0}
   damageArea: {fileID: 5340315189113993683}
   area: {fileID: 3837779193927179943}
+  bomb: {fileID: 8300000, guid: 29d7cb24f41db5241a019257486d8586, type: 3}
   existTime: 5
   damageLength: 0.1
 --- !u!212 &1403126491504120449

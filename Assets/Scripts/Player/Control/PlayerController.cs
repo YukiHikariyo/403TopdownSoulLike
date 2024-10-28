@@ -243,10 +243,13 @@ public class PlayerController : MonoBehaviour
         switch (stun)
         {
             case Stun_Physics.SmallStun:
+                playerRb.velocity = FaceDir * smallStunSpeed * SmallStunCruve.Evaluate(time);
                 break;
             case Stun_Physics.NormalStun:
+                playerRb.velocity = FaceDir * normalStunSpeed *NormalStunCruve.Evaluate (time);
                 break;
             case Stun_Physics.BigStun:
+                playerRb.velocity = FaceDir * bigStunSpeed * BigStunCruve.Evaluate(time);
                 break;
         }
     }

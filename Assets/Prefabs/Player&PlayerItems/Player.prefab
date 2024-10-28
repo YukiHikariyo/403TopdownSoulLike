@@ -1317,6 +1317,7 @@ MonoBehaviour:
   player: {fileID: 4853331213230003033}
   molotovBottle: {fileID: 4625383125543985840, guid: daa42cfb64548a949a85b9e2108dfde6, type: 3}
   flashBullet: {fileID: 9019889957293387996, guid: 251e0e234e8957e4b99f10ab0cbce246, type: 3}
+  gun: {fileID: 8300000, guid: a0c582e2bcf0e4d4f9be3f09dd985298, type: 3}
 --- !u!1 &3675674447321791799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,7 +2680,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 674dabf26d4f5704f9226b88de415789, type: 2}
   - {fileID: 11400000, guid: efe7bce43b41cc9499ccd49d851d4ea2, type: 2}
   - {fileID: 11400000, guid: 4dc65dc4a9121d3459d8ade5886f1d9d, type: 2}
-  runEnergyCost: 5
+  runEnergyCost: 4
   chargeEnergyCost: 10
   runEnergyLimit: 10
   energyCost:
@@ -2754,6 +2755,11 @@ MonoBehaviour:
   memory: 0
   CanInterAction: 0
   interactionObj: {fileID: 0}
+  attack_1: {fileID: 8300000, guid: a5e5ea713415fcc42904ca06876a4d6a, type: 3}
+  attack_3: {fileID: 8300000, guid: b67ba8a8dfb9fea41b5773472721cce9, type: 3}
+  attack_4: {fileID: 8300000, guid: 54325f5026a533c428be8a593ef11bb0, type: 3}
+  fs: {fileID: 8300000, guid: e9665f3b8073bfc4e9626827cfb8a433, type: 3}
+  gun: {fileID: 8300000, guid: a0c582e2bcf0e4d4f9be3f09dd985298, type: 3}
   magicEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -3431,7 +3437,7 @@ MonoBehaviour:
   basicPenetratingPower: 0
   basicReductionRate: 0
   basicToughness: 20
-  basicLightRadius: 4
+  basicLightRadius: 2.5
   talentEnergyRecovery: 0
   talentDamage: 0
   talentCritRate: 0

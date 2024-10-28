@@ -97,6 +97,16 @@ public class PlayerStateMachine : StateMachine
 
     public InteractiveComponent interactionObj = null;
     #endregion
+    #region SFX
+    [Space(16)]
+    [Header("SFX")]
+    [Space(16)]
+
+    public AudioClip attack_1;
+    public AudioClip attack_4;
+    public AudioClip fs;
+    public AudioClip gun;
+    #endregion
     #region 事件
     [Tooltip("魔法中的发射事件")] public UnityEvent magicEvent;
     #endregion
@@ -411,6 +421,18 @@ public class PlayerStateMachine : StateMachine
     }
     #endregion
 
+    #region 事件中音效相关
+
+    public void PlayAtk1()
+    {
+        AudioManager.Instance.PlaySFX(attack_1, transform.position);
+    }
+    public void PlayAtk4()
+    {
+        AudioManager.Instance.PlaySFX(attack_4, transform.position);
+    }
+
+    #endregion
     public void GameOver()
     {
         GameManager.Instance.PlayerDeath();

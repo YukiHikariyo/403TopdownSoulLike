@@ -94,5 +94,6 @@ public class PlayerState_CatchChance : PlayerState
     private void SuccessfulForesight()
     {
         player.GetBuff(BuffType.Foresight,3);//TODO: buff只为反击和4段攻击提供加成
+        AudioManager.Instance.PlaySFX(playerStateMachine.fs,playerStateMachine.transform.position);
     }
 }
