@@ -53,10 +53,12 @@ public class Chest : InteractiveComponent
         if(healthCount > 0)
         {
             PackageManager.Instance.GetMaxHealthBottle();
+            UIManager.Instance.OpenConfirmationPanel(text);
         }
         if(manaCount > 0)
         {
             PackageManager.Instance.GetMaxManaBottle();
+            UIManager.Instance.OpenConfirmationPanel(text);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
