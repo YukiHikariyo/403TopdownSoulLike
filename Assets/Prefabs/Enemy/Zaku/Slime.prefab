@@ -437,6 +437,6 @@ MonoBehaviour:
     m_Bits: 2560
   attackSFX: {fileID: 8300000, guid: dad988e6539010842b2b093f97a29147, type: 3}
   hurtSFX: {fileID: 8300000, guid: d6cbcce8ce76a0e4697bb92f65ba8e0e, type: 3}
-  exp: 20
+  exp: 25
   dropItems: []
   attackObj: {fileID: 4563626525406500339}

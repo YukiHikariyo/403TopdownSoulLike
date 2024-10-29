@@ -79,8 +79,6 @@ AnimationClip:
       value: {fileID: -1733347993, guid: 0905a4f55564a5d4d8189cc0842e93c8, type: 3}
     - time: 0.9
       value: {fileID: 1993688946, guid: 0905a4f55564a5d4d8189cc0842e93c8, type: 3}
-    - time: 1
-      value: {fileID: 832738448, guid: 0905a4f55564a5d4d8189cc0842e93c8, type: 3}
     attribute: m_Sprite
     path: Square
     classID: 212
@@ -148,7 +146,6 @@ AnimationClip:
     - {fileID: 1739613970, guid: 0905a4f55564a5d4d8189cc0842e93c8, type: 3}
     - {fileID: -1733347993, guid: 0905a4f55564a5d4d8189cc0842e93c8, type: 3}
     - {fileID: 1993688946, guid: 0905a4f55564a5d4d8189cc0842e93c8, type: 3}
-    - {fileID: 832738448, guid: 0905a4f55564a5d4d8189cc0842e93c8, type: 3}
     - {fileID: 0}
     - {fileID: 942551134, guid: 60871ab26f05988449347aeb1ad655be, type: 3}
     - {fileID: -2119168625, guid: 60871ab26f05988449347aeb1ad655be, type: 3}
@@ -159,7 +156,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.1
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -232,7 +229,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8
+  - time: 0.7
     functionName: AcceptStateSwitch
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -352,7 +352,7 @@ MonoBehaviour:
     m_Bits: 3584
   attackSFX: {fileID: 8300000, guid: dad988e6539010842b2b093f97a29147, type: 3}
   hurtSFX: {fileID: 8300000, guid: d6cbcce8ce76a0e4697bb92f65ba8e0e, type: 3}
-  exp: 95
+  exp: 100
   dropItems:
   - id: 1
     number: 1

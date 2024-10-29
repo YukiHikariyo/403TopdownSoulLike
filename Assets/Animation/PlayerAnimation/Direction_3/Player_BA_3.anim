@@ -48,15 +48,6 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
-      - serializedVersion: 3
-        time: 1.1
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -90,8 +81,6 @@ AnimationClip:
       value: {fileID: 1423309904, guid: 982ae1abf7caa774a8be1ec5714eb2d0, type: 3}
     - time: 1
       value: {fileID: -1899209083, guid: 982ae1abf7caa774a8be1ec5714eb2d0, type: 3}
-    - time: 1.1
-      value: {fileID: -1886088037, guid: 982ae1abf7caa774a8be1ec5714eb2d0, type: 3}
     attribute: m_Sprite
     path: Square
     classID: 212
@@ -160,7 +149,6 @@ AnimationClip:
     - {fileID: 1249251242, guid: 982ae1abf7caa774a8be1ec5714eb2d0, type: 3}
     - {fileID: 1423309904, guid: 982ae1abf7caa774a8be1ec5714eb2d0, type: 3}
     - {fileID: -1899209083, guid: 982ae1abf7caa774a8be1ec5714eb2d0, type: 3}
-    - {fileID: -1886088037, guid: 982ae1abf7caa774a8be1ec5714eb2d0, type: 3}
     - {fileID: 0}
     - {fileID: 942551134, guid: 60871ab26f05988449347aeb1ad655be, type: 3}
     - {fileID: -2119168625, guid: 60871ab26f05988449347aeb1ad655be, type: 3}
@@ -171,7 +159,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.2
+    m_StopTime: 1.1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -218,15 +206,6 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
-      - serializedVersion: 3
-        time: 1.1
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -253,7 +232,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8
+  - time: 0.7
     functionName: AcceptStateSwitch
     data: 
     objectReferenceParameter: {fileID: 0}

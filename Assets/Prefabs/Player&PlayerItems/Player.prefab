@@ -2680,18 +2680,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 674dabf26d4f5704f9226b88de415789, type: 2}
   - {fileID: 11400000, guid: efe7bce43b41cc9499ccd49d851d4ea2, type: 2}
   - {fileID: 11400000, guid: 4dc65dc4a9121d3459d8ade5886f1d9d, type: 2}
-  runEnergyCost: 4
+  runEnergyCost: 3
   chargeEnergyCost: 10
   runEnergyLimit: 10
   energyCost:
   - 0
   - 0
-  - 12
+  - 10
   - 5
   - 5
+  - 8
   - 10
-  - 10
-  - 18
+  - 15
   - 0
   - 5
   - 0
@@ -2779,9 +2779,9 @@ MonoBehaviour:
   inputs: {fileID: 4510489401662688001}
   playerLight: {fileID: 8680380314532487408}
   playerData: {fileID: 2154088116047620211}
-  moveSpeed: 2.5
-  runSpeed: 4
-  fastRollSpeed: 4
+  moveSpeed: 3
+  runSpeed: 4.5
+  fastRollSpeed: 5
   slowRollSpeed: 8
   lastRollDuration: 0.3
   L1AtkSpeed: 8
@@ -2807,7 +2807,7 @@ MonoBehaviour:
   FlashBangSpeed: 15
   smallStunSpeed: 1
   normalStunSpeed: 1.5
-  bigStunSpeed: 4
+  bigStunSpeed: 8
   fastRollCruve:
     serializedVersion: 2
     m_Curve:

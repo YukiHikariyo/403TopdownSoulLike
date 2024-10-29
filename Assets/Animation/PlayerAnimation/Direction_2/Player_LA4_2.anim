@@ -91,10 +91,6 @@ AnimationClip:
       value: {fileID: 806686144, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
     - time: 1.5
       value: {fileID: 142098541, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
-    - time: 1.6
-      value: {fileID: -2004884586, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
-    - time: 1.7
-      value: {fileID: -666897837, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
     attribute: m_Sprite
     path: Square
     classID: 212
@@ -168,8 +164,6 @@ AnimationClip:
     - {fileID: 733131565, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
     - {fileID: 806686144, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
     - {fileID: 142098541, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
-    - {fileID: -2004884586, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
-    - {fileID: -666897837, guid: ff933db9bbac3e741944ff79497c0f4c, type: 3}
     - {fileID: 0}
     - {fileID: 1378368115, guid: b450320791596574da6ca73f5fc8f7e0, type: 3}
     - {fileID: -395281675, guid: b450320791596574da6ca73f5fc8f7e0, type: 3}
@@ -180,7 +174,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.8000001
+    m_StopTime: 1.6
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -253,7 +247,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.3
+  - time: 1.2
     functionName: AcceptStateSwitch
     data: 
     objectReferenceParameter: {fileID: 0}
