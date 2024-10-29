@@ -621,8 +621,8 @@ MonoBehaviour:
   target: {fileID: 0}
   spawner: {fileID: 0}
   isBoss: 0
-  maxHealth: 265
-  currentHealth: 265
+  maxHealth: 300
+  currentHealth: 300
   basicMoveSpeed: 2.6
   basicDamage: 25
   basicPenetratingPower: 0.1
