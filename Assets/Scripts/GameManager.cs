@@ -243,8 +243,8 @@ public class GameManager : MonoSingleton<GameManager>, ISaveable
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Persistent"));
         await SceneManager.UnloadSceneAsync("GameScene");
-        await SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
+        //await SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
         UIManager.Instance.gameInfo.SetActive(false);
         UIManager.Instance.mainMenu.SetActive(true);
 
